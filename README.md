@@ -1,3 +1,26 @@
+# About This Fork
+
+This repository is a fork of the original BBC BASIC for the Zilog EZ80 by Dean Belfield, specifically targeting the Agon Light family of retrocomputers. Originally written for the proprietary, Windows-only, closed-source Zilog ZDS-II assembler, this sourcecode has been made compatiblilty with the open-source, multi-platform `agon-ez80asm` assembler by [Jeroen Venema (evenomator)](https://github.com/envenomator/agon-ez80asm). This allows assembly on native hardware as well as various modern platforms, including macOS, Windows, and x86-64 and ARM64 Linux.
+
+### Assembling and Running
+The file `basic.bin` in the project root directory contains all the includes, in the proper order, to assemble the executable. On harware, navigate to the directory containing the source code and enter, e.g.: `ez80asm basic.asm /bin/EZBASIC.BIN`, or whatever taget filename you prefer, so long as the destination directory is in `/bin` on the SD card so that MOS recognizes it as a vaild command. From there usage aims to be exactly as the ZDS version.
+
+### Modifications and features
+- Translation of source code to the `agon-ez80asm` syntax, aiming for full compatibility with the ZDS II source code of the original.
+- Maintaining use of ADL (Address Data Long) mode, allowing the BASIC programs and data to extend past the non-ADL limitation of 64K.
+- Documentation of changes inline with the original code. (ongoing)
+- Additional comments documenting unmodified code where it adds clarity and utility. (ongoing)
+
+This fork is maintained by Brandon R. Gates, who can be found on Discord as BeeGee747. The source code and additional details about this fork are [available on GitHub](https://github.com/bgates747/agon-bbc-basic-adl-ez80asm).
+
+## Acknowledgments:
+Many thanks to R.T. Russell for his original work on BBC BASIC, Dean Belfield for the port to Agon and Jeroen Venema for providing open-source resources and tools that have enabled this adaptation.
+
+Brandon R. Gates 10 November 2024
+
+Original text of this file follows
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 # agon-bbc-basic-adl
 
 A port of BBC Basic for Z80 to the Agon, converted to run in ADL mode
