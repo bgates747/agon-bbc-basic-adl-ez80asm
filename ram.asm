@@ -116,7 +116,8 @@ R1:			DS		3		;
 ;
 ; This must be at the end
 ;
-RAM_END:		
-			ALIGN	256			
-USER:							; Must be aligned on a page boundary
+RAM_END:
+; moved to user.asm		
+; 			ALIGN	256			
+; USER:							; Must be aligned on a page boundary
 	

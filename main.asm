@@ -1,3 +1,142 @@
+; ; ===== STUB FUNCTIONS =====
+; printInline:
+;     ret
+
+; BRAKET:
+; 	call printInline
+; 	asciz "main.asm called BRAKET!"
+; 	ret
+
+; CHAIN0:
+; 	call printInline
+; 	asciz "main.asm called CHAIN0!"
+; 	ret
+
+; CHECK:
+; 	call printInline
+; 	asciz "main.asm called CHECK!"
+; 	ret
+
+; COMMA:
+; 	call printInline
+; 	asciz "main.asm called COMMA!"
+; 	ret
+
+; DECODE:
+; 	call printInline
+; 	asciz "main.asm called DECODE!"
+; 	ret
+
+; EXPRI:
+; 	call printInline
+; 	asciz "main.asm called EXPRI!"
+; 	ret
+
+; EXPRS:
+; 	call printInline
+; 	asciz "main.asm called EXPRS!"
+; 	ret
+
+; FILL:
+; 	call printInline
+; 	asciz "main.asm called FILL!"
+; 	ret
+
+; ITEMI:
+; 	call printInline
+; 	asciz "main.asm called ITEMI!"
+; 	ret
+
+; LOADN:
+; 	call printInline
+; 	asciz "main.asm called LOADN!"
+; 	ret
+
+; LTRAP:
+; 	call printInline
+; 	asciz "main.asm called LTRAP!"
+; 	ret
+
+; MUL16:
+; 	call printInline
+; 	asciz "main.asm called MUL16!"
+; 	ret
+
+; NXT:
+; 	call printInline
+; 	asciz "main.asm called NXT!"
+; 	ret
+
+; OSINIT:
+; 	call printInline
+; 	asciz "main.asm called OSINIT!"
+; 	ret
+
+; OSLINE:
+; 	call printInline
+; 	asciz "main.asm called OSLINE!"
+; 	ret
+
+; OSLOAD:
+; 	call printInline
+; 	asciz "main.asm called OSLOAD!"
+; 	ret
+
+; OSSAVE:
+; 	call printInline
+; 	asciz "main.asm called OSSAVE!"
+; 	ret
+
+; OSSHUT:
+; 	call printInline
+; 	asciz "main.asm called OSSHUT!"
+; 	ret
+
+; OSWRCH:
+; 	call printInline
+; 	asciz "main.asm called OSWRCH!"
+; 	ret
+
+; PROMPT:
+; 	call printInline
+; 	asciz "main.asm called PROMPT!"
+; 	ret
+
+; RESET:
+; 	call printInline
+; 	asciz "main.asm called RESET!"
+; 	ret
+
+; SEARCH:
+; 	call printInline
+; 	asciz "main.asm called SEARCH!"
+; 	ret
+
+; SFIX:
+; 	call printInline
+; 	asciz "main.asm called SFIX!"
+; 	ret
+
+; STAR_VERSION:
+; 	call printInline
+; 	asciz "main.asm called STAR_VERSION!"
+; 	ret
+
+; TERMQ:
+; 	call printInline
+; 	asciz "main.asm called TERMQ!"
+; 	ret
+
+; X4OR5:
+; 	call printInline
+; 	asciz "main.asm called X4OR5!"
+; 	ret
+
+; XEQ:
+; 	call printInline
+; 	asciz "main.asm called XEQ!"
+; 	ret
+
 ;
 ; Title:	BBC Basic Interpreter - Z80 version
 ;		Command, Error and Lexical Analysis Module - "MAIN"
@@ -1855,7 +1994,7 @@ PAIR1:			CALL    TERMQ			; Check for ELSE, : or CR
 			OR      C			; We're good...
 			RET     NZ			; Exit, otherwise...
 			CALL    EXTERR			; Throw error: "Silly"
-			DB    	'Silly', 0
+			DB    	"Silly", 0
 ;
 ; DLPAIR - GET PAIR OF LINE NUMBERS FOR DELETE/LIST.
 ;   Inputs: IY = text pointer

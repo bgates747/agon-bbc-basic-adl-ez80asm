@@ -1,3 +1,81 @@
+; ; ===== STUB FUNCTIONS =====
+; printInline:
+;     ret
+
+;     include "mos_api.inc"
+;     include "macros.inc"
+;     include "ram.asm"
+;     include "equs.inc"
+; ASC_TO_NUMBER:
+; 	call printInline
+; 	asciz "agon_graphics.asm called ASC_TO_NUMBER!"
+; 	ret
+
+; BRAKET:
+; 	call printInline
+; 	asciz "agon_graphics.asm called BRAKET!"
+; 	ret
+
+; COMMA:
+; 	call printInline
+; 	asciz "agon_graphics.asm called COMMA!"
+; 	ret
+
+; COUNT0:
+; 	call printInline
+; 	asciz "agon_graphics.asm called COUNT0!"
+; 	ret
+
+; CRLF:
+; 	call printInline
+; 	asciz "agon_graphics.asm called CRLF!"
+; 	ret
+
+; CRTONULL:
+; 	call printInline
+; 	asciz "agon_graphics.asm called CRTONULL!"
+; 	ret
+
+; EXPRI:
+; 	call printInline
+; 	asciz "agon_graphics.asm called EXPRI!"
+; 	ret
+
+; EXPR_W2:
+; 	call printInline
+; 	asciz "agon_graphics.asm called EXPR_W2!"
+; 	ret
+
+; EXTERR:
+; 	call printInline
+; 	asciz "agon_graphics.asm called EXTERR!"
+; 	ret
+
+; INKEY1:
+; 	call printInline
+; 	asciz "agon_graphics.asm called INKEY1!"
+; 	ret
+
+; NULLTOCR:
+; 	call printInline
+; 	asciz "agon_graphics.asm called NULLTOCR!"
+; 	ret
+
+; NXT:
+; 	call printInline
+; 	asciz "agon_graphics.asm called NXT!"
+; 	ret
+
+; OSWRCH:
+; 	call printInline
+; 	asciz "agon_graphics.asm called OSWRCH!"
+; 	ret
+
+; XEQ:
+; 	call printInline
+; 	asciz "agon_graphics.asm called XEQ!"
+; 	ret
+
 ;
 ; Title:	BBC Basic for AGON - Graphics stuff
 ; Author:	Dean Belfield

@@ -383,9 +383,9 @@ VAR_:			CALL    GETVAR
 			RET     Z
 			JP      NC,PUTVAR
 SYNTAX:			LD      A,16            ;"Syntax error"
-			JR	ERROR0
+			JR	ERROR0_EX
 ESCAPE:			LD      A,17            ;"Escape"
-ERROR0:			JP      ERROR_
+ERROR0_EX:			JP      ERROR_
 
 ; =
 ;
@@ -403,7 +403,7 @@ FNEND5:			POP     BC
 			OR      A
 			SBC     HL,BC
 			LD      A,7
-			JR      NZ,ERROR0       ;"No FN"
+			JR      NZ,ERROR0_EX       ;"No FN"
 			POP     IY
 			LD      (ERRLIN),IY     ;IN CASE OF ERROR
 			EX      DE,HL
@@ -516,9 +516,9 @@ DIM5:			CALL    NXT
 ; DIM errors
 ;
 BADDIM:			LD      A,10            	; Throw a "Bad DIM" error
-			JR	ERROR1			
+			JR	ERROR1_EX			
 NOROOM:			LD      A,11            	; Throw a "DIM space" error
-ERROR1:			JP      ERROR_
+ERROR1_EX:			JP      ERROR_
 ;
 ; At this point we're reserving a block of memory, i.e.
 ; DIM var expr[,var expr...]

@@ -102,7 +102,7 @@ FUNTOK:			EQU	8DH			; First token number
 ;
 FUNTBL:			DW24	DECODE			; Line number
 			DW24	OPENIN			; OPENIN
-			DW24	PTR			; PTR
+			DW24	PTR_EV			; PTR
 			DW24	PAGEV			; PAGE
 			DW24	TIMEV			; TIME
 			DW24	LOMEMV			; LOMEM
@@ -121,7 +121,7 @@ FUNTBL:			DW24	DECODE			; Line number
 			DW24	ERRV			; ERR
 			DW24	EVAL_			; EVAL
 			DW24	EXP			; EXP
-			DW24	EXT			; EXT
+			DW24	EXT_EV			; EXT
 			DW24	ZERO			; FALSE
 			DW24	FN			; FN
 			DW24	GET			; GET
@@ -160,7 +160,7 @@ FUNTBL:			DW24	DECODE			; Line number
 ;
 FUNTBL_END:		EQU	$
 ; TCMD:			EQU     FUNTOK+(FUNTBL_END-FUNTBL)/3
-TCMD:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
+TCMD_EV:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
 ;
 ANDK:			EQU     80H
 DIVK:			EQU     81H
@@ -523,7 +523,7 @@ ITEM:			CALL    CHECK			; Check there's at least a page of free memory left and 
 			JP      Z,ITEM1         	; Start of a bracketed expression
 			CP      34			; If `"`
 			JR      Z,CONS          	; Start of a string constant
-			CP      TCMD			; Is it out of range of the function table?
+			CP      TCMD_EV			; Is it out of range of the function table?
 			JP      NC,SYNTAX       	; Error: "Syntax Error"
 			CP      FUNTOK			; If it is in range, then 
 			JP      NC,DISPAT       	; It's a function
@@ -566,7 +566,7 @@ NOSUCH:			JP      C,SYNTAX
 			LD      A,(LISTON)
 			BIT     5,A
 			LD      A,26
-			JR      NZ,ERROR0		; Throw "No such variable"
+			JR      NZ,ERROR0_EV		; Throw "No such variable"
 NOS1:			INC     IY
 			CALL    RANGE
 			JR      NC,NOS1
@@ -594,7 +594,7 @@ CONS1:			LD      (DE),A			; Store the character in the string accumulator
 			JR      NZ,CONS3		; No, so keep looping
 ;
 			LD      A,9
-ERROR0:			JP      ERROR_           	; Throw error "Missing '"'
+ERROR0_EV:			JP      ERROR_           	; Throw error "Missing '"'
 ;
 CONS2:			LD      A,(IY)			; Fetch the next character
 			CP      '"'			; Check for end quote?
@@ -614,7 +614,7 @@ CON:			PUSH    IY
 			POP     IX
 			LD      A,36
 			CALL    FPP
-			JR      C,ERROR0
+			JR      C,ERROR0_EV
 			PUSH    IX
 			POP     IY
 			XOR     A
@@ -795,11 +795,11 @@ OPENIN_1:		PUSH    AF              	; Save OPEN type
 ;PTR - Return current file pointer.
 ;Results are integer numeric.
 ;
-EXT:			CALL    CHANEL
+EXT_EV:			CALL    CHANEL
 			CALL    GETEXT
 			JR      TIME0
 ;
-PTR:			CALL    CHANEL
+PTR_EV:			CALL    CHANEL
 			CALL    GETPTR
 			JR      TIME0
 ;
@@ -1618,14 +1618,14 @@ COMMA:			CALL    NXT
 			CP      ','
 			RET     Z
 			LD      A,5
-			JR      ERROR1          ;"Missing ,"
+			JR      ERROR1_EV          ;"Missing ,"
 ;
 BRAKET:			CALL    NXT
 			INC     IY
 			CP      ')'
 			RET     Z
 			LD      A,27
-ERROR1:			JP      ERROR_           ;"Missing )"
+ERROR1_EV:			JP      ERROR_           ;"Missing )"
 ;
 SAVE:			INC     IY
 SAVE1:			EX      AF,AF'
@@ -1659,7 +1659,7 @@ DOIT:			EX      AF,AF'
 			EXX
 			AND     0FH
 			CALL    FPP
-			JR      C,ERROR1
+			JR      C,ERROR1_EV
 			XOR     A
 			EX      AF,AF'          ;TYPE
 			LD      A,(IY)
