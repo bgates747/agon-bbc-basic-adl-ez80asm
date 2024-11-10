@@ -46,7 +46,7 @@
 			; XDEF	COUNT0
 				
 			; XREF	ADVAL
-			; XREF	FN
+			; XREF	FN_EX
 			; XREF	POINT
 			; XREF	USR
 			; XREF	SYNTAX
@@ -121,9 +121,9 @@ FUNTBL:			DW24	DECODE			; Line number
 			DW24	ERRV			; ERR
 			DW24	EVAL_			; EVAL
 			DW24	EXP			; EXP
-			DW24	EXT_EV			; EXT
+			DW24	EXT			; EXT
 			DW24	ZERO			; FALSE
-			DW24	FN			; FN
+			DW24	FN_EX			; FN
 			DW24	GET			; GET
 			DW24	INKEY			; INKEY
 			DW24	INSTR			; INSTR(
@@ -160,7 +160,7 @@ FUNTBL:			DW24	DECODE			; Line number
 ;
 FUNTBL_END:		EQU	$
 ; TCMD:			EQU     FUNTOK+(FUNTBL_END-FUNTBL)/3
-TCMD_EV:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
+TCMD:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
 ;
 ANDK:			EQU     80H
 DIVK:			EQU     81H
@@ -200,7 +200,7 @@ EXPR0A:			CP      EORK            	; Is operator EOR?
 			CP      ORK			; Is operator OR
 			RET     NZ			; No, so return
 ;
-EXPR0B:			CALL    SAVE            	; Save first operand
+EXPR0B:			CALL    SAVE_EV            	; Save first operand
 			CALL    EXPR1           	; Get second operand
 			CALL    DOIT            	; Do the operation
 			JR      EXPR0A          	; And continue
@@ -210,7 +210,7 @@ EXPR0B:			CALL    SAVE            	; Save first operand
 EXPR1:			CALL    EXPR2			; Get first operator by calling Level 5
 EXPR1A:			CP      ANDK			; Is operator AND?
 			RET     NZ			; No, so return
-			CALL    SAVE			; Save first operand
+			CALL    SAVE_EV			; Save first operand
 			CALL    EXPR2			; Get second operand
 			CALL    DOIT			; Do the operation
 			JR      EXPR1A			; And continue
@@ -250,7 +250,7 @@ EXPR2S:			EX      AF,AF'			; Handle string comparisons
 			PUSH    AF              	; Save the operator
 			CALL    EXPR3           	; Get the second string
 			EX      AF,AF'
-			JP      P,TYPE_
+			JP      P,TYPE_EV_
 			POP     AF
 			LD      C,E             	; Length of string #2
 			POP     DE
@@ -285,7 +285,7 @@ EXPR3A:			CP      '-'			; Is it "-"?
 			EX      AF,AF'			; Get the type
 			JP      M,EXPR3S		; Branch here if string
 			EX      AF,AF'
-EXPR3B:			CALL    SAVE			; Save the first operator
+EXPR3B:			CALL    SAVE_EV			; Save the first operator
 			CALL    EXPR4			; Fetch the second operator
 			CALL    DOIT			; Do the operation
 			JR      EXPR3A			; And continue
@@ -295,7 +295,7 @@ EXPR3S:			EX      AF,AF'			; Handle string concatenation
 			CALL    PUSHS           	; Save the string on the stack
 			CALL    EXPR4           	; Fetch the second operator
 			EX      AF,AF'
-			JP      P,TYPE_			; If it is not a string, then Error: "Type mismatch"
+			JP      P,TYPE_EV_			; If it is not a string, then Error: "Type mismatch"
 			LD	BC, 0			; Clear BC
 			LD      C,E             	; C: Length of the second string
 			POP     DE
@@ -337,7 +337,7 @@ EXPR4A:			CP      '*'			; "*" is valid
 			JR      Z,EXPR4B
 			CP      DIVK			; DIV token is valid
 			RET     NZ			; And return if it is anything else
-EXPR4B:			CALL    SAVE
+EXPR4B:			CALL    SAVE_EV
 			CALL    EXPR5
 			CALL    DOIT
 			JR      EXPR4A
@@ -350,7 +350,7 @@ EXPR5:			CALL    ITEM			; Get variable
 EXPR5A:			CALL    NXT			; Skip spaces
 			CP      '^'			; Is the operator "^"?
 			RET     NZ			; No, so return
-			CALL    SAVE			; Save first operand
+			CALL    SAVE_EV			; Save first operand
 			CALL    ITEM			; Get second operand
 			OR      A			; Test type
 			EX      AF,AF'			; Save type
@@ -362,35 +362,35 @@ EXPR5A:			CALL    NXT			; Skip spaces
 EXPRN:			CALL    EXPR			; Evaluate expression
 			EX      AF,AF'			; Get the type
 			RET     P			; And return if it is a number
-			JR      TYPE_			; Otherwise Error: "Type mismatch"
+			JR      TYPE_EV_			; Otherwise Error: "Type mismatch"
 ;
 ; Evaluate a fixed-point expression 
 ;
 EXPRI:			CALL    EXPR			; Evaluate the expression
 			EX      AF,AF'			; Get the type
 			JP      P,SFIX			; If it is numeric, then convert to fixed-point notation
-			JR      TYPE_			; Otherwise Error: "Type mismatch"
+			JR      TYPE_EV_			; Otherwise Error: "Type mismatch"
 ;	
 ; Evaluate a string expression
 ;	
 EXPRS:			CALL    EXPR			; Evaluate the expression
 			EX      AF,AF'			; Get the type
 			RET     M			; And return if it is a string
-			JR      TYPE_			; Otherwise Error: "Type mismatch"
+			JR      TYPE_EV_			; Otherwise Error: "Type mismatch"
 ;
 ; Get a numeric variable
 ;
 ITEMN:			CALL    ITEM			; Get the variable
 			OR      A			; Test the type
 			RET     P			; And return if it is a number
-			JR      TYPE_			; Otherwise Error: "Type mismatch"
+			JR      TYPE_EV_			; Otherwise Error: "Type mismatch"
 ;
 ; Get a fixed-point variable 
 ;
 ITEMI:			CALL    ITEM			; Get the variable
 			OR      A			; Test the type
 			JP      P,SFIX			; If it is numeric, then convert to fixed-point notation
-			JR      TYPE_			; Otherwise Error: "Type mismatch"
+			JR      TYPE_EV_			; Otherwise Error: "Type mismatch"
 ;
 ; Get a string variable 
 ;
@@ -398,7 +398,7 @@ ITEMS:			CALL    ITEM			; Get the variable
 			OR      A			; Test the type
 			RET     M			; If it is a string, then return
 ;							; Otherwise
-TYPE_:			LD      A,6			; Error: "Type mismatch"
+TYPE_EV_:			LD      A,6			; Error: "Type mismatch"
 			JP      ERROR_           	
 ;
 ; Evaluate a bracketed expression
@@ -469,7 +469,7 @@ BADBIN:			LD	A, 28			; Error: "Bad Binary" - reuses same error code as Bad HEX
 MINUS:			CALL    ITEMN			; Get the numeric argument
 MINUS0:			DEC     C			; Check exponent (C)
 			INC     C			; If it is zero, then it's either a FP zero or an integer
-			JR      Z,NEGATE        	; So do an integer negation
+			JR      Z,NEGATE_EV        	; So do an integer negation
 ;
 			LD      A,H			; Do a FP negation by 
 			XOR     80H             	; Toggling the sign bit (H)
@@ -477,7 +477,7 @@ MINUS0:			DEC     C			; Check exponent (C)
 			XOR     A               	; Numeric marker
 			RET
 ;
-NEGATE:			EXX				; This section does a two's complement negation on H'L'HLC
+NEGATE_EV:			EXX				; This section does a two's complement negation on H'L'HLC
 			LD      A,H			; First do a one's complement by negating all the bytes
 			CPL
 			LD      H,A
@@ -523,7 +523,7 @@ ITEM:			CALL    CHECK			; Check there's at least a page of free memory left and 
 			JP      Z,ITEM1         	; Start of a bracketed expression
 			CP      34			; If `"`
 			JR      Z,CONS          	; Start of a string constant
-			CP      TCMD_EV			; Is it out of range of the function table?
+			CP      TCMD			; Is it out of range of the function table?
 			JP      NC,SYNTAX       	; Error: "Syntax Error"
 			CP      FUNTOK			; If it is in range, then 
 			JP      NC,DISPAT       	; It's a function
@@ -792,10 +792,10 @@ OPENIN_1:		PUSH    AF              	; Save OPEN type
 			JR      COUNT0			; Return channel number to BASIC
 ;
 ;EXT - Return length of file.
-;PTR - Return current file pointer.
+;PTR_EV - Return current file pointer.
 ;Results are integer numeric.
 ;
-EXT_EV:			CALL    CHANEL
+EXT:			CALL    CHANEL
 			CALL    GETEXT
 			JR      TIME0
 ;
@@ -1627,9 +1627,9 @@ BRAKET:			CALL    NXT
 			LD      A,27
 ERROR1_EV:			JP      ERROR_           ;"Missing )"
 ;
-SAVE:			INC     IY
+SAVE_EV:			INC     IY
 SAVE1:			EX      AF,AF'
-			JP      M,TYPE_
+			JP      M,TYPE_EV_
 			EX      AF,AF'
 			EX      (SP),HL
 			EXX
@@ -1640,7 +1640,7 @@ SAVE1:			EX      AF,AF'
 			JP      (HL)
 ;
 DOIT:			EX      AF,AF'
-			JP      M,TYPE_
+			JP      M,TYPE_EV_
 			EXX
 			POP     BC              ;RETURN ADDRESS
 			EXX

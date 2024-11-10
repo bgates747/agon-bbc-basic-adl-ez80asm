@@ -25,7 +25,7 @@
 			; XDEF	RUN
 			; XDEF	SYNTAX
 			; XDEF	ESCAPE
-			; XDEF	FN
+			; XDEF	FN_EX
 			; XDEF	USR
 			; XDEF	STORE5
 			; XDEF	STORE4
@@ -126,28 +126,29 @@
 			; XREF	R0
 ;
 ; List of token values used in this module
-;
-TAND:			EQU     80H
-TOR:			EQU     84H
-TERROR:			EQU     85H
-LINE_:			EQU     86H
-OFF_:			EQU     87H
-STEP:			EQU     88H
-SPC:			EQU     89H
-TAB:			EQU     8AH
-ELSE_:			EQU     8BH
-THEN:			EQU     8CH
-LINO:			EQU     8DH
-TO:			EQU     B8H
-TCMD:			EQU     C6H
-TCALL:			EQU     D6H
-DATA_:			EQU     DCH
-DEF_:			EQU     DDH
-TGOSUB:			EQU     E4H
-TGOTO:			EQU     E5H
-TON:			EQU     EEH
-TPROC:			EQU     F2H
-TSTOP:			EQU     FAH
+; consolidated with the token values in main.asm
+; TAND:			EQU     80H
+; TOR:			EQU     84H
+; TERROR:			EQU     85H
+; LINE_:			EQU     86H
+; OFF_:			EQU     87H
+; STEP:			EQU     88H
+; SPC:			EQU     89H
+; TAB:			EQU     8AH
+; ELSE_:			EQU     8BH
+; THEN:			EQU     8CH
+; LINO:			EQU     8DH
+; TO:				EQU     B8H
+; TCALL:			EQU     D6H
+; DATA_:			EQU     DCH
+; DEF_:			EQU     DDH
+; TGOSUB:			EQU     E4H
+; TGOTO:			EQU     E5H
+; TON:			EQU     EEH
+; TPROC:			EQU     F2H
+; TSTOP:			EQU     FAH
+
+; TCMD:			EQU     C6H ; in eval.asm
 
 ; The command table
 ; Commands are tokens from C6H onwards; this lookup table is used to
@@ -163,11 +164,11 @@ CMDTAB:			DW24  AUTO			; C6H
 			DW24  RENUM			; CCH
 			DW24  SAVE			; CDH
 			DW24  PUT			; CEH
-			DW24  PTR			; CFH
-			DW24  PAGEV			; D0H
-			DW24  TIMEV			; D1H
-			DW24  LOMEMV			; D2H
-			DW24  HIMEMV			; D3H
+			DW24  PTR_EX			; CFH
+			DW24  PAGEV_EX			; D0H
+			DW24  TIMEV_EX			; D1H
+			DW24  LOMEMV_EX			; D2H
+			DW24  HIMEMV_EX			; D3H
 			DW24  SOUND			; D4H
 			DW24  BPUT			; D5H
 			DW24  CALL_			; D6H
@@ -176,40 +177,40 @@ CMDTAB:			DW24  AUTO			; C6H
 			DW24  CLOSE			; D9H
 			DW24  CLG			; DAH
 			DW24  CLS			; DBH
-			DW24  REM             		; DCH: DATA
-			DW24  REM             		; DDH: DEF
-			DW24  DIM			; DEH
+			DW24  REM_EX             		; DCH: DATA
+			DW24  REM_EX             		; DDH: DEF
+			DW24  DIM_EX			; DEH
 			DW24  DRAW			; DFH
 			DW24  END_			; E0H
 			DW24  ENDPRO			; E1H
 			DW24  ENVEL			; E2H
-			DW24  FOR			; E3H
-			DW24  GOSUB			; E4H
-			DW24  GOTO			; E5H
+			DW24  FOR_EX			; E3H
+			DW24  GOSUB_EX			; E4H
+			DW24  GOTO_EX			; E5H
 			DW24  GCOL			; E6H
 			DW24  IF_			; E7H
 			DW24  INPUT			; E8H
 			DW24  LET			; E9H
-			DW24  LOCAL_			; EAH
+			DW24  LOCAL_EX_			; EAH
 			DW24  MODE			; EBH
 			DW24  MOVE			; ECH
-			DW24  NEXT			; EDH
-			DW24  ON_			; EEH
+			DW24  NEXT_EX			; EDH
+			DW24  ON_EX_			; EEH
 			DW24  VDU			; EFH
 			DW24  PLOT			; F0H
 			DW24  PRINT_			; F1H
-			DW24  PROC			; F2H
+			DW24  PROC_EX			; F2H
 			DW24  READ			; F3H
-			DW24  REM			; F4H
-			DW24  REPEAT			; F5H
+			DW24  REM_EX			; F4H
+			DW24  REPEAT_EX			; F5H
 			DW24  REPOR			; F6H
-			DW24  RESTOR			; F7H
+			DW24  RESTOR_EX			; F7H
 			DW24  RETURN			; F8H
 			DW24  RUN			; F9H
 			DW24  STOP			; FAH
 			DW24  COLOUR			; FBH
-			DW24  TRACE			; FCH
-			DW24  UNTIL			; FDH
+			DW24  TRACE_EX			; FCH
+			DW24  UNTIL_EX			; FDH
 			DW24  WIDTHV			; FEH
 			DW24  CLI             		; FFH: OSCLI
 
@@ -241,7 +242,7 @@ RUN0:			LD      SP,(HIMEM)      	; Prepare for RUN
 			LD      (ERRTRP),HL
 			LD      HL,(PAGE_)		; Load HL with the start of program memory (PAGE)
 			LD      A,DATA_			; The DATA token value
-			CALL    SEARCH          	; Search for the first DATA token in the tokenised listing
+			CALL    SEARCH_EX          	; Search for the first DATA token in the tokenised listing
 			LD      (DATPTR),HL     	; Set data pointer
 			LD      IY,(PAGE_)		; Load IY with the start of program memory
 ;			
@@ -323,10 +324,10 @@ CLI:			CALL    EXPRS
 
 ; REM, *
 ;
-EXT:			PUSH    IY
+EXT_EX:			PUSH    IY
 			POP     HL
 			CALL    OSCLI
-REM:			PUSH    IY
+REM_EX:			PUSH    IY
 			POP     HL
 			LD      A,CR
 			LD      B,A
@@ -338,15 +339,15 @@ REM:			PUSH    IY
 ; [LET] var = expr
 ;
 LET0:			CP      ELSE_-TCMD
-			JR      Z,REM
+			JR      Z,REM_EX
 			; CP      ('*'-TCMD) & 0FFH
-			; JR      Z,EXT
+			; JR      Z,EXT_EX
 			; CP      ('='-TCMD) & 0FFH
 			; JR      Z,FNEND
 			; CP      ('['-TCMD) & 0FFH
 			; ez80asm doesn't like () in expressions
 			CP      '*'-TCMD & 0FFH
-			JR      Z,EXT
+			JR      Z,EXT_EX
 			CP      '='-TCMD & 0FFH
 			JR      Z,FNEND
 			CP      '['-TCMD & 0FFH
@@ -437,7 +438,7 @@ FNEND1:			LD      HL,0
 ; DIM var(dim1[,dim2[,...]])[,var(...]
 ; DIM var expr[,var expr...]
 ;
-DIM:			CALL    GETVAR          	; Get the variable
+DIM_EX:			CALL    GETVAR          	; Get the variable
 			JP      C,BADDIM		; Throw a "Bad Dim" error
 			JP      Z,DIM4			; If Z then the command is DIM var% expr, so don't need to create an entity
 			CALL    CREATE			; Create a new entity
@@ -511,7 +512,7 @@ DIM5:			CALL    NXT
 			JP      NZ,XEQ
 			INC     IY
 			CALL    NXT
-			JP      DIM
+			JP      DIM_EX
 ;
 ; DIM errors
 ;
@@ -667,7 +668,7 @@ ONERR:			INC     IY              ;SKIP "ERROR"
 			JP      Z,XEQ
 			DEC     IY
 			LD      (ERRTRP),IY
-			JP      REM
+			JP      REM_EX
 
 ; ON expr GOTO line[,line...] [ELSE statement]
 ; ON expr GOTO line[,line...] [ELSE line]
@@ -675,7 +676,7 @@ ONERR:			INC     IY              ;SKIP "ERROR"
 ; ON expr GOSUB line[,line...] [ELSE line]
 ; ON expr PROCone [,PROCtwo..] [ELSE PROCotherwise]
 ;
-ON_:			CP      TERROR
+ON_EX_:			CP      TERROR
 			JR      Z,ONERR         ;"ON ERROR"
 			CALL    EXPRI
 			LD      A,(IY)
@@ -688,7 +689,7 @@ ON_:			CP      TERROR
 			LD      E,TPROC
 			CP      E
 			LD      A,39
-			JR      NZ,ERROR2       ;"ON syntax"
+			JR      NZ,ERROR2_EX       ;"ON syntax"
 ON1:			LD      D,A
 			EXX
 			PUSH    HL
@@ -728,14 +729,14 @@ ON4:			LD      A,(IY)
 			CP      CR
 			JR      NZ,ON4
 			LD      A,40
-ERROR2:			JP      ERROR_           ;"ON range"
+ERROR2_EX:			JP      ERROR_           ;"ON range"
 ;
 ONPROC:			LD      A,TON
-			JP      PROC
+			JP      PROC_EX
 
 ; GOTO line
 ;
-GOTO:			CALL    ITEMI           	; Fetch the line number
+GOTO_EX:			CALL    ITEMI           	; Fetch the line number
 GOTO1:			CALL    TERMQ			; Check for terminator
 			JP      NZ,SYNTAX		; Throw a "Syntax Error" if not found
 GOTO2:			EXX
@@ -744,14 +745,14 @@ GOTO2:			EXX
 			POP     IY			; IY = HL
 			JP      Z,XEQ0			; If the line is found, then continue execution at that point
 			LD      A,41			; Otherwise throw a "No such line" error
-			JR      ERROR2
+			JR      ERROR2_EX
 
 ; GOSUB line
 ; This pushes the following data onto the execution stack
 ; - 3 bytes: Current execution address
 ; - 3 bytes: Marker (the address of label GOSCHK)
 ;
-GOSUB:			CALL    ITEMI			; Fetch the line number
+GOSUB_EX:			CALL    ITEMI			; Fetch the line number
 GOSUB1:			PUSH    IY              	; Push the current execution address onto the execution stack
 			CALL    CHECK           	; Check there is enough room
 			CALL    GOTO1           	; Push the marker (address of GOSCHK) onto the execution stack and GOTO the line number
@@ -769,14 +770,14 @@ RETURN:			POP     DE			; Pop the marker off the execution stack
 			POP     IY			; Pop the return address off the execution stack
 			JP      Z,XEQ			; Provided this has been called by a GOSUB then continue execution at the return address
 			LD      A,38			; Otherwise throw a "No GOSUB" error
-			JR      ERROR2
+			JR      ERROR2_EX
 
 ; REPEAT
 ; This pushes the following data onto the execution stack
 ; - 3 bytes: Current execution address
 ; - 3 bytes: Marker (the address of label REPCHK)
 ;
-REPEAT:			PUSH    IY			; Push the current execution address onto the execution stack
+REPEAT_EX:			PUSH    IY			; Push the current execution address onto the execution stack
 			CALL    CHECK			; Check if there is enough room
 			CALL    XEQ			; Push the marker (address of REPCHK) onto the execution stack and continue execution
 REPCHK:			EQU     $
@@ -787,13 +788,13 @@ REPCHK:			EQU     $
 ; - 3 bytes: The address of the REPEAT instruction
 ; It also ensures that the data is pushed back on for subsequent UNTIL instructions
 ;
-UNTIL:			POP     BC			; Fetch the marker
+UNTIL_EX:			POP     BC			; Fetch the marker
 			PUSH    BC			; And push it back onto the execution stack
 			LD      HL,REPCHK		; Compare with REPCHK
 			OR      A
 			SBC     HL,BC
 			LD      A,43
-			JR      NZ,ERROR2		; Throw a "No REPEAT" if this value does not match
+			JR      NZ,ERROR2_EX		; Throw a "No REPEAT" if this value does not match
 			CALL    EXPRI			; Fetch the expression
 			CALL    TEST			; Test if the expression evaluates to zero		
 			POP     BC			; Pop the marker
@@ -814,15 +815,15 @@ XEQ2:			JP      XEQ			; Continue execution
 ; - 3 bytes: Marker (the address of FORCHK)
 ;
 FORVAR:			LD      A,34
-			JR      ERROR2          	; Throw "FOR variable" error
+			JR      ERROR2_EX          	; Throw "FOR variable" error
 ;
-FOR:			CALL    ASSIGN			; Assign the START expression value to a variable
+FOR_EX:			CALL    ASSIGN			; Assign the START expression value to a variable
 			JR      NZ,FORVAR       	; If the variable is a string, or invalid, then throw a "FOR variable" error
 			PUSH    AF              	; Save the variable type
 			LD      A,(IY)			; Check the next token
 			CP      TO			; Compare with the token value for "TO"
 			LD      A,36			; Set the error code to 36 ("No TO")
-			JP      NZ,ERROR2       	; And throw the error if that token is missing
+			JP      NZ,ERROR2_EX       	; And throw the error if that token is missing
 			INC     IY			; Skip to the next token
 ;
 			PUSH    IX
@@ -869,12 +870,12 @@ FORCHK:			EQU     $
 ; - 3 bytes: The limit value
 ; It also ensures that the data is pushed back on for subsequent NEXT instructions
 ;
-NEXT:			POP     BC              	; Pop the marker off the execution stack
+NEXT_EX:			POP     BC              	; Pop the marker off the execution stack
 			LD      HL,FORCHK		; Compare with FORCHK
 			OR      A
 			SBC     HL,BC
 			LD      A,32
-			JP      NZ,ERROR3      		; If this does not match, throw a "No FOR" error
+			JP      NZ,ERROR3_EX      		; If this does not match, throw a "No FOR" error
 			CALL    TERMQ			; Check for terminator (a NEXT without a variable)
 			POP     HL			; Pop the address of the loop variable off the execution stack
 			PUSH    HL			; Push it back onto the execution stack
@@ -897,7 +898,7 @@ NEXT0:			SBC     HL,DE			; Compare to make sure that the variables match
 			PUSH    AF
 			LD      A,'+' & 0FH
 			CALL    FPP             	; Add the STEP
-			JR      C,ERROR3
+			JR      C,ERROR3_EX
 			POP     AF              	; Restore TYPE
 			PUSH    AF
 			CALL    STORE           	; Update the variable
@@ -909,7 +910,7 @@ NEXT0:			SBC     HL,DE			; Compare to make sure that the variables match
 			; LD      A,0+('<'-4) & 0FH
 			LD      A,0+'<'-4 & 0FH ; ez80asm doesn't do () in expressions
 			CALL    FPP             	; Test against the limit
-			JR      C,ERROR3		; Throw an error if FPP returns bad
+			JR      C,ERROR3_EX		; Throw an error if FPP returns bad
 			INC     H
 			JR      NZ,LOOP_        	; Keep looping
 			LD      HL,27			; Adjust the stack
@@ -919,7 +920,7 @@ NEXT0:			SBC     HL,DE			; Compare to make sure that the variables match
 			CP      ','			; Check for multiple variables
 			JP      NZ,XEQ			; No, so we are done at ths point
 			INC     IY			; Increment to the next variable
-			JR      NEXT			; And continue
+			JR      NEXT_EX			; And continue
 ;
 LOOP_:			POP     BC
 			POP     DE
@@ -941,12 +942,12 @@ NEXT1:			LD      HL,27			; TODO: What does this do?
 			JR      Z,NEXT0
 ;			
 			LD      A,33
-ERROR3:			JP      ERROR_           	; Throw the error "Can't match FOR"
+ERROR3_EX:			JP      ERROR_           	; Throw the error "Can't match FOR"
 
 ; FNname
 ; N.B. ENTERED WITH A <> TON
 ;
-FN:			PUSH    AF              	; Push A onto the stack; this'll be checked for the token ON (TON) in PROC5
+FN_EX:			PUSH    AF              	; Push A onto the stack; this'll be checked for the token ON (TON) in PROC5
 			CALL    PROC1
 FNCHK:			EQU     $			; This will never fall through as PROC1 will do a JP XEQ
 
@@ -956,7 +957,7 @@ FNCHK:			EQU     $			; This will never fall through as PROC1 will do a JP XEQ
 ; - 3 bytes: The return address for ENDPROC (initially the ON PROC FLAG)
 ; - 3 bytes: Marker (the address of PROCHK)
 ;
-PROC:			PUSH    AF			; Push A onto the stack; this'll be checked for the token ON (TON) in PROC5,
+PROC_EX:			PUSH    AF			; Push A onto the stack; this'll be checked for the token ON (TON) in PROC5,
 			CALL    PROC1			; and is also space reserved on the stack for the return address
 PROCHK:			EQU     $			; This will never fall through as PROC1 will do a JP XEQ
 ;
@@ -967,7 +968,7 @@ PROC1:			CALL    CHECK			; Check there is space for this
 			POP     BC			; BC = IY
 			JR      Z,PROC4			; If found in the dynamic area then skip to PROC4
 			LD      A,30
-			JR      C,ERROR3        	; Throw error "Bad call" if invalid PROC/FN call
+			JR      C,ERROR3_EX        	; Throw error "Bad call" if invalid PROC/FN call
 ;
 ; At this point the PROC/FN has not yet been registered in the dynamic area
 ; So we need to search through the listing and find where the DEFPROC/FN is and save the address
@@ -976,7 +977,7 @@ PROC1:			CALL    CHECK			; Check there is space for this
 			LD      HL,(PAGE_)		; HL: Start of program memory
 ;
 PROC2:			LD      A,DEF_			;  A: The token to search for
-			CALL    SEARCH          	; Look for "DEF" as the first token in a program line
+			CALL    SEARCH_EX          	; Look for "DEF" as the first token in a program line
 			JR      C,PROC3			; Not found, so jump to PROC3
 			PUSH    HL			; HL: Points to the DEF token in the DEFPROC
 			POP     IY			; IY = HL
@@ -1002,7 +1003,7 @@ PROC6:			EX      DE,HL			; HL: Address of the procedure
 PROC3:			POP     IY              	; Restore the execution address
 			CALL    GETDEF			; Search for this PROC/FN entry in the dynamic area
 			LD      A,29
-			JR      NZ,ERROR3      		; Throw error "No such FN/PROC" if not found
+			JR      NZ,ERROR3_EX      		; Throw error "No such FN/PROC" if not found
 ;
 ; At this point we have a PROC/FN entry in the dynamic area
 ; 			
@@ -1046,7 +1047,7 @@ PROC5:			INC	HL			; Increment to the ON PROC flag address
 
 ; LOCAL var[,var...]
 ;
-LOCAL_:			POP     BC			; BC: The current check marker (on the stack)
+LOCAL_EX_:			POP     BC			; BC: The current check marker (on the stack)
 			PUSH    BC
 			LD      HL,FNCHK		; Check if we are in a FN
 			OR      A
@@ -1304,7 +1305,7 @@ READ2:			POP     HL
 			JR      READ0
 ;
 GETDAT:			LD      A,DATA_
-			CALL    SEARCH
+			CALL    SEARCH_EX
 			INC     HL
 			RET     NC
 			LD      A,42
@@ -1324,7 +1325,7 @@ IF_:			CALL    EXPRI
 IF1:			CALL    NXT
 			CP      LINO
 			JP      NZ,XEQ          ;STATEMENT FOLLOWS
-			JP      GOTO            ;LINE NO. FOLLOWS
+			JP      GOTO_EX            ;LINE NO. FOLLOWS
 IFNOT:			LD      A,(IY)
 			CP      CR
 			INC     IY
@@ -1365,7 +1366,7 @@ CLR:			CALL    CLEAR
 
 ; RESTORE [line]
 ;
-RESTOR:			LD      HL,(PAGE_)
+RESTOR_EX:			LD      HL,(PAGE_)
 			CALL    TERMQ
 			JR      Z,RESTR1
 			CALL    ITEMI
@@ -1374,7 +1375,7 @@ RESTOR:			LD      HL,(PAGE_)
 			LD      A,41
 			JP      NZ,ERROR4       ;"No such line"
 RESTR1:			LD      A,DATA_
-			CALL    SEARCH
+			CALL    SEARCH_EX
 			LD      (DATPTR),HL
 			JP      XEQ
 
@@ -1384,7 +1385,7 @@ RESTR1:			LD      A,DATA_
 ; LOMEM=expr
 ; HIMEM=expr
 ;
-PTR:			CALL    CHANEL
+PTR_EX:			CALL    CHANEL
 			CALL    EQUALS
 			LD      A,E
 			PUSH    AF
@@ -1396,15 +1397,15 @@ PTR:			CALL    CHANEL
 			CALL    PUTPTR
 			JP      XEQ
 ;
-PAGEV:			CALL    EQUALS
+PAGEV_EX:			CALL    EQUALS
 			CALL    EXPRI
 			EXX
 			LD      L,0
 			LD      (PAGE_),HL
 			JP      XEQ
 ;
-TIMEV:			CP      '$'
-			JR      Z,TIMEVS
+TIMEV_EX:			CP      '$'
+			JR      Z,TIMEVS_EX
 			CALL    EQUALS
 			CALL    EXPRI
 			PUSH    HL
@@ -1413,13 +1414,13 @@ TIMEV:			CP      '$'
 			CALL    PUTIME
 			JP      XEQ
 ;
-TIMEVS:			INC     IY              ;SKIP '$'
+TIMEVS_EX:			INC     IY              ;SKIP '$'
 			CALL    EQUALS
 			CALL    EXPRS
 			CALL    PUTIMS
 			JP      XEQ
 ;
-LOMEMV:			CALL    EQUALS
+LOMEMV_EX:			CALL    EQUALS
 			CALL    EXPRI
 			CALL    CLEAR
 			EXX
@@ -1427,7 +1428,7 @@ LOMEMV:			CALL    EQUALS
 			LD      (FREE),HL
 			JP      XEQ
 ;
-HIMEMV:			CALL    EQUALS			; Check for '=' and throw an error if not found
+HIMEMV_EX:			CALL    EQUALS			; Check for '=' and throw an error if not found
 			CALL    EXPRI			; Load the expression into registers
 			LD	A,L			;  A: The MSB of the 24-bit value
 			EXX				; HL: The LSW of the 24-bit value
@@ -1463,7 +1464,7 @@ WIDTHV:			CALL    EXPRI
 ; TRACE OFF
 ; TRACE line
 ;
-TRACE:			INC     IY
+TRACE_EX:			INC     IY
 			LD      HL,0
 			CP      TON
 			JR      Z,TRACE0
@@ -2093,12 +2094,12 @@ XTRAC1:			LD      A,(IY)
 ; Corrupts:
 ; - BC
 ;
-SEARCH:			LD      BC,0			; Clear BC
+SEARCH_EX:			LD      BC,0			; Clear BC
 ;
-SRCH1:			LD      C,(HL)			;  C: Fetch the line length
+SRCH1_EX:			LD      C,(HL)			;  C: Fetch the line length
 			INC     C			; Check for 0, i.e. end of program marker
 			DEC     C
-			JR      Z,SRCH2         	; Not found the token, so end
+			JR      Z,SRCH2_EX         	; Not found the token, so end
 			INC     HL			; Skip the line length and line number
 			INC     HL
 			INC     HL
@@ -2108,9 +2109,9 @@ SRCH1:			LD      C,(HL)			;  C: Fetch the line length
 			DEC     C
 			DEC     C
 			ADD     HL,BC
-			JR      SRCH1			; Rinse, lather and repeat
+			JR      SRCH1_EX			; Rinse, lather and repeat
 ; 			
-SRCH2:			DEC     HL              	; Token not found, so back up to the CR at the end of the last line
+SRCH2_EX:			DEC     HL              	; Token not found, so back up to the CR at the end of the last line
 			SCF				; And set the carry flag
 			RET
 
@@ -2230,9 +2231,9 @@ ASSEM5:			POP     HL              	; Old PC
 			JR      Z,ASSEM
 			LD	(R0),HL			; Store HL in R0 so we can access the MSB
 			LD	A,(R0+2)		; Print out the address
-			CALL	HEX
+			CALL	HEX_EX
 			LD      A,H			
-			CALL    HEX
+			CALL    HEX_EX
 			LD      A,L
 			CALL    HEXSP
 			XOR     A
@@ -2262,10 +2263,10 @@ ASSEM4:			LD      A,(BC)
 			CALL    CRLF
 			JP      ASSEM
 ;
-HEXSP:			CALL    HEX
+HEXSP:			CALL    HEX_EX
 			LD      A,' '
 			JR      OUTCH1
-HEX:			PUSH    AF
+HEX_EX:			PUSH    AF
 			RRCA
 			RRCA
 			RRCA
@@ -2350,7 +2351,7 @@ GROUP02:		SUB     10			; The number of opcodes in GROUP2 and GROUP3
 ;
 GROUP04:		SUB     3			; The number of opcodes in GROUP4
 			JR      NC,GROUP05		; If not in that range, then check GROUP5
-GROUP04_1:		CALL    PAIR				
+GROUP04_1:		CALL    PAIR_EX				
 			RET     C
 			JR      BYTE0				
 ;
@@ -2400,7 +2401,7 @@ BIND1:			JP      NC,BIND
 			RLCA
 			RLCA
 			LD      C,A
-			CALL    PAIR1
+			CALL    PAIR1_EX
 			RET     C
 BYTE0:			LD      A,C
 			JP      BYTE_
@@ -2550,12 +2551,12 @@ GROUP16:		SUB	1			; The number of opcodes in GROUP16
 			EX      AF,AF'
 			JP      NC,GROUP05_1		; Load single register direct; go here
 			LD      C,1
-			CALL    PAIR1
+			CALL    PAIR1_EX
 			RET     C
 			LD      A,14
 			CP      B
 			LD      B,A
-			CALL    Z,PAIR
+			CALL    Z,PAIR_EX
 			LD      A,B
 			AND     3FH
 			CP      12
@@ -2571,12 +2572,12 @@ LDIN:			EX      AF,AF'
 			POP     BC
 			JP      NC,BIND
 			LD      C,0AH
-			CALL    PAIR1
+			CALL    PAIR1_EX
 			CALL    LD16
 			JP      NC,GROUP12_1
 			CALL    NUMBER
 			LD      C,2
-			CALL    PAIR
+			CALL    PAIR_EX
 			CALL    LD16
 			RET     C
 			CALL    BYTE_
@@ -2784,7 +2785,7 @@ OPND:			PUSH    HL			; Preserve HL
 			SET	6,D			; Set flag to indicate we've got an index
 			BIT     3,B			; Check if an offset is required
 			PUSH    HL
-			CALL    Z,OFFSET		; If bit 3 of B is zero, then get the offset
+			CALL    Z,OFFSET_EX		; If bit 3 of B is zero, then get the offset
 			LD      E,L			; E: The offset
 			POP     HL
 			LD	A,DDH			; IX prefix
@@ -2797,7 +2798,7 @@ BYTE_:			LD      (IX),A			; Write a byte out
 			OR      A
 			RET
 ;
-OFFSET:			LD      A,(IY)
+OFFSET_EX:			LD      A,(IY)
 			CP      ')'
 			LD      HL,0
 			RET     Z
@@ -2842,9 +2843,9 @@ COND_:			CALL    OPND
 			LD      A,3
 			JR      SHL3
 ;
-PAIR:			CALL    OPND
+PAIR_EX:			CALL    OPND
 			RET     C
-PAIR1:			LD      A,B
+PAIR1_EX:			LD      A,B
 			AND     0FH
 			SUB     8
 			RET     C

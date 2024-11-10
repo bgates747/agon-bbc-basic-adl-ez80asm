@@ -90,13 +90,12 @@ def generate_xref_assembly(input_file, output_file, include_files):
 
 if __name__ == "__main__":
     # File paths
-    input_file = "agon_graphics.asm"
     input_file = "init.asm"
     input_file = "eval.asm"
     input_file = "exec.asm"
     # input_file = "fpp.asm"
     # input_file = "gpio.asm"
-    # input_file = "main.asm"
+    input_file = "main.asm"
     # input_file = "misc.asm"
     # input_file = "patch.asm"
     # input_file = "sorry.asm"
@@ -115,6 +114,7 @@ if __name__ == "__main__":
         "ram.asm",
         "equs.inc",
         "user.asm",
+        "eval.asm",
     ]
     
     generate_xref_assembly(input_file, output_file, include_files)

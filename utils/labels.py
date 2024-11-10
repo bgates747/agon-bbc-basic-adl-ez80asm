@@ -316,35 +316,55 @@ def write_equ_labels_to_file(equs, labels, output_file):
     print(f"EQUs and labels written to {output_file}")
 
 def write_collisions_to_file(collisions, output_file):
-    """Writes the namespace collisions to a file, sorted by label and filename.
+    """Writes the namespace collisions to a file, filtered by specified filenames and sorted by label and filename.
     
     Args:
         collisions (dict): A dictionary of namespace collisions.
         output_file (str): The file path where collisions should be written.
+        file_filter (list, optional): A list of filenames to include in the output. If None, all files are included.
     """
+    # file_filter = ["eval.asm", "exec.asm", "fpp.asm"]
+    file_filter = None
     # Sort collisions by label name
     sorted_collisions = sorted(collisions.items(), key=lambda item: item[0])
 
     with open(output_file, 'w') as file:
         file.write("Namespace Collisions:\n")
         for label, occurrences in sorted_collisions:
-            file.write(f"\nCollision for '{label}':\n")
-            # Sort occurrences by filename
-            sorted_occurrences = sorted(occurrences, key=lambda x: x['file'])
-            for occurrence in sorted_occurrences:
-                if occurrence['type'] == 'label':
-                    file.write(f"  Defined as label in {occurrence['file']} at line {occurrence['line']}\n")
-                elif occurrence['type'] == 'equ':
-                    file.write(f"  Defined as EQU in {occurrence['file']}: {occurrence['definition']}\n")
+            # Filter occurrences by the specified file_filter
+            filtered_occurrences = [occ for occ in occurrences if file_filter is None or occ['file'] in file_filter]
+            if filtered_occurrences:
+                file.write(f"\nCollision for '{label}':\n")
+                # Sort filtered occurrences by filename
+                sorted_occurrences = sorted(filtered_occurrences, key=lambda x: x['file'])
+                for occurrence in sorted_occurrences:
+                    if occurrence['type'] == 'label':
+                        file.write(f"  Defined as label in {occurrence['file']} at line {occurrence['line']}\n")
+                    elif occurrence['type'] == 'equ':
+                        file.write(f"  Defined as EQU in {occurrence['file']}: {occurrence['definition']}\n")
     print(f"Collisions written to {output_file}")
 
 # Main script execution
 if __name__ == "__main__":
-    directory = "basic"
+    directory = "."
     file_list = [
-        "mos_api.inc", "macros.inc", "ram.asm", "equs.inc", "init.asm",
-        "agon_graphics.asm", "agon_sound.asm", "eval.asm", "exec.asm",
-        "fpp.asm", "gpio.asm", "interrupts.asm", "patch.asm", "sorry.asm", "main.asm"
+        "mos_api.inc",
+        "macros.inc",
+        "init.asm",
+        "ram.asm",
+        "equs.inc",
+        "main.asm",
+        "eval.asm",
+        "exec.asm",
+        "fpp.asm",
+        "gpio.asm",
+        "interrupts.asm",
+        "agon_graphics.asm",
+        "agon_sound.asm",
+        "misc.asm",
+        "patch.asm",
+        "sorry.asm",
+        "user.asm",
     ]
 
     files_dict = load_files_to_dict(directory, file_list)
@@ -353,13 +373,13 @@ if __name__ == "__main__":
     equs = extract_equ_definitions(files_dict)
     macros = extract_macros(files_dict)
 
-    output_file = f"{directory}/symbols.txt"
+    output_file = f"utils/symbols.txt"
     write_equ_labels_to_file(equs, labels, output_file)
 
     collisions = find_namespace_collisions(labels, equs)
-    collisions_output_file = f"{directory}/namespace_collisions.txt"
+    collisions_output_file = f"utils/namespace_collisions.txt"
     write_collisions_to_file(collisions, collisions_output_file)
 
-    modified_files_dict = replace_duplicate_labels(files_dict, collisions, xdefs, xrefs)
-    master_output_file = f"{directory}/master_assembly.asm"
-    write_master_assembly(modified_files_dict, master_output_file)
+    # modified_files_dict = replace_duplicate_labels(files_dict, collisions, xdefs, xrefs)
+    # master_output_file = f"{directory}/master_assembly.asm",
+    # write_master_assembly(modified_files_dict, master_output_file)

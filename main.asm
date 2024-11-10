@@ -1,142 +1,3 @@
-; ; ===== STUB FUNCTIONS =====
-; printInline:
-;     ret
-
-; BRAKET:
-; 	call printInline
-; 	asciz "main.asm called BRAKET!"
-; 	ret
-
-; CHAIN0:
-; 	call printInline
-; 	asciz "main.asm called CHAIN0!"
-; 	ret
-
-; CHECK:
-; 	call printInline
-; 	asciz "main.asm called CHECK!"
-; 	ret
-
-; COMMA:
-; 	call printInline
-; 	asciz "main.asm called COMMA!"
-; 	ret
-
-; DECODE:
-; 	call printInline
-; 	asciz "main.asm called DECODE!"
-; 	ret
-
-; EXPRI:
-; 	call printInline
-; 	asciz "main.asm called EXPRI!"
-; 	ret
-
-; EXPRS:
-; 	call printInline
-; 	asciz "main.asm called EXPRS!"
-; 	ret
-
-; FILL:
-; 	call printInline
-; 	asciz "main.asm called FILL!"
-; 	ret
-
-; ITEMI:
-; 	call printInline
-; 	asciz "main.asm called ITEMI!"
-; 	ret
-
-; LOADN:
-; 	call printInline
-; 	asciz "main.asm called LOADN!"
-; 	ret
-
-; LTRAP:
-; 	call printInline
-; 	asciz "main.asm called LTRAP!"
-; 	ret
-
-; MUL16:
-; 	call printInline
-; 	asciz "main.asm called MUL16!"
-; 	ret
-
-; NXT:
-; 	call printInline
-; 	asciz "main.asm called NXT!"
-; 	ret
-
-; OSINIT:
-; 	call printInline
-; 	asciz "main.asm called OSINIT!"
-; 	ret
-
-; OSLINE:
-; 	call printInline
-; 	asciz "main.asm called OSLINE!"
-; 	ret
-
-; OSLOAD:
-; 	call printInline
-; 	asciz "main.asm called OSLOAD!"
-; 	ret
-
-; OSSAVE:
-; 	call printInline
-; 	asciz "main.asm called OSSAVE!"
-; 	ret
-
-; OSSHUT:
-; 	call printInline
-; 	asciz "main.asm called OSSHUT!"
-; 	ret
-
-; OSWRCH:
-; 	call printInline
-; 	asciz "main.asm called OSWRCH!"
-; 	ret
-
-; PROMPT:
-; 	call printInline
-; 	asciz "main.asm called PROMPT!"
-; 	ret
-
-; RESET:
-; 	call printInline
-; 	asciz "main.asm called RESET!"
-; 	ret
-
-; SEARCH:
-; 	call printInline
-; 	asciz "main.asm called SEARCH!"
-; 	ret
-
-; SFIX:
-; 	call printInline
-; 	asciz "main.asm called SFIX!"
-; 	ret
-
-; STAR_VERSION:
-; 	call printInline
-; 	asciz "main.asm called STAR_VERSION!"
-; 	ret
-
-; TERMQ:
-; 	call printInline
-; 	asciz "main.asm called TERMQ!"
-; 	ret
-
-; X4OR5:
-; 	call printInline
-; 	asciz "main.asm called X4OR5!"
-; 	ret
-
-; XEQ:
-; 	call printInline
-; 	asciz "main.asm called XEQ!"
-; 	ret
-
 ;
 ; Title:	BBC Basic Interpreter - Z80 version
 ;		Command, Error and Lexical Analysis Module - "MAIN"
@@ -260,29 +121,67 @@
 ;
 ; A handful of common token IDs
 ;
-TERROR:			EQU     85H
-LINE_:			EQU     86H
-ELSE_:			EQU     8BH
-THEN:			EQU     8CH
-LINO:			EQU     8DH
-FN:			EQU     A4H
-TO:			EQU     B8H
-REN:			EQU     CCH
-DATA_:			EQU     DCH
-DIM:			EQU     DEH
-FOR:			EQU     E3H
-GOSUB:			EQU     E4H
-GOTO:			EQU     E5H
-TIF:			EQU     E7H
-LOCAL_:			EQU     EAH
-NEXT:			EQU     EDH
-ON_:			EQU     EEH
-PROC:			EQU     F2H
-REM:			EQU     F4H
-REPEAT:			EQU     F5H
-RESTOR:			EQU     F7H
-TRACE:			EQU     FCH
-UNTIL:			EQU     FDH
+; TERROR:			EQU     85H
+; LINE_:			EQU     86H
+; ELSE_:			EQU     8BH
+; THEN:			EQU     8CH
+; LINO:			EQU     8DH
+; FN:				EQU     A4H
+; TO:				EQU     B8H
+; REN:			EQU     CCH
+; DATA_:			EQU     DCH
+; DIM:			EQU     DEH
+; FOR:			EQU     E3H
+; GOSUB:			EQU     E4H
+; GOTO:			EQU     E5H
+; TIF:			EQU     E7H
+; LOCAL_:			EQU     EAH
+; NEXT:			EQU     EDH
+; ON_:			EQU     EEH
+; PROC:			EQU     F2H
+; REM:			EQU     F4H
+; REPEAT:			EQU     F5H
+; RESTOR:			EQU     F7H
+; TRACE:			EQU     FCH
+; UNTIL:			EQU     FDH
+
+; consolidated with tokens from exec.asm
+DATA_:	EQU     DCH
+DEF_:	EQU     DDH
+DIM:	EQU     DEH
+ELSE_:	EQU     8BH
+FN:	EQU     A4H
+FOR:	EQU     E3H
+GOSUB:	EQU     E4H
+GOTO:	EQU     E5H
+LINE_:	EQU     86H
+LINO:	EQU     8DH
+LOCAL_:	EQU     EAH
+NEXT:	EQU     EDH
+OFF_:	EQU     87H
+ON_:	EQU     EEH
+PROC:	EQU     F2H
+REM:	EQU     F4H
+REN:	EQU     CCH
+REPEAT:	EQU     F5H
+RESTOR:	EQU     F7H
+SPC:	EQU     89H
+STEP:	EQU     88H
+TAB:	EQU     8AH
+TAND:	EQU     80H
+TCALL:	EQU     D6H
+TERROR:	EQU     85H
+TGOSUB:	EQU     E4H
+TGOTO:	EQU     E5H
+THEN:	EQU     8CH
+TIF:	EQU     E7H
+TO:	EQU     B8H
+TON:	EQU     EEH
+TOR:	EQU     84H
+TPROC:	EQU     F2H
+TRACE:	EQU     FCH
+TSTOP:	EQU     FAH
+UNTIL:	EQU     FDH
 ;
 ; This defines the block of tokens that are pseudo-variables.
 ; There are two versions of each token, a GET and a SET

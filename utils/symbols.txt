@@ -1,0 +1,1278 @@
+Combined EQU and Label Definitions:
+ABSV (label) in eval.asm: Line 874
+ABSV_FP (label) in fpp.asm: Line 658
+ACCS (label) in ram.asm: Line 64
+ACLOST (EQU) in fpp.asm: ACLOST:			EQU     23              ;Accuracy lost
+ACS (label) in eval.asm: Line 964
+ACS1 (label) in fpp.asm: Line 1184
+ACS_FP (label) in fpp.asm: Line 1202
+ADD1 (label) in eval.asm: Line 494
+ADD1_FP (label) in fpp.asm: Line 1776
+ADDR16 (label) in exec.asm: Line 2713
+ADDR24 (label) in exec.asm: Line 2718
+ADDR_ (label) in exec.asm: Line 2710
+ADD_ (label) in fpp.asm: Line 1932
+ADL_ (label) in exec.asm: Line 2629
+ADVAL (label) in sorry.asm: Line 21
+ANDK (EQU) in eval.asm: ANDK:			EQU     80H
+ARGERR (label) in exec.asm: Line 1847
+ARGUE (label) in exec.asm: Line 1801
+ARGUE1 (label) in exec.asm: Line 1803
+ARGUE2 (label) in exec.asm: Line 1831
+ARGUE4 (label) in exec.asm: Line 1840
+ARGUE5 (label) in exec.asm: Line 1850
+ARGUE6 (label) in exec.asm: Line 1856
+ARGUE7 (label) in exec.asm: Line 1872
+ARRAY (label) in main.asm: Line 1634
+ASC (label) in eval.asm: Line 717
+ASC0 (label) in eval.asm: Line 718
+ASC1 (label) in eval.asm: Line 721
+ASC_TO_NUMBER (label) in misc.asm: Line 38
+ASC_TO_NUMBER1 (label) in misc.asm: Line 46
+ASC_TO_NUMBER2 (label) in misc.asm: Line 55
+ASC_TO_NUMBER3 (label) in misc.asm: Line 66
+ASC_TO_NUMBER4 (label) in misc.asm: Line 82
+ASM (label) in exec.asm: Line 370
+ASM0 (label) in exec.asm: Line 369
+ASMB (label) in exec.asm: Line 2297
+ASMB1 (label) in exec.asm: Line 2313
+ASN (label) in eval.asm: Line 952
+ASN_FP (label) in fpp.asm: Line 1112
+ASSEM (label) in exec.asm: Line 2184
+ASSEM0 (label) in exec.asm: Line 2198
+ASSEM1 (label) in exec.asm: Line 2243
+ASSEM2 (label) in exec.asm: Line 2253
+ASSEM3 (label) in exec.asm: Line 2208
+ASSEM4 (label) in exec.asm: Line 2258
+ASSEM5 (label) in exec.asm: Line 2228
+ASSIGN (label) in exec.asm: Line 1648
+ATEND (label) in main.asm: Line 518
+ATN (label) in eval.asm: Line 958
+ATN0 (label) in fpp.asm: Line 1133
+ATN1 (label) in fpp.asm: Line 1153
+ATN2 (label) in fpp.asm: Line 1155
+ATN_FP (label) in fpp.asm: Line 1132
+AUTO (label) in main.asm: Line 1041
+AUTOLOAD (label) in main.asm: Line 363
+AUTOLOAD_1 (label) in main.asm: Line 365
+AUTOLOAD_2 (label) in main.asm: Line 372
+AUTONO (label) in ram.asm: Line 79
+BAD (label) in main.asm: Line 1050
+BADBIN (label) in eval.asm: Line 460
+BADDIM (label) in exec.asm: Line 519
+BADHEX (label) in eval.asm: Line 438
+BADOP (EQU) in fpp.asm: BADOP:			EQU     1               ;Bad operation code
+BAD_FP (label) in fpp.asm: Line 62
+BGET (label) in eval.asm: Line 692
+BIN (label) in eval.asm: Line 446
+BIN1 (label) in eval.asm: Line 449
+BIND (label) in exec.asm: Line 2762
+BIND1 (label) in exec.asm: Line 2398
+BINDIG (label) in eval.asm: Line 1601
+BITLOOKUP (label) in eval.asm: Line 1254
+BIT_ (label) in exec.asm: Line 2854
+BPUT (label) in exec.asm: Line 1516
+BRAKET (label) in eval.asm: Line 1623
+BUFFER (label) in ram.asm: Line 65
+BYTE0 (label) in exec.asm: Line 2406
+BYTE_ (label) in exec.asm: Line 2796
+CALL1 (label) in exec.asm: Line 1545
+CALL2 (label) in exec.asm: Line 1567
+CALL_ (label) in exec.asm: Line 1537
+CARRET (label) in main.asm: Line 1464
+CB (label) in exec.asm: Line 2761
+CHAIN (label) in exec.asm: Line 225
+CHAIN0 (label) in exec.asm: Line 228
+CHANEL (label) in exec.asm: Line 2169
+CHECK (label) in exec.asm: Line 1768
+CHKO1 (label) in fpp.asm: Line 490
+CHKO2 (label) in fpp.asm: Line 491
+CHKOVF (label) in fpp.asm: Line 487
+CHNL (label) in exec.asm: Line 2173
+CHRS (label) in eval.asm: Line 1191
+CLEAN (label) in main.asm: Line 1274
+CLEAR (label) in main.asm: Line 1316
+CLEAR1 (label) in main.asm: Line 1324
+CLG (label) in agon_graphics.asm: Line 124
+CLI (label) in exec.asm: Line 318
+CLOOP (label) in main.asm: Line 404
+CLOOP0 (label) in main.asm: Line 1075
+CLOOP1 (label) in main.asm: Line 768
+CLOSE (label) in exec.asm: Line 1510
+CLR (label) in exec.asm: Line 1363
+CLRSCN (label) in agon_graphics.asm: Line 129
+CLS (label) in exec.asm: Line 1339
+CMDTAB (label) in exec.asm: Line 158
+COLD (label) in main.asm: Line 376
+COLOUR (label) in agon_graphics.asm: Line 215
+COLOUR_1 (label) in agon_graphics.asm: Line 227
+COLOUR_2 (label) in agon_graphics.asm: Line 244
+COMDS (label) in patch.asm: Line 373
+COMMA (label) in eval.asm: Line 1616
+CON (label) in eval.asm: Line 613
+CON0 (label) in fpp.asm: Line 1474
+CON2 (label) in fpp.asm: Line 1486
+CON3 (label) in fpp.asm: Line 1493
+COND_ (label) in exec.asm: Line 2834
+CONS (label) in eval.asm: Line 585
+CONS1 (label) in eval.asm: Line 591
+CONS2 (label) in eval.asm: Line 599
+CONS3 (label) in eval.asm: Line 586
+CON_FP (label) in fpp.asm: Line 1457
+COPY0 (label) in fpp.asm: Line 1990
+COPY_ (label) in fpp.asm: Line 1989
+CORN (label) in exec.asm: Line 2751
+COS (label) in eval.asm: Line 922
+COS0 (label) in fpp.asm: Line 847
+COS_FP (label) in fpp.asm: Line 846
+COUNT (label) in ram.asm: Line 86
+COUNT0 (label) in eval.asm: Line 756
+COUNT1 (label) in eval.asm: Line 757
+COUNT2 (label) in eval.asm: Line 763
+COUNTV (label) in eval.asm: Line 754
+CR (EQU) in equs.inc: CR:			EQU     0DH
+CREATE (label) in main.asm: Line 1927
+CRLF (label) in main.asm: Line 1453
+CRTONULL (label) in misc.asm: Line 132
+CRTONULL0 (label) in misc.asm: Line 136
+CRTONULL1 (label) in misc.asm: Line 137
+CRTONULL2 (label) in misc.asm: Line 142
+CSTR_CAT (label) in misc.asm: Line 217
+CSTR_CAT_1 (label) in misc.asm: Line 223
+CSTR_ENDSWITH (label) in misc.asm: Line 201
+CSTR_FINDCH (label) in misc.asm: Line 187
+CSTR_FNAME (label) in misc.asm: Line 151
+CSTR_LINE (label) in misc.asm: Line 169
+D2 (label) in fpp.asm: Line 1978
+D2C (label) in fpp.asm: Line 1977
+DATA_ (EQU) in main.asm: DATA_:	EQU     DCH
+DATPTR (label) in ram.asm: Line 82
+DB_ (label) in exec.asm: Line 2375
+DECODE (label) in eval.asm: Line 1399
+DEFS (label) in exec.asm: Line 2641
+DEF_ (EQU) in main.asm: DEF_:	EQU     DDH
+DEG (label) in eval.asm: Line 886
+DEG_FP (label) in fpp.asm: Line 701
+DEL (label) in main.asm: Line 1234
+DELET1 (label) in main.asm: Line 738
+DELETE (label) in main.asm: Line 736
+DELIM (label) in exec.asm: Line 1953
+DIGITQ (label) in fpp.asm: Line 2259
+DIM (EQU) in main.asm: DIM:	EQU     DEH
+DIM1 (label) in exec.asm: Line 459
+DIM2 (label) in exec.asm: Line 503
+DIM3 (label) in exec.asm: Line 494
+DIM4 (label) in exec.asm: Line 527
+DIM5 (label) in exec.asm: Line 510
+DIM_EX (label) in exec.asm: Line 441
+DIR_SIZE (EQU) in mos_api.inc: DIR_SIZE:         EQU FFOBJID_SIZE + 31  ; Total size of DIR structure
+DISPAT (label) in eval.asm: Line 1684
+DISPAT_FP (label) in fpp.asm: Line 82
+DISPT0 (label) in eval.asm: Line 1687
+DISPT2 (label) in eval.asm: Line 1680
+DIV0 (label) in fpp.asm: Line 2121
+DIV1 (label) in fpp.asm: Line 2131
+DIV2 (label) in fpp.asm: Line 1817
+DIVA (label) in fpp.asm: Line 2120
+DIVB (label) in fpp.asm: Line 2140
+DIVBY0 (EQU) in fpp.asm: DIVBY0:			EQU     18              ;Division by zero
+DIVC (label) in fpp.asm: Line 2132
+DIVK (EQU) in eval.asm: DIVK:			EQU     81H
+DLOAD5 (label) in fpp.asm: Line 1435
+DLOAD5_SPL (label) in fpp.asm: Line 1444
+DLP1 (label) in main.asm: Line 2051
+DLPAIR (label) in main.asm: Line 2043
+DOIT (label) in eval.asm: Line 1642
+DONE (label) in fpp.asm: Line 933
+DOSPC (label) in exec.asm: Line 2027
+DOT (label) in exec.asm: Line 2937
+DOTAB (label) in exec.asm: Line 1998
+DOTAB1 (label) in exec.asm: Line 2015
+DO_KEYBOARD (label) in interrupts.asm: Line 53
+DO_KEYBOARD_0 (label) in interrupts.asm: Line 59
+DO_KEYBOARD_1 (label) in interrupts.asm: Line 64
+DRAW (label) in agon_graphics.asm: Line 305
+DTABLE (label) in fpp.asm: Line 106
+DYNVAR (label) in ram.asm: Line 67
+ED (label) in exec.asm: Line 2758
+ELSE_ (EQU) in main.asm: ELSE_:	EQU     8BH
+ENCODE (label) in main.asm: Line 2263
+ENDPRO (label) in exec.asm: Line 1097
+END_ (label) in exec.asm: Line 283
+ENVEL (label) in sorry.asm: Line 20
+EOF (label) in eval.asm: Line 687
+EORK (EQU) in eval.asm: EORK:			EQU     82H
+EQUALS (label) in exec.asm: Line 1981
+ERL (label) in ram.asm: Line 83
+ERLV (label) in eval.asm: Line 748
+ERR (label) in ram.asm: Line 88
+ERRLIN (label) in ram.asm: Line 84
+ERROR0 (label) in main.asm: Line 1121
+ERROR0_EV (label) in eval.asm: Line 597
+ERROR0_EX (label) in exec.asm: Line 389
+ERROR1 (label) in main.asm: Line 1129
+ERROR1_EV (label) in eval.asm: Line 1628
+ERROR1_EX (label) in exec.asm: Line 522
+ERROR2 (label) in main.asm: Line 1158
+ERROR2_EX (label) in exec.asm: Line 732
+ERROR3 (label) in main.asm: Line 1635
+ERROR3_EX (label) in exec.asm: Line 945
+ERROR4 (label) in exec.asm: Line 1312
+ERROR_ (label) in main.asm: Line 1109
+ERROR_FP_ (label) in fpp.asm: Line 63
+ERRTRP (label) in ram.asm: Line 80
+ERRTXT (label) in ram.asm: Line 81
+ERRV (label) in eval.asm: Line 751
+ERRWDS (label) in main.asm: Line 685
+ESC (EQU) in equs.inc: ESC:			EQU     1BH
+ESCAPE (label) in exec.asm: Line 388
+ESCDIS (label) in patch.asm: Line 243
+ESCSET (label) in patch.asm: Line 238
+ESCTEST (label) in patch.asm: Line 249
+EVAL_ (label) in eval.asm: Line 996
+EXIT_ (label) in exec.asm: Line 2878
+EXIT_FP_ (label) in fpp.asm: Line 57
+EXP (label) in eval.asm: Line 934
+EXP0 (label) in fpp.asm: Line 951
+EXP1 (label) in fpp.asm: Line 966
+EXP2 (label) in fpp.asm: Line 1009
+EXP3 (label) in fpp.asm: Line 1010
+EXP3S3 (label) in eval.asm: Line 320
+EXP4 (label) in fpp.asm: Line 1004
+EXPR (label) in eval.asm: Line 197
+EXPR0A (label) in eval.asm: Line 198
+EXPR0B (label) in eval.asm: Line 203
+EXPR1 (label) in eval.asm: Line 210
+EXPR1A (label) in eval.asm: Line 211
+EXPR2 (label) in eval.asm: Line 220
+EXPR2B (label) in eval.asm: Line 233
+EXPR2C (label) in eval.asm: Line 241
+EXPR2S (label) in eval.asm: Line 246
+EXPR3 (label) in eval.asm: Line 280
+EXPR3A (label) in eval.asm: Line 281
+EXPR3B (label) in eval.asm: Line 288
+EXPR3S (label) in eval.asm: Line 293
+EXPR4 (label) in eval.asm: Line 331
+EXPR4A (label) in eval.asm: Line 332
+EXPR4B (label) in eval.asm: Line 340
+EXPR5 (label) in eval.asm: Line 347
+EXPR5A (label) in eval.asm: Line 350
+EXPRI (label) in eval.asm: Line 369
+EXPRN (label) in eval.asm: Line 362
+EXPRNG (EQU) in fpp.asm: EXPRNG:			EQU     24              ;Exp range
+EXPRS (label) in eval.asm: Line 376
+EXPRSC (label) in eval.asm: Line 1615
+EXPR_W2 (label) in patch.asm: Line 935
+EXP_FP (label) in fpp.asm: Line 950
+EXT (label) in eval.asm: Line 798
+EXTERR (label) in main.asm: Line 1142
+EXT_DEFAULT (label) in patch.asm: Line 698
+EXT_EX (label) in exec.asm: Line 327
+EXT_HANDLER (label) in patch.asm: Line 713
+EXT_HANDLER_1 (label) in patch.asm: Line 718
+EXT_HANDLER_2 (label) in patch.asm: Line 737
+EXT_LOOKUP (label) in patch.asm: Line 749
+EZ80SFS_1 (label) in exec.asm: Line 3165
+EZ80SFS_2 (label) in exec.asm: Line 3167
+EZ80SFS_ADL0 (label) in exec.asm: Line 3174
+EZ80SFS_ADL1 (label) in exec.asm: Line 3183
+EZ80SF_FULL (label) in exec.asm: Line 2677
+EZ80SF_OK (label) in exec.asm: Line 2693
+EZ80SF_PART (label) in exec.asm: Line 2664
+EZ80SF_TABLE (label) in exec.asm: Line 2704
+FADD (label) in fpp.asm: Line 304
+FADD3 (label) in fpp.asm: Line 331
+FADD4 (label) in fpp.asm: Line 335
+FAND (label) in fpp.asm: Line 183
+FBDIV (label) in fpp.asm: Line 270
+FCOMP0 (label) in fpp.asm: Line 1859
+FCOMP1 (label) in fpp.asm: Line 1865
+FCOMP_FP (label) in fpp.asm: Line 1855
+FCP (label) in fpp.asm: Line 1888
+FCP0 (label) in fpp.asm: Line 1891
+FCP1 (label) in fpp.asm: Line 1904
+FDIV (label) in fpp.asm: Line 358
+FEOR (label) in fpp.asm: Line 203
+FEQ (label) in fpp.asm: Line 637
+FETCHS (label) in exec.asm: Line 2052
+FFOBJID_SIZE (EQU) in mos_api.inc: FFOBJID_SIZE:     EQU 15   ; Total size of FFOBJID structure
+FFOR (label) in fpp.asm: Line 223
+FGE (label) in fpp.asm: Line 618
+FGT (label) in fpp.asm: Line 611
+FILINFO_SIZE (EQU) in mos_api.inc: FILINFO_SIZE:     EQU 278  ; Total size of FILINFO structure
+FILL (label) in exec.asm: Line 2032
+FILL1 (label) in exec.asm: Line 2036
+FIL_SIZE (EQU) in mos_api.inc: FIL_SIZE:         EQU FFOBJID_SIZE + 21  ; Total size of FIL structure
+FIND (label) in exec.asm: Line 2876
+FIND0 (label) in exec.asm: Line 2887
+FIND1 (label) in exec.asm: Line 2893
+FIND2 (label) in exec.asm: Line 2900
+FIND3 (label) in exec.asm: Line 2901
+FIND4 (label) in exec.asm: Line 2911
+FIND5 (label) in exec.asm: Line 2914
+FIND6 (label) in exec.asm: Line 2919
+FINDL (label) in main.asm: Line 1519
+FINDL1 (label) in main.asm: Line 1529
+FIX (label) in fpp.asm: Line 1584
+FIX1 (label) in fpp.asm: Line 1588
+FIX2 (label) in fpp.asm: Line 1602
+FLAGS (label) in ram.asm: Line 103
+FLE (label) in fpp.asm: Line 624
+FLO48 (label) in fpp.asm: Line 1719
+FLOAT2 (label) in fpp.asm: Line 1754
+FLOATA (label) in fpp.asm: Line 1750
+FLOAT_ (label) in fpp.asm: Line 1735
+FLT (label) in fpp.asm: Line 605
+FMOD (label) in fpp.asm: Line 243
+FMUL (label) in fpp.asm: Line 452
+FN (EQU) in main.asm: FN:	EQU     A4H
+FNCHK (EQU) in exec.asm: FNCHK:			EQU     $			; This will never fall through as PROC1 will do a JP XEQ
+FNE (label) in fpp.asm: Line 631
+FNEND (label) in exec.asm: Line 393
+FNEND0 (label) in exec.asm: Line 418
+FNEND1 (label) in exec.asm: Line 429
+FNEND5 (label) in exec.asm: Line 398
+FNPTR (label) in ram.asm: Line 68
+FN_EX (label) in exec.asm: Line 950
+FONE_FP (label) in fpp.asm: Line 926
+FOR (EQU) in main.asm: FOR:	EQU     E3H
+FOR1 (label) in exec.asm: Line 852
+FORCHK (EQU) in exec.asm: FORCHK:			EQU     $
+FORMAT (label) in exec.asm: Line 1988
+FORVAR (label) in exec.asm: Line 817
+FOR_EX (label) in exec.asm: Line 820
+FPI180 (label) in fpp.asm: Line 716
+FPOW (label) in fpp.asm: Line 581
+FPOW0 (label) in fpp.asm: Line 574
+FPOW1 (label) in fpp.asm: Line 595
+FPP (label) in fpp.asm: Line 52
+FPP1 (label) in eval.asm: Line 968
+FPPN (label) in eval.asm: Line 965
+FREE (label) in ram.asm: Line 74
+FSUB (label) in fpp.asm: Line 285
+FTABLE (label) in fpp.asm: Line 123
+FTEST_FP (label) in fpp.asm: Line 1833
+FUNTBL (label) in eval.asm: Line 103
+FUNTBL_END (EQU) in eval.asm: FUNTBL_END:		EQU	$
+FUNTOK (EQU) in eval.asm: FUNTOK:			EQU	8DH			; First token number
+G9 (label) in eval.asm: Line 1501
+GCOL (label) in agon_graphics.asm: Line 264
+GET (label) in eval.asm: Line 704
+GET0 (label) in eval.asm: Line 714
+GET1 (label) in eval.asm: Line 1203
+GETCSR (label) in patch.asm: Line 154
+GETDAT (label) in exec.asm: Line 1307
+GETDEF (label) in main.asm: Line 1781
+GETEX1 (label) in fpp.asm: Line 1515
+GETEX2 (label) in fpp.asm: Line 1532
+GETEXP (label) in fpp.asm: Line 1509
+GETEXT (label) in patch.asm: Line 905
+GETIME (label) in patch.asm: Line 133
+GETIMS (label) in patch.asm: Line 921
+GETPTR (label) in patch.asm: Line 870
+GETS (label) in eval.asm: Line 1199
+GETSCHR (label) in agon_graphics.asm: Line 149
+GETV0 (label) in main.asm: Line 1757
+GETV2 (label) in main.asm: Line 1679
+GETV3 (label) in main.asm: Line 1681
+GETV4 (label) in main.asm: Line 1726
+GETV5 (label) in main.asm: Line 1729
+GETV6 (label) in main.asm: Line 1732
+GETV7 (label) in main.asm: Line 1734
+GETV8 (label) in main.asm: Line 1738
+GETV9 (label) in main.asm: Line 1741
+GETVA (label) in main.asm: Line 1743
+GETVAR (label) in main.asm: Line 1648
+GETVX (label) in main.asm: Line 1714
+GETVZ (label) in main.asm: Line 1718
+GOSCHK (EQU) in exec.asm: GOSCHK:			EQU     $
+GOSUB (EQU) in main.asm: GOSUB:	EQU     E4H
+GOSUB1 (label) in exec.asm: Line 756
+GOSUB_EX (label) in exec.asm: Line 755
+GOTO (EQU) in main.asm: GOTO:	EQU     E5H
+GOTO1 (label) in exec.asm: Line 740
+GOTO2 (label) in exec.asm: Line 742
+GOTO_EX (label) in exec.asm: Line 739
+GPIOB_M0 (label) in gpio.asm: Line 37
+GPIOB_M1 (label) in gpio.asm: Line 44
+GPIOB_M2 (label) in gpio.asm: Line 51
+GPIOB_M3 (label) in gpio.asm: Line 58
+GPIOB_M4 (label) in gpio.asm: Line 65
+GPIOB_M5 (label) in gpio.asm: Line 73
+GPIOB_M6 (label) in gpio.asm: Line 80
+GPIOB_M7 (label) in gpio.asm: Line 89
+GPIOB_M8 (label) in gpio.asm: Line 98
+GPIOB_M9 (label) in gpio.asm: Line 106
+GPIOB_SETMODE (label) in gpio.asm: Line 23
+GPIOMODE_ALTF (EQU) in equs.inc: GPIOMODE_ALTF:		EQU		5;	; Alt Function
+GPIOMODE_DIO (EQU) in equs.inc: GPIOMODE_DIO:		EQU		2	; Open Drain IO
+GPIOMODE_IN (EQU) in equs.inc: GPIOMODE_IN:		EQU		1	; Input
+GPIOMODE_INTAH (EQU) in equs.inc: GPIOMODE_INTAH:		EQU		7	; Interrupt, Active High
+GPIOMODE_INTAL (EQU) in equs.inc: GPIOMODE_INTAL:		EQU		6	; Interrupt, Active Low
+GPIOMODE_INTD (EQU) in equs.inc: GPIOMODE_INTD:		EQU		4	; Interrupt, Dual Edge
+GPIOMODE_INTFE (EQU) in equs.inc: GPIOMODE_INTFE:		EQU		8	; Interrupt, Falling Edge
+GPIOMODE_INTRE (EQU) in equs.inc: GPIOMODE_INTRE:		EQU		9	; Interrupt, Rising Edge
+GPIOMODE_OUT (EQU) in equs.inc: GPIOMODE_OUT:		EQU		0	; Output
+GPIOMODE_SIO (EQU) in equs.inc: GPIOMODE_SIO:		EQU		3	; Open Source IO
+GROUP02 (label) in exec.asm: Line 2340
+GROUP04 (label) in exec.asm: Line 2352
+GROUP04_1 (label) in exec.asm: Line 2354
+GROUP05 (label) in exec.asm: Line 2361
+GROUP05_1 (label) in exec.asm: Line 2370
+GROUP05_HL (label) in exec.asm: Line 2378
+GROUP07 (label) in exec.asm: Line 2394
+GROUP08 (label) in exec.asm: Line 2411
+GROUP09 (label) in exec.asm: Line 2440
+GROUP11 (label) in exec.asm: Line 2467
+GROUP12 (label) in exec.asm: Line 2491
+GROUP12_1 (label) in exec.asm: Line 2504
+GROUP13 (label) in exec.asm: Line 2509
+GROUP13_1 (label) in exec.asm: Line 2511
+GROUP14 (label) in exec.asm: Line 2517
+GROUP15 (label) in exec.asm: Line 2531
+GROUP15_1 (label) in exec.asm: Line 2533
+GROUP16 (label) in exec.asm: Line 2541
+GROUP17 (label) in exec.asm: Line 2590
+GROUP17_1 (label) in exec.asm: Line 2601
+HEX (label) in eval.asm: Line 416
+HEX1 (label) in eval.asm: Line 419
+HEX2 (label) in eval.asm: Line 423
+HEXDIG (label) in eval.asm: Line 1588
+HEXOUT (label) in exec.asm: Line 2276
+HEXSP (label) in exec.asm: Line 2266
+HEXST1 (label) in eval.asm: Line 1440
+HEXST2 (label) in eval.asm: Line 1443
+HEXST3 (label) in eval.asm: Line 1457
+HEXSTR (label) in eval.asm: Line 1437
+HEXSTS (label) in eval.asm: Line 1431
+HEX_EX (label) in exec.asm: Line 2269
+HIMEM (label) in ram.asm: Line 75
+HIMEMV (label) in eval.asm: Line 732
+HIMEMV_EX (label) in exec.asm: Line 1431
+HUH (label) in patch.asm: Line 353
+IADD (label) in fpp.asm: Line 300
+IAND (label) in fpp.asm: Line 184
+IBDIV (label) in fpp.asm: Line 271
+ICP (label) in fpp.asm: Line 1877
+ICP0 (label) in fpp.asm: Line 1894
+ICP1 (label) in fpp.asm: Line 1915
+IDIV (label) in fpp.asm: Line 357
+IEOR (label) in fpp.asm: Line 204
+IEQ (label) in fpp.asm: Line 639
+IEQ1 (label) in fpp.asm: Line 640
+IF1 (label) in exec.asm: Line 1325
+IFNOT (label) in exec.asm: Line 1329
+IF_ (label) in exec.asm: Line 1318
+IGE (label) in fpp.asm: Line 620
+IGE1 (label) in fpp.asm: Line 621
+IGT (label) in fpp.asm: Line 613
+IGT1 (label) in fpp.asm: Line 614
+ILE (label) in fpp.asm: Line 626
+ILE1 (label) in fpp.asm: Line 627
+ILT (label) in fpp.asm: Line 607
+ILT1 (label) in fpp.asm: Line 608
+IMOD (label) in fpp.asm: Line 244
+IMUL (label) in fpp.asm: Line 404
+IMUL1 (label) in fpp.asm: Line 433
+INCC (label) in fpp.asm: Line 1825
+INCREM (label) in ram.asm: Line 99
+IND1 (label) in main.asm: Line 1435
+IND2_ (label) in main.asm: Line 1437
+IND3 (label) in main.asm: Line 1443
+IND4 (label) in main.asm: Line 1444
+INDENT (label) in main.asm: Line 1428
+INE (label) in fpp.asm: Line 633
+INE1 (label) in fpp.asm: Line 634
+INKEY (label) in eval.asm: Line 697
+INKEY0 (label) in eval.asm: Line 1213
+INKEY1 (label) in eval.asm: Line 1214
+INKEYM (label) in eval.asm: Line 1224
+INKEYS (label) in eval.asm: Line 1211
+INPN1 (label) in exec.asm: Line 1133
+INPN2 (label) in exec.asm: Line 1165
+INPN3 (label) in exec.asm: Line 1166
+INPN4 (label) in exec.asm: Line 1172
+INPUT (label) in exec.asm: Line 1183
+INPUT0 (label) in exec.asm: Line 1190
+INPUT1 (label) in exec.asm: Line 1192
+INPUT2 (label) in exec.asm: Line 1212
+INPUT3 (label) in exec.asm: Line 1242
+INPUT4 (label) in exec.asm: Line 1239
+INPUT5 (label) in exec.asm: Line 1240
+INPUT6 (label) in exec.asm: Line 1207
+INPUT9 (label) in exec.asm: Line 1209
+INPUTN (label) in exec.asm: Line 1132
+INSTR (label) in eval.asm: Line 1087
+INSTR1 (label) in eval.asm: Line 1114
+INSTR2 (label) in eval.asm: Line 1120
+INT_ (label) in eval.asm: Line 904
+INT_FP_ (label) in fpp.asm: Line 758
+IOR (label) in fpp.asm: Line 224
+IPOW (label) in fpp.asm: Line 502
+IPOW0 (label) in fpp.asm: Line 506
+IPOW1 (label) in fpp.asm: Line 508
+IPOW2 (label) in fpp.asm: Line 518
+IPOW3 (label) in fpp.asm: Line 545
+IPOW4 (label) in fpp.asm: Line 568
+IPOW5 (label) in fpp.asm: Line 561
+ISUB (label) in fpp.asm: Line 281
+ITEM (label) in eval.asm: Line 511
+ITEM1 (label) in eval.asm: Line 406
+ITEM2 (label) in eval.asm: Line 537
+ITEMI (label) in eval.asm: Line 390
+ITEMN (label) in eval.asm: Line 383
+ITEMS (label) in eval.asm: Line 397
+KEYASCII (label) in ram.asm: Line 112
+KEYCOUNT (label) in ram.asm: Line 113
+KEYDOWN (label) in ram.asm: Line 111
+KEYWDL (EQU) in main.asm: KEYWDL:			EQU     $-KEYWDS
+KEYWDS (label) in main.asm: Line 540
+LD16 (label) in exec.asm: Line 2730
+LD8 (label) in exec.asm: Line 2742
+LDA (label) in exec.asm: Line 2725
+LDIN (label) in exec.asm: Line 2568
+LDOP (label) in exec.asm: Line 2865
+LDOPS (label) in exec.asm: Line 3150
+LEFT1 (label) in eval.asm: Line 1292
+LEFT2 (label) in eval.asm: Line 1303
+LEFT3 (label) in eval.asm: Line 1304
+LEFTS (label) in eval.asm: Line 1291
+LEN (label) in eval.asm: Line 724
+LET (label) in exec.asm: Line 356
+LET0 (label) in exec.asm: Line 341
+LEX (label) in main.asm: Line 1180
+LEX0 (label) in main.asm: Line 1182
+LEX1 (label) in main.asm: Line 1191
+LEX2 (label) in main.asm: Line 1196
+LEX3 (label) in main.asm: Line 1197
+LEX4 (label) in main.asm: Line 1209
+LEX5 (label) in main.asm: Line 1215
+LEX6 (label) in main.asm: Line 1222
+LEXAN1 (label) in main.asm: Line 2120
+LEXAN2 (label) in main.asm: Line 2126
+LEXAN3 (label) in main.asm: Line 2138
+LEXAN4 (label) in main.asm: Line 2149
+LEXAN5 (label) in main.asm: Line 2155
+LEXAN6 (label) in main.asm: Line 2168
+LEXAN7 (label) in main.asm: Line 2178
+LEXAN8 (label) in main.asm: Line 2195
+LEXAN9 (label) in main.asm: Line 2199
+LEXANA (label) in main.asm: Line 2201
+LEXANB (label) in main.asm: Line 2208
+LEXANC (label) in main.asm: Line 2209
+LEXAND (label) in main.asm: Line 2213
+LEXANE (label) in main.asm: Line 2217
+LEXANF (label) in main.asm: Line 2225
+LEXANG (label) in main.asm: Line 2232
+LF (EQU) in equs.inc: LF:			EQU     0AH
+LINE1S (label) in exec.asm: Line 2065
+LINENO (label) in ram.asm: Line 77
+LINES (label) in exec.asm: Line 2064
+LINE_ (EQU) in main.asm: LINE_:	EQU     86H
+LINNM1 (label) in main.asm: Line 1988
+LINNUM (label) in main.asm: Line 1986
+LINO (EQU) in main.asm: LINO:	EQU     8DH
+LIST1 (label) in main.asm: Line 2238
+LIST1L (EQU) in main.asm: LIST1L:			EQU     $-LIST1
+LIST2 (label) in main.asm: Line 2242
+LIST2L (EQU) in main.asm: LIST2L:			EQU     $-LIST2
+LIST7 (label) in main.asm: Line 1376
+LIST8 (label) in main.asm: Line 1369
+LISTA (label) in main.asm: Line 804
+LISTB (label) in main.asm: Line 798
+LISTC (label) in main.asm: Line 810
+LISTE (label) in main.asm: Line 1382
+LISTIT (label) in main.asm: Line 1339
+LISTO (label) in main.asm: Line 763
+LISTON (label) in ram.asm: Line 89
+LIST_ (label) in main.asm: Line 776
+LN (label) in eval.asm: Line 940
+LN0 (label) in fpp.asm: Line 1031
+LN1 (label) in fpp.asm: Line 1080
+LN2 (label) in fpp.asm: Line 1020
+LN3 (label) in fpp.asm: Line 1091
+LN4 (label) in fpp.asm: Line 1047
+LNZERO (label) in main.asm: Line 463
+LN_FP (label) in fpp.asm: Line 1030
+LOAD (label) in main.asm: Line 1079
+LOAD0 (label) in main.asm: Line 1262
+LOAD1 (label) in eval.asm: Line 557
+LOAD4 (label) in eval.asm: Line 547
+LOAD5 (label) in eval.asm: Line 546
+LOADN (label) in eval.asm: Line 541
+LOADS (label) in eval.asm: Line 623
+LOADS2 (label) in eval.asm: Line 643
+LOC0 (label) in main.asm: Line 1842
+LOC1 (label) in main.asm: Line 1853
+LOC2 (label) in main.asm: Line 1864
+LOC3 (label) in main.asm: Line 1879
+LOC4 (label) in main.asm: Line 1887
+LOC5 (label) in main.asm: Line 1893
+LOC5A (label) in main.asm: Line 1905
+LOC6 (label) in main.asm: Line 1919
+LOC7 (label) in main.asm: Line 1937
+LOC8 (label) in main.asm: Line 1950
+LOC9 (label) in main.asm: Line 1958
+LOCAL1 (label) in exec.asm: Line 1068
+LOCAL2 (label) in exec.asm: Line 1077
+LOCAL_ (EQU) in main.asm: LOCAL_:	EQU     EAH
+LOCAL_EX_ (label) in exec.asm: Line 1050
+LOCATE (label) in main.asm: Line 1815
+LOCCHK (EQU) in exec.asm: LOCCHK:			EQU     $
+LOG (label) in eval.asm: Line 946
+LOGRNG (EQU) in fpp.asm: LOGRNG:			EQU     22              ;Log range
+LOG_FP (label) in fpp.asm: Line 1099
+LOMEM (label) in ram.asm: Line 73
+LOMEMV (label) in eval.asm: Line 728
+LOMEMV_EX (label) in exec.asm: Line 1423
+LOOP_ (label) in exec.asm: Line 925
+LOUT (label) in main.asm: Line 1415
+LTRAP (label) in patch.asm: Line 270
+LTRAP1 (label) in patch.asm: Line 273
+MIDS (label) in eval.asm: Line 1260
+MIDS1 (label) in eval.asm: Line 1278
+MINUS (label) in eval.asm: Line 469
+MINUS0 (label) in eval.asm: Line 470
+MOD48 (label) in fpp.asm: Line 1664
+MOD481 (label) in fpp.asm: Line 1672
+MOD482 (label) in fpp.asm: Line 1687
+MOD483 (label) in fpp.asm: Line 1691
+MOD484 (label) in fpp.asm: Line 1713
+MOD485 (label) in fpp.asm: Line 1714
+MODE (label) in agon_graphics.asm: Line 134
+MODK (EQU) in eval.asm: MODK:			EQU     83H
+MOVE (label) in agon_graphics.asm: Line 298
+MUL0 (label) in fpp.asm: Line 2161
+MUL1 (label) in fpp.asm: Line 2172
+MUL16 (label) in exec.asm: Line 2151
+MULA (label) in fpp.asm: Line 2160
+MULB (label) in fpp.asm: Line 2174
+NEG0 (label) in fpp.asm: Line 1617
+NEGATE (label) in fpp.asm: Line 1615
+NEGATE_EV (label) in eval.asm: Line 480
+NEG_ (label) in fpp.asm: Line 1634
+NEW (label) in main.asm: Line 1057
+NEWIT (label) in main.asm: Line 1312
+NEWLIN (label) in exec.asm: Line 291
+NEXT (EQU) in main.asm: NEXT:	EQU     EDH
+NEXT0 (label) in exec.asm: Line 888
+NEXT1 (label) in exec.asm: Line 933
+NEXT_EX (label) in exec.asm: Line 873
+NGROOT (EQU) in fpp.asm: NGROOT:			EQU     21              ;Negative root
+NOAUTO (label) in main.asm: Line 440
+NOROOM (label) in exec.asm: Line 521
+NOS1 (label) in eval.asm: Line 570
+NOSUCH (label) in eval.asm: Line 565
+NOTICE (label) in main.asm: Line 397
+NOTK (label) in eval.asm: Line 880
+NOTK_FP (label) in fpp.asm: Line 669
+NULLTOCR (label) in misc.asm: Line 127
+NUMB1 (label) in fpp.asm: Line 1572
+NUMBER (label) in exec.asm: Line 2805
+NUMBIX (label) in fpp.asm: Line 1551
+NXT (label) in eval.asm: Line 1674
+OC (EQU) in equs.inc: OC:			EQU     STAVAR+15*4     ; CODE ORIGIN (O%)
+ODD (label) in fpp.asm: Line 1792
+OFFSET (EQU) in main.asm: OFFSET:			EQU     CFH-TOKLO		; Offset to the parameterised SET versions
+OFFSET_EX (label) in exec.asm: Line 2801
+OFF_ (EQU) in main.asm: OFF_:	EQU     87H
+OFLOW (label) in fpp.asm: Line 1827
+OLD (label) in main.asm: Line 1062
+ON1 (label) in exec.asm: Line 693
+ON2 (label) in exec.asm: Line 706
+ON3 (label) in exec.asm: Line 713
+ON4 (label) in exec.asm: Line 725
+ONEDIT (label) in main.asm: Line 442
+ONEDIT1 (label) in main.asm: Line 451
+ONERR (label) in exec.asm: Line 662
+ONPROC (label) in exec.asm: Line 734
+ON_ (EQU) in main.asm: ON_:	EQU     EEH
+ON_EX_ (label) in exec.asm: Line 679
+OP (label) in fpp.asm: Line 71
+OPCODS (label) in exec.asm: Line 2944
+OPENIN (label) in eval.asm: Line 781
+OPENIN_1 (label) in eval.asm: Line 783
+OPENOT (label) in eval.asm: Line 775
+OPENUP (label) in eval.asm: Line 778
+OPND (label) in exec.asm: Line 2778
+OPRNDS (label) in exec.asm: Line 3117
+OPT (label) in exec.asm: Line 2619
+OPTS (label) in exec.asm: Line 2614
+ORC (label) in exec.asm: Line 2861
+ORK (EQU) in eval.asm: ORK:			EQU     84H
+OSBGET (label) in patch.asm: Line 832
+OSBPUT (label) in patch.asm: Line 843
+OSBYTE (label) in patch.asm: Line 458
+OSBYTE_0B (label) in patch.asm: Line 474
+OSBYTE_0C (label) in patch.asm: Line 488
+OSBYTE_13 (label) in patch.asm: Line 500
+OSBYTE_76 (label) in patch.asm: Line 516
+OSBYTE_A0 (label) in patch.asm: Line 530
+OSCALL (label) in patch.asm: Line 771
+OSCALL_1 (label) in patch.asm: Line 772
+OSCALL_2 (label) in patch.asm: Line 783
+OSCALL_TABLE (label) in patch.asm: Line 785
+OSCLI (label) in patch.asm: Line 295
+OSCLI0 (label) in patch.asm: Line 302
+OSCLI1 (label) in patch.asm: Line 307
+OSCLI2 (label) in patch.asm: Line 314
+OSCLI3 (label) in patch.asm: Line 315
+OSCLI4 (label) in patch.asm: Line 328
+OSCLI5 (label) in patch.asm: Line 330
+OSCLI6 (label) in patch.asm: Line 341
+OSERROR (label) in patch.asm: Line 627
+OSINIT (label) in patch.asm: Line 285
+OSKEY (label) in patch.asm: Line 220
+OSLINE (label) in patch.asm: Line 95
+OSLINE1 (label) in patch.asm: Line 99
+OSLOAD (label) in patch.asm: Line 546
+OSLOAD_BBC (label) in patch.asm: Line 621
+OSLOAD_TXT (label) in patch.asm: Line 560
+OSLOAD_TXT1 (label) in patch.asm: Line 568
+OSLOAD_TXT2 (label) in patch.asm: Line 583
+OSLOAD_TXT3 (label) in patch.asm: Line 595
+OSLOAD_TXT4 (label) in patch.asm: Line 611
+OSOPEN (label) in patch.asm: Line 806
+OSRDCH (label) in patch.asm: Line 207
+OSSAVE (label) in patch.asm: Line 643
+OSSAVE_BBC (label) in patch.asm: Line 689
+OSSAVE_TXT (label) in patch.asm: Line 657
+OSSAVE_TXT1 (label) in patch.asm: Line 669
+OSSAVE_TXT2 (label) in patch.asm: Line 680
+OSSHUT (label) in patch.asm: Line 819
+OSSTAT (label) in patch.asm: Line 857
+OSWRCH (label) in patch.asm: Line 177
+OSWRCHCH (label) in ram.asm: Line 107
+OSWRCHFH (label) in ram.asm: Line 110
+OSWRCHPT (label) in ram.asm: Line 106
+OSWRCH_BUFFER (label) in patch.asm: Line 190
+OSWRCH_FILE (label) in patch.asm: Line 197
+OUTCH1 (label) in exec.asm: Line 2281
+OUTCHR (label) in main.asm: Line 1457
+OUT_ (label) in main.asm: Line 1478
+PAGEV (label) in eval.asm: Line 736
+PAGEV_EX (label) in exec.asm: Line 1400
+PAGE_ (label) in ram.asm: Line 71
+PAIR (label) in main.asm: Line 2018
+PAIR1 (label) in main.asm: Line 2024
+PAIR1_EX (label) in exec.asm: Line 2848
+PAIR_EX (label) in exec.asm: Line 2846
+PA_ALT1 (EQU) in equs.inc: PA_ALT1:		EQU		98h
+PA_ALT2 (EQU) in equs.inc: PA_ALT2:		EQU		99h
+PA_DDR (EQU) in equs.inc: PA_DDR:			EQU		97h
+PA_DR (EQU) in equs.inc: PA_DR:			EQU		96h
+PBCD (label) in main.asm: Line 1597
+PBCD0 (label) in main.asm: Line 1598
+PBCD1 (label) in main.asm: Line 1600
+PBCD2 (label) in main.asm: Line 1601
+PBCD3 (label) in main.asm: Line 1609
+PBCD4 (label) in main.asm: Line 1620
+PBCDL (label) in main.asm: Line 1589
+PB_ALT1 (EQU) in equs.inc: PB_ALT1:        	EQU		9Ch
+PB_ALT2 (EQU) in equs.inc: PB_ALT2:        	EQU		9Dh
+PB_DDR (EQU) in equs.inc: PB_DDR:        	 	EQU		9Bh
+PB_DR (EQU) in equs.inc: PB_DR:          	EQU		9Ah
+PC (EQU) in equs.inc: PC:			EQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)
+PC_ALT1 (EQU) in equs.inc: PC_ALT1:        	EQU		A0h
+PC_ALT2 (EQU) in equs.inc: PC_ALT2:        	EQU		A1h
+PC_DDR (EQU) in equs.inc: PC_DDR:         	EQU		9Fh
+PC_DR (EQU) in equs.inc: PC_DR:          	EQU		9Eh
+PD_ALT1 (EQU) in equs.inc: PD_ALT1:		EQU		A4h
+PD_ALT2 (EQU) in equs.inc: PD_ALT2:		EQU		A5h
+PD_DDR (EQU) in equs.inc: PD_DDR:			EQU		A3h
+PD_DR (EQU) in equs.inc: PD_DR:          	EQU		A2h
+PI (label) in eval.asm: Line 868
+PIBY4 (label) in fpp.asm: Line 940
+PI_FP (label) in fpp.asm: Line 690
+PLOT (label) in agon_graphics.asm: Line 282
+PLOT_1 (label) in agon_graphics.asm: Line 288
+POINT (label) in agon_graphics.asm: Line 182
+POLY (label) in fpp.asm: Line 2051
+POLY1 (label) in fpp.asm: Line 2056
+POP5 (label) in fpp.asm: Line 2015
+POPS (label) in eval.asm: Line 1574
+POPS1 (label) in eval.asm: Line 1585
+POS (label) in eval.asm: Line 680
+POWR10 (label) in fpp.asm: Line 2076
+POWR11 (label) in fpp.asm: Line 2085
+POWR12 (label) in fpp.asm: Line 2100
+POWR13 (label) in fpp.asm: Line 2092
+POWR14 (label) in fpp.asm: Line 2105
+PRINT0 (label) in exec.asm: Line 620
+PRINT3 (label) in exec.asm: Line 652
+PRINT4 (label) in exec.asm: Line 655
+PRINT6 (label) in exec.asm: Line 604
+PRINT8 (label) in exec.asm: Line 606
+PRINT9 (label) in exec.asm: Line 608
+PRINTA (label) in exec.asm: Line 615
+PRINTC (label) in exec.asm: Line 623
+PRINT_ (label) in exec.asm: Line 559
+PRLINO (label) in main.asm: Line 1389
+PRNTN1 (label) in exec.asm: Line 562
+PRNTN2 (label) in exec.asm: Line 588
+PRNTN3 (label) in exec.asm: Line 592
+PRNTN4 (label) in exec.asm: Line 600
+PROC (EQU) in main.asm: PROC:	EQU     F2H
+PROC1 (label) in exec.asm: Line 964
+PROC2 (label) in exec.asm: Line 979
+PROC3 (label) in exec.asm: Line 1003
+PROC4 (label) in exec.asm: Line 1010
+PROC5 (label) in exec.asm: Line 1034
+PROC6 (label) in exec.asm: Line 995
+PROCHK (EQU) in exec.asm: PROCHK:			EQU     $			; This will never fall through as PROC1 will do a JP XEQ
+PROC_EX (label) in exec.asm: Line 960
+PROMPT (label) in patch.asm: Line 171
+PROPTR (label) in ram.asm: Line 69
+PRREM (label) in main.asm: Line 1405
+PTEXT (label) in exec.asm: Line 2043
+PTEXT1 (label) in exec.asm: Line 2045
+PTR_EV (label) in eval.asm: Line 802
+PTR_EX (label) in exec.asm: Line 1388
+PUSH5 (label) in fpp.asm: Line 2004
+PUSHS (label) in eval.asm: Line 1546
+PUSHS1 (label) in eval.asm: Line 1566
+PUT (label) in exec.asm: Line 1631
+PUTCSR (label) in patch.asm: Line 144
+PUTIME (label) in patch.asm: Line 122
+PUTIMS (label) in sorry.asm: Line 22
+PUTPTR (label) in patch.asm: Line 887
+PUTVAR (label) in main.asm: Line 1630
+R0 (label) in ram.asm: Line 114
+R1 (label) in ram.asm: Line 115
+RAD (label) in eval.asm: Line 892
+RAD_FP (label) in fpp.asm: Line 709
+RAM_END (label) in ram.asm: Line 119
+RAM_START (label) in ram.asm: Line 62
+RAM_Top (EQU) in equs.inc: RAM_Top:		EQU		0B0000h	; Initial value of HIMEM
+RANDOM (label) in ram.asm: Line 85
+RANGE (label) in main.asm: Line 2065
+RANGE1 (label) in main.asm: Line 2077
+RANGE2 (label) in main.asm: Line 2088
+RATIO (label) in fpp.asm: Line 2031
+RDIV (label) in fpp.asm: Line 1017
+READ (label) in exec.asm: Line 1273
+READ0 (label) in exec.asm: Line 1276
+READ1 (label) in exec.asm: Line 1295
+READ2 (label) in exec.asm: Line 1298
+READKEY (label) in patch.asm: Line 260
+RECIP (label) in fpp.asm: Line 1016
+REFIL0 (label) in exec.asm: Line 1251
+REFIL1 (label) in exec.asm: Line 1264
+REFILL (label) in exec.asm: Line 1245
+REG (label) in exec.asm: Line 2818
+REGHI (label) in exec.asm: Line 2830
+REGLO (label) in exec.asm: Line 2826
+REM (EQU) in main.asm: REM:	EQU     F4H
+REM_EX (label) in exec.asm: Line 330
+REN (EQU) in main.asm: REN:	EQU     CCH
+RENUM (label) in main.asm: Line 890
+RENUM1 (label) in main.asm: Line 898
+RENUM2 (label) in main.asm: Line 946
+RENUM3 (label) in main.asm: Line 953
+RENUM4 (label) in main.asm: Line 1002
+RENUM5 (label) in main.asm: Line 1028
+RENUM6 (label) in main.asm: Line 1032
+RENUM7 (label) in main.asm: Line 982
+REPCHK (EQU) in exec.asm: REPCHK:			EQU     $
+REPEAT (EQU) in main.asm: REPEAT:	EQU     F5H
+REPEAT_EX (label) in exec.asm: Line 780
+REPOR (label) in exec.asm: Line 1358
+REPORT (label) in main.asm: Line 2298
+RESET (label) in patch.asm: Line 946
+RESTOR (EQU) in main.asm: RESTOR:	EQU     F7H
+RESTOR_EX (label) in exec.asm: Line 1369
+RESTR1 (label) in exec.asm: Line 1377
+RETURN (label) in exec.asm: Line 766
+RIGHT1 (label) in eval.asm: Line 1319
+RIGHTS (label) in eval.asm: Line 1310
+RND (label) in eval.asm: Line 1025
+RND1 (label) in eval.asm: Line 1030
+RND2 (label) in eval.asm: Line 1032
+RND3 (label) in eval.asm: Line 1039
+RND4 (label) in eval.asm: Line 1040
+RND5 (label) in eval.asm: Line 1045
+RND6 (label) in eval.asm: Line 1058
+RND7 (label) in eval.asm: Line 1066
+RSUB (label) in fpp.asm: Line 292
+RTABLE (label) in fpp.asm: Line 155
+RUN (label) in exec.asm: Line 220
+RUN0 (label) in exec.asm: Line 231
+SAVE (label) in main.asm: Line 1088
+SAVE1 (label) in eval.asm: Line 1631
+SAVE_EV (label) in eval.asm: Line 1630
+SAVLO1 (label) in exec.asm: Line 1886
+SAVLO2 (label) in exec.asm: Line 1915
+SAVLO4 (label) in exec.asm: Line 1943
+SAVLO5 (label) in exec.asm: Line 1946
+SAVLOC (label) in exec.asm: Line 1884
+SAYLN (label) in main.asm: Line 1583
+SCALE (label) in fpp.asm: Line 1656
+SCP (label) in eval.asm: Line 1507
+SCP0 (label) in eval.asm: Line 1519
+SCP1 (label) in eval.asm: Line 1521
+SCP2 (label) in eval.asm: Line 1531
+SCP3 (label) in eval.asm: Line 1536
+SEARCH (label) in eval.asm: Line 1139
+SEARCH_EX (label) in exec.asm: Line 2097
+SEQ (label) in eval.asm: Line 852
+SET1 (label) in main.asm: Line 1557
+SET2 (label) in main.asm: Line 1572
+SET3 (label) in main.asm: Line 1575
+SETLIN (label) in main.asm: Line 1548
+SETOP1 (label) in main.asm: Line 1288
+SETOP2 (label) in main.asm: Line 1299
+SETTOP (label) in main.asm: Line 1285
+SFIX (label) in eval.asm: Line 975
+SFIX_FP (label) in fpp.asm: Line 1605
+SFLOAT (label) in eval.asm: Line 980
+SFLOAT_FP (label) in fpp.asm: Line 1757
+SGE (label) in eval.asm: Line 839
+SGN (label) in eval.asm: Line 898
+SGN_FP (label) in fpp.asm: Line 727
+SGT (label) in eval.asm: Line 834
+SHL3 (label) in exec.asm: Line 2858
+SIGN (label) in exec.asm: Line 2932
+SIGNQ (label) in fpp.asm: Line 2266
+SIN (label) in eval.asm: Line 928
+SIN0 (label) in fpp.asm: Line 857
+SIN1 (label) in fpp.asm: Line 865
+SIN2 (label) in fpp.asm: Line 897
+SIN3 (label) in fpp.asm: Line 915
+SIN_FP (label) in fpp.asm: Line 856
+SIZEW (EQU) in equs.inc: SIZEW:			EQU		3	; Size of a word (3 for ADL mode)
+SKIP (label) in exec.asm: Line 2925
+SKIP0 (label) in exec.asm: Line 2924
+SKIPNOTSP (label) in misc.asm: Line 96
+SKIPSP (label) in patch.asm: Line 358
+SKIPSPC (label) in misc.asm: Line 87
+SLE (label) in eval.asm: Line 843
+SLT (label) in eval.asm: Line 830
+SNE (label) in eval.asm: Line 848
+SOPTBL (label) in eval.asm: Line 171
+SOUND (label) in agon_sound.asm: Line 32
+SOUND0 (label) in agon_sound.asm: Line 83
+SOUND_FREQ_LOOKUP (label) in agon_sound.asm: Line 130
+SPACE_ (label) in main.asm: Line 2102
+SPAN (label) in exec.asm: Line 1974
+SPC (EQU) in main.asm: SPC:	EQU     89H
+SQR (label) in eval.asm: Line 910
+SQR0 (label) in fpp.asm: Line 778
+SQR1 (label) in fpp.asm: Line 2188
+SQR2 (label) in fpp.asm: Line 2201
+SQR3 (label) in fpp.asm: Line 2231
+SQRA (label) in fpp.asm: Line 2203
+SQRB (label) in fpp.asm: Line 2239
+SQR_FP (label) in fpp.asm: Line 777
+SQUARE (label) in fpp.asm: Line 2002
+SRCH1 (label) in eval.asm: Line 1149
+SRCH1_EX (label) in exec.asm: Line 2099
+SRCH2 (label) in eval.asm: Line 1172
+SRCH2_EX (label) in exec.asm: Line 2114
+SRCH3 (label) in eval.asm: Line 1178
+SRCH4 (label) in eval.asm: Line 1185
+STACCS (label) in exec.asm: Line 1688
+STAR_ASM (label) in patch.asm: Line 387
+STAR_BYE (label) in patch.asm: Line 396
+STAR_EDIT (label) in patch.asm: Line 408
+STAR_FX (label) in patch.asm: Line 437
+STAR_FX1 (label) in patch.asm: Line 446
+STAR_FX2 (label) in patch.asm: Line 451
+STAR_VERSION (label) in patch.asm: Line 402
+STAVAR (label) in ram.asm: Line 66
+STEP (EQU) in main.asm: STEP:	EQU     88H
+STOP (label) in exec.asm: Line 1346
+STORE (label) in exec.asm: Line 1659
+STORE1 (label) in exec.asm: Line 1678
+STORE4 (label) in exec.asm: Line 1663
+STORE5 (label) in exec.asm: Line 1662
+STOREI (label) in exec.asm: Line 1670
+STORES (label) in exec.asm: Line 1704
+STORS1 (label) in exec.asm: Line 1749
+STORS3 (label) in exec.asm: Line 1780
+STORS5 (label) in exec.asm: Line 1788
+STR (label) in eval.asm: Line 1483
+STR0 (label) in eval.asm: Line 1484
+STR02 (label) in fpp.asm: Line 1275
+STR1 (label) in eval.asm: Line 1489
+STR10 (label) in fpp.asm: Line 1223
+STR11 (label) in fpp.asm: Line 1228
+STR13 (label) in fpp.asm: Line 1238
+STR14 (label) in fpp.asm: Line 1247
+STR15 (label) in fpp.asm: Line 1256
+STR2 (label) in eval.asm: Line 1493
+STR20 (label) in fpp.asm: Line 1284
+STR21 (label) in fpp.asm: Line 1288
+STR22 (label) in fpp.asm: Line 1290
+STR23 (label) in fpp.asm: Line 1298
+STR24 (label) in fpp.asm: Line 1312
+STR25 (label) in fpp.asm: Line 1320
+STR26 (label) in fpp.asm: Line 1325
+STR27 (label) in fpp.asm: Line 1328
+STR3 (label) in fpp.asm: Line 1344
+STR30 (label) in fpp.asm: Line 1357
+STR31 (label) in fpp.asm: Line 1362
+STR32 (label) in fpp.asm: Line 1375
+STR33 (label) in fpp.asm: Line 1390
+STR34 (label) in fpp.asm: Line 1378
+STR35 (label) in fpp.asm: Line 1380
+STR36 (label) in fpp.asm: Line 1383
+STR37 (label) in fpp.asm: Line 1386
+STR38 (label) in fpp.asm: Line 1391
+STR39 (label) in fpp.asm: Line 1395
+STR3A (label) in fpp.asm: Line 1371
+STR4 (label) in fpp.asm: Line 1401
+STR40 (label) in fpp.asm: Line 1402
+STR41 (label) in fpp.asm: Line 1413
+STR42 (label) in fpp.asm: Line 1421
+STR43 (label) in fpp.asm: Line 1428
+STR44 (label) in fpp.asm: Line 1430
+STR47 (label) in fpp.asm: Line 1429
+STRIN1 (label) in eval.asm: Line 1353
+STRIN2 (label) in eval.asm: Line 1354
+STRING_ (label) in eval.asm: Line 1333
+STRS (label) in eval.asm: Line 1474
+STR_FP (label) in fpp.asm: Line 1215
+SUB_ (label) in fpp.asm: Line 1942
+SWAP (label) in eval.asm: Line 1373
+SWAP1 (label) in fpp.asm: Line 1807
+SWAP_FP (label) in fpp.asm: Line 1804
+SWITCH_A (label) in misc.asm: Line 114
+SYNTAX (label) in exec.asm: Line 386
+TAB (EQU) in main.asm: TAB:	EQU     8AH
+TABIT (label) in exec.asm: Line 2007
+TAN (label) in eval.asm: Line 916
+TAND (EQU) in main.asm: TAND:	EQU     80H
+TAN_FP (label) in fpp.asm: Line 831
+TCALL (EQU) in main.asm: TCALL:	EQU     D6H
+TCMD (EQU) in eval.asm: TCMD:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
+TELL (label) in main.asm: Line 2317
+TERM (label) in exec.asm: Line 1960
+TERM0 (label) in exec.asm: Line 1969
+TERMQ (label) in exec.asm: Line 1966
+TERROR (EQU) in main.asm: TERROR:	EQU     85H
+TEST (label) in eval.asm: Line 1386
+TEST_FP (label) in fpp.asm: Line 1844
+TEXT_ (label) in main.asm: Line 2300
+TGOSUB (EQU) in main.asm: TGOSUB:	EQU     E4H
+TGOTO (EQU) in main.asm: TGOTO:	EQU     E5H
+THEN (EQU) in main.asm: THEN:	EQU     8CH
+TIF (EQU) in main.asm: TIF:	EQU     E7H
+TIME0 (label) in eval.asm: Line 813
+TIMEV (label) in eval.asm: Line 809
+TIMEVS (label) in eval.asm: Line 823
+TIMEVS_EX (label) in exec.asm: Line 1417
+TIMEV_EX (label) in exec.asm: Line 1407
+TO (EQU) in main.asm: TO:	EQU     B8H
+TOKEN1 (label) in main.asm: Line 1501
+TOKHI (EQU) in main.asm: TOKHI:			EQU     93H			; PTR, PAGE, TIME, LOMEM, HIMEM
+TOKLO (EQU) in main.asm: TOKLO:			EQU     8FH			; This defines the block of tokens that are pseudo-variables
+TON (EQU) in main.asm: TON:	EQU     EEH
+TOOBIG (label) in main.asm: Line 2009
+TOOBIG_FP (EQU) in fpp.asm: TOOBIG_FP:			EQU     20              ;Too big
+TOOFAR (label) in exec.asm: Line 2484
+TOP (label) in ram.asm: Line 72
+TOPV (label) in eval.asm: Line 740
+TOR (EQU) in main.asm: TOR:	EQU     84H
+TPROC (EQU) in main.asm: TPROC:	EQU     F2H
+TRACE (EQU) in main.asm: TRACE:	EQU     FCH
+TRACE0 (label) in exec.asm: Line 1476
+TRACE1 (label) in exec.asm: Line 1477
+TRACEN (label) in ram.asm: Line 78
+TRACE_EX (label) in exec.asm: Line 1467
+TRAP (label) in patch.asm: Line 268
+TRUE (label) in eval.asm: Line 854
+TRUE_FP (label) in fpp.asm: Line 641
+TSTOP (EQU) in main.asm: TSTOP:	EQU     FAH
+TYPE_ (label) in main.asm: Line 1906
+TYPE_EV_ (label) in eval.asm: Line 401
+UINT (label) in fpp.asm: Line 1552
+UNSTK (label) in exec.asm: Line 1111
+UNSTK1 (label) in exec.asm: Line 1123
+UNTIL (EQU) in main.asm: UNTIL:	EQU     FDH
+UNTIL_EX (label) in exec.asm: Line 791
+UPPERC (label) in misc.asm: Line 105
+UPPRC (label) in patch.asm: Line 364
+USER (label) in user.asm: Line 6
+USR (label) in exec.asm: Line 1575
+USR1 (label) in exec.asm: Line 1582
+USR2 (label) in exec.asm: Line 1624
+VAL (label) in eval.asm: Line 986
+VAL0 (label) in eval.asm: Line 987
+VAL16 (label) in exec.asm: Line 2714
+VAL24 (label) in exec.asm: Line 2719
+VAL8 (label) in exec.asm: Line 2486
+VAL_FP (label) in fpp.asm: Line 739
+VAR_ (label) in exec.asm: Line 383
+VBLANK_HANDLER (label) in interrupts.asm: Line 76
+VBLANK_HANDLER_JP (label) in interrupts.asm: Line 87
+VBLANK_INIT (label) in interrupts.asm: Line 29
+VBLANK_STOP (label) in interrupts.asm: Line 42
+VDU (label) in exec.asm: Line 1482
+VDU1 (label) in exec.asm: Line 1483
+VDU2 (label) in exec.asm: Line 1496
+VDU3 (label) in exec.asm: Line 1497
+VDU4 (label) in exec.asm: Line 1506
+VDU_BUFFER (EQU) in equs.inc: VDU_BUFFER:		EQU	ACCS		; Storage for VDU commands
+VPOS (label) in eval.asm: Line 684
+WAIT_VBLANK (label) in patch.asm: Line 504
+WARM (label) in main.asm: Line 400
+WARM0 (label) in main.asm: Line 1100
+WARMNC (label) in main.asm: Line 842
+WIDTH (label) in ram.asm: Line 87
+WIDTHV (label) in exec.asm: Line 1457
+X10 (label) in fpp.asm: Line 1960
+X10B (label) in fpp.asm: Line 1926
+X2 (label) in fpp.asm: Line 1967
+X4OR5 (label) in exec.asm: Line 2130
+X5 (label) in fpp.asm: Line 1928
+XEQ (label) in exec.asm: Line 250
+XEQ0 (label) in exec.asm: Line 249
+XEQ1 (label) in exec.asm: Line 252
+XEQ2 (label) in exec.asm: Line 807
+XEQR (label) in exec.asm: Line 367
+XTRAC1 (label) in exec.asm: Line 2079
+XTRACT (label) in exec.asm: Line 2073
+ZERO (label) in eval.asm: Line 1509
+ZERO_FP (label) in fpp.asm: Line 1878
+_argv_ptrs (label) in init.asm: Line 160
+_clear_ram (label) in init.asm: Line 73
+_end (label) in init.asm: Line 62
+_exec_name (label) in init.asm: Line 34
+_get_token (label) in init.asm: Line 132
+_main (label) in main.asm: Line 350
+_parse_params (label) in init.asm: Line 90
+_parse_params_1 (label) in init.asm: Line 100
+_skip_spaces (label) in init.asm: Line 151
+_sps (label) in init.asm: Line 159
+_start (label) in init.asm: Line 44
+argv_ptrs_max (EQU) in init.asm: argv_ptrs_max:		EQU	16				; Maximum number of arguments allowed in argv
+fa_create_always (EQU) in mos_api.inc: fa_create_always:	EQU	08h
+fa_create_new (EQU) in mos_api.inc: fa_create_new:		EQU	04h
+fa_open_always (EQU) in mos_api.inc: fa_open_always:		EQU	10h
+fa_open_append (EQU) in mos_api.inc: fa_open_append:		EQU	30h
+fa_open_existing (EQU) in mos_api.inc: fa_open_existing:	EQU	00h
+fa_read (EQU) in mos_api.inc: fa_read:		EQU	01h
+fa_write (EQU) in mos_api.inc: fa_write:		EQU	02h
+ffs_chdir (EQU) in mos_api.inc: ffs_chdir:		EQU	9Ch
+ffs_chdrive (EQU) in mos_api.inc: ffs_chdrive:		EQU	9Dh
+ffs_chmod (EQU) in mos_api.inc: ffs_chmod:		EQU	99h
+ffs_dclose (EQU) in mos_api.inc: ffs_dclose:		EQU	92h
+ffs_dfindfirst (EQU) in mos_api.inc: ffs_dfindfirst:		EQU	94h
+ffs_dfindnext (EQU) in mos_api.inc: ffs_dfindnext:		EQU	95h
+ffs_dopen (EQU) in mos_api.inc: ffs_dopen:		EQU	91h
+ffs_dread (EQU) in mos_api.inc: ffs_dread:		EQU	93h
+ffs_fclose (EQU) in mos_api.inc: ffs_fclose:		EQU	81h
+ffs_fdisk (EQU) in mos_api.inc: ffs_fdisk:		EQU	A1h
+ffs_feof (EQU) in mos_api.inc: ffs_feof:		EQU	8Eh
+ffs_ferror (EQU) in mos_api.inc: ffs_ferror:		EQU	90h
+ffs_fexpand (EQU) in mos_api.inc: ffs_fexpand:		EQU	88h
+ffs_fforward (EQU) in mos_api.inc: ffs_fforward:		EQU	87h
+ffs_fgets (EQU) in mos_api.inc: ffs_fgets:		EQU	89h
+ffs_flseek (EQU) in mos_api.inc: ffs_flseek:		EQU	84h
+ffs_fopen (EQU) in mos_api.inc: ffs_fopen:		EQU	80h
+ffs_fprintf (EQU) in mos_api.inc: ffs_fprintf:		EQU	8Ch
+ffs_fputc (EQU) in mos_api.inc: ffs_fputc:		EQU	8Ah
+ffs_fputs (EQU) in mos_api.inc: ffs_fputs:		EQU	8Bh
+ffs_fread (EQU) in mos_api.inc: ffs_fread:		EQU	82h
+ffs_fsize (EQU) in mos_api.inc: ffs_fsize:		EQU	8Fh
+ffs_fsync (EQU) in mos_api.inc: ffs_fsync:		EQU	86h
+ffs_ftell (EQU) in mos_api.inc: ffs_ftell:		EQU	8Dh
+ffs_ftruncate (EQU) in mos_api.inc: ffs_ftruncate:		EQU	85h
+ffs_fwrite (EQU) in mos_api.inc: ffs_fwrite:		EQU	83h
+ffs_getcwd (EQU) in mos_api.inc: ffs_getcwd:		EQU	9Eh
+ffs_getfree (EQU) in mos_api.inc: ffs_getfree:		EQU	A2h
+ffs_getlabel (EQU) in mos_api.inc: ffs_getlabel:		EQU	A3h
+ffs_mkdir (EQU) in mos_api.inc: ffs_mkdir:		EQU	9Bh
+ffs_mkfs (EQU) in mos_api.inc: ffs_mkfs:		EQU	A0h
+ffs_mount (EQU) in mos_api.inc: ffs_mount:		EQU	9Fh
+ffs_rename (EQU) in mos_api.inc: ffs_rename:		EQU	98h
+ffs_setcp (EQU) in mos_api.inc: ffs_setcp:		EQU	A5h
+ffs_setlabel (EQU) in mos_api.inc: ffs_setlabel:		EQU	A4h
+ffs_stat (EQU) in mos_api.inc: ffs_stat:		EQU	96h
+ffs_unlink (EQU) in mos_api.inc: ffs_unlink:		EQU	97h
+ffs_utime (EQU) in mos_api.inc: ffs_utime:		EQU	9Ah
+mos_cd (EQU) in mos_api.inc: mos_cd:			EQU	03h
+mos_copy (EQU) in mos_api.inc: mos_copy:		EQU	11h
+mos_del (EQU) in mos_api.inc: mos_del:		EQU	05h
+mos_dir (EQU) in mos_api.inc: mos_dir:		EQU	04h
+mos_editline (EQU) in mos_api.inc: mos_editline:		EQU	09h
+mos_fclose (EQU) in mos_api.inc: mos_fclose:		EQU	0Bh
+mos_feof (EQU) in mos_api.inc: mos_feof:		EQU	0Eh
+mos_fgetc (EQU) in mos_api.inc: mos_fgetc:		EQU	0Ch
+mos_flseek (EQU) in mos_api.inc: mos_flseek:		EQU	1Ch
+mos_fopen (EQU) in mos_api.inc: mos_fopen:		EQU	0Ah
+mos_fputc (EQU) in mos_api.inc: mos_fputc:		EQU	0Dh
+mos_fread (EQU) in mos_api.inc: mos_fread:		EQU	1Ah
+mos_fwrite (EQU) in mos_api.inc: mos_fwrite:		EQU	1Bh
+mos_getError (EQU) in mos_api.inc: mos_getError:		EQU	0Fh
+mos_getfil (EQU) in mos_api.inc: mos_getfil:		EQU	19h
+mos_getkbmap (EQU) in mos_api.inc: mos_getkbmap:		EQU	1Eh
+mos_getkey (EQU) in mos_api.inc: mos_getkey:		EQU	00h
+mos_getrtc (EQU) in mos_api.inc: mos_getrtc:		EQU	12h
+mos_i2c_close (EQU) in mos_api.inc: mos_i2c_close:		EQU	20h
+mos_i2c_open (EQU) in mos_api.inc: mos_i2c_open:		EQU	1Fh
+mos_i2c_read (EQU) in mos_api.inc: mos_i2c_read:		EQU	22h
+mos_i2c_write (EQU) in mos_api.inc: mos_i2c_write:		EQU	21h
+mos_load (EQU) in mos_api.inc: mos_load:		EQU	01h
+mos_mkdir (EQU) in mos_api.inc: mos_mkdir:		EQU	07h
+mos_oscli (EQU) in mos_api.inc: mos_oscli:		EQU	10h
+mos_ren (EQU) in mos_api.inc: mos_ren:		EQU	06h
+mos_save (EQU) in mos_api.inc: mos_save:		EQU	02h
+mos_setintvector (EQU) in mos_api.inc: mos_setintvector:	EQU	14h
+mos_setkbvector (EQU) in mos_api.inc: mos_setkbvector:	EQU	1Dh
+mos_setrtc (EQU) in mos_api.inc: mos_setrtc:		EQU	13h
+mos_sysvars (EQU) in mos_api.inc: mos_sysvars:		EQU	08h
+mos_uclose (EQU) in mos_api.inc: mos_uclose:		EQU	16h
+mos_ugetc (EQU) in mos_api.inc: mos_ugetc:		EQU	17h
+mos_uopen (EQU) in mos_api.inc: mos_uopen:		EQU	15h
+mos_uputc (EQU) in mos_api.inc: mos_uputc:		EQU 	18h
+sysvar_audioChannel (EQU) in mos_api.inc: sysvar_audioChannel:	EQU	0Dh	; 1: Audio channel
+sysvar_audioSuccess (EQU) in mos_api.inc: sysvar_audioSuccess:	EQU	0Eh	; 1: Audio channel note queued (0 = no, 1 = yes)
+sysvar_cursorX (EQU) in mos_api.inc: sysvar_cursorX:		EQU	07h	; 1: Cursor X position
+sysvar_cursorY (EQU) in mos_api.inc: sysvar_cursorY:		EQU	08h	; 1: Cursor Y position
+sysvar_keyascii (EQU) in mos_api.inc: sysvar_keyascii:	EQU	05h	; 1: ASCII keycode, or 0 if no key is pressed
+sysvar_keydelay (EQU) in mos_api.inc: sysvar_keydelay:	EQU	22h	; 2: Keyboard repeat delay
+sysvar_keyled (EQU) in mos_api.inc: sysvar_keyled:		EQU	26h	; 1: Keyboard LED status
+sysvar_keymods (EQU) in mos_api.inc: sysvar_keymods:		EQU	06h	; 1: Keycode modifiers
+sysvar_keyrate (EQU) in mos_api.inc: sysvar_keyrate:		EQU	24h	; 2: Keyboard repeat reat
+sysvar_mouseButtons (EQU) in mos_api.inc: sysvar_mouseButtons:	EQU	2Dh	; 1: Mouse button state
+sysvar_mouseWheel (EQU) in mos_api.inc: sysvar_mouseWheel:	EQU	2Eh	; 1: Mouse wheel delta
+sysvar_mouseX (EQU) in mos_api.inc: sysvar_mouseX:		EQU	29h	; 2: Mouse X position
+sysvar_mouseXDelta (EQU) in mos_api.inc: sysvar_mouseXDelta:	EQU	2Fh	; 2: Mouse X delta
+sysvar_mouseY (EQU) in mos_api.inc: sysvar_mouseY:		EQU	2Bh	; 2: Mouse Y position
+sysvar_mouseYDelta (EQU) in mos_api.inc: sysvar_mouseYDelta:	EQU	31h	; 2: Mouse Y delta
+sysvar_rtc (EQU) in mos_api.inc: sysvar_rtc:		EQU	1Ah	; 6: Real time clock data
+sysvar_rtcEnable (EQU) in mos_api.inc: sysvar_rtcEnable:	EQU	28h	; 1: RTC enable flag (0: disabled, 1: use ESP32 RTC)
+sysvar_scrColours (EQU) in mos_api.inc: sysvar_scrColours:	EQU	15h	; 1: Number of colours displayed
+sysvar_scrCols (EQU) in mos_api.inc: sysvar_scrCols:		EQU	13h	; 1: Screen columns in characters
+sysvar_scrHeight (EQU) in mos_api.inc: sysvar_scrHeight:	EQU	11h	; 2: Screen height in pixels
+sysvar_scrMode (EQU) in mos_api.inc: sysvar_scrMode:		EQU	27h	; 1: Screen mode
+sysvar_scrRows (EQU) in mos_api.inc: sysvar_scrRows:		EQU	14h	; 1: Screen rows in characters
+sysvar_scrWidth (EQU) in mos_api.inc: sysvar_scrWidth:	EQU	0Fh	; 2: Screen width in pixels
+sysvar_scrchar (EQU) in mos_api.inc: sysvar_scrchar:		EQU	09h	; 1: Character read from screen
+sysvar_scrpixel (EQU) in mos_api.inc: sysvar_scrpixel:	EQU	0Ah	; 3: Pixel data read from screen (R,B,G)
+sysvar_scrpixelIndex (EQU) in mos_api.inc: sysvar_scrpixelIndex:	EQU	16h	; 1: Index of pixel data read from screen
+sysvar_spare (EQU) in mos_api.inc: sysvar_spare:		EQU	20h	; 2: Spare, previously used by rtc
+sysvar_time (EQU) in mos_api.inc: sysvar_time:		EQU	00h	; 4: Clock timer in centiseconds (incremented by 2 every VBLANK)
+sysvar_vkeycode (EQU) in mos_api.inc: sysvar_vkeycode:	EQU	17h	; 1: Virtual key code from FabGL
+sysvar_vkeycount (EQU) in mos_api.inc: sysvar_vkeycount:	EQU	19h	; 1: Incremented every time a key packet is received
+sysvar_vkeydown (EQU) in mos_api.inc: sysvar_vkeydown:	EQU	18h	; 1: Virtual key state from FabGL (0=up, 1=down)
+sysvar_vpd_pflags (EQU) in mos_api.inc: sysvar_vpd_pflags:	EQU	04h	; 1: Flags to indicate completion of VDP commands
+vdp_audio (EQU) in mos_api.inc: vdp_audio:		EQU	85h
+vdp_cursor (EQU) in mos_api.inc: vdp_cursor:		EQU	82h
+vdp_gp (EQU) in mos_api.inc: vdp_gp:			EQU 	80h
+vdp_keycode (EQU) in mos_api.inc: vdp_keycode:		EQU 	81h
+vdp_keystate (EQU) in mos_api.inc: vdp_keystate:		EQU	88h
+vdp_logicalcoords (EQU) in mos_api.inc: vdp_logicalcoords:	EQU	C0h
+vdp_mode (EQU) in mos_api.inc: vdp_mode:		EQU	86h
+vdp_pflag_audio (EQU) in mos_api.inc: vdp_pflag_audio:	EQU	00001000b
+vdp_pflag_cursor (EQU) in mos_api.inc: vdp_pflag_cursor:	EQU	00000001b
+vdp_pflag_mode (EQU) in mos_api.inc: vdp_pflag_mode:		EQU	00010000b
+vdp_pflag_mouse (EQU) in mos_api.inc: vdp_pflag_mouse:	EQU	01000000b
+vdp_pflag_point (EQU) in mos_api.inc: vdp_pflag_point:	EQU	00000100b
+vdp_pflag_rtc (EQU) in mos_api.inc: vdp_pflag_rtc:		EQU	00100000b
+vdp_pflag_scrchar (EQU) in mos_api.inc: vdp_pflag_scrchar:	EQU	00000010b
+vdp_rtc (EQU) in mos_api.inc: vdp_rtc:		EQU	87h
+vdp_scrchar (EQU) in mos_api.inc: vdp_scrchar:		EQU	83h
+vdp_scrpixel (EQU) in mos_api.inc: vdp_scrpixel:		EQU	84h
+vdp_terminalmode (EQU) in mos_api.inc: vdp_terminalmode:	EQU	FFh
