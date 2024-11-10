@@ -9,37 +9,37 @@
 			
 			.ASSUME	ADL = 1
 				
-			INCLUDE	"equs.inc"
-			INCLUDE "macros.inc"
-			INCLUDE "mos_api.inc"	; In MOS/src
+			; INCLUDE	"equs.inc"
+			; INCLUDE "macros.inc"
+			; INCLUDE "mos_api.inc"	; In MOS/src
 		
-			SEGMENT CODE
+			; SEGMENT CODE
 				
-			XDEF	CLG
-			XDEF	CLRSCN
-			XDEF	MODE
-			XDEF	COLOUR
-			XDEF	GCOL
-			XDEF	MOVE
-			XDEF	PLOT
-			XDEF	DRAW
-			XDEF	POINT
-			XDEF	GETSCHR
+			; XDEF	CLG
+			; XDEF	CLRSCN
+			; XDEF	MODE
+			; XDEF	COLOUR
+			; XDEF	GCOL
+			; XDEF	MOVE
+			; XDEF	PLOT
+			; XDEF	DRAW
+			; XDEF	POINT
+			; XDEF	GETSCHR
 			
-			XREF	OSWRCH
-			XREF	ASC_TO_NUMBER
-			XREF	EXTERR
-			XREF	EXPRI
-			XREF	COMMA
-			XREF	XEQ
-			XREF	NXT
-			XREF	BRAKET
-			XREF	COUNT0
-			XREF	CRTONULL
-			XREF	NULLTOCR
-			XREF	CRLF
-			XREF	EXPR_W2
-			XREF	INKEY1
+			; XREF	OSWRCH
+			; XREF	ASC_TO_NUMBER
+			; XREF	EXTERR
+			; XREF	EXPRI
+			; XREF	COMMA
+			; XREF	XEQ
+			; XREF	NXT
+			; XREF	BRAKET
+			; XREF	COUNT0
+			; XREF	CRTONULL
+			; XREF	NULLTOCR
+			; XREF	CRLF
+			; XREF	EXPR_W2
+			; XREF	INKEY1
 			
 ; CLG: clears the graphics area
 ;
@@ -61,8 +61,8 @@ MODE:			PUSH	IX			; Get the system vars in IX
 			VDU	16H			; Mode change
 			VDU	L
 			MOSCALL	mos_sysvars		
-$$:			BIT	4, (IX+sysvar_vpd_pflags)
-			JR	Z, $B			; Wait for the result			
+@@:			BIT	4, (IX+sysvar_vpd_pflags)
+			JR	Z, @B			; Wait for the result			
 			POP	IX
 			JP	XEQ
 			
@@ -88,15 +88,15 @@ GETSCHR:		INC	IY
 			VDU	(VDU_BUFFER+1)
 			VDU	(VDU_BUFFER+2)
 			VDU	(VDU_BUFFER+3)
-$$:			BIT	1, (IX+sysvar_vpd_pflags)
-			JR	Z, $B			; Wait for the result
+@@:			BIT	1, (IX+sysvar_vpd_pflags)
+			JR	Z, @B			; Wait for the result
 			LD	A, (IX+sysvar_scrchar)	; Fetch the result in A
 			OR	A			; Check for 00h
 			SCF				; C = character map
-			JR	NZ, $F			; We have a character, so skip next bit
+			JR	NZ, @F			; We have a character, so skip next bit
 			XOR	A			; Clear carry
 			DEC	A			; Set A to FFh
-$$:			POP	IX			
+@@:			POP	IX			
 			JP	INKEY1			; Jump back to the GET command
 
 ; POINT(x,y): Get the pixel colour of a point on screen
@@ -120,12 +120,12 @@ POINT:			CALL    EXPRI      		; Get X coordinate
 			VDU	(VDU_BUFFER+1)
 			VDU	(VDU_BUFFER+2)
 			VDU	(VDU_BUFFER+3)
-$$:			BIT	2, (IX+sysvar_vpd_pflags)
-			JR	Z, $B			; Wait for the result
+@@:			BIT	2, (IX+sysvar_vpd_pflags)
+			JR	Z, @B			; Wait for the result
 ;
 ; Return the data as a 1 byte index
 ;
-			LD	L, (IX+(sysvar_scrpixelIndex))
+			LD	L, (IX+sysvar_scrpixelIndex)
 			POP	IX	
 			JP	COUNT0
 

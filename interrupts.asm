@@ -9,20 +9,20 @@
 
 			.ASSUME	ADL = 1
 				
-			INCLUDE	"macros.inc"
-			INCLUDE	"equs.inc"
-			INCLUDE "mos_api.inc"	; In MOS/src
+			; INCLUDE	"macros.inc"
+			; INCLUDE	"equs.inc"
+			; INCLUDE "mos_api.inc"	; In MOS/src
 
-			SEGMENT CODE
+			; SEGMENT CODE
 				
-			XDEF	VBLANK_INIT
-			XDEF	VBLANK_STOP
-			XDEF	VBLANK_HANDLER	
+			; XDEF	VBLANK_INIT
+			; XDEF	VBLANK_STOP
+			; XDEF	VBLANK_HANDLER	
 
-			XREF	ESCSET	
-			XREF	KEYDOWN		; In ram.asm
-			XREF	KEYASCII 	; In ram.asm
-			XREF	KEYCOUNT	; In ram.asm
+			; XREF	ESCSET	
+			; XREF	KEYDOWN		; In ram.asm
+			; XREF	KEYASCII 	; In ram.asm
+			; XREF	KEYCOUNT	; In ram.asm
 
 ; Hook into the MOS VBLANK interrupt
 ;
@@ -30,7 +30,8 @@ VBLANK_INIT:		DI
 			LD		HL, VBLANK_HANDLER		; this interrupt handler routine who's
 			LD		E, 32h				; Set up the VBlank Interrupt Vector
 			MOSCALL		mos_setintvector
-			EX		HL, DE 				; DEU: Pointer to the MOS interrupt vector
+			; EX		HL, DE 				; DEU: Pointer to the MOS interrupt vector
+			ex de,hl
 			LD		HL, VBLANK_HANDLER_JP + 1	; Pointer to the JP address in this segment
 			LD		(HL), DE			; Self-modify the code
 			EI	

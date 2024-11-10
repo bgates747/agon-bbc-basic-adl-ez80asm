@@ -8,20 +8,20 @@
 			
 			.ASSUME	ADL = 1
 				
-			INCLUDE	"equs.inc"
-			INCLUDE "macros.inc"
-			INCLUDE "mos_api.inc"	; In MOS/src
+			; INCLUDE	"equs.inc"
+			; INCLUDE "macros.inc"
+			; INCLUDE "mos_api.inc"	; In MOS/src
 		
-			SEGMENT CODE
+			; SEGMENT CODE
 			
-			XDEF	SOUND
+			; XDEF	SOUND
 			
-			XREF	COMMA
-			XREF	EXPR_W2
-			XREF	XEQ
-			XREF	LTRAP
-			XREF	OSWRCH
-			XREF	VDU_BUFFER
+			; XREF	COMMA
+			; XREF	EXPR_W2
+			; XREF	XEQ
+			; XREF	LTRAP
+			; XREF	OSWRCH
+			; XREF	VDU_BUFFER
 			
 				
 ; SOUND channel,volume,pitch,duration
@@ -95,8 +95,8 @@ SOUND0:			RES.LIL	3, (IX+sysvar_vpd_pflags)
 ;
 ; Wait for acknowledgement
 ;
-$$:			BIT.LIL	3, (IX+sysvar_vpd_pflags)
-			JR	Z, $B			; Wait for the result
+@@:			BIT.LIL	3, (IX+sysvar_vpd_pflags)
+			JR	Z, @B			; Wait for the result
 			CALL	LTRAP			; Check for ESC
 			LD.LIL	A, (IX+sysvar_audioSuccess)
 			AND	A			; Check if VDP has queued the note

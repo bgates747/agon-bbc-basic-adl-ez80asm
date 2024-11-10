@@ -9,18 +9,18 @@
 ; 11/07/2023:	Fixed *BYE for ADL mode
 ; 26/11/2023:	Moved the ram clear routine into here
 
-			SEGMENT CODE
+			; SEGMENT CODE
 
-			XDEF	_end			
+			; XDEF	_end			
 			
-			XREF	_main				; In main.asm
+			; XREF	_main				; In main.asm
 			
-			XREF	RAM_START			; In ram.asm
-			XREF	RAM_END
+			; XREF	RAM_START			; In ram.asm
+			; XREF	RAM_END
 			
 			.ASSUME	ADL = 1
 				
-			INCLUDE	"equs.inc"
+			; INCLUDE	"equs.inc"
 			
 argv_ptrs_max:		EQU	16				; Maximum number of arguments allowed in argv
 			
@@ -130,7 +130,7 @@ _parse_params_1:
 ; -  C: Length of token (in characters)
 ;
 _get_token:		LD	C, 0			; Initialise length
-$$:			LD	A, (HL)			; Get the character from the parameter string
+@@:			LD	A, (HL)			; Get the character from the parameter string
 			OR	A			; Exit if 0 (end of parameter string in MOS)
 			RET 	Z
 			CP	13			; Exit if CR (end of parameter string in BBC BASIC)
@@ -139,7 +139,7 @@ $$:			LD	A, (HL)			; Get the character from the parameter string
 			RET	Z
 			INC	HL			; Advance to next character
 			INC 	C			; Increment length
-			JR	$B
+			JR	@B
 	
 ; Skip spaces in the parameter string
 ; Parameters:
