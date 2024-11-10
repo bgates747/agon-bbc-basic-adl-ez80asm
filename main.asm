@@ -255,6 +255,7 @@ COLD:			POP	HL			; Pop the return address to init off SPS
 			CALL	STAR_VERSION		; 
 			CALL    TELL			; Output the welcome message
 			DB    	"BBC BASIC (Z80) Version 3.00\n\r"
+			db      "EZ80ASM ADL Version 1.00\n\r"
 NOTICE:			DB    	"(C) Copyright R.T.Russell 1987\n\r"
 			DB	"\n\r", 0
 ;			
