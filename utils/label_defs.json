@@ -17,7 +17,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 64,
-            "def_content": "ACCS:\t\t\tDS\t\t256             ; String Accumulator"
+            "def_content": "ACCS:           BLKB    256,0             ; String Accumulator"
         }
     ],
     "ACLOST": [
@@ -170,7 +170,7 @@
     "ARRAY": [
         {
             "def_file": "main.asm",
-            "def_line": 1496,
+            "def_line": 1433,
             "def_content": "ARRAY:\t\t\tLD      A,14            \t; Otherwise Error: 'Array'"
         }
     ],
@@ -331,7 +331,7 @@
     "ATEND": [
         {
             "def_file": "main.asm",
-            "def_line": 380,
+            "def_line": 317,
             "def_content": "ATEND:\t\t\tPOP     BC              \t; BC: Line length"
         }
     ],
@@ -373,28 +373,28 @@
     "AUTO": [
         {
             "def_file": "main.asm",
-            "def_line": 903,
+            "def_line": 840,
             "def_content": "AUTO:\t\t\tCALL    PAIR\t\t\t; Get the parameter pair (HL: first parameter, BC: second parameter)"
         }
     ],
     "AUTOLOAD": [
         {
             "def_file": "main.asm",
-            "def_line": 224,
+            "def_line": 161,
             "def_content": "AUTOLOAD:\t\tLD\tHL, (IX+3)\t\t; HLU: Address of filename"
         }
     ],
     "AUTOLOAD_1": [
         {
             "def_file": "main.asm",
-            "def_line": 226,
+            "def_line": 163,
             "def_content": "AUTOLOAD_1:\t\tLD\tA, (HL)\t\t\t; Fetch the filename byte"
         }
     ],
     "AUTOLOAD_2": [
         {
             "def_file": "main.asm",
-            "def_line": 233,
+            "def_line": 170,
             "def_content": "AUTOLOAD_2:\t\tDEC\tE"
         }
     ],
@@ -402,13 +402,13 @@
         {
             "def_file": "ram.asm",
             "def_line": 79,
-            "def_content": "AUTONO:\t\t\tDS\t\t3               ; Auto Flag"
+            "def_content": "AUTONO:         BLKB    3,0               ; Auto Flag"
         }
     ],
     "BAD": [
         {
             "def_file": "main.asm",
-            "def_line": 912,
+            "def_line": 849,
             "def_content": "BAD:\t\t\tCALL    TELL            \t; Output \"Bad program\" error"
         }
     ],
@@ -521,7 +521,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 65,
-            "def_content": "BUFFER:\t\t\tDS\t\t256             ; String Input Buffer"
+            "def_content": "BUFFER:         BLKB    256,0             ; String Input Buffer"
         }
     ],
     "BYTE0": [
@@ -562,7 +562,7 @@
     "CARRET": [
         {
             "def_file": "main.asm",
-            "def_line": 1326,
+            "def_line": 1263,
             "def_content": "CARRET:\t\t\tLD      (COUNT),A\t\t; Store the new count value"
         }
     ],
@@ -639,21 +639,21 @@
     "CLEAN": [
         {
             "def_file": "main.asm",
-            "def_line": 1136,
+            "def_line": 1073,
             "def_content": "CLEAN:\t\t\tCALL    SETTOP\t\t\t; Set TOP sysvar"
         }
     ],
     "CLEAR": [
         {
             "def_file": "main.asm",
-            "def_line": 1178,
+            "def_line": 1115,
             "def_content": "CLEAR:\t\t\tPUSH    HL\t\t\t; Stack the BASIC program pointer"
         }
     ],
     "CLEAR1": [
         {
             "def_file": "main.asm",
-            "def_line": 1186,
+            "def_line": 1123,
             "def_content": "CLEAR1:\t\t\tLD      (HL),0\t\t\t; Clear the dynamic variable pointers"
         }
     ],
@@ -674,21 +674,21 @@
     "CLOOP": [
         {
             "def_file": "main.asm",
-            "def_line": 266,
+            "def_line": 203,
             "def_content": "CLOOP:\t\t\tSCF\t\t\t\t; See above - not sure why this is here!"
         }
     ],
     "CLOOP0": [
         {
             "def_file": "main.asm",
-            "def_line": 937,
+            "def_line": 874,
             "def_content": "CLOOP0:\t\t\tJP      CLOOP\t\t\t; Jump back to the command loop"
         }
     ],
     "CLOOP1": [
         {
             "def_file": "main.asm",
-            "def_line": 630,
+            "def_line": 567,
             "def_content": "CLOOP1:\t\t\tJP      CLOOP"
         }
     ],
@@ -730,7 +730,7 @@
     "COLD": [
         {
             "def_file": "main.asm",
-            "def_line": 237,
+            "def_line": 174,
             "def_content": "COLD:\t\t\tPOP\tHL\t\t\t; Pop the return address to init off SPS"
         }
     ],
@@ -885,7 +885,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 86,
-            "def_content": "COUNT:\t\t\tDS\t\t1               ; Print Position"
+            "def_content": "COUNT:          BLKB    1,0               ; Print Position"
         }
     ],
     "COUNT0": [
@@ -926,14 +926,14 @@
     "CREATE": [
         {
             "def_file": "main.asm",
-            "def_line": 1789,
+            "def_line": 1726,
             "def_content": "CREATE:\t\t\tXOR     A"
         }
     ],
     "CRLF": [
         {
             "def_file": "main.asm",
-            "def_line": 1315,
+            "def_line": 1252,
             "def_content": "CRLF:\t\t\tLD      A,CR\t\t\t; Output CR"
         }
     ],
@@ -1024,7 +1024,7 @@
     "DATA_": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 62,
+            "def_line": 61,
             "def_content": "DATA_:\tEQU     DCH"
         }
     ],
@@ -1032,7 +1032,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 82,
-            "def_content": "DATPTR:\t\t\tDS\t\t2               ; Data Pointer"
+            "def_content": "DATPTR:         BLKB    2,0               ; Data Pointer"
         }
     ],
     "DB_": [
@@ -1059,7 +1059,7 @@
     "DEF_": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 63,
+            "def_line": 62,
             "def_content": "DEF_:\tEQU     DDH"
         }
     ],
@@ -1080,21 +1080,21 @@
     "DEL": [
         {
             "def_file": "main.asm",
-            "def_line": 1096,
+            "def_line": 1033,
             "def_content": "DEL:\t\t\tPUSH    DE"
         }
     ],
     "DELET1": [
         {
             "def_file": "main.asm",
-            "def_line": 600,
+            "def_line": 537,
             "def_content": "DELET1:\t\t\tLD      A,(HL)\t\t\t; Check whether it's the last line"
         }
     ],
     "DELETE": [
         {
             "def_file": "main.asm",
-            "def_line": 598,
+            "def_line": 535,
             "def_content": "DELETE:\t\t\tCALL    SETTOP          \t; Set TOP sysvar (first free byte at end of BASIC program)"
         }
     ],
@@ -1115,7 +1115,7 @@
     "DIM": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 64,
+            "def_line": 63,
             "def_content": "DIM:\tEQU     DEH"
         }
     ],
@@ -1159,6 +1159,13 @@
             "def_file": "exec.asm",
             "def_line": 441,
             "def_content": "DIM_EX:\t\t\tCALL    GETVAR          \t; Get the variable"
+        }
+    ],
+    "DIR_SIZE": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 268,
+            "def_content": "DIR_SIZE:         EQU FFOBJID_SIZE + 31  ; Total size of DIR structure"
         }
     ],
     "DISPAT": [
@@ -1262,14 +1269,14 @@
     "DLP1": [
         {
             "def_file": "main.asm",
-            "def_line": 1913,
+            "def_line": 1850,
             "def_content": "DLP1:\t\t\tEX      (SP),HL\t\t\t; HL: The first line number (off the stack)"
         }
     ],
     "DLPAIR": [
         {
             "def_file": "main.asm",
-            "def_line": 1905,
+            "def_line": 1842,
             "def_content": "DLPAIR:\t\t\tCALL    LINNUM\t\t\t; Parse the first line number"
         }
     ],
@@ -1354,7 +1361,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 67,
-            "def_content": "DYNVAR: \t\tDS \t\t54*3            ; Dynamic Variable Pointers"
+            "def_content": "DYNVAR:         BLKB    54*3,0            ; Dynamic Variable Pointers"
         }
     ],
     "ED": [
@@ -1367,14 +1374,14 @@
     "ELSE_": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 65,
+            "def_line": 64,
             "def_content": "ELSE_:\tEQU     8BH"
         }
     ],
     "ENCODE": [
         {
             "def_file": "main.asm",
-            "def_line": 2125,
+            "def_line": 2062,
             "def_content": "ENCODE:\t\t\tSET     4,C\t\t\t; Set bit 4 of C (for lexical analysis - accept line number)"
         }
     ],
@@ -1424,7 +1431,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 83,
-            "def_content": "ERL:\t\t\tDS\t\t2               ; Error Line"
+            "def_content": "ERL:            BLKB    2,0               ; Error Line"
         }
     ],
     "ERLV": [
@@ -1438,20 +1445,20 @@
         {
             "def_file": "ram.asm",
             "def_line": 88,
-            "def_content": "ERR:\t\t\tDS\t\t1               ; Error Number"
+            "def_content": "ERR:            BLKB    1,0               ; Error Number"
         }
     ],
     "ERRLIN": [
         {
             "def_file": "ram.asm",
             "def_line": 84,
-            "def_content": "ERRLIN:\t\t\tDS\t\t3               ; The \"ON ERROR\" Line"
+            "def_content": "ERRLIN:         BLKB    3,0               ; The \"ON ERROR\" Line"
         }
     ],
     "ERROR0": [
         {
             "def_file": "main.asm",
-            "def_line": 983,
+            "def_line": 920,
             "def_content": "ERROR0:\t\t\tCP      (HL)\t\t\t; Compare the character with 0 (the terminator byte)"
         }
     ],
@@ -1472,7 +1479,7 @@
     "ERROR1": [
         {
             "def_file": "main.asm",
-            "def_line": 991,
+            "def_line": 928,
             "def_content": "ERROR1:\t\t\tPUSH    HL\t\t\t; Stack the error string pointer and fall through to EXTERR"
         }
     ],
@@ -1493,7 +1500,7 @@
     "ERROR2": [
         {
             "def_file": "main.asm",
-            "def_line": 1020,
+            "def_line": 957,
             "def_content": "ERROR2:\t\t\tLD      HL,0"
         }
     ],
@@ -1507,7 +1514,7 @@
     "ERROR3": [
         {
             "def_file": "main.asm",
-            "def_line": 1497,
+            "def_line": 1434,
             "def_content": "ERROR3:\t\t\tJP      ERROR_"
         }
     ],
@@ -1528,7 +1535,7 @@
     "ERROR_": [
         {
             "def_file": "main.asm",
-            "def_line": 971,
+            "def_line": 908,
             "def_content": "ERROR_:\t\t\tLD      SP,(HIMEM)\t\t; Set SP to HIMEM"
         }
     ],
@@ -1543,14 +1550,14 @@
         {
             "def_file": "ram.asm",
             "def_line": 80,
-            "def_content": "ERRTRP:\t\t\tDS\t\t3               ; Error Trap"
+            "def_content": "ERRTRP:         BLKB    3,0               ; Error Trap"
         }
     ],
     "ERRTXT": [
         {
             "def_file": "ram.asm",
             "def_line": 81,
-            "def_content": "ERRTXT:\t\t\tDS\t\t2               ; Error Message Pointer"
+            "def_content": "ERRTXT:         BLKB    2,0               ; Error Message Pointer"
         }
     ],
     "ERRV": [
@@ -1563,7 +1570,7 @@
     "ERRWDS": [
         {
             "def_file": "main.asm",
-            "def_line": 547,
+            "def_line": 484,
             "def_content": "ERRWDS:\t\t\tDB    7, \"room\", 0\t\t;  0: No room"
         }
     ],
@@ -1857,7 +1864,7 @@
     "EXTERR": [
         {
             "def_file": "main.asm",
-            "def_line": 1004,
+            "def_line": 941,
             "def_content": "EXTERR:\t\t\tPOP     HL\t\t\t; Pop the error string pointer"
         }
     ],
@@ -2064,6 +2071,13 @@
             "def_content": "FETCHS:\t\t\tPUSH    AF"
         }
     ],
+    "FFOBJID_SIZE": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 247,
+            "def_content": "FFOBJID_SIZE:     EQU 15   ; Total size of FFOBJID structure"
+        }
+    ],
     "FFOR": [
         {
             "def_file": "fpp.asm",
@@ -2085,6 +2099,13 @@
             "def_content": "FGT:\t\t\tCALL    FCP"
         }
     ],
+    "FILINFO_SIZE": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 277,
+            "def_content": "FILINFO_SIZE:     EQU 278  ; Total size of FILINFO structure"
+        }
+    ],
     "FILL": [
         {
             "def_file": "exec.asm",
@@ -2097,6 +2118,13 @@
             "def_file": "exec.asm",
             "def_line": 2036,
             "def_content": "FILL1:\t\t\tLD      A,' '"
+        }
+    ],
+    "FIL_SIZE": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 258,
+            "def_content": "FIL_SIZE:         EQU FFOBJID_SIZE + 21  ; Total size of FIL structure"
         }
     ],
     "FIND": [
@@ -2158,14 +2186,14 @@
     "FINDL": [
         {
             "def_file": "main.asm",
-            "def_line": 1381,
+            "def_line": 1318,
             "def_content": "FINDL:\t\t\tEX      DE,HL\t\t\t; DE: Line number (binary)"
         }
     ],
     "FINDL1": [
         {
             "def_file": "main.asm",
-            "def_line": 1391,
+            "def_line": 1328,
             "def_content": "FINDL1:\t\t\tLD      C,(HL)\t\t\t;  C: The line length"
         }
     ],
@@ -2194,7 +2222,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 103,
-            "def_content": "FLAGS:\t\t\tDS\t\t1\t\t; Miscellaneous flags"
+            "def_content": "FLAGS:          BLKB    1,0       ; Miscellaneous flags"
         }
     ],
     "FLE": [
@@ -2256,7 +2284,7 @@
     "FN": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 66,
+            "def_line": 65,
             "def_content": "FN:\tEQU     A4H"
         }
     ],
@@ -2306,7 +2334,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 68,
-            "def_content": "FNPTR:  \t\tDS    \t\t3               ; Dynamic Function Pointers"
+            "def_content": "FNPTR:          BLKB    3,0               ; Dynamic Function Pointers"
         }
     ],
     "FN_EX": [
@@ -2326,7 +2354,7 @@
     "FOR": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 67,
+            "def_line": 66,
             "def_content": "FOR:\tEQU     E3H"
         }
     ],
@@ -2418,7 +2446,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 74,
-            "def_content": "FREE:   \t\tDS\t\t3               ; First Free Space Byte"
+            "def_content": "FREE:           BLKB    3,0               ; First Free Space Byte"
         }
     ],
     "FSUB": [
@@ -2515,7 +2543,7 @@
     "GETDEF": [
         {
             "def_file": "main.asm",
-            "def_line": 1643,
+            "def_line": 1580,
             "def_content": "GETDEF:\t\t\tLD      A,(IY+1)\t\t; Get the next character from the tokenised line (the start of the procedure name)"
         }
     ],
@@ -2585,91 +2613,91 @@
     "GETV0": [
         {
             "def_file": "main.asm",
-            "def_line": 1619,
+            "def_line": 1556,
             "def_content": "GETV0:\t\t\tPUSH    HL\t\t\t; HL will be 0 for a unary indirection, or the address of the variable for a binary indirection"
         }
     ],
     "GETV2": [
         {
             "def_file": "main.asm",
-            "def_line": 1541,
+            "def_line": 1478,
             "def_content": "GETV2:\t\t\tPUSH    AF"
         }
     ],
     "GETV3": [
         {
             "def_file": "main.asm",
-            "def_line": 1543,
+            "def_line": 1480,
             "def_content": "GETV3:\t\t\tPUSH    HL"
         }
     ],
     "GETV4": [
         {
             "def_file": "main.asm",
-            "def_line": 1588,
+            "def_line": 1525,
             "def_content": "GETV4:\t\t\tLD      A,128           \t; Static strings"
         }
     ],
     "GETV5": [
         {
             "def_file": "main.asm",
-            "def_line": 1591,
+            "def_line": 1528,
             "def_content": "GETV5:\t\t\tLD      A,4             \t; Unary 32-bit indirection"
         }
     ],
     "GETV6": [
         {
             "def_file": "main.asm",
-            "def_line": 1594,
+            "def_line": 1531,
             "def_content": "GETV6:\t\t\tXOR     A               \t; Unary 8-bit indirection"
         }
     ],
     "GETV7": [
         {
             "def_file": "main.asm",
-            "def_line": 1596,
+            "def_line": 1533,
             "def_content": "GETV7:\t\t\tLD      HL,0"
         }
     ],
     "GETV8": [
         {
             "def_file": "main.asm",
-            "def_line": 1600,
+            "def_line": 1537,
             "def_content": "GETV8:\t\t\tLD      B,4             \t; Binary 32-bt indirection"
         }
     ],
     "GETV9": [
         {
             "def_file": "main.asm",
-            "def_line": 1603,
+            "def_line": 1540,
             "def_content": "GETV9:\t\t\tLD      B,0             \t; Binary 8-bit indirection"
         }
     ],
     "GETVA": [
         {
             "def_file": "main.asm",
-            "def_line": 1605,
+            "def_line": 1542,
             "def_content": "GETVA:\t\t\tPUSH    HL"
         }
     ],
     "GETVAR": [
         {
             "def_file": "main.asm",
-            "def_line": 1510,
+            "def_line": 1447,
             "def_content": "GETVAR:\t\t\tLD      A,(IY)\t\t\t; Get the first character"
         }
     ],
     "GETVX": [
         {
             "def_file": "main.asm",
-            "def_line": 1576,
+            "def_line": 1513,
             "def_content": "GETVX:\t\t\tCP      '?'"
         }
     ],
     "GETVZ": [
         {
             "def_file": "main.asm",
-            "def_line": 1580,
+            "def_line": 1517,
             "def_content": "GETVZ:\t\t\tPUSH    HL              \t; Set exit conditions"
         }
     ],
@@ -2683,7 +2711,7 @@
     "GOSUB": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 68,
+            "def_line": 67,
             "def_content": "GOSUB:\tEQU     E4H"
         }
     ],
@@ -2704,7 +2732,7 @@
     "GOTO": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 69,
+            "def_line": 68,
             "def_content": "GOTO:\tEQU     E5H"
         }
     ],
@@ -3104,7 +3132,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 75,
-            "def_content": "HIMEM:  \t\tDS\t\t3               ; First Protected Byte"
+            "def_content": "HIMEM:          BLKB    3,0               ; First Protected Byte"
         }
     ],
     "HIMEMV": [
@@ -3307,41 +3335,41 @@
         {
             "def_file": "ram.asm",
             "def_line": 99,
-            "def_content": "INCREM:\t\t\tDS\t\t1               ; Auto-Increment Value"
+            "def_content": "INCREM:         BLKB    1,0               ; Auto-Increment Value"
         }
     ],
     "IND1": [
         {
             "def_file": "main.asm",
-            "def_line": 1297,
+            "def_line": 1234,
             "def_content": "IND1:\t\t\tINC     B\t\t\t; Increment back to 0"
         }
     ],
     "IND2_": [
         {
             "def_file": "main.asm",
-            "def_line": 1299,
+            "def_line": 1236,
             "def_content": "IND2_:\t\t\tCP      REPEAT\t\t\t; If the token is REPEAT"
         }
     ],
     "IND3": [
         {
             "def_file": "main.asm",
-            "def_line": 1305,
+            "def_line": 1242,
             "def_content": "IND3:\t\t\tINC     C\t\t\t; Incremet back to 0"
         }
     ],
     "IND4": [
         {
             "def_file": "main.asm",
-            "def_line": 1306,
+            "def_line": 1243,
             "def_content": "IND4:\t\t\tEXX"
         }
     ],
     "INDENT": [
         {
             "def_file": "main.asm",
-            "def_line": 1290,
+            "def_line": 1227,
             "def_content": "INDENT:\t\t\tEXX"
         }
     ],
@@ -3636,34 +3664,34 @@
         {
             "def_file": "ram.asm",
             "def_line": 112,
-            "def_content": "KEYASCII:\t\tDS\t\t1\t\t; ASCII code of pressed key"
+            "def_content": "KEYASCII:       BLKB    1,0       ; ASCII code of pressed key"
         }
     ],
     "KEYCOUNT": [
         {
             "def_file": "ram.asm",
             "def_line": 113,
-            "def_content": "KEYCOUNT:\t\tDS\t\t1\t\t; Counts every time a key is pressed"
+            "def_content": "KEYCOUNT:       BLKB    1,0       ; Counts every time a key is pressed"
         }
     ],
     "KEYDOWN": [
         {
             "def_file": "ram.asm",
             "def_line": 111,
-            "def_content": "KEYDOWN:\t\tDS\t\t1\t\t; Keydown flag"
+            "def_content": "KEYDOWN:        BLKB    1,0       ; Keydown flag"
         }
     ],
     "KEYWDL": [
         {
-            "def_file": "equs_bottom.inc",
-            "def_line": 22,
+            "def_file": "main.asm",
+            "def_line": 479,
             "def_content": "KEYWDL:\t\t\tEQU     $-KEYWDS"
         }
     ],
     "KEYWDS": [
         {
             "def_file": "main.asm",
-            "def_line": 402,
+            "def_line": 339,
             "def_content": "KEYWDS:\t\t\tDB    80H, \"AND\""
         }
     ],
@@ -3761,168 +3789,168 @@
     "LEX": [
         {
             "def_file": "main.asm",
-            "def_line": 1042,
+            "def_line": 979,
             "def_content": "LEX:\t\t\tLD      HL,KEYWDS\t\t; Address of the keywords table"
         }
     ],
     "LEX0": [
         {
             "def_file": "main.asm",
-            "def_line": 1044,
+            "def_line": 981,
             "def_content": "LEX0:\t\t\tLD      A,(IY)\t\t\t; Fetch the character to match"
         }
     ],
     "LEX1": [
         {
             "def_file": "main.asm",
-            "def_line": 1053,
+            "def_line": 990,
             "def_content": "LEX1:\t\t\tINC     HL\t\t\t; Increment the pointer"
         }
     ],
     "LEX2": [
         {
             "def_file": "main.asm",
-            "def_line": 1058,
+            "def_line": 995,
             "def_content": "LEX2:\t\t\tPUSH    IY              \t; Save the input pointer"
         }
     ],
     "LEX3": [
         {
             "def_file": "main.asm",
-            "def_line": 1059,
+            "def_line": 996,
             "def_content": "LEX3:\t\t\tINC     HL\t\t\t; Increment the keyword pointer"
         }
     ],
     "LEX4": [
         {
             "def_file": "main.asm",
-            "def_line": 1071,
+            "def_line": 1008,
             "def_content": "LEX4:\t\t\tPOP     IY              \t; Restore the input pointer ready for the next search"
         }
     ],
     "LEX5": [
         {
             "def_file": "main.asm",
-            "def_line": 1077,
+            "def_line": 1014,
             "def_content": "LEX5:\t\t\tLD      A,(HL)\t\t\t; Fetch the byte from the keywords table"
         }
     ],
     "LEX6": [
         {
             "def_file": "main.asm",
-            "def_line": 1084,
+            "def_line": 1021,
             "def_content": "LEX6:\t\t\tPOP     AF\t\t\t; Discard IY input pointer pushed on the stack"
         }
     ],
     "LEXAN1": [
         {
             "def_file": "main.asm",
-            "def_line": 1982,
+            "def_line": 1919,
             "def_content": "LEXAN1:\t\t\tLD      (DE),A          \t; Transfer to buffer"
         }
     ],
     "LEXAN2": [
         {
             "def_file": "main.asm",
-            "def_line": 1988,
+            "def_line": 1925,
             "def_content": "LEXAN2:\t\t\tLD      A,E             \t; Destination buffer on page boundary, so E can be used as length"
         }
     ],
     "LEXAN3": [
         {
             "def_file": "main.asm",
-            "def_line": 2000,
+            "def_line": 1937,
             "def_content": "LEXAN3:\t\t\tCP      ' '\t\t\t; Ignore spaces"
         }
     ],
     "LEXAN4": [
         {
             "def_file": "main.asm",
-            "def_line": 2011,
+            "def_line": 1948,
             "def_content": "LEXAN4:\t\t\tCP      34\t\t\t; Is it a quote character?"
         }
     ],
     "LEXAN5": [
         {
             "def_file": "main.asm",
-            "def_line": 2017,
+            "def_line": 1954,
             "def_content": "LEXAN5:\t\t\tBIT     4,C\t\t\t; Accept line number?"
         }
     ],
     "LEXAN6": [
         {
             "def_file": "main.asm",
-            "def_line": 2030,
+            "def_line": 1967,
             "def_content": "LEXAN6:\t\t\tDEC     C\t\t\t; Check for C=1 (LEFT)"
         }
     ],
     "LEXAN7": [
         {
             "def_file": "main.asm",
-            "def_line": 2040,
+            "def_line": 1977,
             "def_content": "LEXAN7:\t\t\tCP      '*'\t\t\t; Is it a '*' (for star commands)"
         }
     ],
     "LEXAN8": [
         {
             "def_file": "main.asm",
-            "def_line": 2057,
+            "def_line": 1994,
             "def_content": "LEXAN8:\t\t\tCP      REM\t\t\t; If the token is REM"
         }
     ],
     "LEXAN9": [
         {
             "def_file": "main.asm",
-            "def_line": 2061,
+            "def_line": 1998,
             "def_content": "LEXAN9:\t\t\tSET     6,C             \t; FLAG: STOP TOKENISING"
         }
     ],
     "LEXANA": [
         {
             "def_file": "main.asm",
-            "def_line": 2063,
+            "def_line": 2000,
             "def_content": "LEXANA:\t\t\tCP      FN\t\t\t; If the token is FN"
         }
     ],
     "LEXANB": [
         {
             "def_file": "main.asm",
-            "def_line": 2070,
+            "def_line": 2007,
             "def_content": "LEXANB:\t\t\tSET     5,C             \t; FLAG: IN VARIABLE/FN/PROC"
         }
     ],
     "LEXANC": [
         {
             "def_file": "main.asm",
-            "def_line": 2071,
+            "def_line": 2008,
             "def_content": "LEXANC:\t\t\tCP      '&'\t\t\t; Check for hex prefix"
         }
     ],
     "LEXAND": [
         {
             "def_file": "main.asm",
-            "def_line": 2075,
+            "def_line": 2012,
             "def_content": "LEXAND:\t\t\tCP\t'%'\t\t\t; Check for binary prefix"
         }
     ],
     "LEXANE": [
         {
             "def_file": "main.asm",
-            "def_line": 2079,
+            "def_line": 2016,
             "def_content": "LEXANE:\t\t\tLD      HL,LIST1\t\t; List of tokens that must be followed by a line number"
         }
     ],
     "LEXANF": [
         {
             "def_file": "main.asm",
-            "def_line": 2087,
+            "def_line": 2024,
             "def_content": "LEXANF:\t\t\tLD      HL,LIST2\t\t; List of tokens that switch the lexical analysis back to LEFT mode"
         }
     ],
     "LEXANG": [
         {
             "def_file": "main.asm",
-            "def_line": 2094,
+            "def_line": 2031,
             "def_content": "LEXANG:\t\t\tJP      LEXAN1\t\t\t; And loop"
         }
     ],
@@ -3944,7 +3972,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 77,
-            "def_content": "LINENO: \t\tDS\t\t3               ; Line Number"
+            "def_content": "LINENO:         BLKB    3,0               ; Line Number"
         }
     ],
     "LINES": [
@@ -3957,112 +3985,112 @@
     "LINE_": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 70,
+            "def_line": 69,
             "def_content": "LINE_:\tEQU     86H"
         }
     ],
     "LINNM1": [
         {
             "def_file": "main.asm",
-            "def_line": 1850,
+            "def_line": 1787,
             "def_content": "LINNM1:\t\t\tLD      A,(IY)\t\t\t; A: Fetch the digit to add in"
         }
     ],
     "LINNUM": [
         {
             "def_file": "main.asm",
-            "def_line": 1848,
+            "def_line": 1785,
             "def_content": "LINNUM:\t\t\tCALL    NXT\t\t\t; Skip whitespace to the first character"
         }
     ],
     "LINO": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 71,
+            "def_line": 70,
             "def_content": "LINO:\tEQU     8DH"
         }
     ],
     "LIST1": [
         {
             "def_file": "main.asm",
-            "def_line": 2100,
+            "def_line": 2037,
             "def_content": "LIST1:\t\t\tDB\tGOTO"
         }
     ],
     "LIST1L": [
         {
-            "def_file": "equs_bottom.inc",
-            "def_line": 23,
+            "def_file": "main.asm",
+            "def_line": 2043,
             "def_content": "LIST1L:\t\t\tEQU     $-LIST1"
         }
     ],
     "LIST2": [
         {
             "def_file": "main.asm",
-            "def_line": 2104,
+            "def_line": 2041,
             "def_content": "LIST2:\t\t\tDB\tTHEN"
         }
     ],
     "LIST2L": [
         {
-            "def_file": "equs_bottom.inc",
-            "def_line": 24,
+            "def_file": "main.asm",
+            "def_line": 2047,
             "def_content": "LIST2L:\t\t\tEQU     $-LIST2"
         }
     ],
     "LIST7": [
         {
             "def_file": "main.asm",
-            "def_line": 1238,
+            "def_line": 1175,
             "def_content": "LIST7:\t\t\tCALL    LOUT\t\t\t; Output the character / token"
         }
     ],
     "LIST8": [
         {
             "def_file": "main.asm",
-            "def_line": 1231,
+            "def_line": 1168,
             "def_content": "LIST8:\t\t\tLD      A,(HL)\t\t\t; Fetch a character / token byte"
         }
     ],
     "LISTA": [
         {
             "def_file": "main.asm",
-            "def_line": 666,
+            "def_line": 603,
             "def_content": "LISTA:\t\t\tEXX"
         }
     ],
     "LISTB": [
         {
             "def_file": "main.asm",
-            "def_line": 660,
+            "def_line": 597,
             "def_content": "LISTB:\t\t\tLD      E,A             \t; E: IF clause string length"
         }
     ],
     "LISTC": [
         {
             "def_file": "main.asm",
-            "def_line": 672,
+            "def_line": 609,
             "def_content": "LISTC:\t\t\tPUSH    BC              \t; Save second line number"
         }
     ],
     "LISTE": [
         {
             "def_file": "main.asm",
-            "def_line": 1244,
+            "def_line": 1181,
             "def_content": "LISTE:\t\t\tBIT \t3,(IX)\t\t\t; Are we printing to buffer?"
         }
     ],
     "LISTIT": [
         {
             "def_file": "main.asm",
-            "def_line": 1201,
+            "def_line": 1138,
             "def_content": "LISTIT:\t\t\tPUSH    HL\t\t\t; Stack the address of the line"
         }
     ],
     "LISTO": [
         {
             "def_file": "main.asm",
-            "def_line": 625,
+            "def_line": 562,
             "def_content": "LISTO:\t\t\tINC     IY              \t; Skip \"O\" byte"
         }
     ],
@@ -4070,13 +4098,13 @@
         {
             "def_file": "ram.asm",
             "def_line": 89,
-            "def_content": "LISTON:\t\t\tDS\t\t1               ; LISTO (bottom nibble)"
+            "def_content": "LISTON:         BLKB    1,0               ; LISTO (bottom nibble)"
         }
     ],
     "LIST_": [
         {
             "def_file": "main.asm",
-            "def_line": 638,
+            "def_line": 575,
             "def_content": "LIST_:\t\t\tCP      'O'\t\t\t; Check for O (LISTO)"
         }
     ],
@@ -4125,7 +4153,7 @@
     "LNZERO": [
         {
             "def_file": "main.asm",
-            "def_line": 325,
+            "def_line": 262,
             "def_content": "LNZERO:\t\t\tLD\tC,1\t\t\t; Left mode"
         }
     ],
@@ -4139,14 +4167,14 @@
     "LOAD": [
         {
             "def_file": "main.asm",
-            "def_line": 941,
+            "def_line": 878,
             "def_content": "LOAD:\t\t\tCALL    EXPRS           \t; Get the filename"
         }
     ],
     "LOAD0": [
         {
             "def_file": "main.asm",
-            "def_line": 1124,
+            "def_line": 1061,
             "def_content": "LOAD0: \t\t\tLD      DE,(PAGE_)\t\t; DE: Beginning of BASIC program area"
         }
     ],
@@ -4195,77 +4223,77 @@
     "LOC0": [
         {
             "def_file": "main.asm",
-            "def_line": 1704,
+            "def_line": 1641,
             "def_content": "LOC0:\t\t\tCP      '_'-'@'\t\t\t; Check the first character is in"
         }
     ],
     "LOC1": [
         {
             "def_file": "main.asm",
-            "def_line": 1715,
+            "def_line": 1652,
             "def_content": "LOC1:\t\t\tLD\tA, L\t\t\t; Fetch variable index"
         }
     ],
     "LOC2": [
         {
             "def_file": "main.asm",
-            "def_line": 1726,
+            "def_line": 1663,
             "def_content": "LOC2:\t\t\tLD\tDE, (HL)\t\t; Fetch the original pointer"
         }
     ],
     "LOC3": [
         {
             "def_file": "main.asm",
-            "def_line": 1741,
+            "def_line": 1678,
             "def_content": "LOC3:\t\t\tLD      A,(HL)         \t\t; Compare"
         }
     ],
     "LOC4": [
         {
             "def_file": "main.asm",
-            "def_line": 1749,
+            "def_line": 1686,
             "def_content": "LOC4:\t\t\tPOP     IY\t\t\t; Restore the pointer in the program"
         }
     ],
     "LOC5": [
         {
             "def_file": "main.asm",
-            "def_line": 1755,
+            "def_line": 1692,
             "def_content": "LOC5:\t\t\tDEC     IY"
         }
     ],
     "LOC5A": [
         {
             "def_file": "main.asm",
-            "def_line": 1767,
+            "def_line": 1704,
             "def_content": "LOC5A:\t\t\tPOP     DE"
         }
     ],
     "LOC6": [
         {
             "def_file": "main.asm",
-            "def_line": 1781,
+            "def_line": 1718,
             "def_content": "LOC6:\t\t\tINC     A               \t; Set NZ flag"
         }
     ],
     "LOC7": [
         {
             "def_file": "main.asm",
-            "def_line": 1799,
+            "def_line": 1736,
             "def_content": "LOC7:\t\t\tINC     IY"
         }
     ],
     "LOC8": [
         {
             "def_file": "main.asm",
-            "def_line": 1812,
+            "def_line": 1749,
             "def_content": "LOC8:\t\t\tLD      (HL),0          \t; TERMINATOR"
         }
     ],
     "LOC9": [
         {
             "def_file": "main.asm",
-            "def_line": 1820,
+            "def_line": 1757,
             "def_content": "LOC9:\t\t\tLD      (HL),0          \t; Initialise the memory to zero"
         }
     ],
@@ -4286,7 +4314,7 @@
     "LOCAL_": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 72,
+            "def_line": 71,
             "def_content": "LOCAL_:\tEQU     EAH"
         }
     ],
@@ -4300,7 +4328,7 @@
     "LOCATE": [
         {
             "def_file": "main.asm",
-            "def_line": 1677,
+            "def_line": 1614,
             "def_content": "LOCATE:\t\t\tSUB     '@'\t\t\t; Check for valid range"
         }
     ],
@@ -4336,7 +4364,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 73,
-            "def_content": "LOMEM:  \t\tDS\t\t3               ; Start of Dynamic Storage"
+            "def_content": "LOMEM:          BLKB    3,0               ; Start of Dynamic Storage"
         }
     ],
     "LOMEMV": [
@@ -4363,7 +4391,7 @@
     "LOUT": [
         {
             "def_file": "main.asm",
-            "def_line": 1277,
+            "def_line": 1214,
             "def_content": "LOUT:\t\t\tBIT     0,E\t\t\t; If the quote counter is odd (bit 1 set) then"
         }
     ],
@@ -4538,14 +4566,14 @@
     "NEW": [
         {
             "def_file": "main.asm",
-            "def_line": 919,
+            "def_line": 856,
             "def_content": "NEW:\t\t\tCALL    NEWIT\t\t\t; Call NEWIT (clears program area and variables)"
         }
     ],
     "NEWIT": [
         {
             "def_file": "main.asm",
-            "def_line": 1174,
+            "def_line": 1111,
             "def_content": "NEWIT:\t\t\tLD      HL,(PAGE_)\t\t; HL: First byte of BASIC program area"
         }
     ],
@@ -4559,7 +4587,7 @@
     "NEXT": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 73,
+            "def_line": 72,
             "def_content": "NEXT:\tEQU     EDH"
         }
     ],
@@ -4594,7 +4622,7 @@
     "NOAUTO": [
         {
             "def_file": "main.asm",
-            "def_line": 302,
+            "def_line": 239,
             "def_content": "NOAUTO:\t\t\tLD      HL,ACCS\t\t\t; Storage for the line editor (256 bytes)"
         }
     ],
@@ -4622,7 +4650,7 @@
     "NOTICE": [
         {
             "def_file": "main.asm",
-            "def_line": 259,
+            "def_line": 196,
             "def_content": "NOTICE:\t\t\tDB    \t\"(C) Copyright R.T.Russell 1987\\n\\r\""
         }
     ],
@@ -4691,8 +4719,8 @@
     ],
     "OFFSET": [
         {
-            "def_file": "equs_bottom.inc",
-            "def_line": 21,
+            "def_file": "equs_top.inc",
+            "def_line": 99,
             "def_content": "OFFSET:\t\t\tEQU     CFH-TOKLO\t\t; Offset to the parameterised SET versions"
         }
     ],
@@ -4706,7 +4734,7 @@
     "OFF_": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 74,
+            "def_line": 73,
             "def_content": "OFF_:\tEQU     87H"
         }
     ],
@@ -4720,7 +4748,7 @@
     "OLD": [
         {
             "def_file": "main.asm",
-            "def_line": 924,
+            "def_line": 861,
             "def_content": "OLD:\t\t\tLD      HL,(PAGE_)\t\t; HL: The start of the BASIC program area"
         }
     ],
@@ -4755,14 +4783,14 @@
     "ONEDIT": [
         {
             "def_file": "main.asm",
-            "def_line": 304,
+            "def_line": 241,
             "def_content": "ONEDIT:\t\t\tCALL\tONEDIT1\t\t\t; Enter the line into memory"
         }
     ],
     "ONEDIT1": [
         {
             "def_file": "main.asm",
-            "def_line": 313,
+            "def_line": 250,
             "def_content": "ONEDIT1:\t\tXOR     A\t\t\t; Entry point after *EDIT"
         }
     ],
@@ -4783,7 +4811,7 @@
     "ON_": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 75,
+            "def_line": 74,
             "def_content": "ON_:\tEQU     EEH"
         }
     ],
@@ -5176,21 +5204,21 @@
         {
             "def_file": "ram.asm",
             "def_line": 107,
-            "def_content": "OSWRCHCH:\t\tDS\t\t1\t\t; Channel of OSWRCH"
+            "def_content": "OSWRCHCH:       BLKB    1,0       ; Channel of OSWRCH"
         }
     ],
     "OSWRCHFH": [
         {
             "def_file": "ram.asm",
             "def_line": 110,
-            "def_content": "OSWRCHFH:\t\tDS\t\t1\t\t; File handle for OSWRCHCHN"
+            "def_content": "OSWRCHFH:       BLKB    1,0       ; File handle for OSWRCHCHN"
         }
     ],
     "OSWRCHPT": [
         {
             "def_file": "ram.asm",
             "def_line": 106,
-            "def_content": "OSWRCHPT:\t\tDS\t\t2\t\t; Pointer for *EDIT"
+            "def_content": "OSWRCHPT:       BLKB    2,0       ; Pointer for *EDIT"
         }
     ],
     "OSWRCH_BUFFER": [
@@ -5217,14 +5245,14 @@
     "OUTCHR": [
         {
             "def_file": "main.asm",
-            "def_line": 1319,
+            "def_line": 1256,
             "def_content": "OUTCHR:\t\t\tCALL    OSWRCH\t\t\t; Output the character in A"
         }
     ],
     "OUT_": [
         {
             "def_file": "main.asm",
-            "def_line": 1340,
+            "def_line": 1277,
             "def_content": "OUT_:\t\t\tCP      138\t\t\t; Neat trick to do condition: If A >= 10 or < 128 then PE flag is set"
         }
     ],
@@ -5246,20 +5274,20 @@
         {
             "def_file": "ram.asm",
             "def_line": 71,
-            "def_content": "PAGE_:   \t\tDS\t\t3               ; Start of User Program"
+            "def_content": "PAGE_:          BLKB    3,0               ; Start of User Program"
         }
     ],
     "PAIR": [
         {
             "def_file": "main.asm",
-            "def_line": 1880,
+            "def_line": 1817,
             "def_content": "PAIR:\t\t\tCALL    LINNUM          \t; Parse the first line number"
         }
     ],
     "PAIR1": [
         {
             "def_file": "main.asm",
-            "def_line": 1886,
+            "def_line": 1823,
             "def_content": "PAIR1:\t\t\tCALL    TERMQ\t\t\t; Check for ELSE, : or CR"
         }
     ],
@@ -5308,49 +5336,49 @@
     "PBCD": [
         {
             "def_file": "main.asm",
-            "def_line": 1459,
+            "def_line": 1396,
             "def_content": "PBCD:\t\t\tLD      C,' '\t\t\t; C: Leading character (\" \")"
         }
     ],
     "PBCD0": [
         {
             "def_file": "main.asm",
-            "def_line": 1460,
+            "def_line": 1397,
             "def_content": "PBCD0:\t\t\tLD      B,5\t\t\t; Number of digits in result"
         }
     ],
     "PBCD1": [
         {
             "def_file": "main.asm",
-            "def_line": 1462,
+            "def_line": 1399,
             "def_content": "PBCD1:\t\t\tXOR     A\t\t\t; Counter"
         }
     ],
     "PBCD2": [
         {
             "def_file": "main.asm",
-            "def_line": 1463,
+            "def_line": 1400,
             "def_content": "PBCD2:\t\t\tSBC     HL,DE\t\t\t; Loop and count how many 10,000s we have"
         }
     ],
     "PBCD3": [
         {
             "def_file": "main.asm",
-            "def_line": 1471,
+            "def_line": 1408,
             "def_content": "PBCD3:\t\t\tOR      C\t\t\t; A is then an ASCII character, or 00h if we've not processed any non-zero digits yet"
         }
     ],
     "PBCD4": [
         {
             "def_file": "main.asm",
-            "def_line": 1482,
+            "def_line": 1419,
             "def_content": "PBCD4:\t\t\tLD      DE,1000\t\t\t; Set the column heading to 1,000s for subsequent runs"
         }
     ],
     "PBCDL": [
         {
             "def_file": "main.asm",
-            "def_line": 1451,
+            "def_line": 1388,
             "def_content": "PBCDL:\t\t\tLD      C,0\t\t\t; C: Leading character (NUL)"
         }
     ],
@@ -5630,7 +5658,7 @@
     "PRLINO": [
         {
             "def_file": "main.asm",
-            "def_line": 1251,
+            "def_line": 1188,
             "def_content": "PRLINO:\t\t\tPUSH    HL\t\t\t; Swap HL and IY"
         }
     ],
@@ -5665,7 +5693,7 @@
     "PROC": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 76,
+            "def_line": 75,
             "def_content": "PROC:\tEQU     F2H"
         }
     ],
@@ -5736,13 +5764,13 @@
         {
             "def_file": "ram.asm",
             "def_line": 69,
-            "def_content": "PROPTR: \t\tDS\t\t3               ; Dynamic Procedure Pointers"
+            "def_content": "PROPTR:         BLKB    3,0               ; Dynamic Procedure Pointers"
         }
     ],
     "PRREM": [
         {
             "def_file": "main.asm",
-            "def_line": 1267,
+            "def_line": 1204,
             "def_content": "PRREM:\t\t\tCALL\tOUT_\t\t\t; Output the REM token"
         }
     ],
@@ -5833,7 +5861,7 @@
     "PUTVAR": [
         {
             "def_file": "main.asm",
-            "def_line": 1492,
+            "def_line": 1429,
             "def_content": "PUTVAR:\t\t\tCALL    CREATE\t\t\t; Create the variable"
         }
     ],
@@ -5841,14 +5869,14 @@
         {
             "def_file": "ram.asm",
             "def_line": 114,
-            "def_content": "R0:\t\t\tDS\t\t3\t\t; General purpose storage for 8/16 to 24 bit operations"
+            "def_content": "R0:             BLKB    3,0       ; General purpose storage for 8/16 to 24 bit operations"
         }
     ],
     "R1": [
         {
             "def_file": "ram.asm",
             "def_line": 115,
-            "def_content": "R1:\t\t\tDS\t\t3\t\t;"
+            "def_content": "R1:             BLKB    3,0"
         }
     ],
     "RAD": [
@@ -5868,7 +5896,7 @@
     "RAM_END": [
         {
             "def_file": "ram.asm",
-            "def_line": 119,
+            "def_line": 120,
             "def_content": "RAM_END:"
         }
     ],
@@ -5890,27 +5918,27 @@
         {
             "def_file": "ram.asm",
             "def_line": 85,
-            "def_content": "RANDOM:\t\t\tDS\t\t5               ; Random Number"
+            "def_content": "RANDOM:         BLKB    5,0               ; Random Number"
         }
     ],
     "RANGE": [
         {
             "def_file": "main.asm",
-            "def_line": 1927,
+            "def_line": 1864,
             "def_content": "RANGE:\t\t\tLD      A,(IY)\t\t\t; Fetch the character"
         }
     ],
     "RANGE1": [
         {
             "def_file": "main.asm",
-            "def_line": 1939,
+            "def_line": 1876,
             "def_content": "RANGE1:\t\t\tCP      '0'\t\t\t; If it is between '0'..."
         }
     ],
     "RANGE2": [
         {
             "def_file": "main.asm",
-            "def_line": 1950,
+            "def_line": 1887,
             "def_content": "RANGE2:\t\t\tCP      'A'\t\t\t; If it is between 'A'..."
         }
     ],
@@ -6015,7 +6043,7 @@
     "REM": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 77,
+            "def_line": 76,
             "def_content": "REM:\tEQU     F4H"
         }
     ],
@@ -6029,63 +6057,63 @@
     "REN": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 78,
+            "def_line": 77,
             "def_content": "REN:\tEQU     CCH"
         }
     ],
     "RENUM": [
         {
             "def_file": "main.asm",
-            "def_line": 752,
+            "def_line": 689,
             "def_content": "RENUM:\t\t\tCALL    CLEAR           \t; Uses the heap so clear all dynamic variables and function/procedure pointers"
         }
     ],
     "RENUM1": [
         {
             "def_file": "main.asm",
-            "def_line": 760,
+            "def_line": 697,
             "def_content": "RENUM1:\t\t\tLD      A,(HL)          \t; Fetch the line length byte"
         }
     ],
     "RENUM2": [
         {
             "def_file": "main.asm",
-            "def_line": 808,
+            "def_line": 745,
             "def_content": "RENUM2:\t\t\tEX      DE,HL\t\t\t; HL: Pointer to the end of the heap"
         }
     ],
     "RENUM3": [
         {
             "def_file": "main.asm",
-            "def_line": 815,
+            "def_line": 752,
             "def_content": "RENUM3:\t\t\tLD      C,(HL)\t\t\t; Fetch the first line length byte"
         }
     ],
     "RENUM4": [
         {
             "def_file": "main.asm",
-            "def_line": 864,
+            "def_line": 801,
             "def_content": "RENUM4:\t\t\tLD      E,(HL)          \t; DE: The OLD line number"
         }
     ],
     "RENUM5": [
         {
             "def_file": "main.asm",
-            "def_line": 890,
+            "def_line": 827,
             "def_content": "RENUM5:\t\t\tPOP     DE\t\t\t; DE: Pointer to the encoded line number in the listing"
         }
     ],
     "RENUM6": [
         {
             "def_file": "main.asm",
-            "def_line": 894,
+            "def_line": 831,
             "def_content": "RENUM6:\t\t\tPOP     HL\t\t\t; HL: Pointer to the encoded line number in the listing"
         }
     ],
     "RENUM7": [
         {
             "def_file": "main.asm",
-            "def_line": 844,
+            "def_line": 781,
             "def_content": "RENUM7:\t\t\tLD      A,LINO\t\t\t; A: The token code that precedes any line number encoded in BASIC (i.e. GOTO/GOSUB)"
         }
     ],
@@ -6099,7 +6127,7 @@
     "REPEAT": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 79,
+            "def_line": 78,
             "def_content": "REPEAT:\tEQU     F5H"
         }
     ],
@@ -6120,7 +6148,7 @@
     "REPORT": [
         {
             "def_file": "main.asm",
-            "def_line": 2160,
+            "def_line": 2097,
             "def_content": "REPORT:\t\t\tLD      HL, (ERRTXT)\t\t; Output an error message pointed to by ERRTXT"
         }
     ],
@@ -6134,7 +6162,7 @@
     "RESTOR": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 80,
+            "def_line": 79,
             "def_content": "RESTOR:\tEQU     F7H"
         }
     ],
@@ -6260,7 +6288,7 @@
     "SAVE": [
         {
             "def_file": "main.asm",
-            "def_line": 950,
+            "def_line": 887,
             "def_content": "SAVE:\t\t\tCALL    SETTOP          \t; Set TOP sysvar"
         }
     ],
@@ -6316,7 +6344,7 @@
     "SAYLN": [
         {
             "def_file": "main.asm",
-            "def_line": 1445,
+            "def_line": 1382,
             "def_content": "SAYLN:\t\t\tLD      HL,(LINENO)\t\t; Get the LINENO sysvar"
         }
     ],
@@ -6386,49 +6414,49 @@
     "SET1": [
         {
             "def_file": "main.asm",
-            "def_line": 1419,
+            "def_line": 1356,
             "def_content": "SET1:\t\t\tLD      C, (HL)\t\t\t; Get the length of the line; zero indicates the end of the BASIC program"
         }
     ],
     "SET2": [
         {
             "def_file": "main.asm",
-            "def_line": 1434,
+            "def_line": 1371,
             "def_content": "SET2:\t\t\tLD      (LINENO), HL\t\t; Store in the variable LINENO"
         }
     ],
     "SET3": [
         {
             "def_file": "main.asm",
-            "def_line": 1437,
+            "def_line": 1374,
             "def_content": "SET3:\t\t\tLD      HL, 0\t\t\t; We've not found the line at this point so"
         }
     ],
     "SETLIN": [
         {
             "def_file": "main.asm",
-            "def_line": 1410,
+            "def_line": 1347,
             "def_content": "SETLIN:\t\t\tLD\tBC, 0\t\t\t; Zero BC for later"
         }
     ],
     "SETOP1": [
         {
             "def_file": "main.asm",
-            "def_line": 1150,
+            "def_line": 1087,
             "def_content": "SETOP1:\t\t\tLD      C,(HL)\t\t\t; BC: Get first byte of program line (line length)"
         }
     ],
     "SETOP2": [
         {
             "def_file": "main.asm",
-            "def_line": 1161,
+            "def_line": 1098,
             "def_content": "SETOP2:\t\t\tINC     HL             \t\t; Skip the 3 byte end of program marker (&00, &FF, &FF)"
         }
     ],
     "SETTOP": [
         {
             "def_file": "main.asm",
-            "def_line": 1147,
+            "def_line": 1084,
             "def_content": "SETTOP:\t\t\tLD      HL,(PAGE_)\t\t; Start at beginning of BASIC program area"
         }
     ],
@@ -6645,7 +6673,7 @@
     "SPACE_": [
         {
             "def_file": "main.asm",
-            "def_line": 1964,
+            "def_line": 1901,
             "def_content": "SPACE_: \t\tXOR     A"
         }
     ],
@@ -6659,7 +6687,7 @@
     "SPC": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 81,
+            "def_line": 80,
             "def_content": "SPC:\tEQU     89H"
         }
     ],
@@ -6828,13 +6856,13 @@
         {
             "def_file": "ram.asm",
             "def_line": 66,
-            "def_content": "STAVAR:\t\t\tDS\t \t27*4            ; Static Variables"
+            "def_content": "STAVAR:         BLKB    27*4,0            ; Static Variables"
         }
     ],
     "STEP": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 82,
+            "def_line": 81,
             "def_content": "STEP:\tEQU     88H"
         }
     ],
@@ -7247,7 +7275,7 @@
     "TAB": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 83,
+            "def_line": 82,
             "def_content": "TAB:\tEQU     8AH"
         }
     ],
@@ -7268,7 +7296,7 @@
     "TAND": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 84,
+            "def_line": 83,
             "def_content": "TAND:\tEQU     80H"
         }
     ],
@@ -7282,7 +7310,7 @@
     "TCALL": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 85,
+            "def_line": 84,
             "def_content": "TCALL:\tEQU     D6H"
         }
     ],
@@ -7290,13 +7318,13 @@
         {
             "def_file": "equs_bottom.inc",
             "def_line": 8,
-            "def_content": "TCMD:\t\t\tEQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations"
+            "def_content": "TCMD:\t\t\tEQU C6H ;    FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations"
         }
     ],
     "TELL": [
         {
             "def_file": "main.asm",
-            "def_line": 2179,
+            "def_line": 2116,
             "def_content": "TELL:\t\t\tEX      (SP), HL\t\t; Get the return address off the stack into HL, this is the"
         }
     ],
@@ -7324,7 +7352,7 @@
     "TERROR": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 86,
+            "def_line": 85,
             "def_content": "TERROR:\tEQU     85H"
         }
     ],
@@ -7345,35 +7373,35 @@
     "TEXT_": [
         {
             "def_file": "main.asm",
-            "def_line": 2162,
+            "def_line": 2099,
             "def_content": "TEXT_:\t\t\tLD      A, (HL)\t\t\t; Fetch the character"
         }
     ],
     "TGOSUB": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 87,
+            "def_line": 86,
             "def_content": "TGOSUB:\tEQU     E4H"
         }
     ],
     "TGOTO": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 88,
+            "def_line": 87,
             "def_content": "TGOTO:\tEQU     E5H"
         }
     ],
     "THEN": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 89,
+            "def_line": 88,
             "def_content": "THEN:\tEQU     8CH"
         }
     ],
     "TIF": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 90,
+            "def_line": 89,
             "def_content": "TIF:\tEQU     E7H"
         }
     ],
@@ -7415,42 +7443,42 @@
     "TO": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 91,
+            "def_line": 90,
             "def_content": "TO:\tEQU     B8H"
         }
     ],
     "TOKEN1": [
         {
             "def_file": "main.asm",
-            "def_line": 1363,
+            "def_line": 1300,
             "def_content": "TOKEN1:\t\t\tLD      A,(HL)\t\t\t; Fetch the character"
         }
     ],
     "TOKHI": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 99,
+            "def_line": 98,
             "def_content": "TOKHI:\t\t\tEQU     93H\t\t\t; PTR, PAGE, TIME, LOMEM, HIMEM"
         }
     ],
     "TOKLO": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 98,
+            "def_line": 97,
             "def_content": "TOKLO:\t\t\tEQU     8FH\t\t\t; This defines the block of tokens that are pseudo-variables"
         }
     ],
     "TON": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 92,
+            "def_line": 91,
             "def_content": "TON:\tEQU     EEH"
         }
     ],
     "TOOBIG": [
         {
             "def_file": "main.asm",
-            "def_line": 1871,
+            "def_line": 1808,
             "def_content": "TOOBIG:\t\t\tLD      A,20"
         }
     ],
@@ -7472,7 +7500,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 72,
-            "def_content": "TOP:    \t\tDS\t\t3               ; First Location after User Program"
+            "def_content": "TOP:            BLKB    3,0               ; First Location after User Program"
         }
     ],
     "TOPV": [
@@ -7485,21 +7513,21 @@
     "TOR": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 93,
+            "def_line": 92,
             "def_content": "TOR:\tEQU     84H"
         }
     ],
     "TPROC": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 94,
+            "def_line": 93,
             "def_content": "TPROC:\tEQU     F2H"
         }
     ],
     "TRACE": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 95,
+            "def_line": 94,
             "def_content": "TRACE:\tEQU     FCH"
         }
     ],
@@ -7521,7 +7549,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 78,
-            "def_content": "TRACEN:\t\t\tDS\t\t3               ; Trace Flag"
+            "def_content": "TRACEN:         BLKB    3,0               ; Trace Flag"
         }
     ],
     "TRACE_EX": [
@@ -7555,14 +7583,14 @@
     "TSTOP": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 96,
+            "def_line": 95,
             "def_content": "TSTOP:\tEQU     FAH"
         }
     ],
     "TYPE_": [
         {
             "def_file": "main.asm",
-            "def_line": 1768,
+            "def_line": 1705,
             "def_content": "TYPE_:\t\t\tLD      A,(IY-1)\t\t; Check the string type postfix"
         }
     ],
@@ -7597,7 +7625,7 @@
     "UNTIL": [
         {
             "def_file": "equs_top.inc",
-            "def_line": 97,
+            "def_line": 96,
             "def_content": "UNTIL:\tEQU     FDH"
         }
     ],
@@ -7786,21 +7814,21 @@
     "WARM": [
         {
             "def_file": "main.asm",
-            "def_line": 262,
+            "def_line": 199,
             "def_content": "WARM:\t\t\tDB \tF6H\t\t\t; Opcode for OR? Maybe to CCF (the following SCF will be the operand)"
         }
     ],
     "WARM0": [
         {
             "def_file": "main.asm",
-            "def_line": 962,
+            "def_line": 899,
             "def_content": "WARM0:\t\t\tJP      WARM\t\t\t; Jump back to the command loop"
         }
     ],
     "WARMNC": [
         {
             "def_file": "main.asm",
-            "def_line": 704,
+            "def_line": 641,
             "def_content": "WARMNC:\t\t\tJP      NC,WARM\t\t\t; If exceeded the terminating line number then jump to WARM"
         }
     ],
@@ -7808,7 +7836,7 @@
         {
             "def_file": "ram.asm",
             "def_line": 87,
-            "def_content": "WIDTH:\t\t\tDS\t\t1               ; Print Width"
+            "def_content": "WIDTH:          BLKB    1,0               ; Print Width"
         }
     ],
     "WIDTHV": [
@@ -7941,7 +7969,7 @@
         {
             "def_file": "init.asm",
             "def_line": 34,
-            "def_content": "_exec_name:\t\tDB\t\"EZBASIC.BIN\", 0\t\t; The executable name, only used in argv"
+            "def_content": "_exec_name:\t\tDB\t\"bbcbasic24ez.bin\", 0\t\t; The executable name, only used in argv"
         }
     ],
     "_get_token": [
@@ -7954,7 +7982,7 @@
     "_main": [
         {
             "def_file": "main.asm",
-            "def_line": 211,
+            "def_line": 148,
             "def_content": "_main:\t\t\tLD\tHL, ACCS\t\t; Clear the ACCS"
         }
     ],
@@ -7995,9 +8023,919 @@
     ],
     "argv_ptrs_max": [
         {
-            "def_file": "equs_top.inc",
-            "def_line": 58,
+            "def_file": "init.asm",
+            "def_line": 25,
             "def_content": "argv_ptrs_max:\t\tEQU\t16\t\t\t\t; Maximum number of arguments allowed in argv"
+        }
+    ],
+    "fa_create_always": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 138,
+            "def_content": "fa_create_always:\tEQU\t08h"
+        }
+    ],
+    "fa_create_new": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 137,
+            "def_content": "fa_create_new:\t\tEQU\t04h"
+        }
+    ],
+    "fa_open_always": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 139,
+            "def_content": "fa_open_always:\t\tEQU\t10h"
+        }
+    ],
+    "fa_open_append": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 140,
+            "def_content": "fa_open_append:\t\tEQU\t30h"
+        }
+    ],
+    "fa_open_existing": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 136,
+            "def_content": "fa_open_existing:\tEQU\t00h"
+        }
+    ],
+    "fa_read": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 134,
+            "def_content": "fa_read:\t\tEQU\t01h"
+        }
+    ],
+    "fa_write": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 135,
+            "def_content": "fa_write:\t\tEQU\t02h"
+        }
+    ],
+    "ffs_chdir": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 118,
+            "def_content": "ffs_chdir:\t\tEQU\t9Ch"
+        }
+    ],
+    "ffs_chdrive": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 119,
+            "def_content": "ffs_chdrive:\t\tEQU\t9Dh"
+        }
+    ],
+    "ffs_chmod": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 115,
+            "def_content": "ffs_chmod:\t\tEQU\t99h"
+        }
+    ],
+    "ffs_dclose": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 105,
+            "def_content": "ffs_dclose:\t\tEQU\t92h"
+        }
+    ],
+    "ffs_dfindfirst": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 107,
+            "def_content": "ffs_dfindfirst:\t\tEQU\t94h"
+        }
+    ],
+    "ffs_dfindnext": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 108,
+            "def_content": "ffs_dfindnext:\t\tEQU\t95h"
+        }
+    ],
+    "ffs_dopen": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 104,
+            "def_content": "ffs_dopen:\t\tEQU\t91h"
+        }
+    ],
+    "ffs_dread": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 106,
+            "def_content": "ffs_dread:\t\tEQU\t93h"
+        }
+    ],
+    "ffs_fclose": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 85,
+            "def_content": "ffs_fclose:\t\tEQU\t81h"
+        }
+    ],
+    "ffs_fdisk": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 126,
+            "def_content": "ffs_fdisk:\t\tEQU\tA1h"
+        }
+    ],
+    "ffs_feof": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 98,
+            "def_content": "ffs_feof:\t\tEQU\t8Eh"
+        }
+    ],
+    "ffs_ferror": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 100,
+            "def_content": "ffs_ferror:\t\tEQU\t90h"
+        }
+    ],
+    "ffs_fexpand": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 92,
+            "def_content": "ffs_fexpand:\t\tEQU\t88h"
+        }
+    ],
+    "ffs_fforward": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 91,
+            "def_content": "ffs_fforward:\t\tEQU\t87h"
+        }
+    ],
+    "ffs_fgets": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 93,
+            "def_content": "ffs_fgets:\t\tEQU\t89h"
+        }
+    ],
+    "ffs_flseek": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 88,
+            "def_content": "ffs_flseek:\t\tEQU\t84h"
+        }
+    ],
+    "ffs_fopen": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 84,
+            "def_content": "ffs_fopen:\t\tEQU\t80h"
+        }
+    ],
+    "ffs_fprintf": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 96,
+            "def_content": "ffs_fprintf:\t\tEQU\t8Ch"
+        }
+    ],
+    "ffs_fputc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 94,
+            "def_content": "ffs_fputc:\t\tEQU\t8Ah"
+        }
+    ],
+    "ffs_fputs": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 95,
+            "def_content": "ffs_fputs:\t\tEQU\t8Bh"
+        }
+    ],
+    "ffs_fread": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 86,
+            "def_content": "ffs_fread:\t\tEQU\t82h"
+        }
+    ],
+    "ffs_fsize": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 99,
+            "def_content": "ffs_fsize:\t\tEQU\t8Fh"
+        }
+    ],
+    "ffs_fsync": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 90,
+            "def_content": "ffs_fsync:\t\tEQU\t86h"
+        }
+    ],
+    "ffs_ftell": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 97,
+            "def_content": "ffs_ftell:\t\tEQU\t8Dh"
+        }
+    ],
+    "ffs_ftruncate": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 89,
+            "def_content": "ffs_ftruncate:\t\tEQU\t85h"
+        }
+    ],
+    "ffs_fwrite": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 87,
+            "def_content": "ffs_fwrite:\t\tEQU\t83h"
+        }
+    ],
+    "ffs_getcwd": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 120,
+            "def_content": "ffs_getcwd:\t\tEQU\t9Eh"
+        }
+    ],
+    "ffs_getfree": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 127,
+            "def_content": "ffs_getfree:\t\tEQU\tA2h"
+        }
+    ],
+    "ffs_getlabel": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 128,
+            "def_content": "ffs_getlabel:\t\tEQU\tA3h"
+        }
+    ],
+    "ffs_mkdir": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 117,
+            "def_content": "ffs_mkdir:\t\tEQU\t9Bh"
+        }
+    ],
+    "ffs_mkfs": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 125,
+            "def_content": "ffs_mkfs:\t\tEQU\tA0h"
+        }
+    ],
+    "ffs_mount": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 124,
+            "def_content": "ffs_mount:\t\tEQU\t9Fh"
+        }
+    ],
+    "ffs_rename": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 114,
+            "def_content": "ffs_rename:\t\tEQU\t98h"
+        }
+    ],
+    "ffs_setcp": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 130,
+            "def_content": "ffs_setcp:\t\tEQU\tA5h"
+        }
+    ],
+    "ffs_setlabel": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 129,
+            "def_content": "ffs_setlabel:\t\tEQU\tA4h"
+        }
+    ],
+    "ffs_stat": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 112,
+            "def_content": "ffs_stat:\t\tEQU\t96h"
+        }
+    ],
+    "ffs_unlink": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 113,
+            "def_content": "ffs_unlink:\t\tEQU\t97h"
+        }
+    ],
+    "ffs_utime": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 116,
+            "def_content": "ffs_utime:\t\tEQU\t9Ah"
+        }
+    ],
+    "mos_cd": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 48,
+            "def_content": "mos_cd:\t\t\tEQU\t03h"
+        }
+    ],
+    "mos_copy": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 62,
+            "def_content": "mos_copy:\t\tEQU\t11h"
+        }
+    ],
+    "mos_del": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 50,
+            "def_content": "mos_del:\t\tEQU\t05h"
+        }
+    ],
+    "mos_dir": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 49,
+            "def_content": "mos_dir:\t\tEQU\t04h"
+        }
+    ],
+    "mos_editline": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 54,
+            "def_content": "mos_editline:\t\tEQU\t09h"
+        }
+    ],
+    "mos_fclose": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 56,
+            "def_content": "mos_fclose:\t\tEQU\t0Bh"
+        }
+    ],
+    "mos_feof": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 59,
+            "def_content": "mos_feof:\t\tEQU\t0Eh"
+        }
+    ],
+    "mos_fgetc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 57,
+            "def_content": "mos_fgetc:\t\tEQU\t0Ch"
+        }
+    ],
+    "mos_flseek": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 73,
+            "def_content": "mos_flseek:\t\tEQU\t1Ch"
+        }
+    ],
+    "mos_fopen": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 55,
+            "def_content": "mos_fopen:\t\tEQU\t0Ah"
+        }
+    ],
+    "mos_fputc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 58,
+            "def_content": "mos_fputc:\t\tEQU\t0Dh"
+        }
+    ],
+    "mos_fread": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 71,
+            "def_content": "mos_fread:\t\tEQU\t1Ah"
+        }
+    ],
+    "mos_fwrite": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 72,
+            "def_content": "mos_fwrite:\t\tEQU\t1Bh"
+        }
+    ],
+    "mos_getError": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 60,
+            "def_content": "mos_getError:\t\tEQU\t0Fh"
+        }
+    ],
+    "mos_getfil": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 70,
+            "def_content": "mos_getfil:\t\tEQU\t19h"
+        }
+    ],
+    "mos_getkbmap": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 75,
+            "def_content": "mos_getkbmap:\t\tEQU\t1Eh"
+        }
+    ],
+    "mos_getkey": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 45,
+            "def_content": "mos_getkey:\t\tEQU\t00h"
+        }
+    ],
+    "mos_getrtc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 63,
+            "def_content": "mos_getrtc:\t\tEQU\t12h"
+        }
+    ],
+    "mos_i2c_close": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 77,
+            "def_content": "mos_i2c_close:\t\tEQU\t20h"
+        }
+    ],
+    "mos_i2c_open": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 76,
+            "def_content": "mos_i2c_open:\t\tEQU\t1Fh"
+        }
+    ],
+    "mos_i2c_read": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 79,
+            "def_content": "mos_i2c_read:\t\tEQU\t22h"
+        }
+    ],
+    "mos_i2c_write": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 78,
+            "def_content": "mos_i2c_write:\t\tEQU\t21h"
+        }
+    ],
+    "mos_load": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 46,
+            "def_content": "mos_load:\t\tEQU\t01h"
+        }
+    ],
+    "mos_mkdir": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 52,
+            "def_content": "mos_mkdir:\t\tEQU\t07h"
+        }
+    ],
+    "mos_oscli": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 61,
+            "def_content": "mos_oscli:\t\tEQU\t10h"
+        }
+    ],
+    "mos_ren": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 51,
+            "def_content": "mos_ren:\t\tEQU\t06h"
+        }
+    ],
+    "mos_save": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 47,
+            "def_content": "mos_save:\t\tEQU\t02h"
+        }
+    ],
+    "mos_setintvector": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 65,
+            "def_content": "mos_setintvector:\tEQU\t14h"
+        }
+    ],
+    "mos_setkbvector": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 74,
+            "def_content": "mos_setkbvector:\tEQU\t1Dh"
+        }
+    ],
+    "mos_setrtc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 64,
+            "def_content": "mos_setrtc:\t\tEQU\t13h"
+        }
+    ],
+    "mos_sysvars": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 53,
+            "def_content": "mos_sysvars:\t\tEQU\t08h"
+        }
+    ],
+    "mos_uclose": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 67,
+            "def_content": "mos_uclose:\t\tEQU\t16h"
+        }
+    ],
+    "mos_ugetc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 68,
+            "def_content": "mos_ugetc:\t\tEQU\t17h"
+        }
+    ],
+    "mos_uopen": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 66,
+            "def_content": "mos_uopen:\t\tEQU\t15h"
+        }
+    ],
+    "mos_uputc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 69,
+            "def_content": "mos_uputc:\t\tEQU \t18h"
+        }
+    ],
+    "sysvar_audioChannel": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 153,
+            "def_content": "sysvar_audioChannel:\tEQU\t0Dh\t; 1: Audio channel"
+        }
+    ],
+    "sysvar_audioSuccess": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 154,
+            "def_content": "sysvar_audioSuccess:\tEQU\t0Eh\t; 1: Audio channel note queued (0 = no, 1 = yes)"
+        }
+    ],
+    "sysvar_cursorX": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 149,
+            "def_content": "sysvar_cursorX:\t\tEQU\t07h\t; 1: Cursor X position"
+        }
+    ],
+    "sysvar_cursorY": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 150,
+            "def_content": "sysvar_cursorY:\t\tEQU\t08h\t; 1: Cursor Y position"
+        }
+    ],
+    "sysvar_keyascii": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 147,
+            "def_content": "sysvar_keyascii:\tEQU\t05h\t; 1: ASCII keycode, or 0 if no key is pressed"
+        }
+    ],
+    "sysvar_keydelay": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 166,
+            "def_content": "sysvar_keydelay:\tEQU\t22h\t; 2: Keyboard repeat delay"
+        }
+    ],
+    "sysvar_keyled": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 168,
+            "def_content": "sysvar_keyled:\t\tEQU\t26h\t; 1: Keyboard LED status"
+        }
+    ],
+    "sysvar_keymods": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 148,
+            "def_content": "sysvar_keymods:\t\tEQU\t06h\t; 1: Keycode modifiers"
+        }
+    ],
+    "sysvar_keyrate": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 167,
+            "def_content": "sysvar_keyrate:\t\tEQU\t24h\t; 2: Keyboard repeat reat"
+        }
+    ],
+    "sysvar_mouseButtons": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 173,
+            "def_content": "sysvar_mouseButtons:\tEQU\t2Dh\t; 1: Mouse button state"
+        }
+    ],
+    "sysvar_mouseWheel": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 174,
+            "def_content": "sysvar_mouseWheel:\tEQU\t2Eh\t; 1: Mouse wheel delta"
+        }
+    ],
+    "sysvar_mouseX": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 171,
+            "def_content": "sysvar_mouseX:\t\tEQU\t29h\t; 2: Mouse X position"
+        }
+    ],
+    "sysvar_mouseXDelta": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 175,
+            "def_content": "sysvar_mouseXDelta:\tEQU\t2Fh\t; 2: Mouse X delta"
+        }
+    ],
+    "sysvar_mouseY": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 172,
+            "def_content": "sysvar_mouseY:\t\tEQU\t2Bh\t; 2: Mouse Y position"
+        }
+    ],
+    "sysvar_mouseYDelta": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 176,
+            "def_content": "sysvar_mouseYDelta:\tEQU\t31h\t; 2: Mouse Y delta"
+        }
+    ],
+    "sysvar_rtc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 164,
+            "def_content": "sysvar_rtc:\t\tEQU\t1Ah\t; 6: Real time clock data"
+        }
+    ],
+    "sysvar_rtcEnable": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 170,
+            "def_content": "sysvar_rtcEnable:\tEQU\t28h\t; 1: RTC enable flag (0: disabled, 1: use ESP32 RTC)"
+        }
+    ],
+    "sysvar_scrColours": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 159,
+            "def_content": "sysvar_scrColours:\tEQU\t15h\t; 1: Number of colours displayed"
+        }
+    ],
+    "sysvar_scrCols": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 157,
+            "def_content": "sysvar_scrCols:\t\tEQU\t13h\t; 1: Screen columns in characters"
+        }
+    ],
+    "sysvar_scrHeight": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 156,
+            "def_content": "sysvar_scrHeight:\tEQU\t11h\t; 2: Screen height in pixels"
+        }
+    ],
+    "sysvar_scrMode": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 169,
+            "def_content": "sysvar_scrMode:\t\tEQU\t27h\t; 1: Screen mode"
+        }
+    ],
+    "sysvar_scrRows": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 158,
+            "def_content": "sysvar_scrRows:\t\tEQU\t14h\t; 1: Screen rows in characters"
+        }
+    ],
+    "sysvar_scrWidth": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 155,
+            "def_content": "sysvar_scrWidth:\tEQU\t0Fh\t; 2: Screen width in pixels"
+        }
+    ],
+    "sysvar_scrchar": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 151,
+            "def_content": "sysvar_scrchar:\t\tEQU\t09h\t; 1: Character read from screen"
+        }
+    ],
+    "sysvar_scrpixel": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 152,
+            "def_content": "sysvar_scrpixel:\tEQU\t0Ah\t; 3: Pixel data read from screen (R,B,G)"
+        }
+    ],
+    "sysvar_scrpixelIndex": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 160,
+            "def_content": "sysvar_scrpixelIndex:\tEQU\t16h\t; 1: Index of pixel data read from screen"
+        }
+    ],
+    "sysvar_spare": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 165,
+            "def_content": "sysvar_spare:\t\tEQU\t20h\t; 2: Spare, previously used by rtc"
+        }
+    ],
+    "sysvar_time": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 145,
+            "def_content": "sysvar_time:\t\tEQU\t00h\t; 4: Clock timer in centiseconds (incremented by 2 every VBLANK)"
+        }
+    ],
+    "sysvar_vkeycode": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 161,
+            "def_content": "sysvar_vkeycode:\tEQU\t17h\t; 1: Virtual key code from FabGL"
+        }
+    ],
+    "sysvar_vkeycount": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 163,
+            "def_content": "sysvar_vkeycount:\tEQU\t19h\t; 1: Incremented every time a key packet is received"
+        }
+    ],
+    "sysvar_vkeydown": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 162,
+            "def_content": "sysvar_vkeydown:\tEQU\t18h\t; 1: Virtual key state from FabGL (0=up, 1=down)"
+        }
+    ],
+    "sysvar_vpd_pflags": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 146,
+            "def_content": "sysvar_vpd_pflags:\tEQU\t04h\t; 1: Flags to indicate completion of VDP commands"
+        }
+    ],
+    "vdp_audio": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 36,
+            "def_content": "vdp_audio:\t\tEQU\t85h"
+        }
+    ],
+    "vdp_cursor": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 33,
+            "def_content": "vdp_cursor:\t\tEQU\t82h"
+        }
+    ],
+    "vdp_gp": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 31,
+            "def_content": "vdp_gp:\t\t\tEQU \t80h"
+        }
+    ],
+    "vdp_keycode": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 32,
+            "def_content": "vdp_keycode:\t\tEQU \t81h"
+        }
+    ],
+    "vdp_keystate": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 39,
+            "def_content": "vdp_keystate:\t\tEQU\t88h"
+        }
+    ],
+    "vdp_logicalcoords": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 40,
+            "def_content": "vdp_logicalcoords:\tEQU\tC0h"
+        }
+    ],
+    "vdp_mode": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 37,
+            "def_content": "vdp_mode:\t\tEQU\t86h"
+        }
+    ],
+    "vdp_pflag_audio": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 183,
+            "def_content": "vdp_pflag_audio:\tEQU\t00001000b"
+        }
+    ],
+    "vdp_pflag_cursor": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 180,
+            "def_content": "vdp_pflag_cursor:\tEQU\t00000001b"
+        }
+    ],
+    "vdp_pflag_mode": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 184,
+            "def_content": "vdp_pflag_mode:\t\tEQU\t00010000b"
+        }
+    ],
+    "vdp_pflag_mouse": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 186,
+            "def_content": "vdp_pflag_mouse:\tEQU\t01000000b"
+        }
+    ],
+    "vdp_pflag_point": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 182,
+            "def_content": "vdp_pflag_point:\tEQU\t00000100b"
+        }
+    ],
+    "vdp_pflag_rtc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 185,
+            "def_content": "vdp_pflag_rtc:\t\tEQU\t00100000b"
+        }
+    ],
+    "vdp_pflag_scrchar": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 181,
+            "def_content": "vdp_pflag_scrchar:\tEQU\t00000010b"
+        }
+    ],
+    "vdp_rtc": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 38,
+            "def_content": "vdp_rtc:\t\tEQU\t87h"
+        }
+    ],
+    "vdp_scrchar": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 34,
+            "def_content": "vdp_scrchar:\t\tEQU\t83h"
+        }
+    ],
+    "vdp_scrpixel": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 35,
+            "def_content": "vdp_scrpixel:\t\tEQU\t84h"
+        }
+    ],
+    "vdp_terminalmode": [
+        {
+            "def_file": "mos_api.inc",
+            "def_line": 41,
+            "def_content": "vdp_terminalmode:\tEQU\tFFh"
         }
     ]
 }
