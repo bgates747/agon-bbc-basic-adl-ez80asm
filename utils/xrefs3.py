@@ -1,7 +1,8 @@
+
 import os
 import json
 import subprocess
-import tempfile  # Import tempfile module
+import tempfile
 
 # Load JSON data from a file
 def load_json(path):
@@ -25,50 +26,26 @@ def write_combined_file(filename, symbols, api_includes, output_dir):
         for api_include in api_includes:
             f.write(f'    include "../src/{api_include}"\n')
         f.write("\n")
-        
-        # Split symbols into regular symbols and those defined in user.asm
-        regular_symbols = [s for s in symbols if s["def_file"] != "user.asm"]
-        user_symbols = [s for s in symbols if s["def_file"] == "user.asm"]
-        
-        # Write each non-user.asm symbol definition with a source file comment
-        for symbol in regular_symbols:
+
+        # Write symbols as specified (use placeholders for non-EQU symbols)
+        for symbol in symbols:
+            # Write the comment indicating the source file of the definition
             f.write(f"; Defined in {symbol['def_file']}\n")
-            f.write(f"{symbol['def_content']}\n")
+            if "EQU" in symbol["def_content"]:
+                f.write(f"{symbol['def_content']}\n")
+            else:
+                # Use placeholder for non-EQU symbols
+                symbol_name = symbol['def_content'].split(':')[0]
+                f.write(f"{symbol_name}: DL 0x040000\n")
         f.write("\n")
         
         # Footer with BEGIN_HEREISH and the include directive for the source file
         include_line = f'BEGIN_HEREISH:\n    include "../src/{filename}"\n'
         f.write(include_line)
-        
-        # Write user.asm symbols after the main include line
-        if user_symbols:
-            f.write("\n")
-            for symbol in user_symbols:
-                f.write(f"; Defined in {symbol['def_file']}\n")
-                f.write(f"{symbol['def_content']}\n")
-                
+
     print(f"Written combined file to {output_path}")
 
-# Recursive function to collect all required symbols
-def collect_recursive_symbols(symbol_name, label_defs, collected_symbols, visited_symbols, api_files):
-    """Recursively collect all symbols needed for a given symbol, excluding API symbols."""
-    if symbol_name in visited_symbols:
-        return  # Prevent cyclic dependencies
-    visited_symbols.add(symbol_name)
-
-    # Add symbol definitions if it exists in label_defs and hasn't been added already
-    if symbol_name in label_defs:
-        for definition in label_defs[symbol_name]:
-            # Skip symbols defined in API files
-            if definition["def_file"] in api_files:
-                continue
-            if definition not in collected_symbols:
-                collected_symbols.append(definition)
-                # For each reference in the content, check if it needs further resolution
-                for ref_symbol in label_defs:
-                    if ref_symbol in definition["def_content"]:
-                        collect_recursive_symbols(ref_symbol, label_defs, collected_symbols, visited_symbols, api_files)
-
+# Process files to collect and write symbols
 def process_files(source_files, label_defs, label_refs, api_includes, output_dir):
     api_files = set(os.path.basename(path) for path in api_includes)  # Base names of API include files
 
@@ -77,45 +54,65 @@ def process_files(source_files, label_defs, label_refs, api_includes, output_dir
 
         # Collect needed symbol definitions for this file, excluding self-defined and API-defined symbols
         symbols_to_include = []
+        included_symbol_names = set()  # To avoid duplicate symbol definitions
+
+        # Iterate over all symbols referenced in the file
         for symbol_name, references in label_refs.items():
-            # Check if this file references the symbol and if it's not self-defined or defined in an API include
+            # Check if this file references the symbol
             if any(ref["ref_file"] == base_name for ref in references):
                 if symbol_name in label_defs:
-                    # Only include symbols defined in other files, excluding those from API includes
+                    # Find definitions of the symbol
                     for definition in label_defs[symbol_name]:
-                        if definition["def_file"] != base_name and definition["def_file"] not in api_files:
-                            visited_symbols = set()  # Track visited symbols for each symbol
-                            collect_recursive_symbols(symbol_name, label_defs, symbols_to_include, visited_symbols, api_files)
+                        def_file = definition["def_file"]
+                        if def_file != base_name and def_file not in api_files:
+                            # Exclude symbols already included
+                            if symbol_name not in included_symbol_names:
+                                symbols_to_include.append(definition)
+                                included_symbol_names.add(symbol_name)
 
         # Write the combined file with API includes, external symbol definitions, and the original source include
         write_combined_file(base_name, symbols_to_include, api_includes, output_dir)
 
-def adjust_addresses(input_path, output_path, start_addr):
-    """Adjust address comments in the disassembly output and add padding for alignment."""
+def adjust_addresses(input_path, output_path, offset):
+    """Adjust address comments in the disassembly output by adding an offset."""
     with open(input_path, 'r') as infile, open(output_path, 'w') as outfile:
-        current_addr = start_addr
         for line in infile:
-            # Remove existing address comment
-            code_part = line.split(';')[0].rstrip()
-            comment_part = f"; {current_addr:06X}"  # New address comment in hex
-
+            # Remove newline characters
+            line = line.rstrip('\n')
+            # Split the line into code and comment
+            parts = line.split(';', 1)
+            code_part = parts[0].rstrip()
+            if len(parts) > 1:
+                # Extract the existing address from the comment
+                comment_part = parts[1].strip()
+                # Try to parse the address in the comment
+                try:
+                    # Assume the address is in hexadecimal
+                    address = int(comment_part, 16)
+                    # Add the offset to the address
+                    adjusted_address = address + offset
+                    # Format the new address comment
+                    new_comment_part = f"; {adjusted_address:06X}"
+                except ValueError:
+                    # If parsing fails, keep the original comment
+                    new_comment_part = f"; {comment_part}"
+            else:
+                # No comment present
+                new_comment_part = ''
             # Calculate padding to align the address comments at a specific column (e.g., 32)
             padding = max(1, 32 - len(code_part))
-            padded_line = f"{code_part}{' ' * padding}{comment_part}\n"
-
+            # Combine code and new comment
+            padded_line = f"{code_part}{' ' * padding}{new_comment_part}\n"
+            # Write the adjusted line to the output file
             outfile.write(padded_line)
-            current_addr += 1  # Increment address (adjust increment based on actual instruction size if known)
-
 
 if __name__ == "__main__":
     # List of files to scan for symbol definitions and references
     source_files = [
-        "utils/src/agon_graphics.asm",
-        # "utils/src/agon_sound.asm",
-        # "utils/src/basic.asm",
-        # "utils/src/equs.inc",
-        # "utils/src/eval.asm",
-        # "utils/src/exec.asm",
+        # "utils/src/agon_graphics.asm", # done
+        # "utils/src/agon_sound.asm", # Macro [VDU] in "../src/macros.inc" line 36 - Unknown label, invalid number 'OSWRCH' CALL    OSWRCH Invoked from "../src/agon_sound.asm" line 85 as VDU     23                      ; Send the sound command
+        # "utils/src/eval.asm", # done
+        "utils/src/exec.asm",
         # "utils/src/fpp.asm",
         # "utils/src/gpio.asm",
         # "utils/src/init.asm",
@@ -124,10 +121,12 @@ if __name__ == "__main__":
         # "utils/src/main.asm",
         # "utils/src/misc.asm",
         # "utils/src/mos_api.inc",
-        # "utils/src/patch.asm",
+        # "utils/src/patch.asm", # done
         # "utils/src/ram.asm",
         # "utils/src/sorry.asm",
         # "utils/src/user.asm",
+
+        # "utils/src/bbcbasic24.asm",
     ]
 
     # Paths for the saved dictionaries
@@ -139,78 +138,51 @@ if __name__ == "__main__":
     api_includes = [
         "mos_api.inc",
         "macros.inc",
-        # "init.asm",
         "ram.asm",
         "equs.inc",
     ]
 
-    # Load label definitions and references
-    label_defs = load_json(LABEL_DEFS_PATH)
-    label_refs = load_json(LABEL_REFS_PATH)
+    if False:
+        # Load label definitions and references
+        label_defs = load_json(LABEL_DEFS_PATH)
+        label_refs = load_json(LABEL_REFS_PATH)
 
-    # Ensure output directory exists
-    create_output_dir(OUTPUT_DIR)
+        # Ensure output directory exists
+        create_output_dir(OUTPUT_DIR)
 
-    # Process each file to generate combined files
-    process_files(source_files, label_defs, label_refs, api_includes, OUTPUT_DIR)
+        # Process each file to generate combined files
+        process_files(source_files, label_defs, label_refs, api_includes, OUTPUT_DIR)
 
-    print("All combined files generated.")
+        print("All combined files generated.")
 
-# Call to assemble the output file
-for file_name in source_files:
-    base_name = os.path.basename(file_name)
-    asm_path = os.path.join(OUTPUT_DIR, base_name)
-    bin_path = os.path.join("..", "bin", os.path.splitext(base_name)[0] + ".bin")
+    if True:
+        # Call to assemble the output file
+        for file_name in source_files:
+            base_name = os.path.basename(file_name)
+            asm_path = os.path.join(OUTPUT_DIR, base_name)
+            bin_path = os.path.join("..", "bin", os.path.splitext(base_name)[0] + ".bin")
 
-    # Run the assembler command in the utils/mod directory
-    subprocess.run(f"(cd {OUTPUT_DIR} && ez80asm -l {base_name} {bin_path})", shell=True, check=True)
+            # Run the assembler command in the utils/mod directory
+            subprocess.run(f"(cd {OUTPUT_DIR} && ez80asm -l {base_name} {bin_path})", shell=True, check=True)
 
-# Call to disassemble the output binary file and adjust addresses
-for file_name in source_files:
-    base_name = os.path.basename(file_name)
-    bin_path = os.path.join("utils", "bin", os.path.splitext(base_name)[0] + ".bin")
-    adjusted_disasm_path = os.path.join(OUTPUT_DIR, os.path.splitext(base_name)[0] + ".dis.asm")
+    # Call to disassemble the output binary file and adjust addresses
+    for file_name in source_files:
+        base_name = os.path.basename(file_name)
+        bin_path = os.path.join("utils", "bin", os.path.splitext(base_name)[0] + ".bin")
+        adjusted_disasm_path = os.path.join(OUTPUT_DIR, os.path.splitext(base_name)[0] + ".dis.asm")
 
-    # Create a temporary file for the unadjusted disassembly output
-    with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_disasm_file:
-        temp_disasm_path = temp_disasm_file.name
+        # Create a temporary file for the unadjusted disassembly output
+        with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_disasm_file:
+            temp_disasm_path = temp_disasm_file.name
 
-    try:
-        # Run the disassembler command and write output to the temporary file
-        subprocess.run(f"zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {bin_path} > {temp_disasm_path}", shell=True, check=True)
-        
-        # Call adjust_addresses to add padding and correct addresses in the disassembly output
-        adjust_addresses(temp_disasm_path, adjusted_disasm_path, 0x040000)
-        
-        print(f"Disassembly with adjusted addresses written to {adjusted_disasm_path}")
-    finally:
-        # Remove the temporary file
-        os.remove(temp_disasm_path)
-
-# if __name__ == "__main__":
-
-# # Path to the binary file
-#     bin_path = os.path.join("bin", "bbcbasic24.bin")
-#     output_dir = "utils/mod"
-#     os.makedirs(output_dir, exist_ok=True)
-#     adjusted_disasm_path = os.path.join(output_dir, "bbcbasic24.dis.asm")
-
-#     # Create a temporary file for the unadjusted disassembly output
-#     with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_disasm_file:
-#         temp_disasm_path = temp_disasm_file.name
-
-#     try:
-#         # Run the disassembler command and write output to the temporary file
-#         subprocess.run(
-#             f"zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {bin_path} > {temp_disasm_path}",
-#             shell=True,
-#             check=True
-#         )
-
-#         # Call adjust_addresses to add padding and correct addresses in the disassembly output
-#         adjust_addresses(temp_disasm_path, adjusted_disasm_path, 0x040000)
-
-#         print(f"Disassembly with adjusted addresses written to {adjusted_disasm_path}")
-#     finally:
-#         # Remove the temporary file
-#         os.remove(temp_disasm_path)
+        try:
+            # Run the disassembler command and write output to the temporary file
+            subprocess.run(f"zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {bin_path} > {temp_disasm_path}", shell=True, check=True)
+            
+            # Call adjust_addresses to add padding and correct addresses in the disassembly output
+            adjust_addresses(temp_disasm_path, adjusted_disasm_path, 0x040000)
+            
+            print(f"Disassembly with adjusted addresses written to {adjusted_disasm_path}")
+        finally:
+            # Remove the temporary file
+            os.remove(temp_disasm_path)

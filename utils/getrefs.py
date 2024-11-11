@@ -41,7 +41,7 @@ if __name__ == "__main__":
     label_refs = load_json(LABEL_REFS_PATH)
 
     # Get the source file name to query from user input
-    file_name = "agon_graphics.asm"
+    file_name = "patch.inc"
 
     # Query all labels referenced in the given source file
     referenced_labels = query_label_refs(file_name, label_refs)

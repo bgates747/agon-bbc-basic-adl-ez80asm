@@ -1,7 +1,4 @@
-	jp	$00049b                     ; 040000
-	rst	$38                        ; 040001
-	rst	$38                        ; 040002
-	rst	$38                        ; 040003
+	jp	$0004a1                     ; 040000
 	rst	$38                        ; 040004
 	rst	$38                        ; 040005
 	rst	$38                        ; 040006
@@ -1099,230 +1096,764 @@
 	rst	$38                        ; 04044A
 	rst	$38                        ; 04044B
 	rst	$38                        ; 04044C
-	call	$040454                   ; 04044D
-	ld	a,(iy)                      ; 04044E
-	call	$040454                   ; 04044F
-	ld	h,$00                       ; 040450
-	call	$040463                   ; 040451
-	ld	a,$16                       ; 040452
-	call	$040467                   ; 040453
-	call	$04046b                   ; 040454
-	call	$04046f                   ; 040455
-	call	$040473                   ; 040456
-	call	$040477                   ; 040457
-	call	$04047b                   ; 040458
-	call	$04047f                   ; 040459
-	push	hl                        ; 04045A
-	call	$04045d                   ; 04045B
-	ld	de,$040100                  ; 04045C
-	call	$04048c                   ; 04045D
-	call	$04047b                   ; 04045E
-	push	hl                        ; 04045F
-	ld	ix,$040200                  ; 040460
-	ld	($040435),iy                ; 040461
-	ld	a,$10                       ; 040462
-	call	$040490                   ; 040463
-	jp	$040496                     ; 040464
-	ld	a,$0c                       ; 040465
-	jp	$040490                     ; 040466
-	push	ix                        ; 040467
-	ld	a,$08                       ; 040468
-	rst.lis	$08                    ; 040469
-	res	4,(ix+$04)                 ; 04046A
-	call	$04045d                   ; 04046B
-	exx                            ; 04046C
-	ld	a,$16                       ; 04046D
-	call	$040490                   ; 04046E
-	ld	a,l                         ; 04046F
-	call	$040490                   ; 040470
-	ld	a,$08                       ; 040471
-	rst.lis	$08                    ; 040472
-	bit	4,(ix+$04)                 ; 040473
-	jr	z,$-$04                     ; 040474
-	pop	ix                         ; 040475
-	jp	$040496                     ; 040476
-	inc	iy                         ; 040477
-	call	$04045d                   ; 040478
-	exx                            ; 040479
-	ld	($040100),hl                ; 04047A
-	call	$040457                   ; 04047B
-	call	$04045d                   ; 04047C
-	exx                            ; 04047D
-	ld	($040102),hl                ; 04047E
-	call	$040450                   ; 04047F
-	push	ix                        ; 040480
-	ld	a,$08                       ; 040481
-	rst.lis	$08                    ; 040482
-	res	1,(ix+$04)                 ; 040483
-	ld	a,$17                       ; 040484
-	call	$040490                   ; 040485
-	ld	a,$00                       ; 040486
-	call	$040490                   ; 040487
-	ld	a,$83                       ; 040488
-	call	$040490                   ; 040489
-	ld	a,($040100)                 ; 04048A
-	call	$040490                   ; 04048B
-	ld	a,($040101)                 ; 04048C
-	call	$040490                   ; 04048D
-	ld	a,($040102)                 ; 04048E
-	call	$040490                   ; 04048F
-	ld	a,($040103)                 ; 040490
-	call	$040490                   ; 040491
-	bit	1,(ix+$04)                 ; 040492
-	jr	z,$-$04                     ; 040493
-	ld	a,(ix+$09)                  ; 040494
-	or	a                           ; 040495
-	scf                            ; 040496
-	jr	nz,$+$04                    ; 040497
-	xor	a                          ; 040498
-	dec	a                          ; 040499
-	pop	ix                         ; 04049A
-	jp	$040484                     ; 04049B
-	call	$04045d                   ; 04049C
-	exx                            ; 04049D
-	ld	($040100),hl                ; 04049E
-	call	$040457                   ; 04049F
-	call	$04045d                   ; 0404A0
-	exx                            ; 0404A1
-	ld	($040102),hl                ; 0404A2
-	call	$040450                   ; 0404A3
-	push	ix                        ; 0404A4
-	ld	a,$08                       ; 0404A5
-	rst.lis	$08                    ; 0404A6
-	res	2,(ix+$04)                 ; 0404A7
-	ld	a,$17                       ; 0404A8
-	call	$040490                   ; 0404A9
-	ld	a,$00                       ; 0404AA
-	call	$040490                   ; 0404AB
-	ld	a,$84                       ; 0404AC
-	call	$040490                   ; 0404AD
-	ld	a,($040100)                 ; 0404AE
-	call	$040490                   ; 0404AF
-	ld	a,($040101)                 ; 0404B0
-	call	$040490                   ; 0404B1
-	ld	a,($040102)                 ; 0404B2
-	call	$040490                   ; 0404B3
-	ld	a,($040103)                 ; 0404B4
-	call	$040490                   ; 0404B5
-	bit	2,(ix+$04)                 ; 0404B6
-	jr	z,$-$04                     ; 0404B7
-	ld	l,(ix+$16)                  ; 0404B8
-	pop	ix                         ; 0404B9
-	jp	$04045b                     ; 0404BA
-	call	$04045d                   ; 0404BB
-	exx                            ; 0404BC
-	ld	a,l                         ; 0404BD
-	ld	($040100),a                 ; 0404BE
-	call	$040454                   ; 0404BF
-	cp	$2c                         ; 0404C0
-	jr	z,$+$14                     ; 0404C1
-	ld	a,$11                       ; 0404C2
-	call	$040490                   ; 0404C3
-	ld	a,($040100)                 ; 0404C4
-	call	$040490                   ; 0404C5
-	jp	$040496                     ; 0404C6
-	call	$040457                   ; 0404C7
-	call	$04045d                   ; 0404C8
-	exx                            ; 0404C9
-	ld	a,l                         ; 0404CA
-	ld	($040101),a                 ; 0404CB
-	call	$040454                   ; 0404CC
-	cp	$2c                         ; 0404CD
-	jr	z,$+$2e                     ; 0404CE
-	ld	a,$13                       ; 0404CF
-	call	$040490                   ; 0404D0
-	ld	a,($040100)                 ; 0404D1
-	call	$040490                   ; 0404D2
-	ld	a,($040101)                 ; 0404D3
-	call	$040490                   ; 0404D4
-	ld	a,$00                       ; 0404D5
-	call	$040490                   ; 0404D6
-	ld	a,$00                       ; 0404D7
-	call	$040490                   ; 0404D8
-	ld	a,$00                       ; 0404D9
-	call	$040490                   ; 0404DA
-	jp	$040496                     ; 0404DB
-	call	$040457                   ; 0404DC
-	call	$04045d                   ; 0404DD
-	exx                            ; 0404DE
-	ld	a,l                         ; 0404DF
-	ld	($040102),a                 ; 0404E0
-	call	$040457                   ; 0404E1
-	call	$04045d                   ; 0404E2
-	exx                            ; 0404E3
-	ld	a,l                         ; 0404E4
-	ld	($040103),a                 ; 0404E5
-	ld	a,$13                       ; 0404E6
-	call	$040490                   ; 0404E7
-	ld	a,($040100)                 ; 0404E8
-	call	$040490                   ; 0404E9
-	ld	a,$ff                       ; 0404EA
-	call	$040490                   ; 0404EB
-	ld	a,($040101)                 ; 0404EC
-	call	$040490                   ; 0404ED
-	ld	a,($040102)                 ; 0404EE
-	call	$040490                   ; 0404EF
-	ld	a,($040103)                 ; 0404F0
-	call	$040490                   ; 0404F1
-	jp	$040496                     ; 0404F2
-	call	$04045d                   ; 0404F3
-	exx                            ; 0404F4
-	ld	a,l                         ; 0404F5
-	ld	($040100),a                 ; 0404F6
-	call	$040457                   ; 0404F7
-	call	$04045d                   ; 0404F8
-	exx                            ; 0404F9
-	ld	a,l                         ; 0404FA
-	ld	($040101),a                 ; 0404FB
-	ld	a,$12                       ; 0404FC
-	call	$040490                   ; 0404FD
-	ld	a,($040100)                 ; 0404FE
-	call	$040490                   ; 0404FF
-	ld	a,($040101)                 ; 040500
-	call	$040490                   ; 040501
-	jp	$040496                     ; 040502
-	call	$04045d                   ; 040503
-	exx                            ; 040504
-	push	hl                        ; 040505
-	call	$040457                   ; 040506
-	call	$040480                   ; 040507
-	pop	bc                         ; 040508
-	ld	a,$19                       ; 040509
-	call	$040490                   ; 04050A
-	ld	a,c                         ; 04050B
-	call	$040490                   ; 04050C
-	ld	a,e                         ; 04050D
-	call	$040490                   ; 04050E
-	ld	a,d                         ; 04050F
-	call	$040490                   ; 040510
-	ld	a,l                         ; 040511
-	call	$040490                   ; 040512
-	ld	a,h                         ; 040513
-	call	$040490                   ; 040514
-	jp	$040496                     ; 040515
-	call	$040480                   ; 040516
-	ld	c,$04                       ; 040517
-	jr	$-$29                       ; 040518
-	call	$040480                   ; 040519
-	call	$040454                   ; 04051A
-	cp	$2c                         ; 04051B
-	ld	c,$05                       ; 04051C
-	jr	nz,$-$37                    ; 04051D
-	ld	a,$19                       ; 04051E
-	call	$040490                   ; 04051F
-	ld	a,$04                       ; 040520
-	call	$040490                   ; 040521
-	ld	a,e                         ; 040522
-	call	$040490                   ; 040523
-	ld	a,d                         ; 040524
-	call	$040490                   ; 040525
-	ld	a,l                         ; 040526
-	call	$040490                   ; 040527
-	ld	a,h                         ; 040528
-	call	$040490                   ; 040529
-	call	$040457                   ; 04052A
-	push	bc                        ; 04052B
-	call	$040480                   ; 04052C
-	pop	bc                         ; 04052D
-	jr	$-$63                       ; 04052E
-                                ; 04052F
+	rst	$38                        ; 04044D
+	rst	$38                        ; 04044E
+	rst	$38                        ; 04044F
+	nop                            ; 040450
+	nop                            ; 040451
+	inc	b                          ; 040452
+	nop                            ; 040453
+	nop                            ; 040454
+	inc	b                          ; 040455
+	nop                            ; 040456
+	nop                            ; 040457
+	inc	b                          ; 040458
+	nop                            ; 040459
+	nop                            ; 04045A
+	inc	b                          ; 04045B
+	nop                            ; 04045C
+	nop                            ; 04045D
+	inc	b                          ; 04045E
+	nop                            ; 04045F
+	nop                            ; 040460
+	inc	b                          ; 040461
+	nop                            ; 040462
+	nop                            ; 040463
+	inc	b                          ; 040464
+	nop                            ; 040465
+	nop                            ; 040466
+	inc	b                          ; 040467
+	nop                            ; 040468
+	nop                            ; 040469
+	inc	b                          ; 04046A
+	nop                            ; 04046B
+	nop                            ; 04046C
+	inc	b                          ; 04046D
+	nop                            ; 04046E
+	nop                            ; 04046F
+	inc	b                          ; 040470
+	nop                            ; 040471
+	nop                            ; 040472
+	inc	b                          ; 040473
+	nop                            ; 040474
+	nop                            ; 040475
+	inc	b                          ; 040476
+	nop                            ; 040477
+	nop                            ; 040478
+	inc	b                          ; 040479
+	nop                            ; 04047A
+	nop                            ; 04047B
+	inc	b                          ; 04047C
+	nop                            ; 04047D
+	nop                            ; 04047E
+	inc	b                          ; 04047F
+	nop                            ; 040480
+	nop                            ; 040481
+	inc	b                          ; 040482
+	nop                            ; 040483
+	nop                            ; 040484
+	inc	b                          ; 040485
+	nop                            ; 040486
+	nop                            ; 040487
+	inc	b                          ; 040488
+	nop                            ; 040489
+	nop                            ; 04048A
+	inc	b                          ; 04048B
+	nop                            ; 04048C
+	nop                            ; 04048D
+	inc	b                          ; 04048E
+	nop                            ; 04048F
+	nop                            ; 040490
+	inc	b                          ; 040491
+	nop                            ; 040492
+	nop                            ; 040493
+	inc	b                          ; 040494
+	nop                            ; 040495
+	nop                            ; 040496
+	inc	b                          ; 040497
+	nop                            ; 040498
+	nop                            ; 040499
+	inc	b                          ; 04049A
+	nop                            ; 04049B
+	nop                            ; 04049C
+	inc	b                          ; 04049D
+	nop                            ; 04049E
+	nop                            ; 04049F
+	inc	b                          ; 0404A0
+	ld	e,$01                       ; 0404A1
+	push	iy                        ; 0404A3
+	push	hl                        ; 0404A5
+	ld	bc,$000100                  ; 0404A6
+	ld	a,$09                       ; 0404AA
+	rst.lis	$08                    ; 0404AC
+	pop	hl                         ; 0404AE
+	pop	iy                         ; 0404AF
+	push	af                        ; 0404B1
+	call	$040489                   ; 0404B2
+	call	$040462                   ; 0404B6
+	pop	af                         ; 0404BA
+	cp	$1b                         ; 0404BB
+	jp	z,$0405b9                   ; 0404BD
+	ld	a,($040442)                 ; 0404C1
+	res	7,a                        ; 0404C5
+	ld	($040442),a                 ; 0404C7
+	call	$040790                   ; 0404CB
+	xor	a                          ; 0404CF
+	ld	($040447),a                 ; 0404D0
+	ld	($040448),a                 ; 0404D4
+	ret                            ; 0404D8
+	push	ix                        ; 0404D9
+	ld	a,$08                       ; 0404DB
+	rst.lis	$08                    ; 0404DD
+	ld	(ix),l                      ; 0404DF
+	ld	(ix+$01),h                  ; 0404E2
+	ld	(ix+$02),e                  ; 0404E5
+	ld	(ix+$03),d                  ; 0404E8
+	pop	ix                         ; 0404EB
+	ret                            ; 0404ED
+	push	ix                        ; 0404EE
+	ld	a,$08                       ; 0404F0
+	rst.lis	$08                    ; 0404F2
+	ld	l,(ix)                      ; 0404F4
+	ld	h,(ix+$01)                  ; 0404F7
+	ld	e,(ix+$02)                  ; 0404FA
+	ld	d,(ix+$03)                  ; 0404FD
+	pop	ix                         ; 040500
+	ret                            ; 040502
+	ld	a,$1f                       ; 040503
+	rst.lil	$10                    ; 040505
+	ld	a,e                         ; 040507
+	rst.lil	$10                    ; 040508
+	ld	a,l                         ; 04050A
+	rst.lil	$10                    ; 04050B
+	ret                            ; 04050D
+	push	ix                        ; 04050E
+	ld	a,$08                       ; 040510
+	rst.lis	$08                    ; 040512
+	res	0,(ix+$04)                 ; 040514
+	ld	a,$17                       ; 040518
+	call	$040542                   ; 04051A
+	ld	a,$00                       ; 04051E
+	call	$040542                   ; 040520
+	ld	a,$82                       ; 040524
+	call	$040542                   ; 040526
+	bit	0,(ix+$04)                 ; 04052A
+	jr	z,$-$04                     ; 04052E
+	ld	d,$00                       ; 040530
+	ld	h,d                         ; 040532
+	ld	e,(ix+$07)                  ; 040533
+	ld	l,(ix+$08)                  ; 040536
+	pop	ix                         ; 040539
+	ret                            ; 04053B
+	ld	a,$3e                       ; 04053C
+	jp	$040542                     ; 04053E
+	push	hl                        ; 040542
+	ld	hl,$040440                  ; 040543
+	bit	3,(hl)                     ; 040547
+	jr	nz,$+$0d                    ; 040549
+	ld	hl,($040445)                ; 04054B
+	dec	l                          ; 04054F
+	jr	z,$+$12                     ; 040550
+	pop	hl                         ; 040552
+	rst.lil	$10                    ; 040553
+	ret                            ; 040555
+	ld	hl,($040443)                ; 040556
+	ld	(hl),a                      ; 04055A
+	inc	hl                         ; 04055B
+	ld	($040443),hl                ; 04055C
+	pop	hl                         ; 040560
+	ret                            ; 040561
+	push	de                        ; 040562
+	ld	e,h                         ; 040563
+	call	$04098e                   ; 040564
+	pop	de                         ; 040568
+	pop	hl                         ; 040569
+	ret                            ; 04056A
+	ld	a,$00                       ; 04056B
+	rst.lis	$08                    ; 04056D
+	cp	$1b                         ; 04056F
+	jr	z,$+$48                     ; 040571
+	ret                            ; 040573
+	call	$0405a5                   ; 040574
+	jr	z,$+$0c                     ; 040578
+	ld	a,h                         ; 04057A
+	or	l                           ; 04057B
+	ret	z                          ; 04057C
+	call	$040790                   ; 04057D
+	dec	hl                         ; 040581
+	jr	$-$0e                       ; 040582
+	ld	hl,$040447                  ; 040584
+	ld	(hl),$00                    ; 040588
+	cp	$1b                         ; 04058A
+	scf                            ; 04058C
+	ret	nz                         ; 04058D
+	push	hl                        ; 04058E
+	ld	hl,$040442                  ; 04058F
+	bit	6,(hl)                     ; 040593
+	jr	nz,$+$04                    ; 040595
+	set	7,(hl)                     ; 040597
+	pop	hl                         ; 040599
+	ret                            ; 04059A
+	call	$0405a5                   ; 04059B
+	ret	nz                         ; 04059F
+	cp	$1b                         ; 0405A0
+	jr	z,$-$14                     ; 0405A2
+	ret                            ; 0405A4
+	ld	a,($040447)                 ; 0405A5
+	dec	a                          ; 0405A9
+	ld	a,($040448)                 ; 0405AA
+	ret                            ; 0405AE
+	call	$04059b                   ; 0405AF
+	ld	a,($040442)                 ; 0405B3
+	or	a                           ; 0405B7
+	ret	p                          ; 0405B8
+	ld	hl,$040442                  ; 0405B9
+	res	7,(hl)                     ; 0405BD
+	jp	$040477                     ; 0405BF
+	call	$040498                   ; 0405C3
+	xor	a                          ; 0405C7
+	ld	hl,$040495                  ; 0405C8
+	ld	de,$0b0000                  ; 0405CC
+	ld	e,a                         ; 0405D0
+	ret                            ; 0405D1
+	call	$040646                   ; 0405D2
+	cp	$0d                         ; 0405D6
+	ret	z                          ; 0405D8
+	cp	$7c                         ; 0405D9
+	ret	z                          ; 0405DB
+	ex	de,hl                       ; 0405DC
+	ld	hl,$040655                  ; 0405DD
+	ld	a,(de)                      ; 0405E1
+	call	$04064d                   ; 0405E2
+	cp	(hl)                        ; 0405E6
+	jr	z,$+$0d                     ; 0405E7
+	jr	c,$+$32                     ; 0405E9
+	bit	7,(hl)                     ; 0405EB
+	inc	hl                         ; 0405ED
+	jr	z,$-$03                     ; 0405EE
+	inc	hl                         ; 0405F0
+	inc	hl                         ; 0405F1
+	jr	$-$11                       ; 0405F2
+	push	de                        ; 0405F4
+	inc	de                         ; 0405F5
+	inc	hl                         ; 0405F6
+	ld	a,(de)                      ; 0405F7
+	call	$04064d                   ; 0405F8
+	cp	$2e                         ; 0405FC
+	jr	z,$+$0c                     ; 0405FE
+	xor	(hl)                       ; 040600
+	jr	z,$-$0c                     ; 040601
+	cp	$80                         ; 040603
+	jr	z,$+$05                     ; 040605
+	pop	de                         ; 040607
+	jr	$-$1d                       ; 040608
+	pop	af                         ; 04060A
+	inc	de                         ; 04060B
+	bit	7,(hl)                     ; 04060C
+	inc	hl                         ; 04060E
+	jr	z,$-$03                     ; 04060F
+	ld	a,(hl)                      ; 040611
+	inc	hl                         ; 040612
+	ld	h,(hl)                      ; 040613
+	ld	l,a                         ; 040614
+	push	hl                        ; 040615
+	ex	de,hl                       ; 040616
+	jp	$040646                     ; 040617
+	ex	de,hl                       ; 04061B
+	ld	de,$040100                  ; 04061C
+	push	de                        ; 040620
+	call	$040471                   ; 040621
+	pop	hl                         ; 040625
+	push	iy                        ; 040626
+	ld	a,$10                       ; 040628
+	rst.lis	$08                    ; 04062A
+	pop	iy                         ; 04062C
+	or	a                           ; 04062E
+	ret	z                          ; 04062F
+	jp	$04086a                     ; 040630
+	ld	a,$fe                       ; 040634
+	call	$04047d                   ; 040636
+	ld	b,d                         ; 04063A
+	ld	h,c                         ; 04063B
+	ld	h,h                         ; 04063C
+	jr	nz,$+$65                    ; 04063D
+	ld	l,a                         ; 04063F
+	ld	l,l                         ; 040640
+	ld	l,l                         ; 040641
+	ld	h,c                         ; 040642
+	ld	l,(hl)                      ; 040643
+	ld	h,h                         ; 040644
+	nop                            ; 040645
+	ld	a,(hl)                      ; 040646
+	cp	$20                         ; 040647
+	ret	nz                         ; 040649
+	inc	hl                         ; 04064A
+	jr	$-$05                       ; 04064B
+	and	$7f                        ; 04064D
+	cp	$60                         ; 04064F
+	ret	c                          ; 040651
+	and	$5f                        ; 040652
+	ret                            ; 040654
+	ld	b,c                         ; 040655
+	ld	d,e                         ; 040656
+	ld	c,l                         ; 040657
+	ld	(hl),e                      ; 040658
+	ld	b,$42                       ; 040659
+	ld	e,c                         ; 04065B
+	ld	b,l                         ; 04065C
+	ld	a,a                         ; 04065D
+	ld	b,$45                       ; 04065E
+	ld	b,h                         ; 040660
+	ld.lis	d,h                     ; 040661
+	or	h                           ; 040663
+	ld	b,$46                       ; 040664
+	ld	e,b                         ; 040666
+	call	p,$455606                 ; 040667
+	ld.sil	d,e                     ; 04066B
+	ld.lis	c,a                     ; 04066D
+	ld	c,(hl)                      ; 04066F
+	adc	a,e                        ; 040670
+	ld	b,$ff                       ; 040671
+	push	iy                        ; 040673
+	push	hl                        ; 040675
+	pop	iy                         ; 040676
+	call	$040456                   ; 040678
+	pop	iy                         ; 04067C
+	ret                            ; 04067E
+	call	$04049b                   ; 04067F
+	ld	hl,$000000                  ; 040683
+	jp	$04049e                     ; 040687
+	call	$040492                   ; 04068B
+	ld	b,d                         ; 04068F
+	ld	b,d                         ; 040690
+	ld	b,e                         ; 040691
+	jr	nz,$+$44                    ; 040692
+	ld	b,c                         ; 040694
+	ld	d,e                         ; 040695
+	ld.lis	b,e                     ; 040696
+	jr	nz,$+$2a                    ; 040698
+	ld	b,c                         ; 04069A
+	ld	h,a                         ; 04069B
+	ld	l,a                         ; 04069C
+	ld	l,(hl)                      ; 04069D
+	jr	nz,$+$43                    ; 04069E
+	ld	b,h                         ; 0406A0
+	ld	c,h                         ; 0406A1
+	add	hl,hl                      ; 0406A2
+	jr	nz,$+$58                    ; 0406A3
+	ld	h,l                         ; 0406A5
+	ld	(hl),d                      ; 0406A6
+	ld	(hl),e                      ; 0406A7
+	ld	l,c                         ; 0406A8
+	ld	l,a                         ; 0406A9
+	ld	l,(hl)                      ; 0406AA
+	jr	nz,$+$33                    ; 0406AB
+	ld	l,$30                       ; 0406AD
+	inc	sp                         ; 0406AF
+	ld	a,(bc)                      ; 0406B0
+	dec	c                          ; 0406B1
+	nop                            ; 0406B2
+	ret                            ; 0406B3
+	call	$040453                   ; 0406B4
+	ex	de,hl                       ; 0406B8
+	call	$040480                   ; 0406B9
+	ld	a,$29                       ; 0406BD
+	jp	nz,$040474                  ; 0406BF
+	inc	hl                         ; 0406C3
+	ld	e,(hl)                      ; 0406C4
+	inc	hl                         ; 0406C5
+	ld	d,(hl)                      ; 0406C6
+	inc	hl                         ; 0406C7
+	ld	ix,$040100                  ; 0406C8
+	ld	($040443),ix                ; 0406CD
+	ld	ix,$040440                  ; 0406D2
+	ld	a,(ix)                      ; 0406D7
+	push	af                        ; 0406DA
+	ld	(ix),$09                    ; 0406DB
+	call	$040483                   ; 0406DF
+	pop	af                         ; 0406E3
+	ld	(ix),a                      ; 0406E4
+	ld	hl,$040100                  ; 0406E7
+	ld	e,l                         ; 0406EB
+	call	$0404a3                   ; 0406EC
+	jp	$04048c                     ; 0406F0
+	call	$040453                   ; 0406F4
+	ld	c,e                         ; 0406F8
+	call	$040453                   ; 0406F9
+	ld	a,d                         ; 0406FD
+	or	a                           ; 0406FE
+	jr	z,$+$05                     ; 0406FF
+	ex	de,hl                       ; 040701
+	jr	$+$09                       ; 040702
+	ld	b,e                         ; 040704
+	call	$040453                   ; 040705
+	ld	l,b                         ; 040709
+	ld	h,e                         ; 04070A
+	ld	a,c                         ; 04070B
+	cp	$0b                         ; 04070C
+	jr	z,$+$1a                     ; 04070E
+	cp	$0c                         ; 040710
+	jr	z,$+$45                     ; 040712
+	cp	$13                         ; 040714
+	jr	z,$+$70                     ; 040716
+	cp	$76                         ; 040718
+	jp	z,$0407a1                   ; 04071A
+	cp	$a0                         ; 04071E
+	jp	z,$0407d1                   ; 040720
+	jp	$040634                     ; 040724
+	ld	a,$17                       ; 040728
+	call	$040542                   ; 04072A
+	ld	a,$00                       ; 04072E
+	call	$040542                   ; 040730
+	ld	a,$88                       ; 040734
+	call	$040542                   ; 040736
+	ld	a,l                         ; 04073A
+	call	$040542                   ; 04073B
+	ld	a,h                         ; 04073F
+	call	$040542                   ; 040740
+	ld	a,$00                       ; 040744
+	call	$040542                   ; 040746
+	ld	a,$00                       ; 04074A
+	call	$040542                   ; 04074C
+	ld	a,$ff                       ; 040750
+	call	$040542                   ; 040752
+	ret                            ; 040756
+	ld	a,$17                       ; 040757
+	call	$040542                   ; 040759
+	ld	a,$00                       ; 04075D
+	call	$040542                   ; 04075F
+	ld	a,$88                       ; 040763
+	call	$040542                   ; 040765
+	ld	a,$00                       ; 040769
+	call	$040542                   ; 04076B
+	ld	a,$00                       ; 04076F
+	call	$040542                   ; 040771
+	ld	a,l                         ; 040775
+	call	$040542                   ; 040776
+	ld	a,h                         ; 04077A
+	call	$040542                   ; 04077B
+	ld	a,$ff                       ; 04077F
+	call	$040542                   ; 040781
+	ret                            ; 040785
+	call	$040790                   ; 040786
+	ld	l,$00                       ; 04078A
+	jp	$04045f                     ; 04078C
+	push	ix                        ; 040790
+	ld	a,$08                       ; 040792
+	rst.lis	$08                    ; 040794
+	ld	a,(ix)                      ; 040796
+	cp	(ix)                        ; 040799
+	jr	z,$-$03                     ; 04079C
+	pop	ix                         ; 04079E
+	ret                            ; 0407A0
+	ld	a,$17                       ; 0407A1
+	call	$040542                   ; 0407A3
+	ld	a,$00                       ; 0407A7
+	call	$040542                   ; 0407A9
+	ld	a,$88                       ; 0407AD
+	call	$040542                   ; 0407AF
+	ld	a,$00                       ; 0407B3
+	call	$040542                   ; 0407B5
+	ld	a,$00                       ; 0407B9
+	call	$040542                   ; 0407BB
+	ld	a,$00                       ; 0407BF
+	call	$040542                   ; 0407C1
+	ld	a,$00                       ; 0407C5
+	call	$040542                   ; 0407C7
+	ld	a,l                         ; 0407CB
+	call	$040542                   ; 0407CC
+	ret                            ; 0407D0
+	push	ix                        ; 0407D1
+	ld	a,$08                       ; 0407D3
+	rst.lis	$08                    ; 0407D5
+	ld	bc,$000000                  ; 0407D7
+	ld	c,l                         ; 0407DB
+	add	ix,bc                      ; 0407DC
+	ld	l,(ix)                      ; 0407DE
+	pop	ix                         ; 0407E1
+	jp	$04045f                     ; 0407E3
+	push	bc                        ; 0407E7
+	push	de                        ; 0407E8
+	ld	de,$040100                  ; 0407E9
+	call	$04046e                   ; 0407ED
+	ld	hl,$040100                  ; 0407F1
+	call	$0408e7                   ; 0407F5
+	call	$0408fb                   ; 0407F9
+	pop	de                         ; 0407FD
+	pop	bc                         ; 0407FE
+	or	a                           ; 0407FF
+	jr	z,$+$62                     ; 040800
+	xor	a                          ; 040802
+	call	$04096f                   ; 040803
+	ld	e,a                         ; 040807
+	or	a                           ; 040808
+	ld	a,$04                       ; 040809
+	jr	z,$+$5f                     ; 04080B
+	call	$040486                   ; 04080D
+	ld	hl,$040100                  ; 040811
+	call	$040986                   ; 040815
+	jr	c,$+$20                     ; 040819
+	cp	$0a                         ; 04081B
+	jr	z,$+$1c                     ; 04081D
+	cp	$21                         ; 04081F
+	jr	c,$-$0c                     ; 040821
+	ld	(hl),a                      ; 040823
+	inc	l                          ; 040824
+	call	$040986                   ; 040825
+	jr	c,$+$2d                     ; 040829
+	cp	$20                         ; 04082B
+	jr	c,$+$08                     ; 04082D
+	ld	(hl),a                      ; 04082F
+	inc	l                          ; 040830
+	jp	z,$040459                   ; 040831
+	cp	$0a                         ; 040835
+	jr	nz,$-$12                    ; 040837
+	ld	(hl),$0d                    ; 040839
+	ld	a,l                         ; 04083B
+	cp	$02                         ; 04083C
+	jr	c,$+$0c                     ; 04083E
+	push	de                        ; 040840
+	call	$04048f                   ; 040841
+	call	c,$040450                 ; 040845
+	pop	de                         ; 040849
+	call	$040997                   ; 04084A
+	jr	nz,$-$3d                    ; 04084E
+	call	$04097e                   ; 040850
+	scf                            ; 040854
+	ret                            ; 040855
+	cp	$20                         ; 040856
+	jr	c,$+$08                     ; 040858
+	ld	(hl),a                      ; 04085A
+	inc	l                          ; 04085B
+	jp	z,$040459                   ; 04085C
+	jr	$-$27                       ; 040860
+	ld	a,$01                       ; 040862
+	rst.lis	$08                    ; 040864
+	ret	nc                         ; 040866
+	or	a                           ; 040867
+	scf                            ; 040868
+	ret	z                          ; 040869
+	push	af                        ; 04086A
+	ld	hl,$040100                  ; 04086B
+	ld	bc,$000100                  ; 04086F
+	ld	e,a                         ; 040873
+	ld	a,$0f                       ; 040874
+	rst.lis	$08                    ; 040876
+	pop	af                         ; 040878
+	push	hl                        ; 040879
+	add	a,$7f                      ; 04087A
+	jp	$04047d                     ; 04087C
+	push	bc                        ; 040880
+	push	de                        ; 040881
+	ld	de,$040100                  ; 040882
+	call	$04046e                   ; 040886
+	ld	hl,$040100                  ; 04088A
+	call	$0408e7                   ; 04088E
+	call	$0408fb                   ; 040892
+	pop	de                         ; 040896
+	pop	bc                         ; 040897
+	or	a                           ; 040898
+	jr	z,$+$46                     ; 040899
+	ld	a,($040445)                 ; 04089B
+	push	af                        ; 04089F
+	xor	a                          ; 0408A0
+	inc	a                          ; 0408A1
+	ld	($040445),a                 ; 0408A2
+	call	$04096f                   ; 0408A6
+	ld	($040446),a                 ; 0408AA
+	ld	ix,$040440                  ; 0408AE
+	ld	hl,($040414)                ; 0408B3
+	exx                            ; 0408B7
+	ld	bc,$000000                  ; 0408B8
+	exx                            ; 0408BC
+	ld	a,(hl)                      ; 0408BD
+	or	a                           ; 0408BE
+	jr	z,$+$11                     ; 0408BF
+	inc	hl                         ; 0408C1
+	ld	de,$000000                  ; 0408C2
+	ld	e,(hl)                      ; 0408C6
+	inc	hl                         ; 0408C7
+	ld	d,(hl)                      ; 0408C8
+	inc	hl                         ; 0408C9
+	call	$040483                   ; 0408CA
+	jr	$-$11                       ; 0408CE
+	ld	a,($040446)                 ; 0408D0
+	ld	e,a                         ; 0408D4
+	call	$04097e                   ; 0408D5
+	pop	af                         ; 0408D9
+	ld	($040445),a                 ; 0408DA
+	ret                            ; 0408DE
+	ld	a,$02                       ; 0408DF
+	rst.lis	$08                    ; 0408E1
+	or	a                           ; 0408E3
+	ret	z                          ; 0408E4
+	jr	$-$7b                       ; 0408E5
+	push	hl                        ; 0408E7
+	ld	c,$2e                       ; 0408E8
+	call	$04046b                   ; 0408EA
+	or	a                           ; 0408EE
+	jr	nz,$+$0a                    ; 0408EF
+	ld	de,$04092b                  ; 0408F1
+	call	$040465                   ; 0408F5
+	pop	hl                         ; 0408F9
+	ret                            ; 0408FA
+	push	hl                        ; 0408FB
+	ld	c,$2e                       ; 0408FC
+	call	$04046b                   ; 0408FE
+	ld	de,$04092b                  ; 040902
+	push	hl                        ; 040906
+	call	$040468                   ; 040907
+	pop	hl                         ; 04090B
+	jr	z,$+$1b                     ; 04090C
+	ld	a,(de)                      ; 04090E
+	inc	de                         ; 04090F
+	or	a                           ; 040910
+	jr	nz,$-$03                    ; 040911
+	inc	de                         ; 040913
+	ld	a,(de)                      ; 040914
+	or	a                           ; 040915
+	jr	nz,$-$10                    ; 040916
+	ld	a,$cc                       ; 040918
+	call	$04047d                   ; 04091A
+	ld	b,d                         ; 04091E
+	ld	h,c                         ; 04091F
+	ld	h,h                         ; 040920
+	jr	nz,$+$70                    ; 040921
+	ld	h,c                         ; 040923
+	ld	l,l                         ; 040924
+	ld	h,l                         ; 040925
+	nop                            ; 040926
+	inc	de                         ; 040927
+	ld	a,(de)                      ; 040928
+	pop	hl                         ; 040929
+	ret                            ; 04092A
+	ld	l,$42                       ; 04092B
+	ld	b,d                         ; 04092D
+	ld	b,e                         ; 04092E
+	nop                            ; 04092F
+	nop                            ; 040930
+	ld	l,$54                       ; 040931
+	ld	e,b                         ; 040933
+	ld	d,h                         ; 040934
+	nop                            ; 040935
+	ld	bc,$53412e                  ; 040936
+	ld	b,e                         ; 04093A
+	nop                            ; 04093B
+	ld	bc,$41422e                  ; 04093C
+	ld	d,e                         ; 040940
+	nop                            ; 040941
+	ld	bc,$5a2100                  ; 040942
+	add	hl,bc                      ; 040946
+	inc	b                          ; 040947
+	ld	a,(hl)                      ; 040948
+	inc	hl                         ; 040949
+	cp	$ff                         ; 04094A
+	ret	z                          ; 04094C
+	cp	iyl                         ; 04094D
+	jr	z,$+$08                     ; 04094F
+	ret	nc                         ; 040951
+	inc	hl                         ; 040952
+	inc	hl                         ; 040953
+	inc	hl                         ; 040954
+	jr	$-$0d                       ; 040955
+	ld	iy,(hl)                     ; 040957
+	ret                            ; 040959
+	call	nc,$04098e                ; 04095A
+	rst	$10                        ; 04095E
+	add	a,(hl)                     ; 04095F
+	add	hl,bc                      ; 040960
+	inc	b                          ; 040961
+	xor	$42                        ; 040962
+	dec	b                          ; 040964
+	inc	b                          ; 040965
+	call	p,$04070c                 ; 040966
+	rst	$30                        ; 04096A
+	jp	nc,$ff0405                  ; 04096B
+	ld	c,$01                       ; 04096F
+	jr	z,$+$08                     ; 040971
+	ld	c,$32                       ; 040973
+	jr	c,$+$04                     ; 040975
+	ld	c,$0a                       ; 040977
+	ld	a,$0a                       ; 040979
+	rst.lis	$08                    ; 04097B
+	ret                            ; 04097D
+	push	bc                        ; 04097E
+	ld	c,e                         ; 04097F
+	ld	a,$0b                       ; 040980
+	rst.lis	$08                    ; 040982
+	pop	bc                         ; 040984
+	ret                            ; 040985
+	push	bc                        ; 040986
+	ld	c,e                         ; 040987
+	ld	a,$0c                       ; 040988
+	rst.lis	$08                    ; 04098A
+	pop	bc                         ; 04098C
+	ret                            ; 04098D
+	push	bc                        ; 04098E
+	ld	c,e                         ; 04098F
+	ld	b,a                         ; 040990
+	ld	a,$0d                       ; 040991
+	rst.lis	$08                    ; 040993
+	pop	bc                         ; 040995
+	ret                            ; 040996
+	push	bc                        ; 040997
+	ld	c,e                         ; 040998
+	ld	a,$0e                       ; 040999
+	rst.lis	$08                    ; 04099B
+	pop	bc                         ; 04099D
+	cp	$01                         ; 04099E
+	ret                            ; 0409A0
+	push	iy                        ; 0409A1
+	ld	c,e                         ; 0409A3
+	ld	a,$19                       ; 0409A4
+	rst.lis	$08                    ; 0409A6
+	push	hl                        ; 0409A8
+	pop	iy                         ; 0409A9
+	ld	l,(iy+$11)                  ; 0409AB
+	ld	h,(iy+$12)                  ; 0409AE
+	ld	e,(iy+$13)                  ; 0409B1
+	ld	d,(iy+$14)                  ; 0409B4
+	pop	iy                         ; 0409B7
+	ret                            ; 0409B9
+	push	iy                        ; 0409BA
+	ld	c,a                         ; 0409BC
+	push	hl                        ; 0409BD
+	ld	hl,$000002                  ; 0409BE
+	add	hl,sp                      ; 0409C2
+	ld	(hl),e                      ; 0409C3
+	pop	hl                         ; 0409C4
+	ld	e,d                         ; 0409C5
+	ld	a,$1c                       ; 0409C6
+	rst.lis	$08                    ; 0409C8
+	pop	iy                         ; 0409CA
+	ret                            ; 0409CC
+	push	iy                        ; 0409CD
+	ld	c,e                         ; 0409CF
+	ld	a,$19                       ; 0409D0
+	rst.lis	$08                    ; 0409D2
+	push	hl                        ; 0409D4
+	pop	iy                         ; 0409D5
+	ld	l,(iy+$0b)                  ; 0409D7
+	ld	h,(iy+$0c)                  ; 0409DA
+	ld	e,(iy+$0d)                  ; 0409DD
+	ld	d,(iy+$0e)                  ; 0409E0
+	pop	iy                         ; 0409E3
+	ret                            ; 0409E5
+	push	iy                        ; 0409E6
+	ld	hl,$040100                  ; 0409E8
+	ld	a,$12                       ; 0409EC
+	rst.lis	$08                    ; 0409EE
+	ld	de,$040100                  ; 0409F0
+	ld	e,a                         ; 0409F4
+	pop	iy                         ; 0409F5
+	ret                            ; 0409F7
+	call	$04047a                   ; 0409F8
+	exx                            ; 0409FC
+	push	hl                        ; 0409FD
+	call	$04045c                   ; 0409FE
+	call	$04047a                   ; 040A02
+	exx                            ; 040A06
+	pop	de                         ; 040A07
+	ret                            ; 040A08
+	ret                            ; 040A09
+                                

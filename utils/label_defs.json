@@ -7755,13 +7755,6 @@
             "def_content": "VBLANK_STOP:\t\tDI"
         }
     ],
-    "VDU": [
-        {
-            "def_file": "exec.asm",
-            "def_line": 1482,
-            "def_content": "VDU:\t\t\tLD\tIX,BUFFER\t\t; Storage for the VDU stream"
-        }
-    ],
     "VDU1": [
         {
             "def_file": "exec.asm",
@@ -7795,6 +7788,13 @@
             "def_file": "equs.inc",
             "def_line": 52,
             "def_content": "VDU_BUFFER:\t\tEQU\tACCS\t\t; Storage for VDU commands"
+        }
+    ],
+    "VDU_EX": [
+        {
+            "def_file": "exec.asm",
+            "def_line": 1482,
+            "def_content": "VDU_EX:\t\t\tLD\tIX,BUFFER\t\t; Storage for the VDU stream"
         }
     ],
     "VPOS": [

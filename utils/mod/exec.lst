@@ -1,5 +1,5 @@
 PC     Output      Line
-040000 C3 9B 04 00 0001   SKIP_AHEAD: JP BEGIN_HEREISH-0x040000
+040000 C3 0D 05 00 0001   SKIP_AHEAD: JP BEGIN_HEREISH-0x040000
 040004             0002   
 040004             0003       include "../src/mos_api.inc"
 040004             0001*  ;
@@ -590,395 +590,417 @@ PC     Output      Line
 040450             0057*  LF:			EQU     0AH
 040450             0058*  ESC:			EQU     1BH
 040450             0007   
-040450             0008   ; Defined in eval.asm
-040450 CD 54 04 04 0009   BRAKET:			CALL    NXT
-040454             0010   ; Defined in eval.asm
-040454 FD 7E 00    0011   NXT:			LD      A,(IY)			; Fetch the character
-040457             0012   ; Defined in eval.asm
-040457 CD 54 04 04 0013   COMMA:			CALL    NXT
-04045B             0014   ; Defined in eval.asm
-04045B 26 00       0015   COUNT0:			LD      H,0			; Return L
-04045D             0016   ; Defined in eval.asm
-04045D CD 63 04 04 0017   EXPRI:			CALL    EXPR			; Evaluate the expression
-040461             0018   ; Defined in eval.asm
-040461 3E 16       0019   EXP:			LD      A,22
-040463             0020   ; Defined in eval.asm
-040463 CD 67 04 04 0021   EXPR:			CALL    EXPR1			; Get first operator by calling Level 6
-040467             0022   ; Defined in eval.asm
-040467 CD 6B 04 04 0023   EXPR1:			CALL    EXPR2			; Get first operator by calling Level 5
-04046B             0024   ; Defined in eval.asm
-04046B CD 6F 04 04 0025   EXPR2:			CALL    EXPR3			; Get first operator by calling Level 4
-04046F             0026   ; Defined in eval.asm
-04046F CD 73 04 04 0027   EXPR3:			CALL    EXPR4			; Get first operator by calling Level 3
-040473             0028   ; Defined in eval.asm
-040473 CD 77 04 04 0029   EXPR4:			CALL    EXPR5			; Get first operator by calling Level 2
-040477             0030   ; Defined in eval.asm
-040477 CD 7B 04 04 0031   EXPR5:			CALL    ITEM			; Get variable
-04047B             0032   ; Defined in eval.asm
-04047B CD 7F 04 04 0033   ITEM:			CALL    CHECK			; Check there's at least a page of free memory left and Error: "No room" if not
-04047F             0034   ; Defined in exec.asm
-04047F E5          0035   CHECK:			PUSH    HL
-040480             0036   ; Defined in patch.asm
-040480 CD 5D 04 04 0037   EXPR_W2:		CALL	EXPRI			; Get first parameter
-040484             0038   ; Defined in eval.asm
-040484 11 00 01 04 0039   INKEY1:			LD      DE,ACCS			; Store the result in the string accumulator
-040488             0040   ; Defined in eval.asm
-040488 CD 8C 04 04 0041   INKEY:			CALL    ITEMI			; Get the argument
-04048C             0042   ; Defined in eval.asm
-04048C CD 7B 04 04 0043   ITEMI:			CALL    ITEM			; Get the variable
-040490             0044   ; Defined in patch.asm
-040490 E5          0045   OSWRCH:			PUSH	HL
-040491             0046   ; Defined in exec.asm
-040491 DD 21 00 02 0047   VDU:			LD	IX,BUFFER		; Storage for the VDU stream
+040450             0008   ; Defined in main.asm
+040450 00 00 04    0009   AUTO: DL 0x040000
+040453             0010   ; Defined in eval.asm
+040453 00 00 04    0011   BRAKET: DL 0x040000
+040456             0012   ; Defined in main.asm
+040456 00 00 04    0013   CLEAR: DL 0x040000
+040459             0014   ; Defined in agon_graphics.asm
+040459 00 00 04    0015   CLG: DL 0x040000
+04045C             0016   ; Defined in main.asm
+04045C 00 00 04    0017   CLOOP: DL 0x040000
+04045F             0018   ; Defined in agon_graphics.asm
+04045F 00 00 04    0019   CLRSCN: DL 0x040000
+040462             0020   ; Defined in agon_graphics.asm
+040462 00 00 04    0021   COLOUR: DL 0x040000
+040465             0022   ; Defined in eval.asm
+040465 00 00 04    0023   COMMA: DL 0x040000
+040468             0024   ; Defined in eval.asm
+040468 00 00 04    0025   CONS: DL 0x040000
+04046B             0026   ; Defined in main.asm
+04046B 00 00 04    0027   CREATE: DL 0x040000
+04046E             0028   ; Defined in main.asm
+04046E 00 00 04    0029   CRLF: DL 0x040000
+040471             0030   ; Defined in main.asm
+040471             0031   DEF_:	EQU     DDH
+040471             0032   ; Defined in main.asm
+040471 00 00 04    0033   DELETE: DL 0x040000
+040474             0034   ; Defined in fpp.asm
+040474 00 00 04    0035   DLOAD5_SPL: DL 0x040000
+040477             0036   ; Defined in agon_graphics.asm
+040477 00 00 04    0037   DRAW: DL 0x040000
+04047A             0038   ; Defined in main.asm
+04047A             0039   ELSE_:	EQU     8BH
+04047A             0040   ; Defined in sorry.asm
+04047A 00 00 04    0041   ENVEL: DL 0x040000
+04047D             0042   ; Defined in main.asm
+04047D 00 00 04    0043   ERROR_: DL 0x040000
+040480             0044   ; Defined in eval.asm
+040480 00 00 04    0045   EXPR: DL 0x040000
+040483             0046   ; Defined in eval.asm
+040483 00 00 04    0047   EXPRI: DL 0x040000
+040486             0048   ; Defined in eval.asm
+040486 00 00 04    0049   EXPRN: DL 0x040000
+040489             0050   ; Defined in eval.asm
+040489 00 00 04    0051   EXPRS: DL 0x040000
+04048C             0052   ; Defined in main.asm
+04048C 00 00 04    0053   FINDL: DL 0x040000
+04048F             0054   ; Defined in fpp.asm
+04048F 00 00 04    0055   FPP: DL 0x040000
+040492             0056   ; Defined in agon_graphics.asm
+040492 00 00 04    0057   GCOL: DL 0x040000
+040495             0058   ; Defined in main.asm
+040495 00 00 04    0059   GETDEF: DL 0x040000
+040498             0060   ; Defined in main.asm
+040498 00 00 04    0061   GETVAR: DL 0x040000
+04049B             0062   ; Defined in eval.asm
+04049B 00 00 04    0063   ITEMI: DL 0x040000
+04049E             0064   ; Defined in main.asm
+04049E             0065   LINE_:	EQU     86H
+04049E             0066   ; Defined in main.asm
+04049E             0067   LINO:	EQU     8DH
+04049E             0068   ; Defined in main.asm
+04049E 00 00 04    0069   LIST_: DL 0x040000
+0404A1             0070   ; Defined in main.asm
+0404A1 00 00 04    0071   LOAD: DL 0x040000
+0404A4             0072   ; Defined in main.asm
+0404A4 00 00 04    0073   LOAD0: DL 0x040000
+0404A7             0074   ; Defined in eval.asm
+0404A7 00 00 04    0075   LOADN: DL 0x040000
+0404AA             0076   ; Defined in eval.asm
+0404AA 00 00 04    0077   LOADS: DL 0x040000
+0404AD             0078   ; Defined in agon_graphics.asm
+0404AD 00 00 04    0079   MODE: DL 0x040000
+0404B0             0080   ; Defined in agon_graphics.asm
+0404B0 00 00 04    0081   MOVE: DL 0x040000
+0404B3             0082   ; Defined in main.asm
+0404B3 00 00 04    0083   NEW: DL 0x040000
+0404B6             0084   ; Defined in eval.asm
+0404B6 00 00 04    0085   NXT: DL 0x040000
+0404B9             0086   ; Defined in main.asm
+0404B9             0087   OFF_:	EQU     87H
+0404B9             0088   ; Defined in main.asm
+0404B9 00 00 04    0089   OLD: DL 0x040000
+0404BC             0090   ; Defined in patch.asm
+0404BC 00 00 04    0091   OSBGET: DL 0x040000
+0404BF             0092   ; Defined in patch.asm
+0404BF 00 00 04    0093   OSBPUT: DL 0x040000
+0404C2             0094   ; Defined in patch.asm
+0404C2 00 00 04    0095   OSCLI: DL 0x040000
+0404C5             0096   ; Defined in patch.asm
+0404C5 00 00 04    0097   OSLINE: DL 0x040000
+0404C8             0098   ; Defined in patch.asm
+0404C8 00 00 04    0099   OSSHUT: DL 0x040000
+0404CB             0100   ; Defined in main.asm
+0404CB 00 00 04    0101   OUTCHR: DL 0x040000
+0404CE             0102   ; Defined in main.asm
+0404CE 00 00 04    0103   OUT_: DL 0x040000
+0404D1             0104   ; Defined in main.asm
+0404D1 00 00 04    0105   PBCDL: DL 0x040000
+0404D4             0106   ; Defined in agon_graphics.asm
+0404D4 00 00 04    0107   PLOT: DL 0x040000
+0404D7             0108   ; Defined in eval.asm
+0404D7 00 00 04    0109   POPS: DL 0x040000
+0404DA             0110   ; Defined in eval.asm
+0404DA 00 00 04    0111   PUSHS: DL 0x040000
+0404DD             0112   ; Defined in patch.asm
+0404DD 00 00 04    0113   PUTCSR: DL 0x040000
+0404E0             0114   ; Defined in patch.asm
+0404E0 00 00 04    0115   PUTIME: DL 0x040000
+0404E3             0116   ; Defined in sorry.asm
+0404E3 00 00 04    0117   PUTIMS: DL 0x040000
+0404E6             0118   ; Defined in patch.asm
+0404E6 00 00 04    0119   PUTPTR: DL 0x040000
+0404E9             0120   ; Defined in main.asm
+0404E9 00 00 04    0121   RENUM: DL 0x040000
+0404EC             0122   ; Defined in main.asm
+0404EC 00 00 04    0123   REPORT: DL 0x040000
+0404EF             0124   ; Defined in main.asm
+0404EF 00 00 04    0125   SAVE: DL 0x040000
+0404F2             0126   ; Defined in main.asm
+0404F2 00 00 04    0127   SAYLN: DL 0x040000
+0404F5             0128   ; Defined in main.asm
+0404F5 00 00 04    0129   SETLIN: DL 0x040000
+0404F8             0130   ; Defined in agon_sound.asm
+0404F8 00 00 04    0131   SOUND: DL 0x040000
+0404FB             0132   ; Defined in main.asm
+0404FB             0133   SPC:	EQU     89H
+0404FB             0134   ; Defined in main.asm
+0404FB             0135   STEP:	EQU     88H
+0404FB             0136   ; Defined in main.asm
+0404FB             0137   TAB:	EQU     8AH
+0404FB             0138   ; Defined in main.asm
+0404FB             0139   TCALL:	EQU     D6H
+0404FB             0140   ; Defined in eval.asm
+0404FB             0141   TCMD:			EQU C6H ;    FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
+0404FB             0142   ; 041637 FE C6       0526*  			CP      TCMD			; Is it out of range of the function table?
+0404FB             0143   
+0404FB             0144   ; Defined in main.asm
+0404FB 00 00 04    0145   TELL: DL 0x040000
+0404FE             0146   ; Defined in main.asm
+0404FE             0147   TERROR:	EQU     85H
+0404FE             0148   ; Defined in eval.asm
+0404FE 00 00 04    0149   TEST: DL 0x040000
+040501             0150   ; Defined in main.asm
+040501             0151   TGOSUB:	EQU     E4H
+040501             0152   ; Defined in main.asm
+040501             0153   TGOTO:	EQU     E5H
+040501             0154   ; Defined in main.asm
+040501             0155   THEN:	EQU     8CH
+040501             0156   ; Defined in main.asm
+040501             0157   TO:	EQU     B8H
+040501             0158   ; Defined in main.asm
+040501             0159   TON:	EQU     EEH
+040501             0160   ; Defined in main.asm
+040501             0161   TPROC:	EQU     F2H
+040501             0162   ; Defined in patch.asm
+040501 00 00 04    0163   TRAP: DL 0x040000
+040504             0164   ; Defined in main.asm
+040504             0165   TSTOP:	EQU     FAH
+040504             0166   ; Defined in eval.asm
+040504 00 00 04    0167   VAL0: DL 0x040000
+040507             0168   ; Defined in main.asm
+040507 00 00 04    0169   WARM: DL 0x040000
+04050A             0170   ; Defined in eval.asm
+04050A 00 00 04    0171   ZERO: DL 0x040000
+04050D             0172   
+04050D             0173   BEGIN_HEREISH:
+04050D             0174       include "../src/exec.asm"
+04050D             0001*  ;
+04050D             0002*  ; Title:	BBC Basic Interpreter - Z80 version
+04050D             0003*  ;		Statement Execution & Assembler Module - "EXEC"
+04050D             0004*  ; Author:	(C) Copyright  R.T.Russell  1984
+04050D             0005*  ; Modified By:	Dean Belfield
+04050D             0006*  ; Created:	12/05/2023
+04050D             0007*  ; Last Updated:	26/06/2023
+04050D             0008*  ;
+04050D             0009*  ; Modinfo:
+04050D             0010*  ; 27/01/1984:	Version 2.1
+04050D             0011*  ; 02/03/1987:	Version 3.0
+04050D             0012*  ; 11/06/1987:	Version 3.1
+04050D             0013*  ; 12/05/2023:	Modified by Dean Belfield
+04050D             0014*  ; 07/06/2023:	Modified to run in ADL mode
+04050D             0015*  ; 26/06/2023:	Fixed DIM, USR, and address output of inline assembler
+04050D             0016*  
+04050D             0017*  			; .ASSUME	ADL = 1
+04050D             0018*  
+04050D             0019*  			; INCLUDE	"equs.inc"
+04050D             0020*  
+04050D             0021*  			; SEGMENT CODE
+04050D             0022*  
+04050D             0023*  			; XDEF	XEQ
+04050D             0024*  			; XDEF	CHAIN0
+04050D             0025*  			; XDEF	RUN
+04050D             0026*  			; XDEF	SYNTAX
+04050D             0027*  			; XDEF	ESCAPE
+04050D             0028*  			; XDEF	FN_EX
+04050D             0029*  			; XDEF	USR
+04050D             0030*  			; XDEF	STORE5
+04050D             0031*  			; XDEF	STORE4
+04050D             0032*  			; XDEF	CHECK
+04050D             0033*  			; XDEF	TERMQ
+04050D             0034*  			; XDEF	FILL
+04050D             0035*  			; XDEF	X4OR5
+04050D             0036*  			; XDEF	MUL16
+04050D             0037*  			; XDEF	CHANEL
+04050D             0038*  			; XDEF	ASSEM
+04050D             0039*  
+04050D             0040*  			; XREF	AUTO
+04050D             0041*  			; XREF	DELETE
+04050D             0042*  			; XREF	LOAD
+04050D             0043*  			; XREF	LIST_
+04050D             0044*  			; XREF	NEW
+04050D             0045*  			; XREF	OLD
+04050D             0046*  			; XREF	RENUM
+04050D             0047*  			; XREF	SAVE
+04050D             0048*  			; XREF	SOUND
+04050D             0049*  			; XREF	CLG
+04050D             0050*  			; XREF	DRAW
+04050D             0051*  			; XREF	ENVEL
+04050D             0052*  			; XREF	GCOL
+04050D             0053*  			; XREF	MODE
+04050D             0054*  			; XREF	MOVE
+04050D             0055*  			; XREF	PLOT
+04050D             0056*  			; XREF	COLOUR
+04050D             0057*  			; XREF	EXPRS
+04050D             0058*  			; XREF	HIMEM
+04050D             0059*  			; XREF	LOAD0
+04050D             0060*  			; XREF	RANDOM
+04050D             0061*  			; XREF	CLEAR
+04050D             0062*  			; XREF	ERRTRP
+04050D             0063*  			; XREF	PAGE_
+04050D             0064*  			; XREF	DATAPTR
+04050D             0065*  			; XREF	ERRLIN
+04050D             0066*  			; XREF	TRAP
+04050D             0067*  			; XREF	NXT
+04050D             0068*  			; XREF	SETLIN
+04050D             0069*  			; XREF	CLOOP
+04050D             0070*  			; XREF	OSSHUT
+04050D             0071*  			; XREF	WARM
+04050D             0072*  			; XREF	TRACEN
+04050D             0073*  			; XREF	OUTCHR
+04050D             0074*  			; XREF	PBCDL
+04050D             0075*  			; XREF	OSCLI
+04050D             0076*  			; XREF	LISTON
+04050D             0077*  			; XREF	GETVAR
+04050D             0078*  			; XREF	PUTVAR
+04050D             0079*  			; XREF	DATPTR
+04050D             0080*  			; XREF	ERROR_
+04050D             0081*  			; XREF	EXPR
+04050D             0082*  			; XREF	CREATE
+04050D             0083*  			; XREF	EXPRI
+04050D             0084*  			; XREF	BRAKET
+04050D             0085*  			; XREF	FREE
+04050D             0086*  			; XREF	OSBPUT
+04050D             0087*  			; XREF	COUNT
+04050D             0088*  			; XREF	STR
+04050D             0089*  			; XREF	HEXSTR
+04050D             0090*  			; XREF	CRLF
+04050D             0091*  			; XREF	ITEMI
+04050D             0092*  			; XREF	FINDL
+04050D             0093*  			; XREF	TEST
+04050D             0094*  			; XREF	EXPRN
+04050D             0095*  			; XREF	DLOAD5
+04050D             0096*  			; XREF	DLOAD5_SPL
+04050D             0097*  			; XREF	LOADN
+04050D             0098*  			; XREF	FPP
+04050D             0099*  			; XREF	SWAP
+04050D             0100*  			; XREF	GETDEF
+04050D             0101*  			; XREF	ZERO
+04050D             0102*  			; XREF	OSBGET
+04050D             0103*  			; XREF	BUFFER
+04050D             0104*  			; XREF	CONS
+04050D             0105*  			; XREF	VAL0
+04050D             0106*  			; XREF	OSLINE
+04050D             0107*  			; XREF	CLRSCN
+04050D             0108*  			; XREF	TELL
+04050D             0109*  			; XREF	SAYLN
+04050D             0110*  			; XREF	REPORT
+04050D             0111*  			; XREF	PUTPTR
+04050D             0112*  			; XREF	PUTIME
+04050D             0113*  			; XREF	PUTIMS
+04050D             0114*  			; XREF	LOMEM
+04050D             0115*  			; XREF	WIDTH
+04050D             0116*  			; XREF	OSWRCH
+04050D             0117*  			; XREF	COMMA
+04050D             0118*  			; XREF	OSCALL
+04050D             0119*  			; XREF	SFIX
+04050D             0120*  			; XREF	LOAD4
+04050D             0121*  			; XREF	PUSHS
+04050D             0122*  			; XREF	POPS
+04050D             0123*  			; XREF	LOADS
+04050D             0124*  			; XREF	PUTCSR
+04050D             0125*  			; XREF	OUT_
+04050D             0126*  			; XREF	R0
+04050D             0127*  ;
+04050D             0128*  ; List of token values used in this module
+04050D             0129*  ; consolidated with the token values in main.asm
+04050D             0130*  ; TAND:			EQU     80H
+04050D             0131*  ; TOR:			EQU     84H
+04050D             0132*  ; TERROR:			EQU     85H
+04050D             0133*  ; LINE_:			EQU     86H
+04050D             0134*  ; OFF_:			EQU     87H
+04050D             0135*  ; STEP:			EQU     88H
+04050D             0136*  ; SPC:			EQU     89H
+04050D             0137*  ; TAB:			EQU     8AH
+04050D             0138*  ; ELSE_:			EQU     8BH
+04050D             0139*  ; THEN:			EQU     8CH
+04050D             0140*  ; LINO:			EQU     8DH
+04050D             0141*  ; TO:				EQU     B8H
+04050D             0142*  ; TCALL:			EQU     D6H
+04050D             0143*  ; DATA_:			EQU     DCH
+04050D             0144*  ; DEF_:			EQU     DDH
+04050D             0145*  ; TGOSUB:			EQU     E4H
+04050D             0146*  ; TGOTO:			EQU     E5H
+04050D             0147*  ; TON:			EQU     EEH
+04050D             0148*  ; TPROC:			EQU     F2H
+04050D             0149*  ; TSTOP:			EQU     FAH
+04050D             0150*  
+04050D             0151*  ; TCMD:			EQU     C6H ; in eval.asm
+04050D             0152*  
+04050D             0153*  ; The command table
+04050D             0154*  ; Commands are tokens from C6H onwards; this lookup table is used to
+04050D             0155*  ; run the corresponding function; Note that DATA and DEF both use the same
+04050D             0156*  ; code as REM
+04050D             0157*  ;
+04050D 50 04 04    0158*  CMDTAB:			DW24  AUTO			; C6H
+040510 71 04 04    0159*  			DW24  DELETE			; C7H
+040513 A1 04 04    0160*  			DW24  LOAD			; C8H
+040516 9E 04 04    0161*  			DW24  LIST_			; C9H
+040519 B3 04 04    0162*  			DW24  NEW			; CAH
+04051C B9 04 04    0163*  			DW24  OLD			; CBH
+04051F E9 04 04    0164*  			DW24  RENUM			; CCH
+040522 EF 04 04    0165*  			DW24  SAVE			; CDH
+040525 47 10 04    0166*  			DW24  PUT			; CEH
+040528 3D 0E 04    0167*  			DW24  PTR_EX			; CFH
+04052B 57 0E 04    0168*  			DW24  PAGEV_EX			; D0H
+04052E 6A 0E 04    0169*  			DW24  TIMEV_EX			; D1H
+040531 93 0E 04    0170*  			DW24  LOMEMV_EX			; D2H
+040534 AC 0E 04    0171*  			DW24  HIMEMV_EX			; D3H
+040537 F8 04 04    0172*  			DW24  SOUND			; D4H
+04053A 61 0F 04    0173*  			DW24  BPUT			; D5H
+04053D 79 0F 04    0174*  			DW24  CALL_			; D6H
+040540 C1 05 04    0175*  			DW24  CHAIN			; D7H
+040543 0C 0E 04    0176*  			DW24  CLR			; D8H
+040546 55 0F 04    0177*  			DW24  CLOSE			; D9H
+040549 59 04 04    0178*  			DW24  CLG			; DAH
+04054C DF 0D 04    0179*  			DW24  CLS			; DBH
+04054F A0 06 04    0180*  			DW24  REM_EX             		; DCH: DATA
+040552 A0 06 04    0181*  			DW24  REM_EX             		; DDH: DEF
+040555 66 07 04    0182*  			DW24  DIM_EX			; DEH
+040558 77 04 04    0183*  			DW24  DRAW			; DFH
+04055B 3B 06 04    0184*  			DW24  END_			; E0H
+04055E F7 0B 04    0185*  			DW24  ENDPRO			; E1H
+040561 7A 04 04    0186*  			DW24  ENVEL			; E2H
+040564 0C 0A 04    0187*  			DW24  FOR_EX			; E3H
+040567 BC 09 04    0188*  			DW24  GOSUB_EX			; E4H
+04056A A0 09 04    0189*  			DW24  GOTO_EX			; E5H
+04056D 92 04 04    0190*  			DW24  GCOL			; E6H
+040570 AB 0D 04    0191*  			DW24  IF_			; E7H
+040573 99 0C 04    0192*  			DW24  INPUT			; E8H
+040576 C1 06 04    0193*  			DW24  LET			; E9H
+040579 9C 0B 04    0194*  			DW24  LOCAL_EX_			; EAH
+04057C AD 04 04    0195*  			DW24  MODE			; EBH
+04057F B0 04 04    0196*  			DW24  MOVE			; ECH
+040582 5A 0A 04    0197*  			DW24  NEXT_EX			; EDH
+040585 33 09 04    0198*  			DW24  ON_EX_			; EEH
+040588 16 0F 04    0199*  			DW24  VDU_EX			; EFH
+04058B D4 04 04    0200*  			DW24  PLOT			; F0H
+04058E 3C 08 04    0201*  			DW24  PRINT_			; F1H
+040591 F9 0A 04    0202*  			DW24  PROC_EX			; F2H
+040594 4B 0D 04    0203*  			DW24  READ			; F3H
+040597 A0 06 04    0204*  			DW24  REM_EX			; F4H
+04059A DC 09 04    0205*  			DW24  REPEAT_EX			; F5H
+04059D 04 0E 04    0206*  			DW24  REPOR			; F6H
+0405A0 16 0E 04    0207*  			DW24  RESTOR_EX			; F7H
+0405A3 CA 09 04    0208*  			DW24  RETURN			; F8H
+0405A6 BB 05 04    0209*  			DW24  RUN			; F9H
+0405A9 EC 0D 04    0210*  			DW24  STOP			; FAH
+0405AC 62 04 04    0211*  			DW24  COLOUR			; FBH
+0405AF F8 0E 04    0212*  			DW24  TRACE_EX			; FCH
+0405B2 E6 09 04    0213*  			DW24  UNTIL_EX			; FDH
+0405B5 EA 0E 04    0214*  			DW24  WIDTHV			; FEH
+0405B8 86 06 04    0215*  			DW24  CLI             		; FFH: OSCLI
+0405BB             0216*  
+0405BB             0217*  ; RUN
+0405BB             0218*  ; RUN "filename"
+0405BB             0219*  ;
+0405BB CD 19 12 04 0220*  RUN:			CALL    TERMQ			; Standalone RUN command?
+0405BF 28 10       0221*  			JR      Z,RUN0			; Yes, so just RUN the code
+0405C1             0222*  
+0405C1             0223*  ; CHAIN "filename"
+0405C1             0224*  ;
+0405C1 CD 89 04 04 0225*  CHAIN:			CALL    EXPRS			; Get the filename
+0405C5 3E 0D       0226*  			LD      A,CR			; Terminate it with a CR
+0405C7 12          0227*  			LD      (DE),A
+0405C8 ED 7B 20 04 0228*  CHAIN0:			LD      SP,(HIMEM)		; Reset SP
        04          
-040496             0048   ; Defined in exec.asm
-040496 FD 22 35 04 0049   XEQ:			LD      (ERRLIN),IY     	; Error pointer
+0405CD CD A4 04 04 0229*  			CALL    LOAD0			; And load the file in
+0405D1             0230*  ;
+0405D1 ED 7B 20 04 0231*  RUN0:			LD      SP,(HIMEM)      	; Prepare for RUN
        04          
-04049B             0050   
-04049B             0051   BEGIN_HEREISH:
-04049B             0052       include "../src/agon_graphics.asm"
-04049B             0001*  ;
-04049B             0002*  ; Title:	BBC Basic for AGON - Graphics stuff
-04049B             0003*  ; Author:	Dean Belfield
-04049B             0004*  ; Created:	12/05/2023
-04049B             0005*  ; Last Updated:	07/06/2023
-04049B             0006*  ;
-04049B             0007*  ; Modinfo:
-04049B             0008*  ; 07/06/2023:	Modified to run in ADL mode
-04049B             0009*  
-04049B             0010*  			; .ASSUME	ADL = 1
-04049B             0011*  
-04049B             0012*  			; INCLUDE	"equs.inc"
-04049B             0013*  			; INCLUDE "macros.inc"
-04049B             0014*  			; INCLUDE "mos_api.inc"	; In MOS/src
-04049B             0015*  
-04049B             0016*  			; SEGMENT CODE
-04049B             0017*  
-04049B             0018*  			; XDEF	CLG
-04049B             0019*  			; XDEF	CLRSCN
-04049B             0020*  			; XDEF	MODE
-04049B             0021*  			; XDEF	COLOUR
-04049B             0022*  			; XDEF	GCOL
-04049B             0023*  			; XDEF	MOVE
-04049B             0024*  			; XDEF	PLOT
-04049B             0025*  			; XDEF	DRAW
-04049B             0026*  			; XDEF	POINT
-04049B             0027*  			; XDEF	GETSCHR
-04049B             0028*  
-04049B             0029*  			; XREF	OSWRCH
-04049B             0030*  			; XREF	ASC_TO_NUMBER
-04049B             0031*  			; XREF	EXTERR
-04049B             0032*  			; XREF	EXPRI
-04049B             0033*  			; XREF	COMMA
-04049B             0034*  			; XREF	XEQ
-04049B             0035*  			; XREF	NXT
-04049B             0036*  			; XREF	BRAKET
-04049B             0037*  			; XREF	COUNT0
-04049B             0038*  			; XREF	CRTONULL
-04049B             0039*  			; XREF	NULLTOCR
-04049B             0040*  			; XREF	CRLF
-04049B             0041*  			; XREF	EXPR_W2
-04049B             0042*  			; XREF	INKEY1
-04049B             0043*  
-04049B             0044*  ; CLG: clears the graphics area
-04049B             0045*  ;
-04049B             0046*  CLG:			VDU	10h
-04049B 3E 10       0001*M 		LD	A, val
-04049D CD 90 04 04 0002*M 		CALL	OSWRCH
-0404A1 C3 96 04 04 0047*  			JP	XEQ
-0404A5             0048*  
-0404A5             0049*  ; CLS: clears the text area
-0404A5             0050*  ;
-0404A5 3E 0C       0051*  CLRSCN:			LD	A, 0Ch
-0404A7 C3 90 04 04 0052*  			JP	OSWRCH
-0404AB             0053*  
-0404AB             0054*  ; MODE n: Set video mode
-0404AB             0055*  ;
-0404AB DD E5       0056*  MODE:			PUSH	IX			; Get the system vars in IX
-0404AD             0057*  			MOSCALL	mos_sysvars		; Reset the semaphore
-0404AD 3E 08       0001*M 			LD	A, function
-0404AF 49 CF       0002*M 			RST.LIS	08h
-0404B1 DD CB 04 A6 0058*  			RES	4, (IX+sysvar_vpd_pflags)
-0404B5 CD 5D 04 04 0059*  			CALL    EXPRI
-0404B9 D9          0060*  			EXX
-0404BA             0061*  			VDU	16H			; Mode change
-0404BA 3E 16       0001*M 		LD	A, val
-0404BC CD 90 04 04 0002*M 		CALL	OSWRCH
-0404C0             0062*  			VDU	L
-0404C0 7D          0001*M 		LD	A, val
-0404C1 CD 90 04 04 0002*M 		CALL	OSWRCH
-0404C5             0063*  			MOSCALL	mos_sysvars
-0404C5 3E 08       0001*M 			LD	A, function
-0404C7 49 CF       0002*M 			RST.LIS	08h
-0404C9 DD CB 04 66 0064*  @@:			BIT	4, (IX+sysvar_vpd_pflags)
-0404CD 28 FA       0065*  			JR	Z, @B			; Wait for the result
-0404CF DD E1       0066*  			POP	IX
-0404D1 C3 96 04 04 0067*  			JP	XEQ
-0404D5             0068*  
-0404D5             0069*  ; GET(x,y): Get the ASCII code of a character on screen
-0404D5             0070*  ;
-0404D5 FD 23       0071*  GETSCHR:		INC	IY
-0404D7 CD 5D 04 04 0072*  			CALL    EXPRI      		; Get X coordinate
-0404DB D9          0073*  			EXX
-0404DC 22 00 01 04 0074*  			LD	(VDU_BUFFER+0), HL
-0404E0 CD 57 04 04 0075*  			CALL	COMMA
-0404E4 CD 5D 04 04 0076*  			CALL	EXPRI			; Get Y coordinate
-0404E8 D9          0077*  			EXX
-0404E9 22 02 01 04 0078*  			LD	(VDU_BUFFER+2), HL
-0404ED CD 50 04 04 0079*  			CALL	BRAKET			; Closing bracket
-0404F1             0080*  ;
-0404F1 DD E5       0081*  			PUSH	IX			; Get the system vars in IX
-0404F3             0082*  			MOSCALL	mos_sysvars		; Reset the semaphore
-0404F3 3E 08       0001*M 			LD	A, function
-0404F5 49 CF       0002*M 			RST.LIS	08h
-0404F7 DD CB 04 8E 0083*  			RES	1, (IX+sysvar_vpd_pflags)
-0404FB             0084*  			VDU	23
-0404FB 3E 17       0001*M 		LD	A, val
-0404FD CD 90 04 04 0002*M 		CALL	OSWRCH
-040501             0085*  			VDU	0
-040501 3E 00       0001*M 		LD	A, val
-040503 CD 90 04 04 0002*M 		CALL	OSWRCH
-040507             0086*  			VDU	vdp_scrchar
-040507 3E 83       0001*M 		LD	A, val
-040509 CD 90 04 04 0002*M 		CALL	OSWRCH
-04050D             0087*  			VDU	(VDU_BUFFER+0)
-04050D 3A 00 01 04 0001*M 		LD	A, val
-040511 CD 90 04 04 0002*M 		CALL	OSWRCH
-040515             0088*  			VDU	(VDU_BUFFER+1)
-040515 3A 01 01 04 0001*M 		LD	A, val
-040519 CD 90 04 04 0002*M 		CALL	OSWRCH
-04051D             0089*  			VDU	(VDU_BUFFER+2)
-04051D 3A 02 01 04 0001*M 		LD	A, val
-040521 CD 90 04 04 0002*M 		CALL	OSWRCH
-040525             0090*  			VDU	(VDU_BUFFER+3)
-040525 3A 03 01 04 0001*M 		LD	A, val
-040529 CD 90 04 04 0002*M 		CALL	OSWRCH
-04052D DD CB 04 4E 0091*  @@:			BIT	1, (IX+sysvar_vpd_pflags)
-040531 28 FA       0092*  			JR	Z, @B			; Wait for the result
-040533 DD 7E 09    0093*  			LD	A, (IX+sysvar_scrchar)	; Fetch the result in A
-040536 B7          0094*  			OR	A			; Check for 00h
-040537 37          0095*  			SCF				; C = character map
-040538 20 02       0096*  			JR	NZ, @F			; We have a character, so skip next bit
-04053A AF          0097*  			XOR	A			; Clear carry
-04053B 3D          0098*  			DEC	A			; Set A to FFh
-04053C DD E1       0099*  @@:			POP	IX
-04053E C3 84 04 04 0100*  			JP	INKEY1			; Jump back to the GET command
-040542             0101*  
-040542             0102*  ; POINT(x,y): Get the pixel colour of a point on screen
-040542             0103*  ;
-040542 CD 5D 04 04 0104*  POINT:			CALL    EXPRI      		; Get X coordinate
-040546 D9          0105*  			EXX
-040547 22 00 01 04 0106*  			LD	(VDU_BUFFER+0), HL
-04054B CD 57 04 04 0107*  			CALL	COMMA
-04054F CD 5D 04 04 0108*  			CALL	EXPRI			; Get Y coordinate
-040553 D9          0109*  			EXX
-040554 22 02 01 04 0110*  			LD	(VDU_BUFFER+2), HL
-040558 CD 50 04 04 0111*  			CALL	BRAKET			; Closing bracket
-04055C             0112*  ;
-04055C DD E5       0113*  			PUSH	IX			; Get the system vars in IX
-04055E             0114*  			MOSCALL	mos_sysvars		; Reset the semaphore
-04055E 3E 08       0001*M 			LD	A, function
-040560 49 CF       0002*M 			RST.LIS	08h
-040562 DD CB 04 96 0115*  			RES	2, (IX+sysvar_vpd_pflags)
-040566             0116*  			VDU	23
-040566 3E 17       0001*M 		LD	A, val
-040568 CD 90 04 04 0002*M 		CALL	OSWRCH
-04056C             0117*  			VDU	0
-04056C 3E 00       0001*M 		LD	A, val
-04056E CD 90 04 04 0002*M 		CALL	OSWRCH
-040572             0118*  			VDU	vdp_scrpixel
-040572 3E 84       0001*M 		LD	A, val
-040574 CD 90 04 04 0002*M 		CALL	OSWRCH
-040578             0119*  			VDU	(VDU_BUFFER+0)
-040578 3A 00 01 04 0001*M 		LD	A, val
-04057C CD 90 04 04 0002*M 		CALL	OSWRCH
-040580             0120*  			VDU	(VDU_BUFFER+1)
-040580 3A 01 01 04 0001*M 		LD	A, val
-040584 CD 90 04 04 0002*M 		CALL	OSWRCH
-040588             0121*  			VDU	(VDU_BUFFER+2)
-040588 3A 02 01 04 0001*M 		LD	A, val
-04058C CD 90 04 04 0002*M 		CALL	OSWRCH
-040590             0122*  			VDU	(VDU_BUFFER+3)
-040590 3A 03 01 04 0001*M 		LD	A, val
-040594 CD 90 04 04 0002*M 		CALL	OSWRCH
-040598 DD CB 04 56 0123*  @@:			BIT	2, (IX+sysvar_vpd_pflags)
-04059C 28 FA       0124*  			JR	Z, @B			; Wait for the result
-04059E             0125*  ;
-04059E             0126*  ; Return the data as a 1 byte index
-04059E             0127*  ;
-04059E DD 6E 16    0128*  			LD	L, (IX+sysvar_scrpixelIndex)
-0405A1 DD E1       0129*  			POP	IX
-0405A3 C3 5B 04 04 0130*  			JP	COUNT0
-0405A7             0131*  
-0405A7             0132*  
-0405A7             0133*  ; COLOUR colour
-0405A7             0134*  ; COLOUR L,P
-0405A7             0135*  ; COLOUR L,R,G,B
-0405A7             0136*  ;
-0405A7 CD 5D 04 04 0137*  COLOUR:			CALL	EXPRI			; The colour / mode
-0405AB D9          0138*  			EXX
-0405AC 7D          0139*  			LD	A, L
-0405AD 32 00 01 04 0140*  			LD	(VDU_BUFFER+0), A	; Store first parameter
-0405B1 CD 54 04 04 0141*  			CALL	NXT			; Are there any more parameters?
-0405B5 FE 2C       0142*  			CP	','
-0405B7 28 12       0143*  			JR	Z, COLOUR_1		; Yes, so we're doing a palette change next
-0405B9             0144*  ;
-0405B9             0145*  			VDU	11h			; Just set the colour
-0405B9 3E 11       0001*M 		LD	A, val
-0405BB CD 90 04 04 0002*M 		CALL	OSWRCH
-0405BF             0146*  			VDU	(VDU_BUFFER+0)
-0405BF 3A 00 01 04 0001*M 		LD	A, val
-0405C3 CD 90 04 04 0002*M 		CALL	OSWRCH
-0405C7 C3 96 04 04 0147*  			JP	XEQ
-0405CB             0148*  ;
-0405CB CD 57 04 04 0149*  COLOUR_1:		CALL	COMMA
-0405CF CD 5D 04 04 0150*  			CALL	EXPRI			; Parse R (OR P)
-0405D3 D9          0151*  			EXX
-0405D4 7D          0152*  			LD	A, L
-0405D5 32 01 01 04 0153*  			LD	(VDU_BUFFER+1), A
-0405D9 CD 54 04 04 0154*  			CALL	NXT			; Are there any more parameters?
-0405DD FE 2C       0155*  			CP	','
-0405DF 28 2C       0156*  			JR	Z, COLOUR_2		; Yes, so we're doing COLOUR L,R,G,B
-0405E1             0157*  ;
-0405E1             0158*  			VDU	13h			; VDU:COLOUR
-0405E1 3E 13       0001*M 		LD	A, val
-0405E3 CD 90 04 04 0002*M 		CALL	OSWRCH
-0405E7             0159*  			VDU	(VDU_BUFFER+0)		; Logical Colour
-0405E7 3A 00 01 04 0001*M 		LD	A, val
-0405EB CD 90 04 04 0002*M 		CALL	OSWRCH
-0405EF             0160*  			VDU	(VDU_BUFFER+1)		; Palette Colour
-0405EF 3A 01 01 04 0001*M 		LD	A, val
-0405F3 CD 90 04 04 0002*M 		CALL	OSWRCH
-0405F7             0161*  			VDU	0			; RGB set to 0
-0405F7 3E 00       0001*M 		LD	A, val
-0405F9 CD 90 04 04 0002*M 		CALL	OSWRCH
-0405FD             0162*  			VDU	0
-0405FD 3E 00       0001*M 		LD	A, val
-0405FF CD 90 04 04 0002*M 		CALL	OSWRCH
-040603             0163*  			VDU	0
-040603 3E 00       0001*M 		LD	A, val
-040605 CD 90 04 04 0002*M 		CALL	OSWRCH
-040609 C3 96 04 04 0164*  			JP	XEQ
-04060D             0165*  ;
-04060D CD 57 04 04 0166*  COLOUR_2:		CALL	COMMA
-040611 CD 5D 04 04 0167*  			CALL	EXPRI			; Parse G
-040615 D9          0168*  			EXX
-040616 7D          0169*  			LD	A, L
-040617 32 02 01 04 0170*  			LD	(VDU_BUFFER+2), A
-04061B CD 57 04 04 0171*  			CALL	COMMA
-04061F CD 5D 04 04 0172*  			CALL	EXPRI			; Parse B
-040623 D9          0173*  			EXX
-040624 7D          0174*  			LD	A, L
-040625 32 03 01 04 0175*  			LD	(VDU_BUFFER+3), A
-040629             0176*  			VDU	13h			; VDU:COLOUR
-040629 3E 13       0001*M 		LD	A, val
-04062B CD 90 04 04 0002*M 		CALL	OSWRCH
-04062F             0177*  			VDU	(VDU_BUFFER+0)		; Logical Colour
-04062F 3A 00 01 04 0001*M 		LD	A, val
-040633 CD 90 04 04 0002*M 		CALL	OSWRCH
-040637             0178*  			VDU	FFh			; Physical Colour (-1 for RGB mode)
-040637 3E FF       0001*M 		LD	A, val
-040639 CD 90 04 04 0002*M 		CALL	OSWRCH
-04063D             0179*  			VDU	(VDU_BUFFER+1)		; R
-04063D 3A 01 01 04 0001*M 		LD	A, val
-040641 CD 90 04 04 0002*M 		CALL	OSWRCH
-040645             0180*  			VDU	(VDU_BUFFER+2)		; G
-040645 3A 02 01 04 0001*M 		LD	A, val
-040649 CD 90 04 04 0002*M 		CALL	OSWRCH
-04064D             0181*  			VDU	(VDU_BUFFER+3)		; B
-04064D 3A 03 01 04 0001*M 		LD	A, val
-040651 CD 90 04 04 0002*M 		CALL	OSWRCH
-040655 C3 96 04 04 0182*  			JP	XEQ
-040659             0183*  
-040659             0184*  ; GCOL mode,colour
-040659             0185*  ;
-040659 CD 5D 04 04 0186*  GCOL:			CALL	EXPRI			; Parse MODE
-04065D D9          0187*  			EXX
-04065E 7D          0188*  			LD	A, L
-04065F 32 00 01 04 0189*  			LD	(VDU_BUFFER+0), A
-040663 CD 57 04 04 0190*  			CALL	COMMA
-040667             0191*  ;
-040667 CD 5D 04 04 0192*  			CALL	EXPRI			; Parse Colour
-04066B D9          0193*  			EXX
-04066C 7D          0194*  			LD	A, L
-04066D 32 01 01 04 0195*  			LD	(VDU_BUFFER+1), A
-040671             0196*  ;
-040671             0197*  			VDU	12h			; VDU:GCOL
-040671 3E 12       0001*M 		LD	A, val
-040673 CD 90 04 04 0002*M 		CALL	OSWRCH
-040677             0198*  			VDU	(VDU_BUFFER+0)		; Mode
-040677 3A 00 01 04 0001*M 		LD	A, val
-04067B CD 90 04 04 0002*M 		CALL	OSWRCH
-04067F             0199*  			VDU	(VDU_BUFFER+1)		; Colour
-04067F 3A 01 01 04 0001*M 		LD	A, val
-040683 CD 90 04 04 0002*M 		CALL	OSWRCH
-040687 C3 96 04 04 0200*  			JP	XEQ
-04068B             0201*  
-04068B             0202*  ; PLOT mode,x,y
-04068B             0203*  ;
-04068B CD 5D 04 04 0204*  PLOT:			CALL	EXPRI		; Parse mode
-04068F D9          0205*  			EXX
-040690 E5          0206*  			PUSH	HL		; Push mode (L) onto stack
-040691 CD 57 04 04 0207*  			CALL	COMMA
-040695 CD 80 04 04 0208*  			CALL	EXPR_W2		; Parse X and Y
-040699 C1          0209*  			POP	BC		; Pop mode (C) off stack
-04069A             0210*  PLOT_1:			VDU	19H		; VDU code for PLOT
-04069A 3E 19       0001*M 		LD	A, val
-04069C CD 90 04 04 0002*M 		CALL	OSWRCH
-0406A0             0211*  			VDU	C		;  C: Mode
-0406A0 79          0001*M 		LD	A, val
-0406A1 CD 90 04 04 0002*M 		CALL	OSWRCH
-0406A5             0212*  			VDU	E		; DE: X
-0406A5 7B          0001*M 		LD	A, val
-0406A6 CD 90 04 04 0002*M 		CALL	OSWRCH
-0406AA             0213*  			VDU	D
-0406AA 7A          0001*M 		LD	A, val
-0406AB CD 90 04 04 0002*M 		CALL	OSWRCH
-0406AF             0214*  			VDU	L		; HL: Y
-0406AF 7D          0001*M 		LD	A, val
-0406B0 CD 90 04 04 0002*M 		CALL	OSWRCH
-0406B4             0215*  			VDU	H
-0406B4 7C          0001*M 		LD	A, val
-0406B5 CD 90 04 04 0002*M 		CALL	OSWRCH
-0406B9 C3 96 04 04 0216*  			JP	XEQ
-0406BD             0217*  
-0406BD             0218*  ; MOVE x,y
-0406BD             0219*  ;
-0406BD CD 80 04 04 0220*  MOVE:			CALL	EXPR_W2		; Parse X and Y
-0406C1 0E 04       0221*  			LD	C, 04H		; Plot mode 04H (Move)
-0406C3 18 D5       0222*  			JR	PLOT_1		; Plot
-0406C5             0223*  
-0406C5             0224*  ; DRAW x1,y1
-0406C5             0225*  ; DRAW x1,y1,x2,y2
-0406C5             0226*  ;
-0406C5 CD 80 04 04 0227*  DRAW:			CALL	EXPR_W2		; Get X1 and Y1
-0406C9 CD 54 04 04 0228*  			CALL	NXT		; Are there any more parameters?
-0406CD FE 2C       0229*  			CP	','
-0406CF 0E 05       0230*  			LD	C, 05h		; Code for LINE
-0406D1 20 C7       0231*  			JR	NZ, PLOT_1	; No, so just do DRAW x1,y1
-0406D3             0232*  			VDU	19h		; Move to the first coordinates
-0406D3 3E 19       0001*M 		LD	A, val
-0406D5 CD 90 04 04 0002*M 		CALL	OSWRCH
-0406D9             0233*  			VDU	04h
-0406D9 3E 04       0001*M 		LD	A, val
-0406DB CD 90 04 04 0002*M 		CALL	OSWRCH
-0406DF             0234*  			VDU	E
-0406DF 7B          0001*M 		LD	A, val
-0406E0 CD 90 04 04 0002*M 		CALL	OSWRCH
-0406E4             0235*  			VDU	D
-0406E4 7A          0001*M 		LD	A, val
-0406E5 CD 90 04 04 0002*M 		CALL	OSWRCH
-0406E9             0236*  			VDU	L
-0406E9 7D          0001*M 		LD	A, val
-0406EA CD 90 04 04 0002*M 		CALL	OSWRCH
-0406EE             0237*  			VDU	H
-0406EE 7C          0001*M 		LD	A, val
-0406EF CD 90 04 04 0002*M 		CALL	OSWRCH
-0406F3 CD 57 04 04 0238*  			CALL	COMMA
-0406F7 C5          0239*  			PUSH	BC
-0406F8 CD 80 04 04 0240*  			CALL	EXPR_W2		; Get X2 and Y2
-0406FC C1          0241*  			POP	BC
-0406FD 18 9B       0242*  			JR	PLOT_1		; Now DRAW the line to those positions
-0406FF             0243*  
-0406FF             0244*  
-0406FF             0245*  
+0405D6 DD 21 38 04 0232*  			LD      IX,RANDOM		; Pointer to the RANDOM sysvar
+       04          
+0405DB ED 5F       0233*  @@:			LD      A, R			; Use the R register to seed the random number generator
+0405DD 28 FC       0234*  			JR      Z, @B			; Loop unti we get a non-zero value in A
+0405DF 07          0235*  			RLCA				; Rotate it
+0405E0 07          0236*  			RLCA
+0405E1 DD 77 03    0237*  			LD      (IX+3),A		; And store
+0405E4 9F          0238*  			SBC     A,A			; Depending upon the C flag, this will either be 00h or FFh
+0405E5 DD 77 04    0239*  			LD      (IX+4),A		; And store
+0405E8 CD 56 04 04 0240*  			CALL    CLEAR
+0405EC 21 00 00 00 0241*  			LD      HL,0			; Clear the error trap sysvar
+0405F0 22 2C 04 04 0242*  			LD      (ERRTRP),HL
+0405F4 2A 14 04 04 0243*  			LD      HL,(PAGE_)		; Load HL with the start of program memory (PAGE)
+0405F8 3E 00       0244*  			LD      A,DATA_			; The DATA token value
