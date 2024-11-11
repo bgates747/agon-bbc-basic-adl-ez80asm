@@ -452,274 +452,171 @@ OFFSET:			EQU     CFH-TOKLO		; Offset to the parameterised SET versions
 
 ; End equs_top.inc
 
-; Defined in eval.asm
-BRAKET: DL 0x040000
-; Defined in eval.asm
-COMMA: DL 0x040000
-; Defined in eval.asm
-COUNT0: DL 0x040000
-; Defined in eval.asm
-EXPRI: DL 0x040000
-; Defined in patch.asm
-EXPR_W2: DL 0x040000
-; Defined in eval.asm
-INKEY1: DL 0x040000
-; Defined in eval.asm
-NXT: DL 0x040000
-; Defined in patch.asm
-OSWRCH: DL 0x040000
-; Defined in exec.asm
-VDU: DL 0x040000
-; Defined in exec.asm
-XEQ: DL 0x040000
+; Defined in main.asm
+_main: DL 0x040000
 
 BEGIN_HEREISH:
 
 ;
-; Title:	BBC Basic for AGON - Graphics stuff
+; Title:	BBC Basic ADL for AGON - Initialisation Code
+;		Initialisation Code
 ; Author:	Dean Belfield
 ; Created:	12/05/2023
-; Last Updated:	07/06/2023
+; Last Updated:	26/11/2023
 ;
 ; Modinfo:
-; 07/06/2023:	Modified to run in ADL mode
+; 11/07/2023:	Fixed *BYE for ADL mode
+; 26/11/2023:	Moved the ram clear routine into here
+
+			; SEGMENT CODE
+
+			; XDEF	_end			
 			
-			; .ASSUME	ADL = 1
+			; XREF	_main				; In main.asm
+			
+			; XREF	RAM_START			; In ram.asm
+			; XREF	RAM_END
+			
+			.ASSUME	ADL = 1
 				
 			; INCLUDE	"equs.inc"
-			; INCLUDE "macros.inc"
-			; INCLUDE "mos_api.inc"	; In MOS/src
-		
-			; SEGMENT CODE
-				
-			; XDEF	CLG
-			; XDEF	CLRSCN
-			; XDEF	MODE
-			; XDEF	COLOUR
-			; XDEF	GCOL
-			; XDEF	MOVE
-			; XDEF	PLOT
-			; XDEF	DRAW
-			; XDEF	POINT
-			; XDEF	GETSCHR
 			
-			; XREF	OSWRCH
-			; XREF	ASC_TO_NUMBER
-			; XREF	EXTERR
-			; XREF	EXPRI
-			; XREF	COMMA
-			; XREF	XEQ
-			; XREF	NXT
-			; XREF	BRAKET
-			; XREF	COUNT0
-			; XREF	CRTONULL
-			; XREF	NULLTOCR
-			; XREF	CRLF
-			; XREF	EXPR_W2
-			; XREF	INKEY1
+argv_ptrs_max:		EQU	16				; Maximum number of arguments allowed in argv
 			
-; CLG: clears the graphics area
 ;
-CLG:			VDU	10h
-			JP	XEQ
+; Start in ADL mode
+;
+			JP	_start				; Jump to start
+;
+; The header stuff is from byte 64 onwards
+;
+_exec_name:		DB	"bbcbasic24ez.bin", 0		; The executable name, only used in argv	
 
-; CLS: clears the text area
-;
-CLRSCN:			LD	A, 0Ch
-			JP	OSWRCH
-				
-; MODE n: Set video mode
-;
-MODE:			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	4, (IX+sysvar_vpd_pflags)
-			CALL    EXPRI
-			EXX
-			VDU	16H			; Mode change
-			VDU	L
-			MOSCALL	mos_sysvars		
-@@:			BIT	4, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result			
-			POP	IX
-			JP	XEQ
+			ALIGN	64
 			
-; GET(x,y): Get the ASCII code of a character on screen
+			DB	"MOS"				; Flag for MOS - to confirm this is a valid MOS command
+			DB	00h				; MOS header version 0
+			DB	01h				; Flag for run mode (0: Z80, 1: ADL)
 ;
-GETSCHR:		INC	IY
-			CALL    EXPRI      		; Get X coordinate
-			EXX
-			LD	(VDU_BUFFER+0), HL
-			CALL	COMMA		
-			CALL	EXPRI			; Get Y coordinate
-			EXX 
-			LD	(VDU_BUFFER+2), HL
-			CALL	BRAKET			; Closing bracket		
+; And the code follows on immediately after the header
 ;
-			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	1, (IX+sysvar_vpd_pflags)
-			VDU	23
-			VDU	0
-			VDU	vdp_scrchar
-			VDU	(VDU_BUFFER+0)
-			VDU	(VDU_BUFFER+1)
-			VDU	(VDU_BUFFER+2)
-			VDU	(VDU_BUFFER+3)
-@@:			BIT	1, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result
-			LD	A, (IX+sysvar_scrchar)	; Fetch the result in A
-			OR	A			; Check for 00h
-			SCF				; C = character map
-			JR	NZ, @F			; We have a character, so skip next bit
-			XOR	A			; Clear carry
-			DEC	A			; Set A to FFh
-@@:			POP	IX			
-			JP	INKEY1			; Jump back to the GET command
+_start:			PUSH		AF			; Preserve the rest of the registers
+			PUSH		BC
+			PUSH		DE
+			PUSH		IX
+			PUSH		IY
 
-; POINT(x,y): Get the pixel colour of a point on screen
-;
-POINT:			CALL    EXPRI      		; Get X coordinate
-			EXX
-			LD	(VDU_BUFFER+0), HL
-			CALL	COMMA		
-			CALL	EXPRI			; Get Y coordinate
-			EXX 
-			LD	(VDU_BUFFER+2), HL
-			CALL	BRAKET			; Closing bracket		
-;
-			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	2, (IX+sysvar_vpd_pflags)
-			VDU	23
-			VDU	0
-			VDU	vdp_scrpixel
-			VDU	(VDU_BUFFER+0)
-			VDU	(VDU_BUFFER+1)
-			VDU	(VDU_BUFFER+2)
-			VDU	(VDU_BUFFER+3)
-@@:			BIT	2, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result
-;
-; Return the data as a 1 byte index
-;
-			LD	L, (IX+sysvar_scrpixelIndex)
-			POP	IX	
-			JP	COUNT0
+			LD		(_sps), SP 		; Preserve the 24-bit stack pointer (SPS)
 
+			LD		IX, _argv_ptrs		; The argv array pointer address
+			PUSH		IX
+			CALL		_parse_params		; Parse the parameters
+			POP		IX			; IX: argv
+			LD		B, 0			;  C: argc
+			CALL		_clear_ram
+			JP		_main			; Start user code
+;
+; This bit of code is called from STAR_BYE and returns us safely to MOS
+;			
+_end:			LD		SP, (_sps)		; Restore the stack pointer
 
-; COLOUR colour
-; COLOUR L,P
-; COLOUR L,R,G,B
-;
-COLOUR:			CALL	EXPRI			; The colour / mode
-			EXX
-			LD	A, L 
-			LD	(VDU_BUFFER+0), A	; Store first parameter
-			CALL	NXT			; Are there any more parameters?
-			CP	','
-			JR	Z, COLOUR_1		; Yes, so we're doing a palette change next
-;
-			VDU	11h			; Just set the colour
-			VDU	(VDU_BUFFER+0)
-			JP	XEQ			
-;
-COLOUR_1:		CALL	COMMA
-			CALL	EXPRI			; Parse R (OR P)
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+1), A
-			CALL	NXT			; Are there any more parameters?
-			CP	','
-			JR	Z, COLOUR_2		; Yes, so we're doing COLOUR L,R,G,B
-;
-			VDU	13h			; VDU:COLOUR
-			VDU	(VDU_BUFFER+0)		; Logical Colour
-			VDU	(VDU_BUFFER+1)		; Palette Colour
-			VDU	0			; RGB set to 0
-			VDU	0
-			VDU	0
-			JP	XEQ
-;
-COLOUR_2:		CALL	COMMA
-			CALL	EXPRI			; Parse G
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+2), A
-			CALL	COMMA
-			CALL	EXPRI			; Parse B
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+3), A							
-			VDU	13h			; VDU:COLOUR
-			VDU	(VDU_BUFFER+0)		; Logical Colour
-			VDU	FFh			; Physical Colour (-1 for RGB mode)
-			VDU	(VDU_BUFFER+1)		; R
-			VDU	(VDU_BUFFER+2)		; G
-			VDU	(VDU_BUFFER+3)		; B
-			JP	XEQ
+			POP		IY			; Restore the registers
+			POP		IX			
+			POP		DE
+			POP		BC
+			POP		AF
+			RET					; Return to MOS
 
-; GCOL mode,colour
+;Clear the application memory
 ;
-GCOL:			CALL	EXPRI			; Parse MODE
-			EXX
-			LD	A, L 
-			LD	(VDU_BUFFER+0), A	
-			CALL	COMMA
+_clear_ram:		PUSH		BC
+			LD		HL, RAM_START		
+			LD		DE, RAM_START + 1
+			LD		BC, RAM_END - RAM_START - 1
+			XOR		A
+			LD		(HL), A
+			LDIR
+			POP		BC
+			RET
+						
+; Parse the parameter string into a C array
+; Parameters
+; - HL: Address of parameter string
+; - IX: Address for array pointer storage
+; Returns:
+; -  C: Number of parameters parsed
 ;
-			CALL	EXPRI			; Parse Colour
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+1), A
+_parse_params:		LD	BC, _exec_name
+			LD	(IX+0), BC		; ARGV[0] = the executable name
+			INC	IX
+			INC	IX
+			INC	IX
+			CALL	_skip_spaces		; Skip HL past any leading spaces
 ;
-			VDU	12h			; VDU:GCOL
-			VDU	(VDU_BUFFER+0)		; Mode
-			VDU	(VDU_BUFFER+1)		; Colour
-			JP	XEQ
-			
-; PLOT mode,x,y
+			LD	BC, 1			; C: ARGC = 1 - also clears out top 16 bits of BCU
+			LD	B, argv_ptrs_max - 1	; B: Maximum number of argv_ptrs
 ;
-PLOT:			CALL	EXPRI		; Parse mode
-			EXX					
-			PUSH	HL		; Push mode (L) onto stack
-			CALL	COMMA 	
-			CALL	EXPR_W2		; Parse X and Y
-			POP	BC		; Pop mode (C) off stack
-PLOT_1:			VDU	19H		; VDU code for PLOT				
-			VDU	C		;  C: Mode
-			VDU	E		; DE: X
-			VDU	D
-			VDU	L		; HL: Y
-			VDU	H
-			JP	XEQ
+_parse_params_1:	
+			PUSH	BC			; Stack ARGC	
+			PUSH	HL			; Stack start address of token
+			CALL	_get_token		; Get the next token
+			LD	A, C			; A: Length of the token in characters
+			POP	DE			; Start address of token (was in HL)
+			POP	BC			; ARGC
+			OR	A			; Check for A=0 (no token found) OR at end of string
+			RET	Z
+;
+			LD	(IX+0), DE		; Store the pointer to the token
+			PUSH	HL			; DE=HL
+			POP	DE
+			CALL	_skip_spaces		; And skip HL past any spaces onto the next character
+			XOR	A
+			LD	(DE), A			; Zero-terminate the token
+			INC	IX
+			INC	IX
+			INC	IX			; Advance to next pointer position
+			INC	C			; Increment ARGC
+			LD	A, C			; Check for C >= A
+			CP	B
+			JR	C, _parse_params_1	; And loop
+			RET
 
-; MOVE x,y
+; Get the next token
+; Parameters:
+; - HL: Address of parameter string
+; Returns:
+; - HL: Address of first character after token
+; -  C: Length of token (in characters)
 ;
-MOVE:			CALL	EXPR_W2		; Parse X and Y
-			LD	C, 04H		; Plot mode 04H (Move)
-			JR	PLOT_1		; Plot
+_get_token:		LD	C, 0			; Initialise length
+@@:			LD	A, (HL)			; Get the character from the parameter string
+			OR	A			; Exit if 0 (end of parameter string in MOS)
+			RET 	Z
+			CP	13			; Exit if CR (end of parameter string in BBC BASIC)
+			RET	Z
+			CP	' '			; Exit if space (end of token)
+			RET	Z
+			INC	HL			; Advance to next character
+			INC 	C			; Increment length
+			JR	@B
+	
+; Skip spaces in the parameter string
+; Parameters:
+; - HL: Address of parameter string
+; Returns:
+; - HL: Address of next none-space character
+;    F: Z if at end of string, otherwise NZ if there are more tokens to be parsed
+;
+_skip_spaces:		LD	A, (HL)			; Get the character from the parameter string	
+			CP	' '			; Exit if not space
+			RET	NZ
+			INC	HL			; Advance to next character
+			JR	_skip_spaces		; Increment length	
 
-; DRAW x1,y1
-; DRAW x1,y1,x2,y2
+; Storage
 ;
-DRAW:			CALL	EXPR_W2		; Get X1 and Y1
-			CALL	NXT		; Are there any more parameters?
-			CP	','
-			LD	C, 05h		; Code for LINE
-			JR	NZ, PLOT_1	; No, so just do DRAW x1,y1
-			VDU	19h		; Move to the first coordinates
-			VDU	04h
-			VDU	E
-			VDU	D
-			VDU	L
-			VDU	H
-			CALL	COMMA
-			PUSH	BC
-			CALL	EXPR_W2		; Get X2 and Y2
-			POP	BC
-			JR	PLOT_1		; Now DRAW the line to those positions
-			
-			
-			
+_sps:			DS	3			; Storage for the stack pointer
+_argv_ptrs:		BLKP	argv_ptrs_max, 0	; Storage for the argv array pointers
 
 ; Begin ram.asm
 ;

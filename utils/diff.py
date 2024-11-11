@@ -146,7 +146,7 @@ def merge_diff_and_listing(diff_path, list_path, output_path):
         print(f"Error deleting file {diff_path}: {e}")
 
 if __name__ == '__main__':
-    source_filename = 'exec'
+    source_filename = 'agon_sound'
     source_file_extension = 'asm'
 
     # Get file paths

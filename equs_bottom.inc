@@ -1,6 +1,6 @@
 ; --- Begin equs.inc ---
-OC:			EQU     STAVAR+15*4     ; CODE ORIGIN (O%)
-PC:			EQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)
+OC:			EQU     15*4+STAVAR     ; CODE ORIGIN (O%)
+PC:			EQU     16*4+STAVAR     ; PROGRAM COUNTER (P%)
 VDU_BUFFER:		EQU	ACCS		; Storage for VDU commands
 ; --- End equs.inc ---
 

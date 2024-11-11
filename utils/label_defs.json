@@ -4707,7 +4707,7 @@
         {
             "def_file": "equs_bottom.inc",
             "def_line": 2,
-            "def_content": "OC:\t\t\tEQU     STAVAR+15*4     ; CODE ORIGIN (O%)"
+            "def_content": "OC:\t\t\tEQU     15*4+STAVAR     ; CODE ORIGIN (O%)"
         }
     ],
     "ODD": [
@@ -5414,7 +5414,7 @@
         {
             "def_file": "equs_bottom.inc",
             "def_line": 3,
-            "def_content": "PC:\t\t\tEQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)"
+            "def_content": "PC:\t\t\tEQU     16*4+STAVAR     ; PROGRAM COUNTER (P%)"
         }
     ],
     "PC_ALT1": [

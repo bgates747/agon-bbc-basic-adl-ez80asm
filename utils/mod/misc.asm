@@ -452,275 +452,238 @@ OFFSET:			EQU     CFH-TOKLO		; Offset to the parameterised SET versions
 
 ; End equs_top.inc
 
-; Defined in eval.asm
-BRAKET: DL 0x040000
-; Defined in eval.asm
-COMMA: DL 0x040000
-; Defined in eval.asm
-COUNT0: DL 0x040000
-; Defined in eval.asm
-EXPRI: DL 0x040000
-; Defined in patch.asm
-EXPR_W2: DL 0x040000
-; Defined in eval.asm
-INKEY1: DL 0x040000
-; Defined in eval.asm
-NXT: DL 0x040000
-; Defined in patch.asm
-OSWRCH: DL 0x040000
-; Defined in exec.asm
-VDU: DL 0x040000
-; Defined in exec.asm
-XEQ: DL 0x040000
 
 BEGIN_HEREISH:
 
 ;
-; Title:	BBC Basic for AGON - Graphics stuff
+; Title:	BBC Basic for AGON - Miscellaneous helper functions
 ; Author:	Dean Belfield
 ; Created:	12/05/2023
-; Last Updated:	07/06/2023
+; Last Updated:	12/05/2023
 ;
 ; Modinfo:
-; 07/06/2023:	Modified to run in ADL mode
-			
-			; .ASSUME	ADL = 1
-				
+
 			; INCLUDE	"equs.inc"
-			; INCLUDE "macros.inc"
-			; INCLUDE "mos_api.inc"	; In MOS/src
-		
+			; INCLUDE	"macros.inc"
+
+			; .ASSUME	ADL = 1
+
 			; SEGMENT CODE
 				
-			; XDEF	CLG
-			; XDEF	CLRSCN
-			; XDEF	MODE
-			; XDEF	COLOUR
-			; XDEF	GCOL
-			; XDEF	MOVE
-			; XDEF	PLOT
-			; XDEF	DRAW
-			; XDEF	POINT
-			; XDEF	GETSCHR
-			
-			; XREF	OSWRCH
-			; XREF	ASC_TO_NUMBER
-			; XREF	EXTERR
-			; XREF	EXPRI
-			; XREF	COMMA
-			; XREF	XEQ
-			; XREF	NXT
-			; XREF	BRAKET
-			; XREF	COUNT0
-			; XREF	CRTONULL
-			; XREF	NULLTOCR
-			; XREF	CRLF
-			; XREF	EXPR_W2
-			; XREF	INKEY1
-			
-; CLG: clears the graphics area
-;
-CLG:			VDU	10h
-			JP	XEQ
-
-; CLS: clears the text area
-;
-CLRSCN:			LD	A, 0Ch
-			JP	OSWRCH
+			; XDEF	ASC_TO_NUMBER
+			; XDEF	SWITCH_A
+			; XDEF	NULLTOCR
+			; XDEF	CRTONULL
+			; XDEF	CSTR_FNAME
+			; XDEF	CSTR_LINE
+			; XDEF	CSTR_FINDCH
+			; XDEF	CSTR_ENDSWITH
+			; XDEF	CSTR_CAT
 				
-; MODE n: Set video mode
-;
-MODE:			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	4, (IX+sysvar_vpd_pflags)
-			CALL    EXPRI
-			EXX
-			VDU	16H			; Mode change
-			VDU	L
-			MOSCALL	mos_sysvars		
-@@:			BIT	4, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result			
-			POP	IX
-			JP	XEQ
-			
-; GET(x,y): Get the ASCII code of a character on screen
-;
-GETSCHR:		INC	IY
-			CALL    EXPRI      		; Get X coordinate
-			EXX
-			LD	(VDU_BUFFER+0), HL
-			CALL	COMMA		
-			CALL	EXPRI			; Get Y coordinate
-			EXX 
-			LD	(VDU_BUFFER+2), HL
-			CALL	BRAKET			; Closing bracket		
-;
-			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	1, (IX+sysvar_vpd_pflags)
-			VDU	23
-			VDU	0
-			VDU	vdp_scrchar
-			VDU	(VDU_BUFFER+0)
-			VDU	(VDU_BUFFER+1)
-			VDU	(VDU_BUFFER+2)
-			VDU	(VDU_BUFFER+3)
-@@:			BIT	1, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result
-			LD	A, (IX+sysvar_scrchar)	; Fetch the result in A
-			OR	A			; Check for 00h
-			SCF				; C = character map
-			JR	NZ, @F			; We have a character, so skip next bit
-			XOR	A			; Clear carry
-			DEC	A			; Set A to FFh
-@@:			POP	IX			
-			JP	INKEY1			; Jump back to the GET command
+			; XREF	OSWRCH
+			; XREF	KEYWDS
+			; XREF	KEYWDL
 
-; POINT(x,y): Get the pixel colour of a point on screen
+; Read a number and convert to binary
+; If prefixed with &, will read as hex, otherwise decimal
+;   Inputs: HL: Pointer in string buffer
+;  Outputs: HL: Updated text pointer
+;           DE: Value
+;            A: Terminator (spaces skipped)
+; Destroys: A,D,E,H,L,F
 ;
-POINT:			CALL    EXPRI      		; Get X coordinate
-			EXX
-			LD	(VDU_BUFFER+0), HL
-			CALL	COMMA		
-			CALL	EXPRI			; Get Y coordinate
-			EXX 
-			LD	(VDU_BUFFER+2), HL
-			CALL	BRAKET			; Closing bracket		
+ASC_TO_NUMBER:		PUSH	BC			; Preserve BC
+			LD	DE, 0			; Initialise DE
+			CALL	SKIPSPC			; Skip whitespace
+			LD	A, (HL)			; Read first character
+			CP	'&'			; Is it prefixed with '&' (HEX number)?
+			JR	NZ, ASC_TO_NUMBER3	; Jump to decimal parser if not
+			INC	HL			; Otherwise fall through to ASC_TO_HEX
 ;
-			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	2, (IX+sysvar_vpd_pflags)
-			VDU	23
-			VDU	0
-			VDU	vdp_scrpixel
-			VDU	(VDU_BUFFER+0)
-			VDU	(VDU_BUFFER+1)
-			VDU	(VDU_BUFFER+2)
-			VDU	(VDU_BUFFER+3)
-@@:			BIT	2, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result
+ASC_TO_NUMBER1:		LD	A, (HL)			; Fetch the character
+			CALL    UPPERC			; Convert to uppercase  
+			SUB	'0'			; Normalise to 0
+			JR 	C, ASC_TO_NUMBER4	; Return if < ASCII '0'
+			CP 	10			; Check if >= 10
+			JR 	C,ASC_TO_NUMBER2	; No, so skip next bit
+			SUB 	7			; Adjust ASCII A-F to nibble
+			CP 	16			; Check for > F
+			JR 	NC, ASC_TO_NUMBER4	; Return if out of range
+ASC_TO_NUMBER2:		EX 	DE, HL 			; Shift DE left 4 times
+			ADD	HL, HL	
+			ADD	HL, HL	
+			ADD	HL, HL	
+			ADD	HL, HL	
+			EX	DE, HL	
+			OR      E			; OR the new digit in to the least significant nibble
+			LD      E, A
+			INC     HL			; Onto the next character
+			JR      ASC_TO_NUMBER1		; And loop
 ;
-; Return the data as a 1 byte index
-;
-			LD	L, (IX+sysvar_scrpixelIndex)
-			POP	IX	
-			JP	COUNT0
+ASC_TO_NUMBER3:		LD	A, (HL)
+			SUB	'0'			; Normalise to 0
+			JR	C, ASC_TO_NUMBER4	; Return if < ASCII '0'
+			CP	10			; Check if >= 10
+			JR	NC, ASC_TO_NUMBER4	; Return if >= 10
+			EX 	DE, HL 			; Stick DE in HL
+			LD	B, H 			; And copy HL into BC
+			LD	C, L	
+			ADD	HL, HL 			; x 2 
+			ADD	HL, HL 			; x 4
+			ADD	HL, BC 			; x 5
+			ADD	HL, HL 			; x 10
+			EX	DE, HL
+			ADD8U_DE 			; Add A to DE (macro)
+			INC	HL
+			JR	ASC_TO_NUMBER3
+ASC_TO_NUMBER4:		POP	BC 			; Fall through to SKIPSPC here
 
+; Skip a space
+; HL: Pointer in string buffer
+; 
+SKIPSPC:			LD      A, (HL)
+			CP      ' '
+			RET     NZ
+			INC     HL
+			JR      SKIPSPC
 
-; COLOUR colour
-; COLOUR L,P
-; COLOUR L,R,G,B
+; Skip a string
+; HL: Pointer in string buffer
 ;
-COLOUR:			CALL	EXPRI			; The colour / mode
-			EXX
-			LD	A, L 
-			LD	(VDU_BUFFER+0), A	; Store first parameter
-			CALL	NXT			; Are there any more parameters?
-			CP	','
-			JR	Z, COLOUR_1		; Yes, so we're doing a palette change next
-;
-			VDU	11h			; Just set the colour
-			VDU	(VDU_BUFFER+0)
-			JP	XEQ			
-;
-COLOUR_1:		CALL	COMMA
-			CALL	EXPRI			; Parse R (OR P)
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+1), A
-			CALL	NXT			; Are there any more parameters?
-			CP	','
-			JR	Z, COLOUR_2		; Yes, so we're doing COLOUR L,R,G,B
-;
-			VDU	13h			; VDU:COLOUR
-			VDU	(VDU_BUFFER+0)		; Logical Colour
-			VDU	(VDU_BUFFER+1)		; Palette Colour
-			VDU	0			; RGB set to 0
-			VDU	0
-			VDU	0
-			JP	XEQ
-;
-COLOUR_2:		CALL	COMMA
-			CALL	EXPRI			; Parse G
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+2), A
-			CALL	COMMA
-			CALL	EXPRI			; Parse B
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+3), A							
-			VDU	13h			; VDU:COLOUR
-			VDU	(VDU_BUFFER+0)		; Logical Colour
-			VDU	FFh			; Physical Colour (-1 for RGB mode)
-			VDU	(VDU_BUFFER+1)		; R
-			VDU	(VDU_BUFFER+2)		; G
-			VDU	(VDU_BUFFER+3)		; B
-			JP	XEQ
+SKIPNOTSP:		LD	A, (HL)
+			CP	' '
+			RET	Z 
+			INC	HL 
+			JR	SKIPNOTSP
 
-; GCOL mode,colour
+; Convert a character to upper case
+;  A: Character to convert
 ;
-GCOL:			CALL	EXPRI			; Parse MODE
-			EXX
-			LD	A, L 
-			LD	(VDU_BUFFER+0), A	
-			CALL	COMMA
-;
-			CALL	EXPRI			; Parse Colour
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+1), A
-;
-			VDU	12h			; VDU:GCOL
-			VDU	(VDU_BUFFER+0)		; Mode
-			VDU	(VDU_BUFFER+1)		; Colour
-			JP	XEQ
-			
-; PLOT mode,x,y
-;
-PLOT:			CALL	EXPRI		; Parse mode
-			EXX					
-			PUSH	HL		; Push mode (L) onto stack
-			CALL	COMMA 	
-			CALL	EXPR_W2		; Parse X and Y
-			POP	BC		; Pop mode (C) off stack
-PLOT_1:			VDU	19H		; VDU code for PLOT				
-			VDU	C		;  C: Mode
-			VDU	E		; DE: X
-			VDU	D
-			VDU	L		; HL: Y
-			VDU	H
-			JP	XEQ
+UPPERC:  		AND     7FH
+			CP      '`'
+			RET     C
+			AND     5FH			; Convert to upper case
+			RET			
 
-; MOVE x,y
+; Switch on A - lookup table immediately after call
+;  A: Index into lookup table
 ;
-MOVE:			CALL	EXPR_W2		; Parse X and Y
-			LD	C, 04H		; Plot mode 04H (Move)
-			JR	PLOT_1		; Plot
+SWITCH_A:		EX	(SP), HL		; Swap HL with the contents of the top of the stack
+			ADD	A, A			; Multiply A by two
+			ADD8U_HL 			; Add to HL (macro)
+			LD	A, (HL)			; follow the call. Fetch an address from the
+			INC	HL 			; table.
+			LD	H, (HL)
+			LD	L, A
+			EX	(SP), HL		; Swap this new address back, restores HL
+			RET				; Return program control to this new address
 
-; DRAW x1,y1
-; DRAW x1,y1,x2,y2
-;
-DRAW:			CALL	EXPR_W2		; Get X1 and Y1
-			CALL	NXT		; Are there any more parameters?
-			CP	','
-			LD	C, 05h		; Code for LINE
-			JR	NZ, PLOT_1	; No, so just do DRAW x1,y1
-			VDU	19h		; Move to the first coordinates
-			VDU	04h
-			VDU	E
-			VDU	D
-			VDU	L
-			VDU	H
-			CALL	COMMA
-			PUSH	BC
-			CALL	EXPR_W2		; Get X2 and Y2
+; Convert the buffer to a null terminated string and back
+; HL: Buffer address
+;			
+NULLTOCR:		PUSH 	BC
+			LD	B, 0
+			LD	C, CR 
+			JR	CRTONULL0
+;			
+CRTONULL:		PUSH	BC
+			LD	B, CR
+			LD	C, 0	
+;			
+CRTONULL0:		PUSH	HL
+CRTONULL1:		LD	A, (HL)
+			CP 	B 
+			JR	Z, CRTONULL2
+			INC	HL 
+			JR	CRTONULL1
+CRTONULL2:		LD	(HL), C
+			POP 	HL 
 			POP	BC
-			JR	PLOT_1		; Now DRAW the line to those positions
+			RET
 			
+; Copy a filename to DE and zero terminate it
+; HL: Source
+; DE: Destination (ACCS)
+;
+CSTR_FNAME:		LD	A, (HL)			; Get source
+			CP	32			; Is it space
+			JR	Z, @F	
+			CP	CR			; Or is it CR
+			JR	Z, @F
+			LD	(DE), A			; No, so store
+			INC	HL			; Increment
+			INC	DE			
+			JR	CSTR_FNAME		; And loop
+@@:			XOR	A			; Zero terminate the target string
+			LD	(DE), A
+			INC	DE			; And point to next free address
+			RET
 			
+; Copy a CR terminated line to DE and zero terminate it
+; HL: Source
+; DE: Destination (ACCS)
+;
+CSTR_LINE:		LD	A, (HL)			; Get source
+			CP	CR			; Is it CR
+			JR	Z, @F
+			LD	(DE), A			; No, so store
+			INC	HL			; Increment
+			INC	DE			
+			JR	CSTR_LINE		; And loop
+@@:			XOR	A			; Zero terminate the target string
+			LD	(DE), A
+			INC	DE			; And point to next free address
+			RET
 			
-
+; Find the first occurrence of a character (case sensitive)
+; HL: Source
+;  C: Character to find
+; Returns:
+; HL: Pointer to character, or end of string marker
+;
+CSTR_FINDCH:		LD	A, (HL)			; Get source
+			CP	C			; Is it our character?
+			RET	Z			; Yes, so exit
+			OR	A			; Is it the end of string?
+			RET	Z			; Yes, so exit
+			INC	HL
+			JR	CSTR_FINDCH
+			
+; Check whether a string ends with another string (case insensitive)
+; HL: Source
+; DE: The substring we want to test with
+; Returns:
+;  F: Z if HL ends with DE, otherwise NZ
+;
+CSTR_ENDSWITH:		LD	A, (HL)			; Get the source string byte
+			CALL	UPPERC			; Convert to upper case
+			LD	C, A
+			LD	A, (DE)			; Get the substring byte
+			CP	C
+			RET	NZ			; Return NZ if at any point the strings don't match
+			OR	C			; Check whether both bytes are zero
+			RET	Z			; If so, return, as we have reached the end of both strings
+			INC	HL
+			INC	DE
+			JR	CSTR_ENDSWITH		; And loop
+			
+; Concatenate a string onto the end of another string
+; HL: Source
+; DE: Second string
+;
+CSTR_CAT:		LD	A, (HL)			; Loop until we find the end of the first string
+			OR	A
+			JR	Z, CSTR_CAT_1
+			INC	HL
+			JR	CSTR_CAT
+;
+CSTR_CAT_1:		LD	A, (DE)			; Copy the second string onto the end of the first string
+			LD	(HL), A
+			OR	A			; Check for end of string
+			RET	Z			; And return
+			INC	HL
+			INC	DE
+			JR	CSTR_CAT_1		; Loop until finished						
 ; Begin ram.asm
 ;
 ; Title:	BBC Basic Interpreter - Z80 version

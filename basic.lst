@@ -382,17 +382,17 @@ PC     Output      Line
        2E 62 69 6E 
        00          
 040015             0035*  
-040015 FF FF FF FF 0036*  			ALIGN	64
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF    
+040015 00 00 00 00 0036*  			ALIGN	64
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00    
 040040             0037*  
 040040 4D 4F 53    0038*  			DB	"MOS"				; Flag for MOS - to confirm this is a valid MOS command
 040043 00          0039*  			DB	00h				; MOS header version 0
@@ -12627,27 +12627,27 @@ PC     Output      Line
 0449AD             0058*  			; XDEF	RAM_END
 0449AD             0059*  			; XDEF	USER
 0449AD             0060*  
-0449AD FF FF FF FF 0061*  			ALIGN 		256		; ACCS, BUFFER & STAVAR must be on page boundaries
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF    
+0449AD 00 00 00 00 0061*  			ALIGN 		256		; ACCS, BUFFER & STAVAR must be on page boundaries
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00    
 044A00             0062*  RAM_START:
 044A00             0063*  ;
 044A00 00 00 00 00 0064*  ACCS:           BLKB    256,0             ; String Accumulator
@@ -12909,50 +12909,50 @@ PC     Output      Line
 044D50             0002*  
 044D50             0003*  			; .ASSUME	ADL = 1
 044D50             0004*  
-044D50 FF FF FF FF 0005*  			ALIGN	256
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
-       FF FF FF FF 
+044D50 00 00 00 00 0005*  			ALIGN	256
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
+       00 00 00 00 
 044E00             0006*  USER:							; Must be aligned on a page boundary
 044E00             0019       include "equs_bottom.inc"
 044E00             0001*  ; --- Begin equs.inc ---

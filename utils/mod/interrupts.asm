@@ -452,275 +452,98 @@ OFFSET:			EQU     CFH-TOKLO		; Offset to the parameterised SET versions
 
 ; End equs_top.inc
 
-; Defined in eval.asm
-BRAKET: DL 0x040000
-; Defined in eval.asm
-COMMA: DL 0x040000
-; Defined in eval.asm
-COUNT0: DL 0x040000
-; Defined in eval.asm
-EXPRI: DL 0x040000
 ; Defined in patch.asm
-EXPR_W2: DL 0x040000
-; Defined in eval.asm
-INKEY1: DL 0x040000
-; Defined in eval.asm
-NXT: DL 0x040000
-; Defined in patch.asm
-OSWRCH: DL 0x040000
-; Defined in exec.asm
-VDU: DL 0x040000
-; Defined in exec.asm
-XEQ: DL 0x040000
+ESCSET: DL 0x040000
 
 BEGIN_HEREISH:
 
 ;
-; Title:	BBC Basic for AGON - Graphics stuff
+; Title:	BBC Basic for AGON - Interrupts
 ; Author:	Dean Belfield
 ; Created:	12/05/2023
 ; Last Updated:	07/06/2023
 ;
 ; Modinfo:
 ; 07/06/2023:	Modified to run in ADL mode
-			
+
 			; .ASSUME	ADL = 1
 				
+			; INCLUDE	"macros.inc"
 			; INCLUDE	"equs.inc"
-			; INCLUDE "macros.inc"
 			; INCLUDE "mos_api.inc"	; In MOS/src
-		
+
 			; SEGMENT CODE
 				
-			; XDEF	CLG
-			; XDEF	CLRSCN
-			; XDEF	MODE
-			; XDEF	COLOUR
-			; XDEF	GCOL
-			; XDEF	MOVE
-			; XDEF	PLOT
-			; XDEF	DRAW
-			; XDEF	POINT
-			; XDEF	GETSCHR
-			
-			; XREF	OSWRCH
-			; XREF	ASC_TO_NUMBER
-			; XREF	EXTERR
-			; XREF	EXPRI
-			; XREF	COMMA
-			; XREF	XEQ
-			; XREF	NXT
-			; XREF	BRAKET
-			; XREF	COUNT0
-			; XREF	CRTONULL
-			; XREF	NULLTOCR
-			; XREF	CRLF
-			; XREF	EXPR_W2
-			; XREF	INKEY1
-			
-; CLG: clears the graphics area
-;
-CLG:			VDU	10h
-			JP	XEQ
+			; XDEF	VBLANK_INIT
+			; XDEF	VBLANK_STOP
+			; XDEF	VBLANK_HANDLER	
 
-; CLS: clears the text area
-;
-CLRSCN:			LD	A, 0Ch
-			JP	OSWRCH
-				
-; MODE n: Set video mode
-;
-MODE:			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	4, (IX+sysvar_vpd_pflags)
-			CALL    EXPRI
-			EXX
-			VDU	16H			; Mode change
-			VDU	L
-			MOSCALL	mos_sysvars		
-@@:			BIT	4, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result			
-			POP	IX
-			JP	XEQ
-			
-; GET(x,y): Get the ASCII code of a character on screen
-;
-GETSCHR:		INC	IY
-			CALL    EXPRI      		; Get X coordinate
-			EXX
-			LD	(VDU_BUFFER+0), HL
-			CALL	COMMA		
-			CALL	EXPRI			; Get Y coordinate
-			EXX 
-			LD	(VDU_BUFFER+2), HL
-			CALL	BRAKET			; Closing bracket		
-;
-			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	1, (IX+sysvar_vpd_pflags)
-			VDU	23
-			VDU	0
-			VDU	vdp_scrchar
-			VDU	(VDU_BUFFER+0)
-			VDU	(VDU_BUFFER+1)
-			VDU	(VDU_BUFFER+2)
-			VDU	(VDU_BUFFER+3)
-@@:			BIT	1, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result
-			LD	A, (IX+sysvar_scrchar)	; Fetch the result in A
-			OR	A			; Check for 00h
-			SCF				; C = character map
-			JR	NZ, @F			; We have a character, so skip next bit
-			XOR	A			; Clear carry
-			DEC	A			; Set A to FFh
-@@:			POP	IX			
-			JP	INKEY1			; Jump back to the GET command
+			; XREF	ESCSET	
+			; XREF	KEYDOWN		; In ram.asm
+			; XREF	KEYASCII 	; In ram.asm
+			; XREF	KEYCOUNT	; In ram.asm
 
-; POINT(x,y): Get the pixel colour of a point on screen
+; Hook into the MOS VBLANK interrupt
 ;
-POINT:			CALL    EXPRI      		; Get X coordinate
-			EXX
-			LD	(VDU_BUFFER+0), HL
-			CALL	COMMA		
-			CALL	EXPRI			; Get Y coordinate
-			EXX 
-			LD	(VDU_BUFFER+2), HL
-			CALL	BRAKET			; Closing bracket		
-;
-			PUSH	IX			; Get the system vars in IX
-			MOSCALL	mos_sysvars		; Reset the semaphore
-			RES	2, (IX+sysvar_vpd_pflags)
-			VDU	23
-			VDU	0
-			VDU	vdp_scrpixel
-			VDU	(VDU_BUFFER+0)
-			VDU	(VDU_BUFFER+1)
-			VDU	(VDU_BUFFER+2)
-			VDU	(VDU_BUFFER+3)
-@@:			BIT	2, (IX+sysvar_vpd_pflags)
-			JR	Z, @B			; Wait for the result
-;
-; Return the data as a 1 byte index
-;
-			LD	L, (IX+sysvar_scrpixelIndex)
-			POP	IX	
-			JP	COUNT0
+VBLANK_INIT:		DI
+			LD		HL, VBLANK_HANDLER		; this interrupt handler routine who's
+			LD		E, 32h				; Set up the VBlank Interrupt Vector
+			MOSCALL		mos_setintvector
+			; EX		HL, DE 				; DEU: Pointer to the MOS interrupt vector
+			ex de,hl
+			LD		HL, VBLANK_HANDLER_JP + 1	; Pointer to the JP address in this segment
+			LD		(HL), DE			; Self-modify the code
+			EI	
+			RET
 
+; Unhook the custom VBLANK interrupt
+;
+VBLANK_STOP:		DI
+			LD		HL, VBLANK_HANDLER_JP + 1	; Pointer to the JP address in this segment
+			LD		DE, (HL)			
+			EX		DE, HL 				; HLU: Address of MOS interrupt vector
+			LD		E, 32h
+			MOSCALL		mos_setintvector		; Restore the MOS interrupt vector
+			EI
+			RET 
 
-; COLOUR colour
-; COLOUR L,P
-; COLOUR L,R,G,B
+; A safe LIS call to ESCSET
+; 
+DO_KEYBOARD:		MOSCALL		mos_sysvars			; Get the system variables
+			LD		HL, KEYCOUNT 			; Check whether the keycount has changed
+			LD		A, (IX + sysvar_vkeycount)	; by comparing the MOS copy
+			CP 		(HL)				; with our local copy
+			JR		NZ, DO_KEYBOARD_1		; Yes it has, so jump to the next bit
 ;
-COLOUR:			CALL	EXPRI			; The colour / mode
-			EXX
-			LD	A, L 
-			LD	(VDU_BUFFER+0), A	; Store first parameter
-			CALL	NXT			; Are there any more parameters?
-			CP	','
-			JR	Z, COLOUR_1		; Yes, so we're doing a palette change next
+DO_KEYBOARD_0:		XOR		A 				; Clear the keyboard values 
+			LD		(KEYASCII), A
+			LD		(KEYDOWN), A 
+			RET	 					; And return
 ;
-			VDU	11h			; Just set the colour
-			VDU	(VDU_BUFFER+0)
-			JP	XEQ			
-;
-COLOUR_1:		CALL	COMMA
-			CALL	EXPRI			; Parse R (OR P)
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+1), A
-			CALL	NXT			; Are there any more parameters?
-			CP	','
-			JR	Z, COLOUR_2		; Yes, so we're doing COLOUR L,R,G,B
-;
-			VDU	13h			; VDU:COLOUR
-			VDU	(VDU_BUFFER+0)		; Logical Colour
-			VDU	(VDU_BUFFER+1)		; Palette Colour
-			VDU	0			; RGB set to 0
-			VDU	0
-			VDU	0
-			JP	XEQ
-;
-COLOUR_2:		CALL	COMMA
-			CALL	EXPRI			; Parse G
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+2), A
-			CALL	COMMA
-			CALL	EXPRI			; Parse B
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+3), A							
-			VDU	13h			; VDU:COLOUR
-			VDU	(VDU_BUFFER+0)		; Logical Colour
-			VDU	FFh			; Physical Colour (-1 for RGB mode)
-			VDU	(VDU_BUFFER+1)		; R
-			VDU	(VDU_BUFFER+2)		; G
-			VDU	(VDU_BUFFER+3)		; B
-			JP	XEQ
+DO_KEYBOARD_1:		LD		(HL), A 			; Store the updated local copy of keycount 
+			LD		A, (IX + sysvar_vkeydown)	; Fetch key down value (1 = key down, 0 = key up)
+			OR		A 
+			JR		Z, DO_KEYBOARD_0		; If it is key up, then clear the keyboard values
+;			
+			LD		(KEYDOWN), A 			; Store the keydown value
+			LD		A, (IX + sysvar_keyascii)	; Fetch key ASCII value
+			LD		(KEYASCII), A 			; Store locally
+			CP		1Bh				; Is it escape?
+			CALL		Z, ESCSET			; Yes, so set the escape flags
+			RET						; Return to the interrupt handler
 
-; GCOL mode,colour
+VBLANK_HANDLER:		DI 
+			PUSH		AF 
+			PUSH		HL
+			PUSH		IX
+			CALL		DO_KEYBOARD
+			POP		IX 
+			POP		HL
+			POP		AF 
 ;
-GCOL:			CALL	EXPRI			; Parse MODE
-			EXX
-			LD	A, L 
-			LD	(VDU_BUFFER+0), A	
-			CALL	COMMA
+; Finally jump to the MOS interrupt
 ;
-			CALL	EXPRI			; Parse Colour
-			EXX
-			LD	A, L
-			LD	(VDU_BUFFER+1), A
-;
-			VDU	12h			; VDU:GCOL
-			VDU	(VDU_BUFFER+0)		; Mode
-			VDU	(VDU_BUFFER+1)		; Colour
-			JP	XEQ
-			
-; PLOT mode,x,y
-;
-PLOT:			CALL	EXPRI		; Parse mode
-			EXX					
-			PUSH	HL		; Push mode (L) onto stack
-			CALL	COMMA 	
-			CALL	EXPR_W2		; Parse X and Y
-			POP	BC		; Pop mode (C) off stack
-PLOT_1:			VDU	19H		; VDU code for PLOT				
-			VDU	C		;  C: Mode
-			VDU	E		; DE: X
-			VDU	D
-			VDU	L		; HL: Y
-			VDU	H
-			JP	XEQ
-
-; MOVE x,y
-;
-MOVE:			CALL	EXPR_W2		; Parse X and Y
-			LD	C, 04H		; Plot mode 04H (Move)
-			JR	PLOT_1		; Plot
-
-; DRAW x1,y1
-; DRAW x1,y1,x2,y2
-;
-DRAW:			CALL	EXPR_W2		; Get X1 and Y1
-			CALL	NXT		; Are there any more parameters?
-			CP	','
-			LD	C, 05h		; Code for LINE
-			JR	NZ, PLOT_1	; No, so just do DRAW x1,y1
-			VDU	19h		; Move to the first coordinates
-			VDU	04h
-			VDU	E
-			VDU	D
-			VDU	L
-			VDU	H
-			CALL	COMMA
-			PUSH	BC
-			CALL	EXPR_W2		; Get X2 and Y2
-			POP	BC
-			JR	PLOT_1		; Now DRAW the line to those positions
-			
-			
-			
-
+VBLANK_HANDLER_JP:	JP		0				; This is self-modified by VBLANK_INIT				
 ; Begin ram.asm
 ;
 ; Title:	BBC Basic Interpreter - Z80 version
