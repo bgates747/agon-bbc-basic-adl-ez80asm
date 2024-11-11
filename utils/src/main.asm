@@ -16,7 +16,7 @@
 ; 15/11/2023:	Fixed bug in ONEDIT1 for OSLOAD_TXT, Startup message now includes Agon version
 ; 26/11/2023:	Fixed bug in AUTOLOAD
 
-			.ASSUME	ADL = 1
+			; .ASSUME	ADL = 1
 
 			; INCLUDE	"equs.inc"
 

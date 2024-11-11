@@ -12,7 +12,7 @@
 ; 13/08/2023:	Added INKEY(-n) support (requires MOS 1.04)
 ; 17/08/2023:	Added binary constants
 
-			.ASSUME	ADL = 1
+			; .ASSUME	ADL = 1
 
 			; INCLUDE	"equs.inc"
 			; INCLUDE "macros.inc"

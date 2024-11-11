@@ -12,7 +12,7 @@
 ; 06/06/2023:	Modified to run in ADL mode
 ; 26/06/2023:	Added temporary stores R0 and R1
 
-			.ASSUME	ADL = 1
+			; .ASSUME	ADL = 1
 
 			; DEFINE	LORAM, SPACE = ROM
 			; SEGMENT LORAM

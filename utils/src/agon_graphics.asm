@@ -7,7 +7,7 @@
 ; Modinfo:
 ; 07/06/2023:	Modified to run in ADL mode
 			
-			.ASSUME	ADL = 1
+			; .ASSUME	ADL = 1
 				
 			; INCLUDE	"equs.inc"
 			; INCLUDE "macros.inc"

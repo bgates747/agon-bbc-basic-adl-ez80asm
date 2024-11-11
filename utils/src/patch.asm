@@ -8,7 +8,7 @@
 ; 11/07/2023:	Fixed *BYE for ADL mode
 ; 15/11/2023:	Improved OSLOAD_TXT; now handles LF terminated files, files with no trailing LF or CR/LF at end
 
-			.ASSUME	ADL = 1
+			; .ASSUME	ADL = 1
 				
 			; INCLUDE	"equs.inc"
 			; INCLUDE "macros.inc"
