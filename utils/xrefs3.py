@@ -130,7 +130,7 @@ if __name__ == "__main__":
     # List of files to scan for symbol definitions and references
     source_files = [
         # "agon_graphics.asm", # done
-        "agon_sound.asm", # Macro [VDU] in "macros.inc" line 36 - Unknown label, invalid number 'OSWRCH' CALL    OSWRCH Invoked from "agon_sound.asm" line 85 as VDU     23                      ; Send the sound command
+        # "agon_sound.asm", # Macro [VDU] in "macros.inc" line 36 - Unknown label, invalid number 'OSWRCH' CALL    OSWRCH Invoked from "agon_sound.asm" line 85 as VDU     23                      ; Send the sound command
         # "eval.asm", # done
         # "exec.asm", # done
         # "fpp.asm", # done
@@ -139,7 +139,7 @@ if __name__ == "__main__":
         # "interrupts.asm", # done
         # "main.asm", # done
         # "misc.asm", # done
-        # "patch.asm", # done
+        "patch.asm", # done
         # "sorry.asm", # done
         # "bbcbasic24.asm",
     ]

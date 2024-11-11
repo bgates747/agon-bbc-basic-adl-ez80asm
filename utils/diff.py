@@ -146,7 +146,7 @@ def merge_diff_and_listing(diff_path, list_path, output_path):
         print(f"Error deleting file {diff_path}: {e}")
 
 if __name__ == '__main__':
-    source_filename = 'agon_sound'
+    source_filename = 'patch'
     source_file_extension = 'asm'
 
     # Get file paths
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     diff_output_path = f'utils/mod/{source_filename}.dif.{source_file_extension}'
 
     # Configurable parameters
-    window_size = 16               # Adjust window size as needed
+    window_size = 8               # Adjust window size as needed
     step_size = window_size        # Window advances by one window at a time
     min_match_percentage = 60      # Minimum percentage of matching lines to consider a match
 
@@ -170,24 +170,24 @@ if __name__ == '__main__':
     # Merge the diff file and the listing file
     merge_diff_and_listing(diff_output_path, list_path, final_output_path)
 
-    # Delete the temporary files once processing is complete
-    try:
-        os.remove(file1_path)
-        print(f"Deleted temporary file: {file1_path}")
-    except OSError as e:
-        print(f"Error deleting file {file1_path}: {e}")
+    # # Delete the temporary files once processing is complete
+    # try:
+    #     os.remove(file1_path)
+    #     print(f"Deleted temporary file: {file1_path}")
+    # except OSError as e:
+    #     print(f"Error deleting file {file1_path}: {e}")
 
-    try:
-        os.remove(diff_output_path)
-        print(f"Deleted temporary file: {diff_output_path}")
-    except OSError as e:
-        print(f"Error deleting file {diff_output_path}: {e}")
+    # try:
+    #     os.remove(diff_output_path)
+    #     print(f"Deleted temporary file: {diff_output_path}")
+    # except OSError as e:
+    #     print(f"Error deleting file {diff_output_path}: {e}")
 
-    try:
-        os.remove(list_path)
-        print(f"Deleted temporary file: {list_path}")
-    except OSError as e:
-        print(f"Error deleting file {list_path}: {e}")
+    # try:
+    #     os.remove(list_path)
+    #     print(f"Deleted temporary file: {list_path}")
+    # except OSError as e:
+    #     print(f"Error deleting file {list_path}: {e}")
     
 
 
