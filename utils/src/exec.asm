@@ -196,7 +196,7 @@ CMDTAB:			DW24  AUTO			; C6H
 			DW24  MOVE			; ECH
 			DW24  NEXT_EX			; EDH
 			DW24  ON_EX_			; EEH
-			DW24  VDU_EX			; EFH
+			DW24  VDU			; EFH
 			DW24  PLOT			; F0H
 			DW24  PRINT_			; F1H
 			DW24  PROC_EX			; F2H
@@ -1479,7 +1479,7 @@ TRACE1:			LD      (TRACEN),HL
 
 ; VDU expr,expr;....
 ;
-VDU_EX:			LD	IX,BUFFER		; Storage for the VDU stream
+VDU:			LD	IX,BUFFER		; Storage for the VDU stream
 VDU1:			PUSH	IX
 			CALL    EXPRI			; Fetch the VDU character
 			POP	IX

@@ -1,5 +1,6 @@
 PC     Output      Line
-040000 C3 5C 04 00 0001   SKIP_AHEAD: JP BEGIN_HEREISH-0x040000
+
+040000 C3 5C 04 00 0001   SKIP_AHEAD: JP BEGIN_HEREISH-0x040000
 040004             0002   
 040004             0003       include "../src/mos_api.inc"
 040004             0001*  ;
@@ -358,7 +359,7 @@ PC     Output      Line
 040004             0011*  ; Modinfo:
 040004             0012*  ; 06/06/2023:	Modified to run in ADL mode
 040004             0013*  ; 26/06/2023:	Added temporary stores R0 and R1
-040004             0014*  
+040004             0014*  ; .ASSUME
 040004             0015*  			; .ASSUME	ADL = 1
 040004             0016*  
 040004             0017*  			; DEFINE	LORAM, SPACE = ROM
@@ -608,7 +609,7 @@ PC     Output      Line
 04045C             0005*  ; Last Updated:	12/05/2023
 04045C             0006*  ;
 04045C             0007*  ; Modinfo:
-04045C             0008*  
+04045C             0008*  ; .ASSUME
 04045C             0009*  			; .ASSUME	ADL = 1
 04045C             0010*  
 04045C             0011*  			; INCLUDE	"equs.inc"

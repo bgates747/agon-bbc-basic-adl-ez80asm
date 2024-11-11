@@ -370,8 +370,7 @@ UPPRC:  		AND     7FH
 ; Each command has bit 7 of the last character set, and is followed by the address of the handler
 ; These must be in alphabetical order
 ;		
-COMDS:  		
-			DB	"AS","M"+80h		; ASM
+COMDS:  		DB	"AS","M"+80h		; ASM
 			DW	STAR_ASM
 			DB	"BY","E"+80h		; BYE
 			DW	STAR_BYE
@@ -382,18 +381,6 @@ COMDS:
 			DB	"VERSIO","N"+80h	; VERSION
 			DW	STAR_VERSION
 			DB	FFh
-
-			; DB	"AS","M"+80h		; ASM
-			; dl	STAR_ASM
-			; DB	"BY","E"+80h		; BYE
-			; dl	STAR_BYE
-			; DB	"EDI","T"+80h		; EDIT
-			; dl	STAR_EDIT
-			; DB	"F","X"+80h		; FX
-			; dl	STAR_FX
-			; DB	"VERSIO","N"+80h	; VERSION
-			; dl	STAR_VERSION
-			; DB	FFh
 						
 ; *ASM string
 ;

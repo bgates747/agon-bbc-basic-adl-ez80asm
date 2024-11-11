@@ -118,70 +118,7 @@
 			; XREF	STAR_VERSION
 
 			; XREF	_end			; In init.asm			
-;
-; A handful of common token IDs
-;
-; TERROR:			EQU     85H
-; LINE_:			EQU     86H
-; ELSE_:			EQU     8BH
-; THEN:			EQU     8CH
-; LINO:			EQU     8DH
-; FN:				EQU     A4H
-; TO:				EQU     B8H
-; REN:			EQU     CCH
-; DATA_:			EQU     DCH
-; DIM:			EQU     DEH
-; FOR:			EQU     E3H
-; GOSUB:			EQU     E4H
-; GOTO:			EQU     E5H
-; TIF:			EQU     E7H
-; LOCAL_:			EQU     EAH
-; NEXT:			EQU     EDH
-; ON_:			EQU     EEH
-; PROC:			EQU     F2H
-; REM:			EQU     F4H
-; REPEAT:			EQU     F5H
-; RESTOR:			EQU     F7H
-; TRACE:			EQU     FCH
-; UNTIL:			EQU     FDH
 
-; consolidated with tokens from exec.asm
-DATA_:	EQU     DCH
-DEF_:	EQU     DDH
-DIM:	EQU     DEH
-ELSE_:	EQU     8BH
-FN:	EQU     A4H
-FOR:	EQU     E3H
-GOSUB:	EQU     E4H
-GOTO:	EQU     E5H
-LINE_:	EQU     86H
-LINO:	EQU     8DH
-LOCAL_:	EQU     EAH
-NEXT:	EQU     EDH
-OFF_:	EQU     87H
-ON_:	EQU     EEH
-PROC:	EQU     F2H
-REM:	EQU     F4H
-REN:	EQU     CCH
-REPEAT:	EQU     F5H
-RESTOR:	EQU     F7H
-SPC:	EQU     89H
-STEP:	EQU     88H
-TAB:	EQU     8AH
-TAND:	EQU     80H
-TCALL:	EQU     D6H
-TERROR:	EQU     85H
-TGOSUB:	EQU     E4H
-TGOTO:	EQU     E5H
-THEN:	EQU     8CH
-TIF:	EQU     E7H
-TO:	EQU     B8H
-TON:	EQU     EEH
-TOR:	EQU     84H
-TPROC:	EQU     F2H
-TRACE:	EQU     FCH
-TSTOP:	EQU     FAH
-UNTIL:	EQU     FDH
 ;
 ; This defines the block of tokens that are pseudo-variables.
 ; There are two versions of each token, a GET and a SET
@@ -198,9 +135,9 @@ UNTIL:	EQU     FDH
 ;   LET A% = PAGE : REM This is the GET version
 ;   PAGE = 40000  : REM This is the SET version
 ;
-TOKLO:			EQU     8FH			; This defines the block of tokens that are pseudo-variables
-TOKHI:			EQU     93H			; PTR, PAGE, TIME, LOMEM, HIMEM
-OFFSET:			EQU     CFH-TOKLO		; Offset to the parameterised SET versions
+; TOKLO:			EQU     8FH			; This defines the block of tokens that are pseudo-variables
+; TOKHI:			EQU     93H			; PTR, PAGE, TIME, LOMEM, HIMEM
+; OFFSET:			EQU     CFH-TOKLO		; Offset to the parameterised SET versions
 
 ; The main routine
 ; IXU: argv - pointer to array of parameters

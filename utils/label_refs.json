@@ -15,8 +15,8 @@
     ],
     "ACCS": [
         {
-            "ref_file": "equs.inc",
-            "ref_line": 52,
+            "ref_file": "equs_bottom.inc",
+            "ref_line": 4,
             "ref_content": "VDU_BUFFER:\t\tEQU\tACCS\t\t; Storage for VDU commands"
         },
         {
@@ -1735,7 +1735,6 @@
             "ref_content": "JP      DIM_EX"
         }
     ],
-    "DIR_SIZE": [],
     "DISPAT": [],
     "DISPAT_FP": [],
     "DISPT0": [
@@ -3148,83 +3147,6 @@
             "ref_content": "READ1:\t\t\tCALL    FETCHS"
         }
     ],
-    "FFOBJID_SIZE": [
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 251,
-            "ref_content": "FIL.flag:         EQU FFOBJID_SIZE       ; File status flags"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 252,
-            "ref_content": "FIL.err:          EQU FFOBJID_SIZE + 1   ; Abort flag (error code)"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 253,
-            "ref_content": "FIL.fptr:         EQU FFOBJID_SIZE + 2   ; File read/write pointer"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 254,
-            "ref_content": "FIL.clust:        EQU FFOBJID_SIZE + 6   ; Current cluster of fptr"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 255,
-            "ref_content": "FIL.sect:         EQU FFOBJID_SIZE + 10  ; Sector number appearing in buf[]"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 256,
-            "ref_content": "FIL.dir_sect:     EQU FFOBJID_SIZE + 14  ; Sector number containing the directory entry"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 257,
-            "ref_content": "FIL.dir_ptr:      EQU FFOBJID_SIZE + 18  ; Pointer to the directory entry in the win[]"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 258,
-            "ref_content": "FIL_SIZE:         EQU FFOBJID_SIZE + 21  ; Total size of FIL structure"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 262,
-            "ref_content": "DIR.dptr:         EQU FFOBJID_SIZE       ; Current read/write offset"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 263,
-            "ref_content": "DIR.clust:        EQU FFOBJID_SIZE + 4   ; Current cluster"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 264,
-            "ref_content": "DIR.sect:         EQU FFOBJID_SIZE + 8   ; Current sector"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 265,
-            "ref_content": "DIR.dir:          EQU FFOBJID_SIZE + 12  ; Pointer to the directory item in the win[]"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 266,
-            "ref_content": "DIR.fn:           EQU FFOBJID_SIZE + 15  ; SFN (in/out) {body[8],ext[3],status[1]}"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 267,
-            "ref_content": "DIR.blk_ofs:      EQU FFOBJID_SIZE + 27  ; Offset of current entry block being processed"
-        },
-        {
-            "ref_file": "mos_api.inc",
-            "ref_line": 268,
-            "ref_content": "DIR_SIZE:         EQU FFOBJID_SIZE + 31  ; Total size of DIR structure"
-        }
-    ],
     "FFOR": [
         {
             "ref_file": "fpp.asm",
@@ -3246,7 +3168,6 @@
             "ref_content": "DW24  FGT             ;>"
         }
     ],
-    "FILINFO_SIZE": [],
     "FILL": [
         {
             "ref_file": "exec.asm",
@@ -3266,7 +3187,6 @@
             "ref_content": "DJNZ    FILL1"
         }
     ],
-    "FIL_SIZE": [],
     "FIND": [
         {
             "ref_file": "exec.asm",
@@ -9282,18 +9202,438 @@
             "ref_content": "STAR_BYE:\t\tCALL\tVBLANK_STOP\t\t; Restore MOS interrupts"
         }
     ],
+    "VDU": [
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 46,
+            "ref_content": "CLG:\t\t\tVDU\t10h"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 61,
+            "ref_content": "VDU\t16H\t\t\t; Mode change"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 62,
+            "ref_content": "VDU\tL"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 84,
+            "ref_content": "VDU\t23"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 85,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 86,
+            "ref_content": "VDU\tvdp_scrchar"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 87,
+            "ref_content": "VDU\t(VDU_BUFFER+0)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 88,
+            "ref_content": "VDU\t(VDU_BUFFER+1)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 89,
+            "ref_content": "VDU\t(VDU_BUFFER+2)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 90,
+            "ref_content": "VDU\t(VDU_BUFFER+3)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 116,
+            "ref_content": "VDU\t23"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 117,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 118,
+            "ref_content": "VDU\tvdp_scrpixel"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 119,
+            "ref_content": "VDU\t(VDU_BUFFER+0)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 120,
+            "ref_content": "VDU\t(VDU_BUFFER+1)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 121,
+            "ref_content": "VDU\t(VDU_BUFFER+2)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 122,
+            "ref_content": "VDU\t(VDU_BUFFER+3)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 145,
+            "ref_content": "VDU\t11h\t\t\t; Just set the colour"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 146,
+            "ref_content": "VDU\t(VDU_BUFFER+0)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 158,
+            "ref_content": "VDU\t13h\t\t\t; VDU:COLOUR"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 159,
+            "ref_content": "VDU\t(VDU_BUFFER+0)\t\t; Logical Colour"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 160,
+            "ref_content": "VDU\t(VDU_BUFFER+1)\t\t; Palette Colour"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 161,
+            "ref_content": "VDU\t0\t\t\t; RGB set to 0"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 162,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 163,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 176,
+            "ref_content": "VDU\t13h\t\t\t; VDU:COLOUR"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 177,
+            "ref_content": "VDU\t(VDU_BUFFER+0)\t\t; Logical Colour"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 178,
+            "ref_content": "VDU\tFFh\t\t\t; Physical Colour (-1 for RGB mode)"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 179,
+            "ref_content": "VDU\t(VDU_BUFFER+1)\t\t; R"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 180,
+            "ref_content": "VDU\t(VDU_BUFFER+2)\t\t; G"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 181,
+            "ref_content": "VDU\t(VDU_BUFFER+3)\t\t; B"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 197,
+            "ref_content": "VDU\t12h\t\t\t; VDU:GCOL"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 198,
+            "ref_content": "VDU\t(VDU_BUFFER+0)\t\t; Mode"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 199,
+            "ref_content": "VDU\t(VDU_BUFFER+1)\t\t; Colour"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 210,
+            "ref_content": "PLOT_1:\t\t\tVDU\t19H\t\t; VDU code for PLOT"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 211,
+            "ref_content": "VDU\tC\t\t;  C: Mode"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 212,
+            "ref_content": "VDU\tE\t\t; DE: X"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 213,
+            "ref_content": "VDU\tD"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 214,
+            "ref_content": "VDU\tL\t\t; HL: Y"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 215,
+            "ref_content": "VDU\tH"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 232,
+            "ref_content": "VDU\t19h\t\t; Move to the first coordinates"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 233,
+            "ref_content": "VDU\t04h"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 234,
+            "ref_content": "VDU\tE"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 235,
+            "ref_content": "VDU\tD"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 236,
+            "ref_content": "VDU\tL"
+        },
+        {
+            "ref_file": "agon_graphics.asm",
+            "ref_line": 237,
+            "ref_content": "VDU\tH"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 85,
+            "ref_content": "VDU\t23\t\t\t; Send the sound command"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 86,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 87,
+            "ref_content": "VDU\tvdp_audio"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 88,
+            "ref_content": "VDU\t(VDU_BUFFER+0)\t\t; 0: Channel"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 89,
+            "ref_content": "VDU\t(VDU_BUFFER+1)\t\t; 1: Waveform (0)"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 90,
+            "ref_content": "VDU\t(VDU_BUFFER+2)\t\t; 2: Volume (0-100)"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 91,
+            "ref_content": "VDU\t(VDU_BUFFER+3)\t\t; 3: Frequency L"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 92,
+            "ref_content": "VDU\t(VDU_BUFFER+4)\t\t; 4: Frequency H"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 93,
+            "ref_content": "VDU\t(VDU_BUFFER+5)\t\t; 5: Duration L"
+        },
+        {
+            "ref_file": "agon_sound.asm",
+            "ref_line": 94,
+            "ref_content": "VDU\t(VDU_BUFFER+6)\t\t; 6: Duration H"
+        },
+        {
+            "ref_file": "exec.asm",
+            "ref_line": 199,
+            "ref_content": "DW24  VDU\t\t\t; EFH"
+        },
+        {
+            "ref_file": "macros.inc",
+            "ref_line": 34,
+            "ref_content": "MACRO VDU\tval"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 157,
+            "ref_content": "VDU\t23"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 158,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 159,
+            "ref_content": "VDU\tvdp_cursor"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 474,
+            "ref_content": "OSBYTE_0B:\t\tVDU\t23"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 475,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 476,
+            "ref_content": "VDU\tvdp_keystate"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 477,
+            "ref_content": "VDU\tL"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 478,
+            "ref_content": "VDU\tH"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 479,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 480,
+            "ref_content": "VDU \t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 481,
+            "ref_content": "VDU\t255"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 488,
+            "ref_content": "OSBYTE_0C:\t\tVDU\t23"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 489,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 490,
+            "ref_content": "VDU\tvdp_keystate"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 491,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 492,
+            "ref_content": "VDU \t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 493,
+            "ref_content": "VDU\tL"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 494,
+            "ref_content": "VDU\tH"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 495,
+            "ref_content": "VDU\t255"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 516,
+            "ref_content": "OSBYTE_76:\t\tVDU\t23"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 517,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 518,
+            "ref_content": "VDU\tvdp_keystate"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 519,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 520,
+            "ref_content": "VDU \t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 521,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 522,
+            "ref_content": "VDU\t0"
+        },
+        {
+            "ref_file": "patch.asm",
+            "ref_line": 523,
+            "ref_content": "VDU\tL"
+        }
+    ],
     "VDU1": [],
     "VDU2": [],
     "VDU3": [],
     "VDU4": [],
     "VDU_BUFFER": [],
-    "VDU_EX": [
-        {
-            "ref_file": "exec.asm",
-            "ref_line": 199,
-            "ref_content": "DW24  VDU_EX\t\t\t; EFH"
-        }
-    ],
     "VPOS": [
         {
             "ref_file": "eval.asm",
@@ -9753,417 +10093,5 @@
             "ref_line": 98,
             "ref_content": "LD\tB, argv_ptrs_max - 1\t; B: Maximum number of argv_ptrs"
         }
-    ],
-    "fa_create_always": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 810,
-            "ref_content": "LD\tC, fa_write | fa_create_always"
-        }
-    ],
-    "fa_create_new": [],
-    "fa_open_always": [],
-    "fa_open_append": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 808,
-            "ref_content": "LD\tC, fa_write | fa_open_append"
-        }
-    ],
-    "fa_open_existing": [],
-    "fa_read": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 806,
-            "ref_content": "OSOPEN:\t\t\tLD\tC, fa_read"
-        }
-    ],
-    "fa_write": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 808,
-            "ref_content": "LD\tC, fa_write | fa_open_append"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 810,
-            "ref_content": "LD\tC, fa_write | fa_create_always"
-        }
-    ],
-    "ffs_chdir": [],
-    "ffs_chdrive": [],
-    "ffs_chmod": [],
-    "ffs_dclose": [],
-    "ffs_dfindfirst": [],
-    "ffs_dfindnext": [],
-    "ffs_dopen": [],
-    "ffs_dread": [],
-    "ffs_fclose": [],
-    "ffs_fdisk": [],
-    "ffs_feof": [],
-    "ffs_ferror": [],
-    "ffs_fexpand": [],
-    "ffs_fforward": [],
-    "ffs_fgets": [],
-    "ffs_flseek": [],
-    "ffs_fopen": [],
-    "ffs_fprintf": [],
-    "ffs_fputc": [],
-    "ffs_fputs": [],
-    "ffs_fread": [],
-    "ffs_fsize": [],
-    "ffs_fsync": [],
-    "ffs_ftell": [],
-    "ffs_ftruncate": [],
-    "ffs_fwrite": [],
-    "ffs_getcwd": [],
-    "ffs_getfree": [],
-    "ffs_getlabel": [],
-    "ffs_mkdir": [],
-    "ffs_mkfs": [],
-    "ffs_mount": [],
-    "ffs_rename": [],
-    "ffs_setcp": [],
-    "ffs_setlabel": [],
-    "ffs_stat": [],
-    "ffs_unlink": [],
-    "ffs_utime": [],
-    "mos_cd": [],
-    "mos_copy": [],
-    "mos_del": [],
-    "mos_dir": [],
-    "mos_editline": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 102,
-            "ref_content": "MOSCALL\tmos_editline\t\t; Call the MOS line editor"
-        }
-    ],
-    "mos_fclose": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 821,
-            "ref_content": "MOSCALL\tmos_fclose"
-        }
-    ],
-    "mos_feof": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 859,
-            "ref_content": "MOSCALL\tmos_feof"
-        }
-    ],
-    "mos_fgetc": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 834,
-            "ref_content": "MOSCALL\tmos_fgetc"
-        }
-    ],
-    "mos_flseek": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 895,
-            "ref_content": "MOSCALL\t\tmos_flseek"
-        }
-    ],
-    "mos_fopen": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 811,
-            "ref_content": "@@:\t\t\tMOSCALL\tmos_fopen"
-        }
-    ],
-    "mos_fputc": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 846,
-            "ref_content": "MOSCALL\tmos_fputc"
-        }
-    ],
-    "mos_fread": [],
-    "mos_fwrite": [],
-    "mos_getError": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 631,
-            "ref_content": "MOSCALL\tmos_getError\t\t; Copy the error message into the buffer"
-        }
-    ],
-    "mos_getfil": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 872,
-            "ref_content": "MOSCALL\t\tmos_getfil \t; HLU: Pointer to FIL structure"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 907,
-            "ref_content": "MOSCALL mos_getfil  ; HLU: Pointer to FIL structure"
-        }
-    ],
-    "mos_getkbmap": [
-        {
-            "ref_file": "eval.asm",
-            "ref_line": 1224,
-            "ref_content": "INKEYM:\t\t\tMOSCALL\tmos_getkbmap\t\t; Get the base address of the keyboard"
-        }
-    ],
-    "mos_getkey": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 207,
-            "ref_content": "OSRDCH:\t\t\tMOSCALL\tmos_getkey\t\t; Read keyboard"
-        }
-    ],
-    "mos_getrtc": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 923,
-            "ref_content": "MOSCALL\tmos_getrtc"
-        }
-    ],
-    "mos_i2c_close": [],
-    "mos_i2c_open": [],
-    "mos_i2c_read": [],
-    "mos_i2c_write": [],
-    "mos_load": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 621,
-            "ref_content": "OSLOAD_BBC:\t\tMOSCALL\tmos_load\t\t; Call LOAD in MOS"
-        }
-    ],
-    "mos_mkdir": [],
-    "mos_oscli": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 347,
-            "ref_content": "MOSCALL\tmos_oscli\t\t; Returns OSCLI error in A"
-        }
-    ],
-    "mos_ren": [],
-    "mos_save": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 689,
-            "ref_content": "OSSAVE_BBC:\t\tMOSCALL\tmos_save\t\t; Call SAVE in MOS"
-        }
-    ],
-    "mos_setintvector": [
-        {
-            "ref_file": "interrupts.asm",
-            "ref_line": 32,
-            "ref_content": "MOSCALL\t\tmos_setintvector"
-        },
-        {
-            "ref_file": "interrupts.asm",
-            "ref_line": 47,
-            "ref_content": "MOSCALL\t\tmos_setintvector\t\t; Restore the MOS interrupt vector"
-        }
-    ],
-    "mos_setkbvector": [],
-    "mos_setrtc": [],
-    "mos_sysvars": [
-        {
-            "ref_file": "agon_graphics.asm",
-            "ref_line": 57,
-            "ref_content": "MOSCALL\tmos_sysvars\t\t; Reset the semaphore"
-        },
-        {
-            "ref_file": "agon_graphics.asm",
-            "ref_line": 63,
-            "ref_content": "MOSCALL\tmos_sysvars"
-        },
-        {
-            "ref_file": "agon_graphics.asm",
-            "ref_line": 82,
-            "ref_content": "MOSCALL\tmos_sysvars\t\t; Reset the semaphore"
-        },
-        {
-            "ref_file": "agon_graphics.asm",
-            "ref_line": 114,
-            "ref_content": "MOSCALL\tmos_sysvars\t\t; Reset the semaphore"
-        },
-        {
-            "ref_file": "agon_sound.asm",
-            "ref_line": 82,
-            "ref_content": "MOSCALL\tmos_sysvars\t\t; Reset the semaphore"
-        },
-        {
-            "ref_file": "interrupts.asm",
-            "ref_line": 53,
-            "ref_content": "DO_KEYBOARD:\t\tMOSCALL\t\tmos_sysvars\t\t\t; Get the system variables"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 123,
-            "ref_content": "MOSCALL\tmos_sysvars"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 134,
-            "ref_content": "MOSCALL\tmos_sysvars"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 155,
-            "ref_content": "MOSCALL\tmos_sysvars\t\t; Reset the semaphore"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 505,
-            "ref_content": "MOSCALL\tmos_sysvars\t\t; Fetch pointer to system variables"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 531,
-            "ref_content": "MOSCALL\tmos_sysvars\t\t; Fetch pointer to system variables"
-        }
-    ],
-    "mos_uclose": [],
-    "mos_ugetc": [],
-    "mos_uopen": [],
-    "mos_uputc": [],
-    "sysvar_audioChannel": [],
-    "sysvar_audioSuccess": [],
-    "sysvar_cursorX": [],
-    "sysvar_cursorY": [],
-    "sysvar_keyascii": [],
-    "sysvar_keydelay": [],
-    "sysvar_keyled": [],
-    "sysvar_keymods": [],
-    "sysvar_keyrate": [],
-    "sysvar_mouseButtons": [],
-    "sysvar_mouseWheel": [],
-    "sysvar_mouseX": [],
-    "sysvar_mouseXDelta": [],
-    "sysvar_mouseY": [],
-    "sysvar_mouseYDelta": [],
-    "sysvar_rtc": [],
-    "sysvar_rtcEnable": [],
-    "sysvar_scrColours": [],
-    "sysvar_scrCols": [],
-    "sysvar_scrHeight": [],
-    "sysvar_scrMode": [],
-    "sysvar_scrRows": [],
-    "sysvar_scrWidth": [],
-    "sysvar_scrchar": [],
-    "sysvar_scrpixel": [],
-    "sysvar_scrpixelIndex": [],
-    "sysvar_spare": [],
-    "sysvar_time": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 124,
-            "ref_content": "LD\t(IX + sysvar_time + 0), L"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 125,
-            "ref_content": "LD\t(IX + sysvar_time + 1), H"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 126,
-            "ref_content": "LD\t(IX + sysvar_time + 2), E"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 127,
-            "ref_content": "LD\t(IX + sysvar_time + 3), D"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 135,
-            "ref_content": "LD\tL, (IX + sysvar_time + 0)"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 136,
-            "ref_content": "LD\tH, (IX + sysvar_time + 1)"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 137,
-            "ref_content": "LD\tE, (IX + sysvar_time + 2)"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 138,
-            "ref_content": "LD\tD, (IX + sysvar_time + 3)"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 506,
-            "ref_content": "LD\tA, (IX + sysvar_time + 0)"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 507,
-            "ref_content": "@@:\t\t\tCP \tA, (IX + sysvar_time + 0)"
-        }
-    ],
-    "sysvar_vkeycode": [],
-    "sysvar_vkeycount": [],
-    "sysvar_vkeydown": [],
-    "sysvar_vpd_pflags": [],
-    "vdp_audio": [
-        {
-            "ref_file": "agon_sound.asm",
-            "ref_line": 87,
-            "ref_content": "VDU\tvdp_audio"
-        }
-    ],
-    "vdp_cursor": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 159,
-            "ref_content": "VDU\tvdp_cursor"
-        }
-    ],
-    "vdp_gp": [],
-    "vdp_keycode": [],
-    "vdp_keystate": [
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 476,
-            "ref_content": "VDU\tvdp_keystate"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 490,
-            "ref_content": "VDU\tvdp_keystate"
-        },
-        {
-            "ref_file": "patch.asm",
-            "ref_line": 518,
-            "ref_content": "VDU\tvdp_keystate"
-        }
-    ],
-    "vdp_logicalcoords": [],
-    "vdp_mode": [],
-    "vdp_pflag_audio": [],
-    "vdp_pflag_cursor": [],
-    "vdp_pflag_mode": [],
-    "vdp_pflag_mouse": [],
-    "vdp_pflag_point": [],
-    "vdp_pflag_rtc": [],
-    "vdp_pflag_scrchar": [],
-    "vdp_rtc": [],
-    "vdp_scrchar": [
-        {
-            "ref_file": "agon_graphics.asm",
-            "ref_line": 86,
-            "ref_content": "VDU\tvdp_scrchar"
-        }
-    ],
-    "vdp_scrpixel": [
-        {
-            "ref_file": "agon_graphics.asm",
-            "ref_line": 118,
-            "ref_content": "VDU\tvdp_scrpixel"
-        }
-    ],
-    "vdp_terminalmode": []
+    ]
 }

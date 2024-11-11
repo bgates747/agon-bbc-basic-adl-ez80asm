@@ -14,7 +14,7 @@
 ; 07/06/2023:	Modified to run in ADL mode
 ; 26/06/2023:	Fixed DIM, USR, and address output of inline assembler
 
-			.ASSUME	ADL = 1
+			; .ASSUME	ADL = 1
 
 			; INCLUDE	"equs.inc"
 

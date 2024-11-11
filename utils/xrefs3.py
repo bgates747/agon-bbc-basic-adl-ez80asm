@@ -14,18 +14,21 @@ def load_json(path):
 def create_output_dir(directory):
     """Create output directory if it doesn't exist."""
     os.makedirs(directory, exist_ok=True)
-
-# Write symbols and include directives to the output file in the specified order
 def write_combined_file(filename, symbols, api_includes, output_dir):
     output_path = os.path.join(output_dir, filename)
     with open(output_path, 'w') as f:
         # Write the custom header with SKIP_AHEAD and two line breaks
         f.write("SKIP_AHEAD: JP BEGIN_HEREISH-0x040000\n\n")
 
-        # Write API includes at the top
+        # Write API includes at the top (copy their contents)
         for api_include in api_includes:
-            f.write(f'    include "../src/{api_include}"\n')
-        f.write("\n")
+            api_include_path = os.path.join("utils/src", api_include)
+            f.write(f"; Begin {api_include}\n")
+            with open(api_include_path, 'r') as inc_file:
+                inc_content = inc_file.read()
+                f.write(inc_content)
+                f.write("\n")
+            f.write(f"; End {api_include}\n\n")
 
         # Write symbols as specified (use placeholders for non-EQU symbols)
         for symbol in symbols:
@@ -39,9 +42,26 @@ def write_combined_file(filename, symbols, api_includes, output_dir):
                 f.write(f"{symbol_name}: DL 0x040000\n")
         f.write("\n")
         
-        # Footer with BEGIN_HEREISH and the include directive for the source file
-        include_line = f'BEGIN_HEREISH:\n    include "../src/{filename}"\n'
-        f.write(include_line)
+        # Footer with BEGIN_HEREISH: $
+        f.write("BEGIN_HEREISH:\n\n")
+
+        # Copy the contents of the file we're processing into the output file
+        source_file_path = os.path.join("utils/src", filename)
+        with open(source_file_path, 'r') as source_file:
+            source_content = source_file.read()
+            f.write(source_content)
+            f.write("\n")
+
+        # Append the contents of additional files at the bottom
+        additional_files = ["utils/src/user.asm", "utils/src/equs_bottom.inc"]
+        for additional_file in additional_files:
+            f.write(f"; Begin {os.path.basename(additional_file)}\n")
+            additional_file_path = additional_file  # Paths are already relative
+            with open(additional_file_path, 'r') as add_file:
+                add_content = add_file.read()
+                f.write(add_content)
+                f.write("\n")
+            f.write(f"; End {os.path.basename(additional_file)}\n\n")
 
     print(f"Written combined file to {output_path}")
 
@@ -109,10 +129,10 @@ def adjust_addresses(input_path, output_path, offset):
 if __name__ == "__main__":
     # List of files to scan for symbol definitions and references
     source_files = [
-        # "utils/src/agon_graphics.asm", # done
-        # "utils/src/agon_sound.asm", # Macro [VDU] in "../src/macros.inc" line 36 - Unknown label, invalid number 'OSWRCH' CALL    OSWRCH Invoked from "../src/agon_sound.asm" line 85 as VDU     23                      ; Send the sound command
+        "utils/src/agon_graphics.asm", # done
+        # "utils/src/agon_sound.asm", # Macro [VDU] in "utils/src/macros.inc" line 36 - Unknown label, invalid number 'OSWRCH' CALL    OSWRCH Invoked from "utils/src/agon_sound.asm" line 85 as VDU     23                      ; Send the sound command
         # "utils/src/eval.asm", # done
-        "utils/src/exec.asm",
+        # "utils/src/exec.asm",
         # "utils/src/fpp.asm",
         # "utils/src/gpio.asm",
         # "utils/src/init.asm",
@@ -139,10 +159,12 @@ if __name__ == "__main__":
         "mos_api.inc",
         "macros.inc",
         "ram.asm",
-        "equs.inc",
+        "equs_top.inc",
+        "equs_bottom.inc",
+        "user.asm",
     ]
 
-    if False:
+    if True:
         # Load label definitions and references
         label_defs = load_json(LABEL_DEFS_PATH)
         label_refs = load_json(LABEL_REFS_PATH)

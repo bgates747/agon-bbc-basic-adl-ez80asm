@@ -22,8 +22,8 @@
     ],
     "ACLOST": [
         {
-            "def_file": "fpp.asm",
-            "def_line": 47,
+            "def_file": "equs_top.inc",
+            "def_line": 53,
             "def_content": "ACLOST:\t\t\tEQU     23              ;Accuracy lost"
         }
     ],
@@ -106,8 +106,8 @@
     ],
     "ANDK": [
         {
-            "def_file": "eval.asm",
-            "def_line": 165,
+            "def_file": "equs_top.inc",
+            "def_line": 37,
             "def_content": "ANDK:\t\t\tEQU     80H"
         }
     ],
@@ -435,8 +435,8 @@
     ],
     "BADOP": [
         {
-            "def_file": "fpp.asm",
-            "def_line": 42,
+            "def_file": "equs_top.inc",
+            "def_line": 48,
             "def_content": "BADOP:\t\t\tEQU     1               ;Bad operation code"
         }
     ],
@@ -918,8 +918,8 @@
     ],
     "CR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 56,
+            "def_file": "equs_top.inc",
+            "def_line": 30,
             "def_content": "CR:\t\t\tEQU     0DH"
         }
     ],
@@ -1023,8 +1023,8 @@
     ],
     "DATA_": [
         {
-            "def_file": "main.asm",
-            "def_line": 149,
+            "def_file": "equs_top.inc",
+            "def_line": 62,
             "def_content": "DATA_:\tEQU     DCH"
         }
     ],
@@ -1058,8 +1058,8 @@
     ],
     "DEF_": [
         {
-            "def_file": "main.asm",
-            "def_line": 150,
+            "def_file": "equs_top.inc",
+            "def_line": 63,
             "def_content": "DEF_:\tEQU     DDH"
         }
     ],
@@ -1114,8 +1114,8 @@
     ],
     "DIM": [
         {
-            "def_file": "main.asm",
-            "def_line": 151,
+            "def_file": "equs_top.inc",
+            "def_line": 64,
             "def_content": "DIM:\tEQU     DEH"
         }
     ],
@@ -1159,13 +1159,6 @@
             "def_file": "exec.asm",
             "def_line": 441,
             "def_content": "DIM_EX:\t\t\tCALL    GETVAR          \t; Get the variable"
-        }
-    ],
-    "DIR_SIZE": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 268,
-            "def_content": "DIR_SIZE:         EQU FFOBJID_SIZE + 31  ; Total size of DIR structure"
         }
     ],
     "DISPAT": [
@@ -1233,8 +1226,8 @@
     ],
     "DIVBY0": [
         {
-            "def_file": "fpp.asm",
-            "def_line": 43,
+            "def_file": "equs_top.inc",
+            "def_line": 49,
             "def_content": "DIVBY0:\t\t\tEQU     18              ;Division by zero"
         }
     ],
@@ -1247,8 +1240,8 @@
     ],
     "DIVK": [
         {
-            "def_file": "eval.asm",
-            "def_line": 166,
+            "def_file": "equs_top.inc",
+            "def_line": 38,
             "def_content": "DIVK:\t\t\tEQU     81H"
         }
     ],
@@ -1373,8 +1366,8 @@
     ],
     "ELSE_": [
         {
-            "def_file": "main.asm",
-            "def_line": 152,
+            "def_file": "equs_top.inc",
+            "def_line": 65,
             "def_content": "ELSE_:\tEQU     8BH"
         }
     ],
@@ -1415,8 +1408,8 @@
     ],
     "EORK": [
         {
-            "def_file": "eval.asm",
-            "def_line": 167,
+            "def_file": "equs_top.inc",
+            "def_line": 39,
             "def_content": "EORK:\t\t\tEQU     82H"
         }
     ],
@@ -1576,8 +1569,8 @@
     ],
     "ESC": [
         {
-            "def_file": "equs.inc",
-            "def_line": 58,
+            "def_file": "equs_top.inc",
+            "def_line": 32,
             "def_content": "ESC:\t\t\tEQU     1BH"
         }
     ],
@@ -1821,8 +1814,8 @@
     ],
     "EXPRNG": [
         {
-            "def_file": "fpp.asm",
-            "def_line": 48,
+            "def_file": "equs_top.inc",
+            "def_line": 54,
             "def_content": "EXPRNG:\t\t\tEQU     24              ;Exp range"
         }
     ],
@@ -2071,13 +2064,6 @@
             "def_content": "FETCHS:\t\t\tPUSH    AF"
         }
     ],
-    "FFOBJID_SIZE": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 247,
-            "def_content": "FFOBJID_SIZE:     EQU 15   ; Total size of FFOBJID structure"
-        }
-    ],
     "FFOR": [
         {
             "def_file": "fpp.asm",
@@ -2099,13 +2085,6 @@
             "def_content": "FGT:\t\t\tCALL    FCP"
         }
     ],
-    "FILINFO_SIZE": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 277,
-            "def_content": "FILINFO_SIZE:     EQU 278  ; Total size of FILINFO structure"
-        }
-    ],
     "FILL": [
         {
             "def_file": "exec.asm",
@@ -2118,13 +2097,6 @@
             "def_file": "exec.asm",
             "def_line": 2036,
             "def_content": "FILL1:\t\t\tLD      A,' '"
-        }
-    ],
-    "FIL_SIZE": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 258,
-            "def_content": "FIL_SIZE:         EQU FFOBJID_SIZE + 21  ; Total size of FIL structure"
         }
     ],
     "FIND": [
@@ -2283,8 +2255,8 @@
     ],
     "FN": [
         {
-            "def_file": "main.asm",
-            "def_line": 153,
+            "def_file": "equs_top.inc",
+            "def_line": 66,
             "def_content": "FN:\tEQU     A4H"
         }
     ],
@@ -2353,8 +2325,8 @@
     ],
     "FOR": [
         {
-            "def_file": "main.asm",
-            "def_line": 154,
+            "def_file": "equs_top.inc",
+            "def_line": 67,
             "def_content": "FOR:\tEQU     E3H"
         }
     ],
@@ -2486,8 +2458,8 @@
     ],
     "FUNTOK": [
         {
-            "def_file": "eval.asm",
-            "def_line": 101,
+            "def_file": "equs_top.inc",
+            "def_line": 36,
             "def_content": "FUNTOK:\t\t\tEQU\t8DH\t\t\t; First token number"
         }
     ],
@@ -2710,8 +2682,8 @@
     ],
     "GOSUB": [
         {
-            "def_file": "main.asm",
-            "def_line": 155,
+            "def_file": "equs_top.inc",
+            "def_line": 68,
             "def_content": "GOSUB:\tEQU     E4H"
         }
     ],
@@ -2731,8 +2703,8 @@
     ],
     "GOTO": [
         {
-            "def_file": "main.asm",
-            "def_line": 156,
+            "def_file": "equs_top.inc",
+            "def_line": 69,
             "def_content": "GOTO:\tEQU     E5H"
         }
     ],
@@ -2836,71 +2808,71 @@
     ],
     "GPIOMODE_ALTF": [
         {
-            "def_file": "equs.inc",
-            "def_line": 42,
+            "def_file": "equs_top.inc",
+            "def_line": 25,
             "def_content": "GPIOMODE_ALTF:\t\tEQU\t\t5;\t; Alt Function"
         }
     ],
     "GPIOMODE_DIO": [
         {
-            "def_file": "equs.inc",
-            "def_line": 39,
+            "def_file": "equs_top.inc",
+            "def_line": 22,
             "def_content": "GPIOMODE_DIO:\t\tEQU\t\t2\t; Open Drain IO"
         }
     ],
     "GPIOMODE_IN": [
         {
-            "def_file": "equs.inc",
-            "def_line": 38,
+            "def_file": "equs_top.inc",
+            "def_line": 21,
             "def_content": "GPIOMODE_IN:\t\tEQU\t\t1\t; Input"
         }
     ],
     "GPIOMODE_INTAH": [
         {
-            "def_file": "equs.inc",
-            "def_line": 44,
+            "def_file": "equs_top.inc",
+            "def_line": 27,
             "def_content": "GPIOMODE_INTAH:\t\tEQU\t\t7\t; Interrupt, Active High"
         }
     ],
     "GPIOMODE_INTAL": [
         {
-            "def_file": "equs.inc",
-            "def_line": 43,
+            "def_file": "equs_top.inc",
+            "def_line": 26,
             "def_content": "GPIOMODE_INTAL:\t\tEQU\t\t6\t; Interrupt, Active Low"
         }
     ],
     "GPIOMODE_INTD": [
         {
-            "def_file": "equs.inc",
-            "def_line": 41,
+            "def_file": "equs_top.inc",
+            "def_line": 24,
             "def_content": "GPIOMODE_INTD:\t\tEQU\t\t4\t; Interrupt, Dual Edge"
         }
     ],
     "GPIOMODE_INTFE": [
         {
-            "def_file": "equs.inc",
-            "def_line": 45,
+            "def_file": "equs_top.inc",
+            "def_line": 28,
             "def_content": "GPIOMODE_INTFE:\t\tEQU\t\t8\t; Interrupt, Falling Edge"
         }
     ],
     "GPIOMODE_INTRE": [
         {
-            "def_file": "equs.inc",
-            "def_line": 46,
+            "def_file": "equs_top.inc",
+            "def_line": 29,
             "def_content": "GPIOMODE_INTRE:\t\tEQU\t\t9\t; Interrupt, Rising Edge"
         }
     ],
     "GPIOMODE_OUT": [
         {
-            "def_file": "equs.inc",
-            "def_line": 37,
+            "def_file": "equs_top.inc",
+            "def_line": 20,
             "def_content": "GPIOMODE_OUT:\t\tEQU\t\t0\t; Output"
         }
     ],
     "GPIOMODE_SIO": [
         {
-            "def_file": "equs.inc",
-            "def_line": 40,
+            "def_file": "equs_top.inc",
+            "def_line": 23,
             "def_content": "GPIOMODE_SIO:\t\tEQU\t\t3\t; Open Source IO"
         }
     ],
@@ -3683,8 +3655,8 @@
     ],
     "KEYWDL": [
         {
-            "def_file": "main.asm",
-            "def_line": 542,
+            "def_file": "equs_bottom.inc",
+            "def_line": 22,
             "def_content": "KEYWDL:\t\t\tEQU     $-KEYWDS"
         }
     ],
@@ -3956,8 +3928,8 @@
     ],
     "LF": [
         {
-            "def_file": "equs.inc",
-            "def_line": 57,
+            "def_file": "equs_top.inc",
+            "def_line": 31,
             "def_content": "LF:\t\t\tEQU     0AH"
         }
     ],
@@ -3984,8 +3956,8 @@
     ],
     "LINE_": [
         {
-            "def_file": "main.asm",
-            "def_line": 157,
+            "def_file": "equs_top.inc",
+            "def_line": 70,
             "def_content": "LINE_:\tEQU     86H"
         }
     ],
@@ -4005,8 +3977,8 @@
     ],
     "LINO": [
         {
-            "def_file": "main.asm",
-            "def_line": 158,
+            "def_file": "equs_top.inc",
+            "def_line": 71,
             "def_content": "LINO:\tEQU     8DH"
         }
     ],
@@ -4019,8 +3991,8 @@
     ],
     "LIST1L": [
         {
-            "def_file": "main.asm",
-            "def_line": 2106,
+            "def_file": "equs_bottom.inc",
+            "def_line": 23,
             "def_content": "LIST1L:\t\t\tEQU     $-LIST1"
         }
     ],
@@ -4033,8 +4005,8 @@
     ],
     "LIST2L": [
         {
-            "def_file": "main.asm",
-            "def_line": 2110,
+            "def_file": "equs_bottom.inc",
+            "def_line": 24,
             "def_content": "LIST2L:\t\t\tEQU     $-LIST2"
         }
     ],
@@ -4313,8 +4285,8 @@
     ],
     "LOCAL_": [
         {
-            "def_file": "main.asm",
-            "def_line": 159,
+            "def_file": "equs_top.inc",
+            "def_line": 72,
             "def_content": "LOCAL_:\tEQU     EAH"
         }
     ],
@@ -4348,8 +4320,8 @@
     ],
     "LOGRNG": [
         {
-            "def_file": "fpp.asm",
-            "def_line": 46,
+            "def_file": "equs_top.inc",
+            "def_line": 52,
             "def_content": "LOGRNG:\t\t\tEQU     22              ;Log range"
         }
     ],
@@ -4488,8 +4460,8 @@
     ],
     "MODK": [
         {
-            "def_file": "eval.asm",
-            "def_line": 168,
+            "def_file": "equs_top.inc",
+            "def_line": 40,
             "def_content": "MODK:\t\t\tEQU     83H"
         }
     ],
@@ -4586,8 +4558,8 @@
     ],
     "NEXT": [
         {
-            "def_file": "main.asm",
-            "def_line": 160,
+            "def_file": "equs_top.inc",
+            "def_line": 73,
             "def_content": "NEXT:\tEQU     EDH"
         }
     ],
@@ -4614,8 +4586,8 @@
     ],
     "NGROOT": [
         {
-            "def_file": "fpp.asm",
-            "def_line": 45,
+            "def_file": "equs_top.inc",
+            "def_line": 51,
             "def_content": "NGROOT:\t\t\tEQU     21              ;Negative root"
         }
     ],
@@ -4705,8 +4677,8 @@
     ],
     "OC": [
         {
-            "def_file": "equs.inc",
-            "def_line": 50,
+            "def_file": "equs_bottom.inc",
+            "def_line": 2,
             "def_content": "OC:\t\t\tEQU     STAVAR+15*4     ; CODE ORIGIN (O%)"
         }
     ],
@@ -4719,8 +4691,8 @@
     ],
     "OFFSET": [
         {
-            "def_file": "main.asm",
-            "def_line": 203,
+            "def_file": "equs_bottom.inc",
+            "def_line": 21,
             "def_content": "OFFSET:\t\t\tEQU     CFH-TOKLO\t\t; Offset to the parameterised SET versions"
         }
     ],
@@ -4733,8 +4705,8 @@
     ],
     "OFF_": [
         {
-            "def_file": "main.asm",
-            "def_line": 161,
+            "def_file": "equs_top.inc",
+            "def_line": 74,
             "def_content": "OFF_:\tEQU     87H"
         }
     ],
@@ -4810,8 +4782,8 @@
     ],
     "ON_": [
         {
-            "def_file": "main.asm",
-            "def_line": 162,
+            "def_file": "equs_top.inc",
+            "def_line": 75,
             "def_content": "ON_:\tEQU     EEH"
         }
     ],
@@ -4901,8 +4873,8 @@
     ],
     "ORK": [
         {
-            "def_file": "eval.asm",
-            "def_line": 169,
+            "def_file": "equs_top.inc",
+            "def_line": 41,
             "def_content": "ORK:\t\t\tEQU     84H"
         }
     ],
@@ -5307,29 +5279,29 @@
     ],
     "PA_ALT1": [
         {
-            "def_file": "equs.inc",
-            "def_line": 22,
+            "def_file": "equs_top.inc",
+            "def_line": 6,
             "def_content": "PA_ALT1:\t\tEQU\t\t98h"
         }
     ],
     "PA_ALT2": [
         {
-            "def_file": "equs.inc",
-            "def_line": 23,
+            "def_file": "equs_top.inc",
+            "def_line": 7,
             "def_content": "PA_ALT2:\t\tEQU\t\t99h"
         }
     ],
     "PA_DDR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 21,
+            "def_file": "equs_top.inc",
+            "def_line": 5,
             "def_content": "PA_DDR:\t\t\tEQU\t\t97h"
         }
     ],
     "PA_DR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 20,
+            "def_file": "equs_top.inc",
+            "def_line": 4,
             "def_content": "PA_DR:\t\t\tEQU\t\t96h"
         }
     ],
@@ -5384,92 +5356,92 @@
     ],
     "PB_ALT1": [
         {
-            "def_file": "equs.inc",
-            "def_line": 26,
+            "def_file": "equs_top.inc",
+            "def_line": 10,
             "def_content": "PB_ALT1:        \tEQU\t\t9Ch"
         }
     ],
     "PB_ALT2": [
         {
-            "def_file": "equs.inc",
-            "def_line": 27,
+            "def_file": "equs_top.inc",
+            "def_line": 11,
             "def_content": "PB_ALT2:        \tEQU\t\t9Dh"
         }
     ],
     "PB_DDR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 25,
+            "def_file": "equs_top.inc",
+            "def_line": 9,
             "def_content": "PB_DDR:        \t \tEQU\t\t9Bh"
         }
     ],
     "PB_DR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 24,
+            "def_file": "equs_top.inc",
+            "def_line": 8,
             "def_content": "PB_DR:          \tEQU\t\t9Ah"
         }
     ],
     "PC": [
         {
-            "def_file": "equs.inc",
-            "def_line": 51,
+            "def_file": "equs_bottom.inc",
+            "def_line": 3,
             "def_content": "PC:\t\t\tEQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)"
         }
     ],
     "PC_ALT1": [
         {
-            "def_file": "equs.inc",
-            "def_line": 30,
+            "def_file": "equs_top.inc",
+            "def_line": 14,
             "def_content": "PC_ALT1:        \tEQU\t\tA0h"
         }
     ],
     "PC_ALT2": [
         {
-            "def_file": "equs.inc",
-            "def_line": 31,
+            "def_file": "equs_top.inc",
+            "def_line": 15,
             "def_content": "PC_ALT2:        \tEQU\t\tA1h"
         }
     ],
     "PC_DDR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 29,
+            "def_file": "equs_top.inc",
+            "def_line": 13,
             "def_content": "PC_DDR:         \tEQU\t\t9Fh"
         }
     ],
     "PC_DR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 28,
+            "def_file": "equs_top.inc",
+            "def_line": 12,
             "def_content": "PC_DR:          \tEQU\t\t9Eh"
         }
     ],
     "PD_ALT1": [
         {
-            "def_file": "equs.inc",
-            "def_line": 34,
+            "def_file": "equs_top.inc",
+            "def_line": 18,
             "def_content": "PD_ALT1:\t\tEQU\t\tA4h"
         }
     ],
     "PD_ALT2": [
         {
-            "def_file": "equs.inc",
-            "def_line": 35,
+            "def_file": "equs_top.inc",
+            "def_line": 19,
             "def_content": "PD_ALT2:\t\tEQU\t\tA5h"
         }
     ],
     "PD_DDR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 33,
+            "def_file": "equs_top.inc",
+            "def_line": 17,
             "def_content": "PD_DDR:\t\t\tEQU\t\tA3h"
         }
     ],
     "PD_DR": [
         {
-            "def_file": "equs.inc",
-            "def_line": 32,
+            "def_file": "equs_top.inc",
+            "def_line": 16,
             "def_content": "PD_DR:          \tEQU\t\tA2h"
         }
     ],
@@ -5692,8 +5664,8 @@
     ],
     "PROC": [
         {
-            "def_file": "main.asm",
-            "def_line": 163,
+            "def_file": "equs_top.inc",
+            "def_line": 76,
             "def_content": "PROC:\tEQU     F2H"
         }
     ],
@@ -5909,8 +5881,8 @@
     ],
     "RAM_Top": [
         {
-            "def_file": "equs.inc",
-            "def_line": 13,
+            "def_file": "equs_top.inc",
+            "def_line": 2,
             "def_content": "RAM_Top:\t\tEQU\t\t0B0000h\t; Initial value of HIMEM"
         }
     ],
@@ -6042,8 +6014,8 @@
     ],
     "REM": [
         {
-            "def_file": "main.asm",
-            "def_line": 164,
+            "def_file": "equs_top.inc",
+            "def_line": 77,
             "def_content": "REM:\tEQU     F4H"
         }
     ],
@@ -6056,8 +6028,8 @@
     ],
     "REN": [
         {
-            "def_file": "main.asm",
-            "def_line": 165,
+            "def_file": "equs_top.inc",
+            "def_line": 78,
             "def_content": "REN:\tEQU     CCH"
         }
     ],
@@ -6126,8 +6098,8 @@
     ],
     "REPEAT": [
         {
-            "def_file": "main.asm",
-            "def_line": 166,
+            "def_file": "equs_top.inc",
+            "def_line": 79,
             "def_content": "REPEAT:\tEQU     F5H"
         }
     ],
@@ -6161,8 +6133,8 @@
     ],
     "RESTOR": [
         {
-            "def_file": "main.asm",
-            "def_line": 167,
+            "def_file": "equs_top.inc",
+            "def_line": 80,
             "def_content": "RESTOR:\tEQU     F7H"
         }
     ],
@@ -6581,8 +6553,8 @@
     ],
     "SIZEW": [
         {
-            "def_file": "equs.inc",
-            "def_line": 15,
+            "def_file": "equs_top.inc",
+            "def_line": 3,
             "def_content": "SIZEW:\t\t\tEQU\t\t3\t; Size of a word (3 for ADL mode)"
         }
     ],
@@ -6686,8 +6658,8 @@
     ],
     "SPC": [
         {
-            "def_file": "main.asm",
-            "def_line": 168,
+            "def_file": "equs_top.inc",
+            "def_line": 81,
             "def_content": "SPC:\tEQU     89H"
         }
     ],
@@ -6861,8 +6833,8 @@
     ],
     "STEP": [
         {
-            "def_file": "main.asm",
-            "def_line": 169,
+            "def_file": "equs_top.inc",
+            "def_line": 82,
             "def_content": "STEP:\tEQU     88H"
         }
     ],
@@ -7274,8 +7246,8 @@
     ],
     "TAB": [
         {
-            "def_file": "main.asm",
-            "def_line": 170,
+            "def_file": "equs_top.inc",
+            "def_line": 83,
             "def_content": "TAB:\tEQU     8AH"
         }
     ],
@@ -7295,8 +7267,8 @@
     ],
     "TAND": [
         {
-            "def_file": "main.asm",
-            "def_line": 171,
+            "def_file": "equs_top.inc",
+            "def_line": 84,
             "def_content": "TAND:\tEQU     80H"
         }
     ],
@@ -7309,15 +7281,15 @@
     ],
     "TCALL": [
         {
-            "def_file": "main.asm",
-            "def_line": 172,
+            "def_file": "equs_top.inc",
+            "def_line": 85,
             "def_content": "TCALL:\tEQU     D6H"
         }
     ],
     "TCMD": [
         {
-            "def_file": "eval.asm",
-            "def_line": 163,
+            "def_file": "equs_bottom.inc",
+            "def_line": 8,
             "def_content": "TCMD:\t\t\tEQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations"
         }
     ],
@@ -7351,8 +7323,8 @@
     ],
     "TERROR": [
         {
-            "def_file": "main.asm",
-            "def_line": 173,
+            "def_file": "equs_top.inc",
+            "def_line": 86,
             "def_content": "TERROR:\tEQU     85H"
         }
     ],
@@ -7379,29 +7351,29 @@
     ],
     "TGOSUB": [
         {
-            "def_file": "main.asm",
-            "def_line": 174,
+            "def_file": "equs_top.inc",
+            "def_line": 87,
             "def_content": "TGOSUB:\tEQU     E4H"
         }
     ],
     "TGOTO": [
         {
-            "def_file": "main.asm",
-            "def_line": 175,
+            "def_file": "equs_top.inc",
+            "def_line": 88,
             "def_content": "TGOTO:\tEQU     E5H"
         }
     ],
     "THEN": [
         {
-            "def_file": "main.asm",
-            "def_line": 176,
+            "def_file": "equs_top.inc",
+            "def_line": 89,
             "def_content": "THEN:\tEQU     8CH"
         }
     ],
     "TIF": [
         {
-            "def_file": "main.asm",
-            "def_line": 177,
+            "def_file": "equs_top.inc",
+            "def_line": 90,
             "def_content": "TIF:\tEQU     E7H"
         }
     ],
@@ -7442,8 +7414,8 @@
     ],
     "TO": [
         {
-            "def_file": "main.asm",
-            "def_line": 178,
+            "def_file": "equs_top.inc",
+            "def_line": 91,
             "def_content": "TO:\tEQU     B8H"
         }
     ],
@@ -7456,22 +7428,22 @@
     ],
     "TOKHI": [
         {
-            "def_file": "main.asm",
-            "def_line": 202,
+            "def_file": "equs_top.inc",
+            "def_line": 99,
             "def_content": "TOKHI:\t\t\tEQU     93H\t\t\t; PTR, PAGE, TIME, LOMEM, HIMEM"
         }
     ],
     "TOKLO": [
         {
-            "def_file": "main.asm",
-            "def_line": 201,
+            "def_file": "equs_top.inc",
+            "def_line": 98,
             "def_content": "TOKLO:\t\t\tEQU     8FH\t\t\t; This defines the block of tokens that are pseudo-variables"
         }
     ],
     "TON": [
         {
-            "def_file": "main.asm",
-            "def_line": 179,
+            "def_file": "equs_top.inc",
+            "def_line": 92,
             "def_content": "TON:\tEQU     EEH"
         }
     ],
@@ -7484,8 +7456,8 @@
     ],
     "TOOBIG_FP": [
         {
-            "def_file": "fpp.asm",
-            "def_line": 44,
+            "def_file": "equs_top.inc",
+            "def_line": 50,
             "def_content": "TOOBIG_FP:\t\t\tEQU     20              ;Too big"
         }
     ],
@@ -7512,22 +7484,22 @@
     ],
     "TOR": [
         {
-            "def_file": "main.asm",
-            "def_line": 180,
+            "def_file": "equs_top.inc",
+            "def_line": 93,
             "def_content": "TOR:\tEQU     84H"
         }
     ],
     "TPROC": [
         {
-            "def_file": "main.asm",
-            "def_line": 181,
+            "def_file": "equs_top.inc",
+            "def_line": 94,
             "def_content": "TPROC:\tEQU     F2H"
         }
     ],
     "TRACE": [
         {
-            "def_file": "main.asm",
-            "def_line": 182,
+            "def_file": "equs_top.inc",
+            "def_line": 95,
             "def_content": "TRACE:\tEQU     FCH"
         }
     ],
@@ -7582,8 +7554,8 @@
     ],
     "TSTOP": [
         {
-            "def_file": "main.asm",
-            "def_line": 183,
+            "def_file": "equs_top.inc",
+            "def_line": 96,
             "def_content": "TSTOP:\tEQU     FAH"
         }
     ],
@@ -7624,8 +7596,8 @@
     ],
     "UNTIL": [
         {
-            "def_file": "main.asm",
-            "def_line": 184,
+            "def_file": "equs_top.inc",
+            "def_line": 97,
             "def_content": "UNTIL:\tEQU     FDH"
         }
     ],
@@ -7755,6 +7727,13 @@
             "def_content": "VBLANK_STOP:\t\tDI"
         }
     ],
+    "VDU": [
+        {
+            "def_file": "exec.asm",
+            "def_line": 1482,
+            "def_content": "VDU:\t\t\tLD\tIX,BUFFER\t\t; Storage for the VDU stream"
+        }
+    ],
     "VDU1": [
         {
             "def_file": "exec.asm",
@@ -7785,16 +7764,9 @@
     ],
     "VDU_BUFFER": [
         {
-            "def_file": "equs.inc",
-            "def_line": 52,
+            "def_file": "equs_bottom.inc",
+            "def_line": 4,
             "def_content": "VDU_BUFFER:\t\tEQU\tACCS\t\t; Storage for VDU commands"
-        }
-    ],
-    "VDU_EX": [
-        {
-            "def_file": "exec.asm",
-            "def_line": 1482,
-            "def_content": "VDU_EX:\t\t\tLD\tIX,BUFFER\t\t; Storage for the VDU stream"
         }
     ],
     "VPOS": [
@@ -8023,919 +7995,9 @@
     ],
     "argv_ptrs_max": [
         {
-            "def_file": "init.asm",
-            "def_line": 25,
-            "def_content": "argv_ptrs_max:\t\tEQU\t16\t\t\t\t; Maximum number of arguments allowed in argv"
-        }
-    ],
-    "fa_create_always": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 138,
-            "def_content": "fa_create_always:\tEQU\t08h"
-        }
-    ],
-    "fa_create_new": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 137,
-            "def_content": "fa_create_new:\t\tEQU\t04h"
-        }
-    ],
-    "fa_open_always": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 139,
-            "def_content": "fa_open_always:\t\tEQU\t10h"
-        }
-    ],
-    "fa_open_append": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 140,
-            "def_content": "fa_open_append:\t\tEQU\t30h"
-        }
-    ],
-    "fa_open_existing": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 136,
-            "def_content": "fa_open_existing:\tEQU\t00h"
-        }
-    ],
-    "fa_read": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 134,
-            "def_content": "fa_read:\t\tEQU\t01h"
-        }
-    ],
-    "fa_write": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 135,
-            "def_content": "fa_write:\t\tEQU\t02h"
-        }
-    ],
-    "ffs_chdir": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 118,
-            "def_content": "ffs_chdir:\t\tEQU\t9Ch"
-        }
-    ],
-    "ffs_chdrive": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 119,
-            "def_content": "ffs_chdrive:\t\tEQU\t9Dh"
-        }
-    ],
-    "ffs_chmod": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 115,
-            "def_content": "ffs_chmod:\t\tEQU\t99h"
-        }
-    ],
-    "ffs_dclose": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 105,
-            "def_content": "ffs_dclose:\t\tEQU\t92h"
-        }
-    ],
-    "ffs_dfindfirst": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 107,
-            "def_content": "ffs_dfindfirst:\t\tEQU\t94h"
-        }
-    ],
-    "ffs_dfindnext": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 108,
-            "def_content": "ffs_dfindnext:\t\tEQU\t95h"
-        }
-    ],
-    "ffs_dopen": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 104,
-            "def_content": "ffs_dopen:\t\tEQU\t91h"
-        }
-    ],
-    "ffs_dread": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 106,
-            "def_content": "ffs_dread:\t\tEQU\t93h"
-        }
-    ],
-    "ffs_fclose": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 85,
-            "def_content": "ffs_fclose:\t\tEQU\t81h"
-        }
-    ],
-    "ffs_fdisk": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 126,
-            "def_content": "ffs_fdisk:\t\tEQU\tA1h"
-        }
-    ],
-    "ffs_feof": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 98,
-            "def_content": "ffs_feof:\t\tEQU\t8Eh"
-        }
-    ],
-    "ffs_ferror": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 100,
-            "def_content": "ffs_ferror:\t\tEQU\t90h"
-        }
-    ],
-    "ffs_fexpand": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 92,
-            "def_content": "ffs_fexpand:\t\tEQU\t88h"
-        }
-    ],
-    "ffs_fforward": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 91,
-            "def_content": "ffs_fforward:\t\tEQU\t87h"
-        }
-    ],
-    "ffs_fgets": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 93,
-            "def_content": "ffs_fgets:\t\tEQU\t89h"
-        }
-    ],
-    "ffs_flseek": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 88,
-            "def_content": "ffs_flseek:\t\tEQU\t84h"
-        }
-    ],
-    "ffs_fopen": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 84,
-            "def_content": "ffs_fopen:\t\tEQU\t80h"
-        }
-    ],
-    "ffs_fprintf": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 96,
-            "def_content": "ffs_fprintf:\t\tEQU\t8Ch"
-        }
-    ],
-    "ffs_fputc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 94,
-            "def_content": "ffs_fputc:\t\tEQU\t8Ah"
-        }
-    ],
-    "ffs_fputs": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 95,
-            "def_content": "ffs_fputs:\t\tEQU\t8Bh"
-        }
-    ],
-    "ffs_fread": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 86,
-            "def_content": "ffs_fread:\t\tEQU\t82h"
-        }
-    ],
-    "ffs_fsize": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 99,
-            "def_content": "ffs_fsize:\t\tEQU\t8Fh"
-        }
-    ],
-    "ffs_fsync": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 90,
-            "def_content": "ffs_fsync:\t\tEQU\t86h"
-        }
-    ],
-    "ffs_ftell": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 97,
-            "def_content": "ffs_ftell:\t\tEQU\t8Dh"
-        }
-    ],
-    "ffs_ftruncate": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 89,
-            "def_content": "ffs_ftruncate:\t\tEQU\t85h"
-        }
-    ],
-    "ffs_fwrite": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 87,
-            "def_content": "ffs_fwrite:\t\tEQU\t83h"
-        }
-    ],
-    "ffs_getcwd": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 120,
-            "def_content": "ffs_getcwd:\t\tEQU\t9Eh"
-        }
-    ],
-    "ffs_getfree": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 127,
-            "def_content": "ffs_getfree:\t\tEQU\tA2h"
-        }
-    ],
-    "ffs_getlabel": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 128,
-            "def_content": "ffs_getlabel:\t\tEQU\tA3h"
-        }
-    ],
-    "ffs_mkdir": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 117,
-            "def_content": "ffs_mkdir:\t\tEQU\t9Bh"
-        }
-    ],
-    "ffs_mkfs": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 125,
-            "def_content": "ffs_mkfs:\t\tEQU\tA0h"
-        }
-    ],
-    "ffs_mount": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 124,
-            "def_content": "ffs_mount:\t\tEQU\t9Fh"
-        }
-    ],
-    "ffs_rename": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 114,
-            "def_content": "ffs_rename:\t\tEQU\t98h"
-        }
-    ],
-    "ffs_setcp": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 130,
-            "def_content": "ffs_setcp:\t\tEQU\tA5h"
-        }
-    ],
-    "ffs_setlabel": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 129,
-            "def_content": "ffs_setlabel:\t\tEQU\tA4h"
-        }
-    ],
-    "ffs_stat": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 112,
-            "def_content": "ffs_stat:\t\tEQU\t96h"
-        }
-    ],
-    "ffs_unlink": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 113,
-            "def_content": "ffs_unlink:\t\tEQU\t97h"
-        }
-    ],
-    "ffs_utime": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 116,
-            "def_content": "ffs_utime:\t\tEQU\t9Ah"
-        }
-    ],
-    "mos_cd": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 48,
-            "def_content": "mos_cd:\t\t\tEQU\t03h"
-        }
-    ],
-    "mos_copy": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 62,
-            "def_content": "mos_copy:\t\tEQU\t11h"
-        }
-    ],
-    "mos_del": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 50,
-            "def_content": "mos_del:\t\tEQU\t05h"
-        }
-    ],
-    "mos_dir": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 49,
-            "def_content": "mos_dir:\t\tEQU\t04h"
-        }
-    ],
-    "mos_editline": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 54,
-            "def_content": "mos_editline:\t\tEQU\t09h"
-        }
-    ],
-    "mos_fclose": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 56,
-            "def_content": "mos_fclose:\t\tEQU\t0Bh"
-        }
-    ],
-    "mos_feof": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 59,
-            "def_content": "mos_feof:\t\tEQU\t0Eh"
-        }
-    ],
-    "mos_fgetc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 57,
-            "def_content": "mos_fgetc:\t\tEQU\t0Ch"
-        }
-    ],
-    "mos_flseek": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 73,
-            "def_content": "mos_flseek:\t\tEQU\t1Ch"
-        }
-    ],
-    "mos_fopen": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 55,
-            "def_content": "mos_fopen:\t\tEQU\t0Ah"
-        }
-    ],
-    "mos_fputc": [
-        {
-            "def_file": "mos_api.inc",
+            "def_file": "equs_top.inc",
             "def_line": 58,
-            "def_content": "mos_fputc:\t\tEQU\t0Dh"
-        }
-    ],
-    "mos_fread": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 71,
-            "def_content": "mos_fread:\t\tEQU\t1Ah"
-        }
-    ],
-    "mos_fwrite": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 72,
-            "def_content": "mos_fwrite:\t\tEQU\t1Bh"
-        }
-    ],
-    "mos_getError": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 60,
-            "def_content": "mos_getError:\t\tEQU\t0Fh"
-        }
-    ],
-    "mos_getfil": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 70,
-            "def_content": "mos_getfil:\t\tEQU\t19h"
-        }
-    ],
-    "mos_getkbmap": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 75,
-            "def_content": "mos_getkbmap:\t\tEQU\t1Eh"
-        }
-    ],
-    "mos_getkey": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 45,
-            "def_content": "mos_getkey:\t\tEQU\t00h"
-        }
-    ],
-    "mos_getrtc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 63,
-            "def_content": "mos_getrtc:\t\tEQU\t12h"
-        }
-    ],
-    "mos_i2c_close": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 77,
-            "def_content": "mos_i2c_close:\t\tEQU\t20h"
-        }
-    ],
-    "mos_i2c_open": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 76,
-            "def_content": "mos_i2c_open:\t\tEQU\t1Fh"
-        }
-    ],
-    "mos_i2c_read": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 79,
-            "def_content": "mos_i2c_read:\t\tEQU\t22h"
-        }
-    ],
-    "mos_i2c_write": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 78,
-            "def_content": "mos_i2c_write:\t\tEQU\t21h"
-        }
-    ],
-    "mos_load": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 46,
-            "def_content": "mos_load:\t\tEQU\t01h"
-        }
-    ],
-    "mos_mkdir": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 52,
-            "def_content": "mos_mkdir:\t\tEQU\t07h"
-        }
-    ],
-    "mos_oscli": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 61,
-            "def_content": "mos_oscli:\t\tEQU\t10h"
-        }
-    ],
-    "mos_ren": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 51,
-            "def_content": "mos_ren:\t\tEQU\t06h"
-        }
-    ],
-    "mos_save": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 47,
-            "def_content": "mos_save:\t\tEQU\t02h"
-        }
-    ],
-    "mos_setintvector": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 65,
-            "def_content": "mos_setintvector:\tEQU\t14h"
-        }
-    ],
-    "mos_setkbvector": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 74,
-            "def_content": "mos_setkbvector:\tEQU\t1Dh"
-        }
-    ],
-    "mos_setrtc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 64,
-            "def_content": "mos_setrtc:\t\tEQU\t13h"
-        }
-    ],
-    "mos_sysvars": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 53,
-            "def_content": "mos_sysvars:\t\tEQU\t08h"
-        }
-    ],
-    "mos_uclose": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 67,
-            "def_content": "mos_uclose:\t\tEQU\t16h"
-        }
-    ],
-    "mos_ugetc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 68,
-            "def_content": "mos_ugetc:\t\tEQU\t17h"
-        }
-    ],
-    "mos_uopen": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 66,
-            "def_content": "mos_uopen:\t\tEQU\t15h"
-        }
-    ],
-    "mos_uputc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 69,
-            "def_content": "mos_uputc:\t\tEQU \t18h"
-        }
-    ],
-    "sysvar_audioChannel": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 153,
-            "def_content": "sysvar_audioChannel:\tEQU\t0Dh\t; 1: Audio channel"
-        }
-    ],
-    "sysvar_audioSuccess": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 154,
-            "def_content": "sysvar_audioSuccess:\tEQU\t0Eh\t; 1: Audio channel note queued (0 = no, 1 = yes)"
-        }
-    ],
-    "sysvar_cursorX": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 149,
-            "def_content": "sysvar_cursorX:\t\tEQU\t07h\t; 1: Cursor X position"
-        }
-    ],
-    "sysvar_cursorY": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 150,
-            "def_content": "sysvar_cursorY:\t\tEQU\t08h\t; 1: Cursor Y position"
-        }
-    ],
-    "sysvar_keyascii": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 147,
-            "def_content": "sysvar_keyascii:\tEQU\t05h\t; 1: ASCII keycode, or 0 if no key is pressed"
-        }
-    ],
-    "sysvar_keydelay": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 166,
-            "def_content": "sysvar_keydelay:\tEQU\t22h\t; 2: Keyboard repeat delay"
-        }
-    ],
-    "sysvar_keyled": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 168,
-            "def_content": "sysvar_keyled:\t\tEQU\t26h\t; 1: Keyboard LED status"
-        }
-    ],
-    "sysvar_keymods": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 148,
-            "def_content": "sysvar_keymods:\t\tEQU\t06h\t; 1: Keycode modifiers"
-        }
-    ],
-    "sysvar_keyrate": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 167,
-            "def_content": "sysvar_keyrate:\t\tEQU\t24h\t; 2: Keyboard repeat reat"
-        }
-    ],
-    "sysvar_mouseButtons": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 173,
-            "def_content": "sysvar_mouseButtons:\tEQU\t2Dh\t; 1: Mouse button state"
-        }
-    ],
-    "sysvar_mouseWheel": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 174,
-            "def_content": "sysvar_mouseWheel:\tEQU\t2Eh\t; 1: Mouse wheel delta"
-        }
-    ],
-    "sysvar_mouseX": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 171,
-            "def_content": "sysvar_mouseX:\t\tEQU\t29h\t; 2: Mouse X position"
-        }
-    ],
-    "sysvar_mouseXDelta": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 175,
-            "def_content": "sysvar_mouseXDelta:\tEQU\t2Fh\t; 2: Mouse X delta"
-        }
-    ],
-    "sysvar_mouseY": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 172,
-            "def_content": "sysvar_mouseY:\t\tEQU\t2Bh\t; 2: Mouse Y position"
-        }
-    ],
-    "sysvar_mouseYDelta": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 176,
-            "def_content": "sysvar_mouseYDelta:\tEQU\t31h\t; 2: Mouse Y delta"
-        }
-    ],
-    "sysvar_rtc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 164,
-            "def_content": "sysvar_rtc:\t\tEQU\t1Ah\t; 6: Real time clock data"
-        }
-    ],
-    "sysvar_rtcEnable": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 170,
-            "def_content": "sysvar_rtcEnable:\tEQU\t28h\t; 1: RTC enable flag (0: disabled, 1: use ESP32 RTC)"
-        }
-    ],
-    "sysvar_scrColours": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 159,
-            "def_content": "sysvar_scrColours:\tEQU\t15h\t; 1: Number of colours displayed"
-        }
-    ],
-    "sysvar_scrCols": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 157,
-            "def_content": "sysvar_scrCols:\t\tEQU\t13h\t; 1: Screen columns in characters"
-        }
-    ],
-    "sysvar_scrHeight": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 156,
-            "def_content": "sysvar_scrHeight:\tEQU\t11h\t; 2: Screen height in pixels"
-        }
-    ],
-    "sysvar_scrMode": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 169,
-            "def_content": "sysvar_scrMode:\t\tEQU\t27h\t; 1: Screen mode"
-        }
-    ],
-    "sysvar_scrRows": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 158,
-            "def_content": "sysvar_scrRows:\t\tEQU\t14h\t; 1: Screen rows in characters"
-        }
-    ],
-    "sysvar_scrWidth": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 155,
-            "def_content": "sysvar_scrWidth:\tEQU\t0Fh\t; 2: Screen width in pixels"
-        }
-    ],
-    "sysvar_scrchar": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 151,
-            "def_content": "sysvar_scrchar:\t\tEQU\t09h\t; 1: Character read from screen"
-        }
-    ],
-    "sysvar_scrpixel": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 152,
-            "def_content": "sysvar_scrpixel:\tEQU\t0Ah\t; 3: Pixel data read from screen (R,B,G)"
-        }
-    ],
-    "sysvar_scrpixelIndex": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 160,
-            "def_content": "sysvar_scrpixelIndex:\tEQU\t16h\t; 1: Index of pixel data read from screen"
-        }
-    ],
-    "sysvar_spare": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 165,
-            "def_content": "sysvar_spare:\t\tEQU\t20h\t; 2: Spare, previously used by rtc"
-        }
-    ],
-    "sysvar_time": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 145,
-            "def_content": "sysvar_time:\t\tEQU\t00h\t; 4: Clock timer in centiseconds (incremented by 2 every VBLANK)"
-        }
-    ],
-    "sysvar_vkeycode": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 161,
-            "def_content": "sysvar_vkeycode:\tEQU\t17h\t; 1: Virtual key code from FabGL"
-        }
-    ],
-    "sysvar_vkeycount": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 163,
-            "def_content": "sysvar_vkeycount:\tEQU\t19h\t; 1: Incremented every time a key packet is received"
-        }
-    ],
-    "sysvar_vkeydown": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 162,
-            "def_content": "sysvar_vkeydown:\tEQU\t18h\t; 1: Virtual key state from FabGL (0=up, 1=down)"
-        }
-    ],
-    "sysvar_vpd_pflags": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 146,
-            "def_content": "sysvar_vpd_pflags:\tEQU\t04h\t; 1: Flags to indicate completion of VDP commands"
-        }
-    ],
-    "vdp_audio": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 36,
-            "def_content": "vdp_audio:\t\tEQU\t85h"
-        }
-    ],
-    "vdp_cursor": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 33,
-            "def_content": "vdp_cursor:\t\tEQU\t82h"
-        }
-    ],
-    "vdp_gp": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 31,
-            "def_content": "vdp_gp:\t\t\tEQU \t80h"
-        }
-    ],
-    "vdp_keycode": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 32,
-            "def_content": "vdp_keycode:\t\tEQU \t81h"
-        }
-    ],
-    "vdp_keystate": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 39,
-            "def_content": "vdp_keystate:\t\tEQU\t88h"
-        }
-    ],
-    "vdp_logicalcoords": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 40,
-            "def_content": "vdp_logicalcoords:\tEQU\tC0h"
-        }
-    ],
-    "vdp_mode": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 37,
-            "def_content": "vdp_mode:\t\tEQU\t86h"
-        }
-    ],
-    "vdp_pflag_audio": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 183,
-            "def_content": "vdp_pflag_audio:\tEQU\t00001000b"
-        }
-    ],
-    "vdp_pflag_cursor": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 180,
-            "def_content": "vdp_pflag_cursor:\tEQU\t00000001b"
-        }
-    ],
-    "vdp_pflag_mode": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 184,
-            "def_content": "vdp_pflag_mode:\t\tEQU\t00010000b"
-        }
-    ],
-    "vdp_pflag_mouse": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 186,
-            "def_content": "vdp_pflag_mouse:\tEQU\t01000000b"
-        }
-    ],
-    "vdp_pflag_point": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 182,
-            "def_content": "vdp_pflag_point:\tEQU\t00000100b"
-        }
-    ],
-    "vdp_pflag_rtc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 185,
-            "def_content": "vdp_pflag_rtc:\t\tEQU\t00100000b"
-        }
-    ],
-    "vdp_pflag_scrchar": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 181,
-            "def_content": "vdp_pflag_scrchar:\tEQU\t00000010b"
-        }
-    ],
-    "vdp_rtc": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 38,
-            "def_content": "vdp_rtc:\t\tEQU\t87h"
-        }
-    ],
-    "vdp_scrchar": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 34,
-            "def_content": "vdp_scrchar:\t\tEQU\t83h"
-        }
-    ],
-    "vdp_scrpixel": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 35,
-            "def_content": "vdp_scrpixel:\t\tEQU\t84h"
-        }
-    ],
-    "vdp_terminalmode": [
-        {
-            "def_file": "mos_api.inc",
-            "def_line": 41,
-            "def_content": "vdp_terminalmode:\tEQU\tFFh"
+            "def_content": "argv_ptrs_max:\t\tEQU\t16\t\t\t\t; Maximum number of arguments allowed in argv"
         }
     ]
 }

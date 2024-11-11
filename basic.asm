@@ -2,7 +2,7 @@
     include "macros.inc"
     include "init.asm"
     include "ram.asm"
-    include "equs.inc"
+    include "equs_top.inc"
     include "main.asm"
     include "eval.asm"
     include "exec.asm"
@@ -15,3 +15,4 @@
     include "patch.asm"
     include "sorry.asm"
     include "user.asm"
+    include "equs_bottom.inc"

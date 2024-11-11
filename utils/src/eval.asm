@@ -98,7 +98,7 @@
 ;
 ; Table of addresses for functions
 ;
-FUNTOK:			EQU	8DH			; First token number
+; FUNTOK:			EQU	8DH			; First token number
 ;
 FUNTBL:			DW24	DECODE			; Line number
 			DW24	OPENIN			; OPENIN
@@ -160,13 +160,13 @@ FUNTBL:			DW24	DECODE			; Line number
 ;
 FUNTBL_END:		EQU	$
 ; TCMD:			EQU     FUNTOK+(FUNTBL_END-FUNTBL)/3
-TCMD:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
+; TCMD:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
 ;
-ANDK:			EQU     80H
-DIVK:			EQU     81H
-EORK:			EQU     82H
-MODK:			EQU     83H
-ORK:			EQU     84H
+; ANDK:			EQU     80H
+; DIVK:			EQU     81H
+; EORK:			EQU     82H
+; MODK:			EQU     83H
+; ORK:			EQU     84H
 ;
 SOPTBL:			DW24	SLE			; <= (STRING)
 			DW24	SNE			; <>

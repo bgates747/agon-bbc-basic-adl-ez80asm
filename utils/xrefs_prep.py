@@ -81,24 +81,26 @@ def save_dict_to_file(dictionary, path):
 if __name__ == "__main__":
     # List of files to scan for symbol definitions and references
     source_files = [
+        "utils/src/mos_api.inc",
+        "utils/src/macros.inc",
+        "utils/src/ram.asm",
+        "utils/src/equs_top.inc",
+
         "utils/src/agon_graphics.asm",
         "utils/src/agon_sound.asm",
         "utils/src/basic.asm",
-        "utils/src/equs.inc",
         "utils/src/eval.asm",
         "utils/src/exec.asm",
         "utils/src/fpp.asm",
         "utils/src/gpio.asm",
         "utils/src/init.asm",
         "utils/src/interrupts.asm",
-        "utils/src/macros.inc",
         "utils/src/main.asm",
         "utils/src/misc.asm",
-        "utils/src/mos_api.inc",
         "utils/src/patch.asm",
-        "utils/src/ram.asm",
         "utils/src/sorry.asm",
         "utils/src/user.asm",
+        "utils/src/equs_bottom.inc",
     ]
 
     # Paths for the saved dictionaries
