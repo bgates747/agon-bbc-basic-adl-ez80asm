@@ -212,7 +212,7 @@ if __name__ == '__main__':
         'include "equs_top.inc"',
         'include "init.asm"',
         '',
-        'include "sorry.asm"',
+        # 'include "sorry.asm"',
 
         'include "eval.asm"',
         'include "exec.asm"',
@@ -224,7 +224,7 @@ if __name__ == '__main__':
         'include "agon_graphics.asm"',
         'include "agon_sound.asm"',
         'include "interrupts.asm"',
-        # 'include "sorry.asm"',
+        'include "sorry.asm"',
         '',
         'include "ram.asm"',
         'include "user.asm"',

@@ -1,0 +1,1383 @@
+jp $000022       ;                  | 040000        || 040000 C3 22 00 00 0001  SKIP_AHEAD: JP BEGIN_HEREISH-0x040000
+nop              ; nop              | 040004 0400DA || 040004 00 00 04    0456  BRAKET: DL 0x040000
+nop              ;                  | 040005        || nop                            ; 0400DB
+inc b            ;                  | 040006        || 
+nop              ; nop              | 040007 0400DD || 040007 00 00 04    0458  COMMA: DL 0x040000
+nop              ;                  | 040008        || nop                            ; 0400DE
+inc b            ;                  | 040009        || 
+nop              ; nop              | 04000A 0400E0 || 04000A 00 00 04    0460  COUNT0: DL 0x040000
+nop              ;                  | 04000B        || nop                            ; 0400E1
+inc b            ;                  | 04000C        || 
+nop              ; nop              | 04000D 0400E3 || 04000D 00 00 04    0462  EXPRI: DL 0x040000
+nop              ;                  | 04000E        || nop                            ; 0400E4
+inc b            ;                  | 04000F        || 
+nop              ; nop              | 040010 0400E6 || 040010 00 00 04    0464  EXPR_W2: DL 0x040000
+nop              ;                  | 040011        || nop                            ; 0400E7
+inc b            ;                  | 040012        || 
+nop              ; nop              | 040013 0400DA || 040013 00 00 04    0466  INKEY1: DL 0x040000
+nop              ;                  | 040014        || nop                            ; 0400DB
+inc b            ;                  | 040015        || 
+nop              ; nop              | 040016 0400DD || 040016 00 00 04    0468  NXT: DL 0x040000
+nop              ;                  | 040017        || nop                            ; 0400DE
+inc b            ;                  | 040018        || 
+nop              ; nop              | 040019 0400E0 || 040019 00 00 04    0470  OSWRCH: DL 0x040000
+nop              ;                  | 04001A        || nop                            ; 0400E1
+inc b            ;                  | 04001B        || 
+nop              ; nop              | 04001C 0400E3 || 04001C 00 00 04    0472  VDU: DL 0x040000
+nop              ;                  | 04001D        || nop                            ; 0400E4
+inc b            ;                  | 04001E        || 
+nop              ; nop              | 04001F 0400E6 || 04001F 00 00 04    0474  XEQ: DL 0x040000
+nop              ;                  | 040020        || nop                            ; 0400E7
+inc b            ;                  | 040021        || 
+ld a,$10         ;                  | 040022        || 040022 3E 10       0001M   LD A, val
+call $040019     ; call $043f00     | 040024 0443C4 || 040024 CD 19 00 04 0002M   CALL OSWRCH
+jp $04001f       ; jp $040b96       | 040028 0443C8 || 040028 C3 1F 00 04 0524     JP XEQ
+ld a,$0c         ; ld a,$0c         | 04002C 0443CC || 04002C 3E 0C       0528  CLRSCN:   LD A, 0Ch
+jp $040019       ; jp $043f00       | 04002E 0443CE || 04002E C3 19 00 04 0529     JP OSWRCH
+push ix          ; push ix          | 040032 0443D2 || 040032 DD E5       0533  MODE:   PUSH IX   ; Get the system vars in IX
+ld a,$08         ; ld a,$08         | 040034 0443D4 || 040034 3E 08       0001M    LD A, function
+rst.lis $08      ; rst.lis $08      | 040036 0443D6 || 040036 49 CF       0002M    RST.LIS 08h
+res 4,(ix+$04)   ; res 4,(ix+$04)   | 040038 0443D8 || 040038 DD CB 04 A6 0535     RES 4, (IX+sysvar_vpd_pflags)
+call $04000d     ; call $04030a     | 04003C 0443DC || 04003C CD 0D 00 04 0536     CALL    EXPRI
+exx              ; exx              | 040040 0443E0 || 040040 D9          0537     EXX
+ld a,$16         ; ld a,$16         | 040041 0443E1 || 040041 3E 16       0001M   LD A, val
+call $040019     ; call $043f00     | 040043 0443E3 || 040043 CD 19 00 04 0002M   CALL OSWRCH
+ld a,l           ; ld a,l           | 040047 0443E7 || 040047 7D          0001M   LD A, val
+call $040019     ; call $043f00     | 040048 0443E8 || 040048 CD 19 00 04 0002M   CALL OSWRCH
+ld a,$08         ; ld a,$08         | 04004C 0443EC || 04004C 3E 08       0001M    LD A, function
+rst.lis $08      ; rst.lis $08      | 04004E 0443EE || 04004E 49 CF       0002M    RST.LIS 08h
+bit 4,(ix+$04)   ; bit 4,(ix+$04)   | 040050 0443F0 || 040050 DD CB 04 66 0541  @@:   BIT 4, (IX+sysvar_vpd_pflags)
+jr z,$-$04       ; jr z,$-$04       | 040054 0443F4 || 040054 28 FA       0542     JR Z, @B   ; Wait for the result
+pop ix           ; pop ix           | 040056 0443F6 || 040056 DD E1       0543     POP IX
+jp $04001f       ; jp $040b96       | 040058 0443F8 || 040058 C3 1F 00 04 0544     JP XEQ
+inc iy           ; inc iy           | 04005C 0443FC || 04005C FD 23       0548  GETSCHR:  INC IY
+call $04000d     ; call $04030a     | 04005E 0443FE || 04005E CD 0D 00 04 0549     CALL    EXPRI        ; Get X coordinate
+exx              ; exx              | 040062 044402 || 040062 D9          0550     EXX
+ld ($040300),hl  ; ld ($044a00),hl  | 040063 044403 || 040063 22 00 03 04 0551     LD (VDU_BUFFER+0), HL
+call $040007     ; call $040a22     | 040067 044407 || 040067 CD 07 00 04 0552     CALL COMMA
+call $04000d     ; call $04030a     | 04006B 04440B || 04006B CD 0D 00 04 0553     CALL EXPRI   ; Get Y coordinate
+exx              ; exx              | 04006F 04440F || 04006F D9          0554     EXX
+ld ($040302),hl  ; ld ($044a02),hl  | 040070 044410 || 040070 22 02 03 04 0555     LD (VDU_BUFFER+2), HL
+call $040004     ; call $040a2f     | 040074 044414 || 040074 CD 04 00 04 0556     CALL BRAKET   ; Closing bracket
+push ix          ; push ix          | 040078 044418 || 040078 DD E5       0558     PUSH IX   ; Get the system vars in IX
+ld a,$08         ; ld a,$08         | 04007A 04441A || 04007A 3E 08       0001M    LD A, function
+rst.lis $08      ; rst.lis $08      | 04007C 04441C || 04007C 49 CF       0002M    RST.LIS 08h
+res 1,(ix+$04)   ; res 1,(ix+$04)   | 04007E 04441E || 04007E DD CB 04 8E 0560     RES 1, (IX+sysvar_vpd_pflags)
+ld a,$17         ; ld a,$17         | 040082 044422 || 040082 3E 17       0001M   LD A, val
+call $040019     ; call $043f00     | 040084 044424 || 040084 CD 19 00 04 0002M   CALL OSWRCH
+ld a,$00         ; ld a,$00         | 040088 044428 || 040088 3E 00       0001M   LD A, val
+call $040019     ; call $043f00     | 04008A 04442A || 04008A CD 19 00 04 0002M   CALL OSWRCH
+ld a,$83         ; ld a,$83         | 04008E 04442E || 04008E 3E 83       0001M   LD A, val
+call $040019     ; call $043f00     | 040090 044430 || 040090 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040300)   ; ld a,($044a00)   | 040094 044434 || 040094 3A 00 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 040098 044438 || 040098 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040301)   ; ld a,($044a01)   | 04009C 04443C || 04009C 3A 01 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 0400A0 044440 || 0400A0 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040302)   ; ld a,($044a02)   | 0400A4 044444 || 0400A4 3A 02 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 0400A8 044448 || 0400A8 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040303)   ; ld a,($044a03)   | 0400AC 04444C || 0400AC 3A 03 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 0400B0 044450 || 0400B0 CD 19 00 04 0002M   CALL OSWRCH
+bit 1,(ix+$04)   ; bit 1,(ix+$04)   | 0400B4 044454 || 0400B4 DD CB 04 4E 0568  @@:   BIT 1, (IX+sysvar_vpd_pflags)
+jr z,$-$04       ; jr z,$-$04       | 0400B8 044458 || 0400B8 28 FA       0569     JR Z, @B   ; Wait for the result
+ld a,(ix+$09)    ; ld a,(ix+$09)    | 0400BA 04445A || 0400BA DD 7E 09    0570     LD A, (IX+sysvar_scrchar) ; Fetch the result in A
+or a             ; or a             | 0400BD 04445D || 0400BD B7          0571     OR A   ; Check for 00h
+scf              ; scf              | 0400BE 04445E || 0400BE 37          0572     SCF    ; C = character map
+jr nz,$+$04      ; jr nz,$+$04      | 0400BF 04445F || 0400BF 20 02       0573     JR NZ, @F   ; We have a character, so skip next bit
+xor a            ; xor a            | 0400C1 044461 || 0400C1 AF          0574     XOR A   ; Clear carry
+dec a            ; dec a            | 0400C2 044462 || 0400C2 3D          0575     DEC A   ; Set A to FFh
+pop ix           ; pop ix           | 0400C3 044463 || 0400C3 DD E1       0576  @@:   POP IX
+jp $040013       ; jp $0407e1       | 0400C5 044465 || 0400C5 C3 13 00 04 0577     JP INKEY1   ; Jump back to the GET command
+call $04000d     ; call $04030a     | 0400C9 044469 || 0400C9 CD 0D 00 04 0581  POINT:   CALL    EXPRI        ; Get X coordinate
+exx              ; exx              | 0400CD 04446D || 0400CD D9          0582     EXX
+ld ($040300),hl  ; ld ($044a00),hl  | 0400CE 04446E || 0400CE 22 00 03 04 0583     LD (VDU_BUFFER+0), HL
+call $040007     ; call $040a22     | 0400D2 044472 || 0400D2 CD 07 00 04 0584     CALL COMMA
+call $04000d     ; call $04030a     | 0400D6 044476 || 0400D6 CD 0D 00 04 0585     CALL EXPRI   ; Get Y coordinate
+exx              ; exx              | 0400DA 04447A || 0400DA D9          0586     EXX
+ld ($040302),hl  ; ld ($044a02),hl  | 0400DB 04447B || 0400DB 22 02 03 04 0587     LD (VDU_BUFFER+2), HL
+call $040004     ; call $040a2f     | 0400DF 04447F || 0400DF CD 04 00 04 0588     CALL BRAKET   ; Closing bracket
+push ix          ; push ix          | 0400E3 044483 || 0400E3 DD E5       0590     PUSH IX   ; Get the system vars in IX
+ld a,$08         ; ld a,$08         | 0400E5 044485 || 0400E5 3E 08       0001M    LD A, function
+rst.lis $08      ; rst.lis $08      | 0400E7 044487 || 0400E7 49 CF       0002M    RST.LIS 08h
+res 2,(ix+$04)   ; res 2,(ix+$04)   | 0400E9 044489 || 0400E9 DD CB 04 96 0592     RES 2, (IX+sysvar_vpd_pflags)
+ld a,$17         ; ld a,$17         | 0400ED 04448D || 0400ED 3E 17       0001M   LD A, val
+call $040019     ; call $043f00     | 0400EF 04448F || 0400EF CD 19 00 04 0002M   CALL OSWRCH
+ld a,$00         ; ld a,$00         | 0400F3 044493 || 0400F3 3E 00       0001M   LD A, val
+call $040019     ; call $043f00     | 0400F5 044495 || 0400F5 CD 19 00 04 0002M   CALL OSWRCH
+ld a,$84         ; ld a,$84         | 0400F9 044499 || 0400F9 3E 84       0001M   LD A, val
+call $040019     ; call $043f00     | 0400FB 04449B || 0400FB CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040300)   ; ld a,($044a00)   | 0400FF 04449F || 0400FF 3A 00 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 040103 0444A3 || 040103 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040301)   ; ld a,($044a01)   | 040107 0444A7 || 040107 3A 01 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 04010B 0444AB || 04010B CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040302)   ; ld a,($044a02)   | 04010F 0444AF || 04010F 3A 02 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 040113 0444B3 || 040113 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040303)   ; ld a,($044a03)   | 040117 0444B7 || 040117 3A 03 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 04011B 0444BB || 04011B CD 19 00 04 0002M   CALL OSWRCH
+bit 2,(ix+$04)   ; bit 2,(ix+$04)   | 04011F 0444BF || 04011F DD CB 04 56 0600  @@:   BIT 2, (IX+sysvar_vpd_pflags)
+jr z,$-$04       ; jr z,$-$04       | 040123 0444C3 || 040123 28 FA       0601     JR Z, @B   ; Wait for the result
+ld l,(ix+$16)    ; ld l,(ix+$16)    | 040125 0444C5 || 040125 DD 6E 16    0605     LD L, (IX+sysvar_scrpixelIndex)
+pop ix           ; pop ix           | 040128 0444C8 || 040128 DD E1       0606     POP IX
+jp $04000a       ; jp $04057f       | 04012A 0444CA || 04012A C3 0A 00 04 0607     JP COUNT0
+call $04000d     ; call $04030a     | 04012E 0444CE || 04012E CD 0D 00 04 0614  COLOUR:   CALL EXPRI   ; The colour / mode
+exx              ; exx              | 040132 0444D2 || 040132 D9          0615     EXX
+ld a,l           ; ld a,l           | 040133 0444D3 || 040133 7D          0616     LD A, L
+ld ($040300),a   ; ld ($044a00),a   | 040134 0444D4 || 040134 32 00 03 04 0617     LD (VDU_BUFFER+0), A ; Store first parameter
+call $040016     ; call $040a70     | 040138 0444D8 || 040138 CD 16 00 04 0618     CALL NXT   ; Are there any more parameters?
+cp $2c           ; cp $2c           | 04013C 0444DC || 04013C FE 2C       0619     CP ','
+jr z,$+$14       ; jr z,$+$14       | 04013E 0444DE || 04013E 28 12       0620     JR Z, COLOUR_1  ; Yes, so we're doing a palette change next
+ld a,$11         ; ld a,$11         | 040140 0444E0 || 040140 3E 11       0001M   LD A, val
+call $040019     ; call $043f00     | 040142 0444E2 || 040142 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040300)   ; ld a,($044a00)   | 040146 0444E6 || 040146 3A 00 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 04014A 0444EA || 04014A CD 19 00 04 0002M   CALL OSWRCH
+jp $04001f       ; jp $040b96       | 04014E 0444EE || 04014E C3 1F 00 04 0624     JP XEQ
+call $040007     ; call $040a22     | 040152 0444F2 || 040152 CD 07 00 04 0626  COLOUR_1:  CALL COMMA
+call $04000d     ; call $04030a     | 040156 0444F6 || 040156 CD 0D 00 04 0627     CALL EXPRI   ; Parse R (OR P)
+exx              ; exx              | 04015A 0444FA || 04015A D9          0628     EXX
+ld a,l           ; ld a,l           | 04015B 0444FB || 04015B 7D          0629     LD A, L
+ld ($040301),a   ; ld ($044a01),a   | 04015C 0444FC || 04015C 32 01 03 04 0630     LD (VDU_BUFFER+1), A
+call $040016     ; call $040a70     | 040160 044500 || 040160 CD 16 00 04 0631     CALL NXT   ; Are there any more parameters?
+cp $2c           ; cp $2c           | 040164 044504 || 040164 FE 2C       0632     CP ','
+jr z,$+$2e       ; jr z,$+$2e       | 040166 044506 || 040166 28 2C       0633     JR Z, COLOUR_2  ; Yes, so we're doing COLOUR L,R,G,B
+ld a,$13         ; ld a,$13         | 040168 044508 || 040168 3E 13       0001M   LD A, val
+call $040019     ; call $043f00     | 04016A 04450A || 04016A CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040300)   ; ld a,($044a00)   | 04016E 04450E || 04016E 3A 00 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 040172 044512 || 040172 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040301)   ; ld a,($044a01)   | 040176 044516 || 040176 3A 01 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 04017A 04451A || 04017A CD 19 00 04 0002M   CALL OSWRCH
+ld a,$00         ; ld a,$00         | 04017E 04451E || 04017E 3E 00       0001M   LD A, val
+call $040019     ; call $043f00     | 040180 044520 || 040180 CD 19 00 04 0002M   CALL OSWRCH
+ld a,$00         ; ld a,$00         | 040184 044524 || 040184 3E 00       0001M   LD A, val
+call $040019     ; call $043f00     | 040186 044526 || 040186 CD 19 00 04 0002M   CALL OSWRCH
+ld a,$00         ; ld a,$00         | 04018A 04452A || 04018A 3E 00       0001M   LD A, val
+call $040019     ; call $043f00     | 04018C 04452C || 04018C CD 19 00 04 0002M   CALL OSWRCH
+jp $04001f       ; jp $040b96       | 040190 044530 || 040190 C3 1F 00 04 0641     JP XEQ
+call $040007     ; call $040a22     | 040194 044534 || 040194 CD 07 00 04 0643  COLOUR_2:  CALL COMMA
+call $04000d     ; call $04030a     | 040198 044538 || 040198 CD 0D 00 04 0644     CALL EXPRI   ; Parse G
+exx              ; exx              | 04019C 04453C || 04019C D9          0645     EXX
+ld a,l           ; ld a,l           | 04019D 04453D || 04019D 7D          0646     LD A, L
+ld ($040302),a   ; ld ($044a02),a   | 04019E 04453E || 04019E 32 02 03 04 0647     LD (VDU_BUFFER+2), A
+call $040007     ; call $040a22     | 0401A2 044542 || 0401A2 CD 07 00 04 0648     CALL COMMA
+call $04000d     ; call $04030a     | 0401A6 044546 || 0401A6 CD 0D 00 04 0649     CALL EXPRI   ; Parse B
+exx              ; exx              | 0401AA 04454A || 0401AA D9          0650     EXX
+ld a,l           ; ld a,l           | 0401AB 04454B || 0401AB 7D          0651     LD A, L
+ld ($040303),a   ; ld ($044a03),a   | 0401AC 04454C || 0401AC 32 03 03 04 0652     LD (VDU_BUFFER+3), A
+ld a,$13         ; ld a,$13         | 0401B0 044550 || 0401B0 3E 13       0001M   LD A, val
+call $040019     ; call $043f00     | 0401B2 044552 || 0401B2 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040300)   ; ld a,($044a00)   | 0401B6 044556 || 0401B6 3A 00 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 0401BA 04455A || 0401BA CD 19 00 04 0002M   CALL OSWRCH
+ld a,$ff         ; ld a,$ff         | 0401BE 04455E || 0401BE 3E FF       0001M   LD A, val
+call $040019     ; call $043f00     | 0401C0 044560 || 0401C0 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040301)   ; ld a,($044a01)   | 0401C4 044564 || 0401C4 3A 01 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 0401C8 044568 || 0401C8 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040302)   ; ld a,($044a02)   | 0401CC 04456C || 0401CC 3A 02 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 0401D0 044570 || 0401D0 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040303)   ; ld a,($044a03)   | 0401D4 044574 || 0401D4 3A 03 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 0401D8 044578 || 0401D8 CD 19 00 04 0002M   CALL OSWRCH
+jp $04001f       ; jp $040b96       | 0401DC 04457C || 0401DC C3 1F 00 04 0659     JP XEQ
+call $04000d     ; call $04030a     | 0401E0 044580 || 0401E0 CD 0D 00 04 0663  GCOL:   CALL EXPRI   ; Parse MODE
+exx              ; exx              | 0401E4 044584 || 0401E4 D9          0664     EXX
+ld a,l           ; ld a,l           | 0401E5 044585 || 0401E5 7D          0665     LD A, L
+ld ($040300),a   ; ld ($044a00),a   | 0401E6 044586 || 0401E6 32 00 03 04 0666     LD (VDU_BUFFER+0), A
+call $040007     ; call $040a22     | 0401EA 04458A || 0401EA CD 07 00 04 0667     CALL COMMA
+call $04000d     ; call $04030a     | 0401EE 04458E || 0401EE CD 0D 00 04 0669     CALL EXPRI   ; Parse Colour
+exx              ; exx              | 0401F2 044592 || 0401F2 D9          0670     EXX
+ld a,l           ; ld a,l           | 0401F3 044593 || 0401F3 7D          0671     LD A, L
+ld ($040301),a   ; ld ($044a01),a   | 0401F4 044594 || 0401F4 32 01 03 04 0672     LD (VDU_BUFFER+1), A
+ld a,$12         ; ld a,$12         | 0401F8 044598 || 0401F8 3E 12       0001M   LD A, val
+call $040019     ; call $043f00     | 0401FA 04459A || 0401FA CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040300)   ; ld a,($044a00)   | 0401FE 04459E || 0401FE 3A 00 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 040202 0445A2 || 040202 CD 19 00 04 0002M   CALL OSWRCH
+ld a,($040301)   ; ld a,($044a01)   | 040206 0445A6 || 040206 3A 01 03 04 0001M   LD A, val
+call $040019     ; call $043f00     | 04020A 0445AA || 04020A CD 19 00 04 0002M   CALL OSWRCH
+jp $04001f       ; jp $040b96       | 04020E 0445AE || 04020E C3 1F 00 04 0677     JP XEQ
+call $04000d     ; call $04030a     | 040212 0445B2 || 040212 CD 0D 00 04 0681  PLOT:   CALL EXPRI  ; Parse mode
+exx              ; exx              | 040216 0445B6 || 040216 D9          0682     EXX
+push hl          ; push hl          | 040217 0445B7 || 040217 E5          0683     PUSH HL  ; Push mode (L) onto stack
+call $040007     ; call $040a22     | 040218 0445B8 || 040218 CD 07 00 04 0684     CALL COMMA
+call $040010     ; call $0443a5     | 04021C 0445BC || 04021C CD 10 00 04 0685     CALL EXPR_W2  ; Parse X and Y
+pop bc           ; pop bc           | 040220 0445C0 || 040220 C1          0686     POP BC  ; Pop mode (C) off stack
+ld a,$19         ; ld a,$19         | 040221 0445C1 || 040221 3E 19       0001M   LD A, val
+call $040019     ; call $043f00     | 040223 0445C3 || 040223 CD 19 00 04 0002M   CALL OSWRCH
+ld a,c           ; ld a,c           | 040227 0445C7 || 040227 79          0001M   LD A, val
+call $040019     ; call $043f00     | 040228 0445C8 || 040228 CD 19 00 04 0002M   CALL OSWRCH
+ld a,e           ; ld a,e           | 04022C 0445CC || 04022C 7B          0001M   LD A, val
+call $040019     ; call $043f00     | 04022D 0445CD || 04022D CD 19 00 04 0002M   CALL OSWRCH
+ld a,d           ; ld a,d           | 040231 0445D1 || 040231 7A          0001M   LD A, val
+call $040019     ; call $043f00     | 040232 0445D2 || 040232 CD 19 00 04 0002M   CALL OSWRCH
+ld a,l           ; ld a,l           | 040236 0445D6 || 040236 7D          0001M   LD A, val
+call $040019     ; call $043f00     | 040237 0445D7 || 040237 CD 19 00 04 0002M   CALL OSWRCH
+ld a,h           ; ld a,h           | 04023B 0445DB || 04023B 7C          0001M   LD A, val
+call $040019     ; call $043f00     | 04023C 0445DC || 04023C CD 19 00 04 0002M   CALL OSWRCH
+jp $04001f       ; jp $040b96       | 040240 0445E0 || 040240 C3 1F 00 04 0693     JP XEQ
+call $040010     ; call $0443a5     | 040244 0445E4 || 040244 CD 10 00 04 0697  MOVE:   CALL EXPR_W2  ; Parse X and Y
+ld c,$04         ; ld c,$04         | 040248 0445E8 || 040248 0E 04       0698     LD C, 04H  ; Plot mode 04H (Move)
+jr $-$29         ; jr $-$29         | 04024A 0445EA || 04024A 18 D5       0699     JR PLOT_1  ; Plot
+call $040010     ; call $0443a5     | 04024C 0445EC || 04024C CD 10 00 04 0704  DRAW:   CALL EXPR_W2  ; Get X1 and Y1
+call $040016     ; call $040a70     | 040250 0445F0 || 040250 CD 16 00 04 0705     CALL NXT  ; Are there any more parameters?
+cp $2c           ; cp $2c           | 040254 0445F4 || 040254 FE 2C       0706     CP ','
+ld c,$05         ; ld c,$05         | 040256 0445F6 || 040256 0E 05       0707     LD C, 05h  ; Code for LINE
+jr nz,$-$37      ; jr nz,$-$37      | 040258 0445F8 || 040258 20 C7       0708     JR NZ, PLOT_1 ; No, so just do DRAW x1,y1
+ld a,$19         ; ld a,$19         | 04025A 0445FA || 04025A 3E 19       0001M   LD A, val
+call $040019     ; call $043f00     | 04025C 0445FC || 04025C CD 19 00 04 0002M   CALL OSWRCH
+ld a,$04         ; ld a,$04         | 040260 044600 || 040260 3E 04       0001M   LD A, val
+call $040019     ; call $043f00     | 040262 044602 || 040262 CD 19 00 04 0002M   CALL OSWRCH
+ld a,e           ; ld a,e           | 040266 044606 || 040266 7B          0001M   LD A, val
+call $040019     ; call $043f00     | 040267 044607 || 040267 CD 19 00 04 0002M   CALL OSWRCH
+ld a,d           ; ld a,d           | 04026B 04460B || 04026B 7A          0001M   LD A, val
+call $040019     ; call $043f00     | 04026C 04460C || 04026C CD 19 00 04 0002M   CALL OSWRCH
+ld a,l           ; ld a,l           | 040270 044610 || 040270 7D          0001M   LD A, val
+call $040019     ; call $043f00     | 040271 044611 || 040271 CD 19 00 04 0002M   CALL OSWRCH
+ld a,h           ; ld a,h           | 040275 044615 || 040275 7C          0001M   LD A, val
+call $040019     ; call $043f00     | 040276 044616 || 040276 CD 19 00 04 0002M   CALL OSWRCH
+call $040007     ; call $040a22     | 04027A 04461A || 04027A CD 07 00 04 0715     CALL COMMA
+push bc          ; push bc          | 04027E 04461E || 04027E C5          0716     PUSH BC
+call $040010     ; call $0443a5     | 04027F 04461F || 04027F CD 10 00 04 0717     CALL EXPR_W2  ; Get X2 and Y2
+pop bc           ; pop bc           | 040283 044623 || 040283 C1          0718     POP BC
+jr $-$63         ; jr $-$63         | 040284 044624 || 040284 18 9B       0719     JR PLOT_1  ; Now DRAW the line to those positions
+rst $38          ;                  | 040286        || 040286 FF FF FF FF 0785     ALIGN   256  ; ACCS, BUFFER & STAVAR must be on page boundaries
+rst $38          ;                  | 040287        || 
+rst $38          ;                  | 040288        || 
+rst $38          ;                  | 040289        || 
+rst $38          ;                  | 04028A        || rst $38                        ; 040011
+rst $38          ;                  | 04028B        || rst $38                        ; 040012
+rst $38          ;                  | 04028C        || rst $38                        ; 040013
+rst $38          ;                  | 04028D        || rst $38                        ; 040014
+rst $38          ;                  | 04028E        || rst $38                        ; 040015
+rst $38          ;                  | 04028F        || rst $38                        ; 040016
+rst $38          ;                  | 040290        || rst $38                        ; 040017
+rst $38          ;                  | 040291        || rst $38                        ; 040018
+rst $38          ;                  | 040292        || rst $38                        ; 040019
+rst $38          ;                  | 040293        || rst $38                        ; 04001A
+rst $38          ;                  | 040294        || rst $38                        ; 04001B
+rst $38          ;                  | 040295        || rst $38                        ; 04001C
+rst $38          ;                  | 040296        || rst $38                        ; 04001D
+rst $38          ;                  | 040297        || rst $38                        ; 04001E
+rst $38          ;                  | 040298        || rst $38                        ; 04001F
+rst $38          ;                  | 040299        || rst $38                        ; 040020
+rst $38          ;                  | 04029A        || rst $38                        ; 040011
+rst $38          ;                  | 04029B        || rst $38                        ; 040012
+rst $38          ;                  | 04029C        || rst $38                        ; 040013
+rst $38          ;                  | 04029D        || rst $38                        ; 040014
+rst $38          ;                  | 04029E        || rst $38                        ; 040015
+rst $38          ;                  | 04029F        || rst $38                        ; 040016
+rst $38          ;                  | 0402A0        || rst $38                        ; 040017
+rst $38          ;                  | 0402A1        || rst $38                        ; 040018
+rst $38          ;                  | 0402A2        || rst $38                        ; 040019
+rst $38          ;                  | 0402A3        || rst $38                        ; 04001A
+rst $38          ;                  | 0402A4        || rst $38                        ; 04001B
+rst $38          ;                  | 0402A5        || rst $38                        ; 04001C
+rst $38          ;                  | 0402A6        || rst $38                        ; 04001D
+rst $38          ;                  | 0402A7        || rst $38                        ; 04001E
+rst $38          ;                  | 0402A8        || rst $38                        ; 04001F
+rst $38          ;                  | 0402A9        || rst $38                        ; 040020
+rst $38          ;                  | 0402AA        || rst $38                        ; 040011
+rst $38          ;                  | 0402AB        || rst $38                        ; 040012
+rst $38          ;                  | 0402AC        || rst $38                        ; 040013
+rst $38          ;                  | 0402AD        || rst $38                        ; 040014
+rst $38          ;                  | 0402AE        || rst $38                        ; 040015
+rst $38          ;                  | 0402AF        || rst $38                        ; 040016
+rst $38          ;                  | 0402B0        || rst $38                        ; 040017
+rst $38          ;                  | 0402B1        || rst $38                        ; 040018
+rst $38          ;                  | 0402B2        || rst $38                        ; 040019
+rst $38          ;                  | 0402B3        || rst $38                        ; 04001A
+rst $38          ;                  | 0402B4        || rst $38                        ; 04001B
+rst $38          ;                  | 0402B5        || rst $38                        ; 04001C
+rst $38          ;                  | 0402B6        || rst $38                        ; 04001D
+rst $38          ;                  | 0402B7        || rst $38                        ; 04001E
+rst $38          ;                  | 0402B8        || rst $38                        ; 04001F
+rst $38          ;                  | 0402B9        || rst $38                        ; 040020
+rst $38          ;                  | 0402BA        || rst $38                        ; 040011
+rst $38          ;                  | 0402BB        || rst $38                        ; 040012
+rst $38          ;                  | 0402BC        || rst $38                        ; 040013
+rst $38          ;                  | 0402BD        || rst $38                        ; 040014
+rst $38          ;                  | 0402BE        || rst $38                        ; 040015
+rst $38          ;                  | 0402BF        || rst $38                        ; 040016
+rst $38          ;                  | 0402C0        || rst $38                        ; 040017
+rst $38          ;                  | 0402C1        || rst $38                        ; 040018
+rst $38          ;                  | 0402C2        || rst $38                        ; 040019
+rst $38          ;                  | 0402C3        || rst $38                        ; 04001A
+rst $38          ;                  | 0402C4        || rst $38                        ; 04001B
+rst $38          ;                  | 0402C5        || rst $38                        ; 04001C
+rst $38          ;                  | 0402C6        || rst $38                        ; 04001D
+rst $38          ;                  | 0402C7        || rst $38                        ; 04001E
+rst $38          ;                  | 0402C8        || rst $38                        ; 04001F
+rst $38          ;                  | 0402C9        || rst $38                        ; 040020
+rst $38          ;                  | 0402CA        || rst $38                        ; 040011
+rst $38          ;                  | 0402CB        || rst $38                        ; 040012
+rst $38          ;                  | 0402CC        || rst $38                        ; 040013
+rst $38          ;                  | 0402CD        || rst $38                        ; 040014
+rst $38          ;                  | 0402CE        || rst $38                        ; 040015
+rst $38          ;                  | 0402CF        || rst $38                        ; 040016
+rst $38          ;                  | 0402D0        || rst $38                        ; 040017
+rst $38          ;                  | 0402D1        || rst $38                        ; 040018
+rst $38          ;                  | 0402D2        || rst $38                        ; 040019
+rst $38          ;                  | 0402D3        || rst $38                        ; 04001A
+rst $38          ;                  | 0402D4        || rst $38                        ; 04001B
+rst $38          ;                  | 0402D5        || rst $38                        ; 04001C
+rst $38          ;                  | 0402D6        || rst $38                        ; 04001D
+rst $38          ;                  | 0402D7        || rst $38                        ; 04001E
+rst $38          ;                  | 0402D8        || rst $38                        ; 04001F
+rst $38          ;                  | 0402D9        || rst $38                        ; 040020
+rst $38          ;                  | 0402DA        || rst $38                        ; 040011
+rst $38          ;                  | 0402DB        || rst $38                        ; 040012
+rst $38          ;                  | 0402DC        || rst $38                        ; 040013
+rst $38          ;                  | 0402DD        || rst $38                        ; 040014
+rst $38          ;                  | 0402DE        || rst $38                        ; 040015
+rst $38          ;                  | 0402DF        || rst $38                        ; 040016
+rst $38          ;                  | 0402E0        || rst $38                        ; 040017
+rst $38          ;                  | 0402E1        || rst $38                        ; 040018
+rst $38          ;                  | 0402E2        || rst $38                        ; 040019
+rst $38          ;                  | 0402E3        || rst $38                        ; 04001A
+rst $38          ;                  | 0402E4        || rst $38                        ; 04001B
+rst $38          ;                  | 0402E5        || rst $38                        ; 04001C
+rst $38          ;                  | 0402E6        || rst $38                        ; 04001D
+rst $38          ;                  | 0402E7        || rst $38                        ; 04001E
+rst $38          ;                  | 0402E8        || rst $38                        ; 04001F
+rst $38          ;                  | 0402E9        || rst $38                        ; 040020
+rst $38          ;                  | 0402EA        || rst $38                        ; 040011
+rst $38          ;                  | 0402EB        || rst $38                        ; 040012
+rst $38          ;                  | 0402EC        || rst $38                        ; 040013
+rst $38          ;                  | 0402ED        || rst $38                        ; 040014
+rst $38          ;                  | 0402EE        || rst $38                        ; 040015
+rst $38          ;                  | 0402EF        || rst $38                        ; 040016
+rst $38          ;                  | 0402F0        || rst $38                        ; 040017
+rst $38          ;                  | 0402F1        || rst $38                        ; 040018
+rst $38          ;                  | 0402F2        || rst $38                        ; 040019
+rst $38          ;                  | 0402F3        || rst $38                        ; 04001A
+rst $38          ;                  | 0402F4        || rst $38                        ; 04001B
+rst $38          ;                  | 0402F5        || rst $38                        ; 04001C
+rst $38          ;                  | 0402F6        || rst $38                        ; 04001D
+rst $38          ;                  | 0402F7        || rst $38                        ; 04001E
+rst $38          ;                  | 0402F8        || rst $38                        ; 04001F
+rst $38          ;                  | 0402F9        || rst $38                        ; 040020
+rst $38          ;                  | 0402FA        || 
+rst $38          ;                  | 0402FB        || 
+rst $38          ;                  | 0402FC        || 
+rst $38          ;                  | 0402FD        || rst $38                        ; 0400D7
+rst $38          ;                  | 0402FE        || rst $38                        ; 0400D8
+rst $38          ;                  | 0402FF        || rst $38                        ; 0400D9
+nop              ; nop              | 040300 0400DA || 040300 00 00 00 00 0788  ACCS:           BLKB    256,0             ; String Accumulator
+nop              ;                  | 040301        || nop                            ; 0400DB
+nop              ;                  | 040302        || nop                            ; 0400DC
+nop              ;                  | 040303        || nop                            ; 0400DD
+nop              ;                  | 040304        || nop                            ; 0400DE
+nop              ;                  | 040305        || nop                            ; 0400DF
+nop              ;                  | 040306        || nop                            ; 0400E0
+nop              ;                  | 040307        || nop                            ; 0400E1
+nop              ;                  | 040308        || nop                            ; 0400E2
+nop              ;                  | 040309        || nop                            ; 0400E3
+nop              ;                  | 04030A        || nop                            ; 0400DA
+nop              ;                  | 04030B        || nop                            ; 0400DB
+nop              ;                  | 04030C        || nop                            ; 0400DC
+nop              ;                  | 04030D        || nop                            ; 0400DD
+nop              ;                  | 04030E        || nop                            ; 0400DE
+nop              ;                  | 04030F        || nop                            ; 0400DF
+nop              ;                  | 040310        || nop                            ; 0400E0
+nop              ;                  | 040311        || nop                            ; 0400E1
+nop              ;                  | 040312        || nop                            ; 0400E2
+nop              ;                  | 040313        || nop                            ; 0400E3
+nop              ;                  | 040314        || nop                            ; 0400E4
+nop              ;                  | 040315        || nop                            ; 0400E5
+nop              ;                  | 040316        || nop                            ; 0400E6
+nop              ;                  | 040317        || nop                            ; 0400E7
+nop              ;                  | 040318        || nop                            ; 0400E8
+nop              ;                  | 040319        || nop                            ; 0400E9
+nop              ;                  | 04031A        || nop                            ; 0400DA
+nop              ;                  | 04031B        || nop                            ; 0400DB
+nop              ;                  | 04031C        || nop                            ; 0400DC
+nop              ;                  | 04031D        || nop                            ; 0400DD
+nop              ;                  | 04031E        || nop                            ; 0400DE
+nop              ;                  | 04031F        || nop                            ; 0400DF
+nop              ;                  | 040320        || nop                            ; 0400E0
+nop              ;                  | 040321        || nop                            ; 0400E1
+nop              ;                  | 040322        || nop                            ; 0400E2
+nop              ;                  | 040323        || nop                            ; 0400E3
+nop              ;                  | 040324        || nop                            ; 0400E4
+nop              ;                  | 040325        || nop                            ; 0400E5
+nop              ;                  | 040326        || nop                            ; 0400E6
+nop              ;                  | 040327        || nop                            ; 0400E7
+nop              ;                  | 040328        || nop                            ; 0400E8
+nop              ;                  | 040329        || nop                            ; 0400E9
+nop              ;                  | 04032A        || nop                            ; 0400DA
+nop              ;                  | 04032B        || nop                            ; 0400DB
+nop              ;                  | 04032C        || nop                            ; 0400DC
+nop              ;                  | 04032D        || nop                            ; 0400DD
+nop              ;                  | 04032E        || nop                            ; 0400DE
+nop              ;                  | 04032F        || nop                            ; 0400DF
+nop              ;                  | 040330        || nop                            ; 0400E0
+nop              ;                  | 040331        || nop                            ; 0400E1
+nop              ;                  | 040332        || nop                            ; 0400E2
+nop              ;                  | 040333        || nop                            ; 0400E3
+nop              ;                  | 040334        || nop                            ; 0400E4
+nop              ;                  | 040335        || nop                            ; 0400E5
+nop              ;                  | 040336        || nop                            ; 0400E6
+nop              ;                  | 040337        || nop                            ; 0400E7
+nop              ;                  | 040338        || nop                            ; 0400E8
+nop              ;                  | 040339        || nop                            ; 0400E9
+nop              ;                  | 04033A        || nop                            ; 0400DA
+nop              ;                  | 04033B        || nop                            ; 0400DB
+nop              ;                  | 04033C        || nop                            ; 0400DC
+nop              ;                  | 04033D        || nop                            ; 0400DD
+nop              ;                  | 04033E        || nop                            ; 0400DE
+nop              ;                  | 04033F        || nop                            ; 0400DF
+nop              ;                  | 040340        || nop                            ; 0400E0
+nop              ;                  | 040341        || nop                            ; 0400E1
+nop              ;                  | 040342        || nop                            ; 0400E2
+nop              ;                  | 040343        || nop                            ; 0400E3
+nop              ;                  | 040344        || nop                            ; 0400E4
+nop              ;                  | 040345        || nop                            ; 0400E5
+nop              ;                  | 040346        || nop                            ; 0400E6
+nop              ;                  | 040347        || nop                            ; 0400E7
+nop              ;                  | 040348        || nop                            ; 0400E8
+nop              ;                  | 040349        || nop                            ; 0400E9
+nop              ;                  | 04034A        || nop                            ; 0400DA
+nop              ;                  | 04034B        || nop                            ; 0400DB
+nop              ;                  | 04034C        || nop                            ; 0400DC
+nop              ;                  | 04034D        || nop                            ; 0400DD
+nop              ;                  | 04034E        || nop                            ; 0400DE
+nop              ;                  | 04034F        || nop                            ; 0400DF
+nop              ;                  | 040350        || nop                            ; 0400E0
+nop              ;                  | 040351        || nop                            ; 0400E1
+nop              ;                  | 040352        || nop                            ; 0400E2
+nop              ;                  | 040353        || nop                            ; 0400E3
+nop              ;                  | 040354        || nop                            ; 0400E4
+nop              ;                  | 040355        || nop                            ; 0400E5
+nop              ;                  | 040356        || nop                            ; 0400E6
+nop              ;                  | 040357        || nop                            ; 0400E7
+nop              ;                  | 040358        || nop                            ; 0400E8
+nop              ;                  | 040359        || nop                            ; 0400E9
+nop              ;                  | 04035A        || nop                            ; 0400DA
+nop              ;                  | 04035B        || nop                            ; 0400DB
+nop              ;                  | 04035C        || nop                            ; 0400DC
+nop              ;                  | 04035D        || nop                            ; 0400DD
+nop              ;                  | 04035E        || nop                            ; 0400DE
+nop              ;                  | 04035F        || nop                            ; 0400DF
+nop              ;                  | 040360        || nop                            ; 0400E0
+nop              ;                  | 040361        || nop                            ; 0400E1
+nop              ;                  | 040362        || nop                            ; 0400E2
+nop              ;                  | 040363        || nop                            ; 0400E3
+nop              ;                  | 040364        || nop                            ; 0400E4
+nop              ;                  | 040365        || nop                            ; 0400E5
+nop              ;                  | 040366        || nop                            ; 0400E6
+nop              ;                  | 040367        || nop                            ; 0400E7
+nop              ;                  | 040368        || nop                            ; 0400E8
+nop              ;                  | 040369        || nop                            ; 0400E9
+nop              ;                  | 04036A        || nop                            ; 0400DA
+nop              ;                  | 04036B        || nop                            ; 0400DB
+nop              ;                  | 04036C        || nop                            ; 0400DC
+nop              ;                  | 04036D        || nop                            ; 0400DD
+nop              ;                  | 04036E        || nop                            ; 0400DE
+nop              ;                  | 04036F        || nop                            ; 0400DF
+nop              ;                  | 040370        || nop                            ; 0400E0
+nop              ;                  | 040371        || nop                            ; 0400E1
+nop              ;                  | 040372        || nop                            ; 0400E2
+nop              ;                  | 040373        || nop                            ; 0400E3
+nop              ;                  | 040374        || nop                            ; 0400E4
+nop              ;                  | 040375        || nop                            ; 0400E5
+nop              ;                  | 040376        || nop                            ; 0400E6
+nop              ;                  | 040377        || nop                            ; 0400E7
+nop              ;                  | 040378        || nop                            ; 0400E8
+nop              ;                  | 040379        || nop                            ; 0400E9
+nop              ;                  | 04037A        || nop                            ; 0400DA
+nop              ;                  | 04037B        || nop                            ; 0400DB
+nop              ;                  | 04037C        || nop                            ; 0400DC
+nop              ;                  | 04037D        || nop                            ; 0400DD
+nop              ;                  | 04037E        || nop                            ; 0400DE
+nop              ;                  | 04037F        || nop                            ; 0400DF
+nop              ;                  | 040380        || nop                            ; 0400E0
+nop              ;                  | 040381        || nop                            ; 0400E1
+nop              ;                  | 040382        || nop                            ; 0400E2
+nop              ;                  | 040383        || nop                            ; 0400E3
+nop              ;                  | 040384        || nop                            ; 0400E4
+nop              ;                  | 040385        || nop                            ; 0400E5
+nop              ;                  | 040386        || nop                            ; 0400E6
+nop              ;                  | 040387        || nop                            ; 0400E7
+nop              ;                  | 040388        || nop                            ; 0400E8
+nop              ;                  | 040389        || nop                            ; 0400E9
+nop              ;                  | 04038A        || nop                            ; 0400DA
+nop              ;                  | 04038B        || nop                            ; 0400DB
+nop              ;                  | 04038C        || nop                            ; 0400DC
+nop              ;                  | 04038D        || nop                            ; 0400DD
+nop              ;                  | 04038E        || nop                            ; 0400DE
+nop              ;                  | 04038F        || nop                            ; 0400DF
+nop              ;                  | 040390        || nop                            ; 0400E0
+nop              ;                  | 040391        || nop                            ; 0400E1
+nop              ;                  | 040392        || nop                            ; 0400E2
+nop              ;                  | 040393        || nop                            ; 0400E3
+nop              ;                  | 040394        || nop                            ; 0400E4
+nop              ;                  | 040395        || nop                            ; 0400E5
+nop              ;                  | 040396        || nop                            ; 0400E6
+nop              ;                  | 040397        || nop                            ; 0400E7
+nop              ;                  | 040398        || nop                            ; 0400E8
+nop              ;                  | 040399        || nop                            ; 0400E9
+nop              ;                  | 04039A        || nop                            ; 0400DA
+nop              ;                  | 04039B        || nop                            ; 0400DB
+nop              ;                  | 04039C        || nop                            ; 0400DC
+nop              ;                  | 04039D        || nop                            ; 0400DD
+nop              ;                  | 04039E        || nop                            ; 0400DE
+nop              ;                  | 04039F        || nop                            ; 0400DF
+nop              ;                  | 0403A0        || nop                            ; 0400E0
+nop              ;                  | 0403A1        || nop                            ; 0400E1
+nop              ;                  | 0403A2        || nop                            ; 0400E2
+nop              ;                  | 0403A3        || nop                            ; 0400E3
+nop              ;                  | 0403A4        || nop                            ; 0400E4
+nop              ;                  | 0403A5        || nop                            ; 0400E5
+nop              ;                  | 0403A6        || nop                            ; 0400E6
+nop              ;                  | 0403A7        || nop                            ; 0400E7
+nop              ;                  | 0403A8        || nop                            ; 0400E8
+nop              ;                  | 0403A9        || nop                            ; 0400E9
+nop              ;                  | 0403AA        || nop                            ; 0400DA
+nop              ;                  | 0403AB        || nop                            ; 0400DB
+nop              ;                  | 0403AC        || nop                            ; 0400DC
+nop              ;                  | 0403AD        || nop                            ; 0400DD
+nop              ;                  | 0403AE        || nop                            ; 0400DE
+nop              ;                  | 0403AF        || nop                            ; 0400DF
+nop              ;                  | 0403B0        || nop                            ; 0400E0
+nop              ;                  | 0403B1        || nop                            ; 0400E1
+nop              ;                  | 0403B2        || nop                            ; 0400E2
+nop              ;                  | 0403B3        || nop                            ; 0400E3
+nop              ;                  | 0403B4        || nop                            ; 0400E4
+nop              ;                  | 0403B5        || nop                            ; 0400E5
+nop              ;                  | 0403B6        || nop                            ; 0400E6
+nop              ;                  | 0403B7        || nop                            ; 0400E7
+nop              ;                  | 0403B8        || nop                            ; 0400E8
+nop              ;                  | 0403B9        || nop                            ; 0400E9
+nop              ;                  | 0403BA        || nop                            ; 0400DA
+nop              ;                  | 0403BB        || nop                            ; 0400DB
+nop              ;                  | 0403BC        || nop                            ; 0400DC
+nop              ;                  | 0403BD        || nop                            ; 0400DD
+nop              ;                  | 0403BE        || nop                            ; 0400DE
+nop              ;                  | 0403BF        || nop                            ; 0400DF
+nop              ;                  | 0403C0        || nop                            ; 0400E0
+nop              ;                  | 0403C1        || nop                            ; 0400E1
+nop              ;                  | 0403C2        || nop                            ; 0400E2
+nop              ;                  | 0403C3        || nop                            ; 0400E3
+nop              ;                  | 0403C4        || nop                            ; 0400E4
+nop              ;                  | 0403C5        || nop                            ; 0400E5
+nop              ;                  | 0403C6        || nop                            ; 0400E6
+nop              ;                  | 0403C7        || nop                            ; 0400E7
+nop              ;                  | 0403C8        || nop                            ; 0400E8
+nop              ;                  | 0403C9        || nop                            ; 0400E9
+nop              ;                  | 0403CA        || nop                            ; 0400DA
+nop              ;                  | 0403CB        || nop                            ; 0400DB
+nop              ;                  | 0403CC        || nop                            ; 0400DC
+nop              ;                  | 0403CD        || nop                            ; 0400DD
+nop              ;                  | 0403CE        || nop                            ; 0400DE
+nop              ;                  | 0403CF        || nop                            ; 0400DF
+nop              ;                  | 0403D0        || nop                            ; 0400E0
+nop              ;                  | 0403D1        || nop                            ; 0400E1
+nop              ;                  | 0403D2        || nop                            ; 0400E2
+nop              ;                  | 0403D3        || nop                            ; 0400E3
+nop              ;                  | 0403D4        || nop                            ; 0400E4
+nop              ;                  | 0403D5        || nop                            ; 0400E5
+nop              ;                  | 0403D6        || nop                            ; 0400E6
+nop              ;                  | 0403D7        || nop                            ; 0400E7
+nop              ;                  | 0403D8        || nop                            ; 0400E8
+nop              ;                  | 0403D9        || nop                            ; 0400E9
+nop              ;                  | 0403DA        || nop                            ; 0400DA
+nop              ;                  | 0403DB        || nop                            ; 0400DB
+nop              ;                  | 0403DC        || nop                            ; 0400DC
+nop              ;                  | 0403DD        || nop                            ; 0400DD
+nop              ;                  | 0403DE        || nop                            ; 0400DE
+nop              ;                  | 0403DF        || nop                            ; 0400DF
+nop              ;                  | 0403E0        || nop                            ; 0400E0
+nop              ;                  | 0403E1        || nop                            ; 0400E1
+nop              ;                  | 0403E2        || nop                            ; 0400E2
+nop              ;                  | 0403E3        || nop                            ; 0400E3
+nop              ;                  | 0403E4        || nop                            ; 0400E4
+nop              ;                  | 0403E5        || nop                            ; 0400E5
+nop              ;                  | 0403E6        || nop                            ; 0400E6
+nop              ;                  | 0403E7        || nop                            ; 0400E7
+nop              ;                  | 0403E8        || nop                            ; 0400E8
+nop              ;                  | 0403E9        || nop                            ; 0400E9
+nop              ;                  | 0403EA        || nop                            ; 0400DA
+nop              ;                  | 0403EB        || nop                            ; 0400DB
+nop              ;                  | 0403EC        || nop                            ; 0400DC
+nop              ;                  | 0403ED        || nop                            ; 0400DD
+nop              ;                  | 0403EE        || nop                            ; 0400DE
+nop              ;                  | 0403EF        || nop                            ; 0400DF
+nop              ;                  | 0403F0        || nop                            ; 0400E0
+nop              ;                  | 0403F1        || nop                            ; 0400E1
+nop              ;                  | 0403F2        || nop                            ; 0400E2
+nop              ;                  | 0403F3        || nop                            ; 0400E3
+nop              ;                  | 0403F4        || nop                            ; 0400E4
+nop              ;                  | 0403F5        || nop                            ; 0400E5
+nop              ;                  | 0403F6        || nop                            ; 0400E6
+nop              ;                  | 0403F7        || nop                            ; 0400E7
+nop              ;                  | 0403F8        || nop                            ; 0400E8
+nop              ;                  | 0403F9        || nop                            ; 0400E9
+nop              ;                  | 0403FA        || nop                            ; 0400DA
+nop              ;                  | 0403FB        || nop                            ; 0400DB
+nop              ;                  | 0403FC        || nop                            ; 0400DC
+nop              ;                  | 0403FD        || nop                            ; 0400DD
+nop              ;                  | 0403FE        || nop                            ; 0400DE
+nop              ;                  | 0403FF        || nop                            ; 0400DF
+nop              ; nop              | 040400 0400E0 || 040400 00 00 00 00 0789  BUFFER:         BLKB    256,0             ; String Input Buffer
+nop              ;                  | 040401        || nop                            ; 0400E1
+nop              ;                  | 040402        || nop                            ; 0400E2
+nop              ;                  | 040403        || nop                            ; 0400E3
+nop              ;                  | 040404        || nop                            ; 0400E4
+nop              ;                  | 040405        || nop                            ; 0400E5
+nop              ;                  | 040406        || nop                            ; 0400E6
+nop              ;                  | 040407        || nop                            ; 0400E7
+nop              ;                  | 040408        || nop                            ; 0400E8
+nop              ;                  | 040409        || nop                            ; 0400E9
+nop              ;                  | 04040A        || nop                            ; 0400DA
+nop              ;                  | 04040B        || nop                            ; 0400DB
+nop              ;                  | 04040C        || nop                            ; 0400DC
+nop              ;                  | 04040D        || nop                            ; 0400DD
+nop              ;                  | 04040E        || nop                            ; 0400DE
+nop              ;                  | 04040F        || nop                            ; 0400DF
+nop              ;                  | 040410        || nop                            ; 0400E0
+nop              ;                  | 040411        || nop                            ; 0400E1
+nop              ;                  | 040412        || nop                            ; 0400E2
+nop              ;                  | 040413        || nop                            ; 0400E3
+nop              ;                  | 040414        || nop                            ; 0400E4
+nop              ;                  | 040415        || nop                            ; 0400E5
+nop              ;                  | 040416        || nop                            ; 0400E6
+nop              ;                  | 040417        || nop                            ; 0400E7
+nop              ;                  | 040418        || nop                            ; 0400E8
+nop              ;                  | 040419        || nop                            ; 0400E9
+nop              ;                  | 04041A        || nop                            ; 0400DA
+nop              ;                  | 04041B        || nop                            ; 0400DB
+nop              ;                  | 04041C        || nop                            ; 0400DC
+nop              ;                  | 04041D        || nop                            ; 0400DD
+nop              ;                  | 04041E        || nop                            ; 0400DE
+nop              ;                  | 04041F        || nop                            ; 0400DF
+nop              ;                  | 040420        || nop                            ; 0400E0
+nop              ;                  | 040421        || nop                            ; 0400E1
+nop              ;                  | 040422        || nop                            ; 0400E2
+nop              ;                  | 040423        || nop                            ; 0400E3
+nop              ;                  | 040424        || nop                            ; 0400E4
+nop              ;                  | 040425        || nop                            ; 0400E5
+nop              ;                  | 040426        || nop                            ; 0400E6
+nop              ;                  | 040427        || nop                            ; 0400E7
+nop              ;                  | 040428        || nop                            ; 0400E8
+nop              ;                  | 040429        || nop                            ; 0400E9
+nop              ;                  | 04042A        || nop                            ; 0400DA
+nop              ;                  | 04042B        || nop                            ; 0400DB
+nop              ;                  | 04042C        || nop                            ; 0400DC
+nop              ;                  | 04042D        || nop                            ; 0400DD
+nop              ;                  | 04042E        || nop                            ; 0400DE
+nop              ;                  | 04042F        || nop                            ; 0400DF
+nop              ;                  | 040430        || nop                            ; 0400E0
+nop              ;                  | 040431        || nop                            ; 0400E1
+nop              ;                  | 040432        || nop                            ; 0400E2
+nop              ;                  | 040433        || nop                            ; 0400E3
+nop              ;                  | 040434        || nop                            ; 0400E4
+nop              ;                  | 040435        || nop                            ; 0400E5
+nop              ;                  | 040436        || nop                            ; 0400E6
+nop              ;                  | 040437        || nop                            ; 0400E7
+nop              ;                  | 040438        || nop                            ; 0400E8
+nop              ;                  | 040439        || nop                            ; 0400E9
+nop              ;                  | 04043A        || nop                            ; 0400DA
+nop              ;                  | 04043B        || nop                            ; 0400DB
+nop              ;                  | 04043C        || nop                            ; 0400DC
+nop              ;                  | 04043D        || nop                            ; 0400DD
+nop              ;                  | 04043E        || nop                            ; 0400DE
+nop              ;                  | 04043F        || nop                            ; 0400DF
+nop              ;                  | 040440        || nop                            ; 0400E0
+nop              ;                  | 040441        || nop                            ; 0400E1
+nop              ;                  | 040442        || nop                            ; 0400E2
+nop              ;                  | 040443        || nop                            ; 0400E3
+nop              ;                  | 040444        || nop                            ; 0400E4
+nop              ;                  | 040445        || nop                            ; 0400E5
+nop              ;                  | 040446        || nop                            ; 0400E6
+nop              ;                  | 040447        || nop                            ; 0400E7
+nop              ;                  | 040448        || nop                            ; 0400E8
+nop              ;                  | 040449        || nop                            ; 0400E9
+nop              ;                  | 04044A        || nop                            ; 0400DA
+nop              ;                  | 04044B        || nop                            ; 0400DB
+nop              ;                  | 04044C        || nop                            ; 0400DC
+nop              ;                  | 04044D        || nop                            ; 0400DD
+nop              ;                  | 04044E        || nop                            ; 0400DE
+nop              ;                  | 04044F        || nop                            ; 0400DF
+nop              ;                  | 040450        || nop                            ; 0400E0
+nop              ;                  | 040451        || nop                            ; 0400E1
+nop              ;                  | 040452        || nop                            ; 0400E2
+nop              ;                  | 040453        || nop                            ; 0400E3
+nop              ;                  | 040454        || nop                            ; 0400E4
+nop              ;                  | 040455        || nop                            ; 0400E5
+nop              ;                  | 040456        || nop                            ; 0400E6
+nop              ;                  | 040457        || nop                            ; 0400E7
+nop              ;                  | 040458        || nop                            ; 0400E8
+nop              ;                  | 040459        || nop                            ; 0400E9
+nop              ;                  | 04045A        || nop                            ; 0400DA
+nop              ;                  | 04045B        || nop                            ; 0400DB
+nop              ;                  | 04045C        || nop                            ; 0400DC
+nop              ;                  | 04045D        || nop                            ; 0400DD
+nop              ;                  | 04045E        || nop                            ; 0400DE
+nop              ;                  | 04045F        || nop                            ; 0400DF
+nop              ;                  | 040460        || nop                            ; 0400E0
+nop              ;                  | 040461        || nop                            ; 0400E1
+nop              ;                  | 040462        || nop                            ; 0400E2
+nop              ;                  | 040463        || nop                            ; 0400E3
+nop              ;                  | 040464        || nop                            ; 0400E4
+nop              ;                  | 040465        || nop                            ; 0400E5
+nop              ;                  | 040466        || nop                            ; 0400E6
+nop              ;                  | 040467        || nop                            ; 0400E7
+nop              ;                  | 040468        || nop                            ; 0400E8
+nop              ;                  | 040469        || nop                            ; 0400E9
+nop              ;                  | 04046A        || nop                            ; 0400DA
+nop              ;                  | 04046B        || nop                            ; 0400DB
+nop              ;                  | 04046C        || nop                            ; 0400DC
+nop              ;                  | 04046D        || nop                            ; 0400DD
+nop              ;                  | 04046E        || nop                            ; 0400DE
+nop              ;                  | 04046F        || nop                            ; 0400DF
+nop              ;                  | 040470        || nop                            ; 0400E0
+nop              ;                  | 040471        || nop                            ; 0400E1
+nop              ;                  | 040472        || nop                            ; 0400E2
+nop              ;                  | 040473        || nop                            ; 0400E3
+nop              ;                  | 040474        || nop                            ; 0400E4
+nop              ;                  | 040475        || nop                            ; 0400E5
+nop              ;                  | 040476        || nop                            ; 0400E6
+nop              ;                  | 040477        || nop                            ; 0400E7
+nop              ;                  | 040478        || nop                            ; 0400E8
+nop              ;                  | 040479        || nop                            ; 0400E9
+nop              ;                  | 04047A        || nop                            ; 0400DA
+nop              ;                  | 04047B        || nop                            ; 0400DB
+nop              ;                  | 04047C        || nop                            ; 0400DC
+nop              ;                  | 04047D        || nop                            ; 0400DD
+nop              ;                  | 04047E        || nop                            ; 0400DE
+nop              ;                  | 04047F        || nop                            ; 0400DF
+nop              ;                  | 040480        || nop                            ; 0400E0
+nop              ;                  | 040481        || nop                            ; 0400E1
+nop              ;                  | 040482        || nop                            ; 0400E2
+nop              ;                  | 040483        || nop                            ; 0400E3
+nop              ;                  | 040484        || nop                            ; 0400E4
+nop              ;                  | 040485        || nop                            ; 0400E5
+nop              ;                  | 040486        || nop                            ; 0400E6
+nop              ;                  | 040487        || nop                            ; 0400E7
+nop              ;                  | 040488        || nop                            ; 0400E8
+nop              ;                  | 040489        || nop                            ; 0400E9
+nop              ;                  | 04048A        || nop                            ; 0400DA
+nop              ;                  | 04048B        || nop                            ; 0400DB
+nop              ;                  | 04048C        || nop                            ; 0400DC
+nop              ;                  | 04048D        || nop                            ; 0400DD
+nop              ;                  | 04048E        || nop                            ; 0400DE
+nop              ;                  | 04048F        || nop                            ; 0400DF
+nop              ;                  | 040490        || nop                            ; 0400E0
+nop              ;                  | 040491        || nop                            ; 0400E1
+nop              ;                  | 040492        || nop                            ; 0400E2
+nop              ;                  | 040493        || nop                            ; 0400E3
+nop              ;                  | 040494        || nop                            ; 0400E4
+nop              ;                  | 040495        || nop                            ; 0400E5
+nop              ;                  | 040496        || nop                            ; 0400E6
+nop              ;                  | 040497        || nop                            ; 0400E7
+nop              ;                  | 040498        || nop                            ; 0400E8
+nop              ;                  | 040499        || nop                            ; 0400E9
+nop              ;                  | 04049A        || nop                            ; 0400DA
+nop              ;                  | 04049B        || nop                            ; 0400DB
+nop              ;                  | 04049C        || nop                            ; 0400DC
+nop              ;                  | 04049D        || nop                            ; 0400DD
+nop              ;                  | 04049E        || nop                            ; 0400DE
+nop              ;                  | 04049F        || nop                            ; 0400DF
+nop              ;                  | 0404A0        || nop                            ; 0400E0
+nop              ;                  | 0404A1        || nop                            ; 0400E1
+nop              ;                  | 0404A2        || nop                            ; 0400E2
+nop              ;                  | 0404A3        || nop                            ; 0400E3
+nop              ;                  | 0404A4        || nop                            ; 0400E4
+nop              ;                  | 0404A5        || nop                            ; 0400E5
+nop              ;                  | 0404A6        || nop                            ; 0400E6
+nop              ;                  | 0404A7        || nop                            ; 0400E7
+nop              ;                  | 0404A8        || nop                            ; 0400E8
+nop              ;                  | 0404A9        || nop                            ; 0400E9
+nop              ;                  | 0404AA        || nop                            ; 0400DA
+nop              ;                  | 0404AB        || nop                            ; 0400DB
+nop              ;                  | 0404AC        || nop                            ; 0400DC
+nop              ;                  | 0404AD        || nop                            ; 0400DD
+nop              ;                  | 0404AE        || nop                            ; 0400DE
+nop              ;                  | 0404AF        || nop                            ; 0400DF
+nop              ;                  | 0404B0        || nop                            ; 0400E0
+nop              ;                  | 0404B1        || nop                            ; 0400E1
+nop              ;                  | 0404B2        || nop                            ; 0400E2
+nop              ;                  | 0404B3        || nop                            ; 0400E3
+nop              ;                  | 0404B4        || nop                            ; 0400E4
+nop              ;                  | 0404B5        || nop                            ; 0400E5
+nop              ;                  | 0404B6        || nop                            ; 0400E6
+nop              ;                  | 0404B7        || nop                            ; 0400E7
+nop              ;                  | 0404B8        || nop                            ; 0400E8
+nop              ;                  | 0404B9        || nop                            ; 0400E9
+nop              ;                  | 0404BA        || nop                            ; 0400DA
+nop              ;                  | 0404BB        || nop                            ; 0400DB
+nop              ;                  | 0404BC        || nop                            ; 0400DC
+nop              ;                  | 0404BD        || nop                            ; 0400DD
+nop              ;                  | 0404BE        || nop                            ; 0400DE
+nop              ;                  | 0404BF        || nop                            ; 0400DF
+nop              ;                  | 0404C0        || nop                            ; 0400E0
+nop              ;                  | 0404C1        || nop                            ; 0400E1
+nop              ;                  | 0404C2        || nop                            ; 0400E2
+nop              ;                  | 0404C3        || nop                            ; 0400E3
+nop              ;                  | 0404C4        || nop                            ; 0400E4
+nop              ;                  | 0404C5        || nop                            ; 0400E5
+nop              ;                  | 0404C6        || nop                            ; 0400E6
+nop              ;                  | 0404C7        || nop                            ; 0400E7
+nop              ;                  | 0404C8        || nop                            ; 0400E8
+nop              ;                  | 0404C9        || nop                            ; 0400E9
+nop              ;                  | 0404CA        || nop                            ; 0400DA
+nop              ;                  | 0404CB        || nop                            ; 0400DB
+nop              ;                  | 0404CC        || nop                            ; 0400DC
+nop              ;                  | 0404CD        || nop                            ; 0400DD
+nop              ;                  | 0404CE        || nop                            ; 0400DE
+nop              ;                  | 0404CF        || nop                            ; 0400DF
+nop              ;                  | 0404D0        || nop                            ; 0400E0
+nop              ;                  | 0404D1        || nop                            ; 0400E1
+nop              ;                  | 0404D2        || nop                            ; 0400E2
+nop              ;                  | 0404D3        || nop                            ; 0400E3
+nop              ;                  | 0404D4        || nop                            ; 0400E4
+nop              ;                  | 0404D5        || nop                            ; 0400E5
+nop              ;                  | 0404D6        || nop                            ; 0400E6
+nop              ;                  | 0404D7        || nop                            ; 0400E7
+nop              ;                  | 0404D8        || nop                            ; 0400E8
+nop              ;                  | 0404D9        || nop                            ; 0400E9
+nop              ;                  | 0404DA        || nop                            ; 0400DA
+nop              ;                  | 0404DB        || nop                            ; 0400DB
+nop              ;                  | 0404DC        || nop                            ; 0400DC
+nop              ;                  | 0404DD        || nop                            ; 0400DD
+nop              ;                  | 0404DE        || nop                            ; 0400DE
+nop              ;                  | 0404DF        || nop                            ; 0400DF
+nop              ;                  | 0404E0        || nop                            ; 0400E0
+nop              ;                  | 0404E1        || nop                            ; 0400E1
+nop              ;                  | 0404E2        || nop                            ; 0400E2
+nop              ;                  | 0404E3        || nop                            ; 0400E3
+nop              ;                  | 0404E4        || nop                            ; 0400E4
+nop              ;                  | 0404E5        || nop                            ; 0400E5
+nop              ;                  | 0404E6        || nop                            ; 0400E6
+nop              ;                  | 0404E7        || nop                            ; 0400E7
+nop              ;                  | 0404E8        || nop                            ; 0400E8
+nop              ;                  | 0404E9        || nop                            ; 0400E9
+nop              ;                  | 0404EA        || nop                            ; 0400DA
+nop              ;                  | 0404EB        || nop                            ; 0400DB
+nop              ;                  | 0404EC        || nop                            ; 0400DC
+nop              ;                  | 0404ED        || nop                            ; 0400DD
+nop              ;                  | 0404EE        || nop                            ; 0400DE
+nop              ;                  | 0404EF        || nop                            ; 0400DF
+nop              ;                  | 0404F0        || nop                            ; 0400E0
+nop              ;                  | 0404F1        || nop                            ; 0400E1
+nop              ;                  | 0404F2        || nop                            ; 0400E2
+nop              ;                  | 0404F3        || nop                            ; 0400E3
+nop              ;                  | 0404F4        || nop                            ; 0400E4
+nop              ;                  | 0404F5        || nop                            ; 0400E5
+nop              ;                  | 0404F6        || nop                            ; 0400E6
+nop              ;                  | 0404F7        || nop                            ; 0400E7
+nop              ;                  | 0404F8        || nop                            ; 0400E8
+nop              ;                  | 0404F9        || nop                            ; 0400E9
+nop              ;                  | 0404FA        || nop                            ; 0400DA
+nop              ;                  | 0404FB        || nop                            ; 0400DB
+nop              ;                  | 0404FC        || nop                            ; 0400DC
+nop              ;                  | 0404FD        || nop                            ; 0400DD
+nop              ;                  | 0404FE        || nop                            ; 0400DE
+nop              ;                  | 0404FF        || nop                            ; 0400DF
+nop              ; nop              | 040500 0400E0 || 040500 00 00 00 00 0790  STAVAR:         BLKB    27*4,0            ; Static Variables
+nop              ;                  | 040501        || nop                            ; 0400E1
+nop              ;                  | 040502        || nop                            ; 0400E2
+nop              ;                  | 040503        || nop                            ; 0400E3
+nop              ;                  | 040504        || nop                            ; 0400E4
+nop              ;                  | 040505        || nop                            ; 0400E5
+nop              ;                  | 040506        || nop                            ; 0400E6
+nop              ;                  | 040507        || nop                            ; 0400E7
+nop              ;                  | 040508        || nop                            ; 0400E8
+nop              ;                  | 040509        || nop                            ; 0400E9
+nop              ;                  | 04050A        || nop                            ; 0400DA
+nop              ;                  | 04050B        || nop                            ; 0400DB
+nop              ;                  | 04050C        || nop                            ; 0400DC
+nop              ;                  | 04050D        || nop                            ; 0400DD
+nop              ;                  | 04050E        || nop                            ; 0400DE
+nop              ;                  | 04050F        || nop                            ; 0400DF
+nop              ;                  | 040510        || nop                            ; 0400E0
+nop              ;                  | 040511        || nop                            ; 0400E1
+nop              ;                  | 040512        || nop                            ; 0400E2
+nop              ;                  | 040513        || nop                            ; 0400E3
+nop              ;                  | 040514        || nop                            ; 0400E4
+nop              ;                  | 040515        || nop                            ; 0400E5
+nop              ;                  | 040516        || nop                            ; 0400E6
+nop              ;                  | 040517        || nop                            ; 0400E7
+nop              ;                  | 040518        || nop                            ; 0400E8
+nop              ;                  | 040519        || nop                            ; 0400E9
+nop              ;                  | 04051A        || nop                            ; 0400DA
+nop              ;                  | 04051B        || nop                            ; 0400DB
+nop              ;                  | 04051C        || nop                            ; 0400DC
+nop              ;                  | 04051D        || nop                            ; 0400DD
+nop              ;                  | 04051E        || nop                            ; 0400DE
+nop              ;                  | 04051F        || nop                            ; 0400DF
+nop              ;                  | 040520        || nop                            ; 0400E0
+nop              ;                  | 040521        || nop                            ; 0400E1
+nop              ;                  | 040522        || nop                            ; 0400E2
+nop              ;                  | 040523        || nop                            ; 0400E3
+nop              ;                  | 040524        || nop                            ; 0400E4
+nop              ;                  | 040525        || nop                            ; 0400E5
+nop              ;                  | 040526        || nop                            ; 0400E6
+nop              ;                  | 040527        || nop                            ; 0400E7
+nop              ;                  | 040528        || nop                            ; 0400E8
+nop              ;                  | 040529        || nop                            ; 0400E9
+nop              ;                  | 04052A        || nop                            ; 0400DA
+nop              ;                  | 04052B        || nop                            ; 0400DB
+nop              ;                  | 04052C        || nop                            ; 0400DC
+nop              ;                  | 04052D        || nop                            ; 0400DD
+nop              ;                  | 04052E        || nop                            ; 0400DE
+nop              ;                  | 04052F        || nop                            ; 0400DF
+nop              ;                  | 040530        || nop                            ; 0400E0
+nop              ;                  | 040531        || nop                            ; 0400E1
+nop              ;                  | 040532        || nop                            ; 0400E2
+nop              ;                  | 040533        || nop                            ; 0400E3
+nop              ;                  | 040534        || nop                            ; 0400E4
+nop              ;                  | 040535        || nop                            ; 0400E5
+nop              ;                  | 040536        || nop                            ; 0400E6
+nop              ;                  | 040537        || nop                            ; 0400E7
+nop              ;                  | 040538        || nop                            ; 0400E8
+nop              ;                  | 040539        || nop                            ; 0400E9
+nop              ;                  | 04053A        || nop                            ; 0400DA
+nop              ;                  | 04053B        || nop                            ; 0400DB
+nop              ;                  | 04053C        || nop                            ; 0400DC
+nop              ;                  | 04053D        || nop                            ; 0400DD
+nop              ;                  | 04053E        || nop                            ; 0400DE
+nop              ;                  | 04053F        || nop                            ; 0400DF
+nop              ;                  | 040540        || nop                            ; 0400E0
+nop              ;                  | 040541        || nop                            ; 0400E1
+nop              ;                  | 040542        || nop                            ; 0400E2
+nop              ;                  | 040543        || nop                            ; 0400E3
+nop              ;                  | 040544        || nop                            ; 0400E4
+nop              ;                  | 040545        || nop                            ; 0400E5
+nop              ;                  | 040546        || nop                            ; 0400E6
+nop              ;                  | 040547        || nop                            ; 0400E7
+nop              ;                  | 040548        || nop                            ; 0400E8
+nop              ;                  | 040549        || nop                            ; 0400E9
+nop              ;                  | 04054A        || nop                            ; 0400DA
+nop              ;                  | 04054B        || nop                            ; 0400DB
+nop              ;                  | 04054C        || nop                            ; 0400DC
+nop              ;                  | 04054D        || nop                            ; 0400DD
+nop              ;                  | 04054E        || nop                            ; 0400DE
+nop              ;                  | 04054F        || nop                            ; 0400DF
+nop              ;                  | 040550        || nop                            ; 0400E0
+nop              ;                  | 040551        || nop                            ; 0400E1
+nop              ;                  | 040552        || nop                            ; 0400E2
+nop              ;                  | 040553        || nop                            ; 0400E3
+nop              ;                  | 040554        || nop                            ; 0400E4
+nop              ;                  | 040555        || nop                            ; 0400E5
+nop              ;                  | 040556        || nop                            ; 0400E6
+nop              ;                  | 040557        || nop                            ; 0400E7
+nop              ;                  | 040558        || nop                            ; 0400E8
+nop              ;                  | 040559        || nop                            ; 0400E9
+nop              ;                  | 04055A        || nop                            ; 0400DA
+nop              ;                  | 04055B        || nop                            ; 0400DB
+nop              ;                  | 04055C        || nop                            ; 0400DC
+nop              ;                  | 04055D        || nop                            ; 0400DD
+nop              ;                  | 04055E        || nop                            ; 0400DE
+nop              ;                  | 04055F        || nop                            ; 0400DF
+nop              ;                  | 040560        || nop                            ; 0400E0
+nop              ;                  | 040561        || nop                            ; 0400E1
+nop              ;                  | 040562        || nop                            ; 0400E2
+nop              ;                  | 040563        || nop                            ; 0400E3
+nop              ;                  | 040564        || nop                            ; 0400E4
+nop              ;                  | 040565        || nop                            ; 0400E5
+nop              ;                  | 040566        || nop                            ; 0400E6
+nop              ;                  | 040567        || nop                            ; 0400E7
+nop              ;                  | 040568        || nop                            ; 0400E8
+nop              ;                  | 040569        || nop                            ; 0400E9
+nop              ;                  | 04056A        || nop                            ; 0400DA
+nop              ;                  | 04056B        || nop                            ; 0400DB
+nop              ; nop              | 04056C 0400DC || 04056C 00 00 00 00 0791  DYNVAR:         BLKB    54*3,0            ; Dynamic Variable Pointers
+nop              ;                  | 04056D        || nop                            ; 0400DD
+nop              ;                  | 04056E        || nop                            ; 0400DE
+nop              ;                  | 04056F        || nop                            ; 0400DF
+nop              ;                  | 040570        || nop                            ; 0400E0
+nop              ;                  | 040571        || nop                            ; 0400E1
+nop              ;                  | 040572        || nop                            ; 0400E2
+nop              ;                  | 040573        || nop                            ; 0400E3
+nop              ;                  | 040574        || nop                            ; 0400E4
+nop              ;                  | 040575        || nop                            ; 0400E5
+nop              ;                  | 040576        || nop                            ; 0400E6
+nop              ;                  | 040577        || nop                            ; 0400E7
+nop              ;                  | 040578        || nop                            ; 0400E8
+nop              ;                  | 040579        || nop                            ; 0400E9
+nop              ;                  | 04057A        || nop                            ; 0400DA
+nop              ;                  | 04057B        || nop                            ; 0400DB
+nop              ;                  | 04057C        || nop                            ; 0400DC
+nop              ;                  | 04057D        || nop                            ; 0400DD
+nop              ;                  | 04057E        || nop                            ; 0400DE
+nop              ;                  | 04057F        || nop                            ; 0400DF
+nop              ;                  | 040580        || nop                            ; 0400E0
+nop              ;                  | 040581        || nop                            ; 0400E1
+nop              ;                  | 040582        || nop                            ; 0400E2
+nop              ;                  | 040583        || nop                            ; 0400E3
+nop              ;                  | 040584        || nop                            ; 0400E4
+nop              ;                  | 040585        || nop                            ; 0400E5
+nop              ;                  | 040586        || nop                            ; 0400E6
+nop              ;                  | 040587        || nop                            ; 0400E7
+nop              ;                  | 040588        || nop                            ; 0400E8
+nop              ;                  | 040589        || nop                            ; 0400E9
+nop              ;                  | 04058A        || nop                            ; 0400DA
+nop              ;                  | 04058B        || nop                            ; 0400DB
+nop              ;                  | 04058C        || nop                            ; 0400DC
+nop              ;                  | 04058D        || nop                            ; 0400DD
+nop              ;                  | 04058E        || nop                            ; 0400DE
+nop              ;                  | 04058F        || nop                            ; 0400DF
+nop              ;                  | 040590        || nop                            ; 0400E0
+nop              ;                  | 040591        || nop                            ; 0400E1
+nop              ;                  | 040592        || nop                            ; 0400E2
+nop              ;                  | 040593        || nop                            ; 0400E3
+nop              ;                  | 040594        || nop                            ; 0400E4
+nop              ;                  | 040595        || nop                            ; 0400E5
+nop              ;                  | 040596        || nop                            ; 0400E6
+nop              ;                  | 040597        || nop                            ; 0400E7
+nop              ;                  | 040598        || nop                            ; 0400E8
+nop              ;                  | 040599        || nop                            ; 0400E9
+nop              ;                  | 04059A        || nop                            ; 0400DA
+nop              ;                  | 04059B        || nop                            ; 0400DB
+nop              ;                  | 04059C        || nop                            ; 0400DC
+nop              ;                  | 04059D        || nop                            ; 0400DD
+nop              ;                  | 04059E        || nop                            ; 0400DE
+nop              ;                  | 04059F        || nop                            ; 0400DF
+nop              ;                  | 0405A0        || nop                            ; 0400E0
+nop              ;                  | 0405A1        || nop                            ; 0400E1
+nop              ;                  | 0405A2        || nop                            ; 0400E2
+nop              ;                  | 0405A3        || nop                            ; 0400E3
+nop              ;                  | 0405A4        || nop                            ; 0400E4
+nop              ;                  | 0405A5        || nop                            ; 0400E5
+nop              ;                  | 0405A6        || nop                            ; 0400E6
+nop              ;                  | 0405A7        || nop                            ; 0400E7
+nop              ;                  | 0405A8        || nop                            ; 0400E8
+nop              ;                  | 0405A9        || nop                            ; 0400E9
+nop              ;                  | 0405AA        || nop                            ; 0400DA
+nop              ;                  | 0405AB        || nop                            ; 0400DB
+nop              ;                  | 0405AC        || nop                            ; 0400DC
+nop              ;                  | 0405AD        || nop                            ; 0400DD
+nop              ;                  | 0405AE        || nop                            ; 0400DE
+nop              ;                  | 0405AF        || nop                            ; 0400DF
+nop              ;                  | 0405B0        || nop                            ; 0400E0
+nop              ;                  | 0405B1        || nop                            ; 0400E1
+nop              ;                  | 0405B2        || nop                            ; 0400E2
+nop              ;                  | 0405B3        || nop                            ; 0400E3
+nop              ;                  | 0405B4        || nop                            ; 0400E4
+nop              ;                  | 0405B5        || nop                            ; 0400E5
+nop              ;                  | 0405B6        || nop                            ; 0400E6
+nop              ;                  | 0405B7        || nop                            ; 0400E7
+nop              ;                  | 0405B8        || nop                            ; 0400E8
+nop              ;                  | 0405B9        || nop                            ; 0400E9
+nop              ;                  | 0405BA        || nop                            ; 0400DA
+nop              ;                  | 0405BB        || nop                            ; 0400DB
+nop              ;                  | 0405BC        || nop                            ; 0400DC
+nop              ;                  | 0405BD        || nop                            ; 0400DD
+nop              ;                  | 0405BE        || nop                            ; 0400DE
+nop              ;                  | 0405BF        || nop                            ; 0400DF
+nop              ;                  | 0405C0        || nop                            ; 0400E0
+nop              ;                  | 0405C1        || nop                            ; 0400E1
+nop              ;                  | 0405C2        || nop                            ; 0400E2
+nop              ;                  | 0405C3        || nop                            ; 0400E3
+nop              ;                  | 0405C4        || nop                            ; 0400E4
+nop              ;                  | 0405C5        || nop                            ; 0400E5
+nop              ;                  | 0405C6        || nop                            ; 0400E6
+nop              ;                  | 0405C7        || nop                            ; 0400E7
+nop              ;                  | 0405C8        || nop                            ; 0400E8
+nop              ;                  | 0405C9        || nop                            ; 0400E9
+nop              ;                  | 0405CA        || nop                            ; 0400DA
+nop              ;                  | 0405CB        || nop                            ; 0400DB
+nop              ;                  | 0405CC        || nop                            ; 0400DC
+nop              ;                  | 0405CD        || nop                            ; 0400DD
+nop              ;                  | 0405CE        || nop                            ; 0400DE
+nop              ;                  | 0405CF        || nop                            ; 0400DF
+nop              ;                  | 0405D0        || nop                            ; 0400E0
+nop              ;                  | 0405D1        || nop                            ; 0400E1
+nop              ;                  | 0405D2        || nop                            ; 0400E2
+nop              ;                  | 0405D3        || nop                            ; 0400E3
+nop              ;                  | 0405D4        || nop                            ; 0400E4
+nop              ;                  | 0405D5        || nop                            ; 0400E5
+nop              ;                  | 0405D6        || nop                            ; 0400E6
+nop              ;                  | 0405D7        || nop                            ; 0400E7
+nop              ;                  | 0405D8        || nop                            ; 0400E8
+nop              ;                  | 0405D9        || nop                            ; 0400E9
+nop              ;                  | 0405DA        || nop                            ; 0400DA
+nop              ;                  | 0405DB        || nop                            ; 0400DB
+nop              ;                  | 0405DC        || nop                            ; 0400DC
+nop              ;                  | 0405DD        || nop                            ; 0400DD
+nop              ;                  | 0405DE        || nop                            ; 0400DE
+nop              ;                  | 0405DF        || nop                            ; 0400DF
+nop              ;                  | 0405E0        || nop                            ; 0400E0
+nop              ;                  | 0405E1        || nop                            ; 0400E1
+nop              ;                  | 0405E2        || nop                            ; 0400E2
+nop              ;                  | 0405E3        || nop                            ; 0400E3
+nop              ;                  | 0405E4        || nop                            ; 0400E4
+nop              ;                  | 0405E5        || nop                            ; 0400E5
+nop              ;                  | 0405E6        || nop                            ; 0400E6
+nop              ;                  | 0405E7        || nop                            ; 0400E7
+nop              ;                  | 0405E8        || nop                            ; 0400E8
+nop              ;                  | 0405E9        || nop                            ; 0400E9
+nop              ;                  | 0405EA        || nop                            ; 0400DA
+nop              ;                  | 0405EB        || nop                            ; 0400DB
+nop              ;                  | 0405EC        || nop                            ; 0400DC
+nop              ;                  | 0405ED        || nop                            ; 0400DD
+nop              ;                  | 0405EE        || nop                            ; 0400DE
+nop              ;                  | 0405EF        || nop                            ; 0400DF
+nop              ;                  | 0405F0        || nop                            ; 0400E0
+nop              ;                  | 0405F1        || nop                            ; 0400E1
+nop              ;                  | 0405F2        || nop                            ; 0400E2
+nop              ;                  | 0405F3        || nop                            ; 0400E3
+nop              ;                  | 0405F4        || nop                            ; 0400E4
+nop              ;                  | 0405F5        || nop                            ; 0400E5
+nop              ;                  | 0405F6        || nop                            ; 0400E6
+nop              ;                  | 0405F7        || nop                            ; 0400E7
+nop              ;                  | 0405F8        || nop                            ; 0400E8
+nop              ;                  | 0405F9        || nop                            ; 0400E9
+nop              ;                  | 0405FA        || nop                            ; 0400DA
+nop              ;                  | 0405FB        || nop                            ; 0400DB
+nop              ;                  | 0405FC        || nop                            ; 0400DC
+nop              ;                  | 0405FD        || nop                            ; 0400DD
+nop              ;                  | 0405FE        || nop                            ; 0400DE
+nop              ;                  | 0405FF        || nop                            ; 0400DF
+nop              ;                  | 040600        || nop                            ; 0400E0
+nop              ;                  | 040601        || nop                            ; 0400E1
+nop              ;                  | 040602        || nop                            ; 0400E2
+nop              ;                  | 040603        || nop                            ; 0400E3
+nop              ;                  | 040604        || nop                            ; 0400E4
+nop              ;                  | 040605        || nop                            ; 0400E5
+nop              ;                  | 040606        || nop                            ; 0400E6
+nop              ;                  | 040607        || nop                            ; 0400E7
+nop              ;                  | 040608        || nop                            ; 0400E8
+nop              ;                  | 040609        || nop                            ; 0400E9
+nop              ;                  | 04060A        || nop                            ; 0400DA
+nop              ;                  | 04060B        || nop                            ; 0400DB
+nop              ;                  | 04060C        || nop                            ; 0400DC
+nop              ;                  | 04060D        || nop                            ; 0400DD
+nop              ; nop              | 04060E 0400DE || 04060E 00 00 00    0792  FNPTR:          BLKB    3,0               ; Dynamic Function Pointers
+nop              ;                  | 04060F        || nop                            ; 0400DF
+nop              ;                  | 040610        || nop                            ; 0400E0
+nop              ; nop              | 040611 0400E1 || 040611 00 00 00    0793  PROPTR:         BLKB    3,0               ; Dynamic Procedure Pointers
+nop              ;                  | 040612        || nop                            ; 0400E2
+nop              ;                  | 040613        || nop                            ; 0400E3
+nop              ; nop              | 040614 0400E4 || 040614 00 00 00    0795  PAGE_:          BLKB    3,0               ; Start of User Program
+nop              ;                  | 040615        || nop                            ; 0400E5
+nop              ;                  | 040616        || nop                            ; 0400E6
+nop              ; nop              | 040617 0400E7 || 040617 00 00 00    0796  TOP:            BLKB    3,0               ; First Location after User Program
+nop              ;                  | 040618        || nop                            ; 0400E8
+nop              ;                  | 040619        || nop                            ; 0400E9
+nop              ; nop              | 04061A 0400DA || 04061A 00 00 00    0797  LOMEM:          BLKB    3,0               ; Start of Dynamic Storage
+nop              ;                  | 04061B        || nop                            ; 0400DB
+nop              ;                  | 04061C        || nop                            ; 0400DC
+nop              ; nop              | 04061D 0400DD || 04061D 00 00 00    0798  FREE:           BLKB    3,0               ; First Free Space Byte
+nop              ;                  | 04061E        || nop                            ; 0400DE
+nop              ;                  | 04061F        || nop                            ; 0400DF
+nop              ; nop              | 040620 0400E0 || 040620 00 00 00    0799  HIMEM:          BLKB    3,0               ; First Protected Byte
+nop              ;                  | 040621        || nop                            ; 0400E1
+nop              ;                  | 040622        || nop                            ; 0400E2
+nop              ; nop              | 040623 0400E3 || 040623 00 00 00    0801  LINENO:         BLKB    3,0               ; Line Number
+nop              ;                  | 040624        || nop                            ; 0400E4
+nop              ;                  | 040625        || nop                            ; 0400E5
+nop              ; nop              | 040626 0400E6 || 040626 00 00 00    0802  TRACEN:         BLKB    3,0               ; Trace Flag
+nop              ;                  | 040627        || nop                            ; 0400E7
+nop              ;                  | 040628        || nop                            ; 0400E8
+nop              ; nop              | 040629 0400E9 || 040629 00 00 00    0803  AUTONO:         BLKB    3,0               ; Auto Flag
+nop              ;                  | 04062A        || nop                            ; 0400DA
+nop              ;                  | 04062B        || nop                            ; 0400DB
+nop              ; nop              | 04062C 0400DC || 04062C 00 00 00    0804  ERRTRP:         BLKB    3,0               ; Error Trap
+nop              ;                  | 04062D        || nop                            ; 0400DD
+nop              ;                  | 04062E        || nop                            ; 0400DE
+nop              ; nop              | 04062F 0400DF || 04062F 00 00       0805  ERRTXT:         BLKB    2,0               ; Error Message Pointer
+nop              ;                  | 040630        || nop                            ; 0400E0
+nop              ; nop              | 040631 0400E1 || 040631 00 00       0806  DATPTR:         BLKB    2,0               ; Data Pointer
+nop              ;                  | 040632        || nop                            ; 0400E2
+nop              ; nop              | 040633 0400E3 || 040633 00 00       0807  ERL:            BLKB    2,0               ; Error Line
+nop              ;                  | 040634        || nop                            ; 0400E4
+nop              ; nop              | 040635 0400E5 || 040635 00 00 00    0808  ERRLIN:         BLKB    3,0               ; The "ON ERROR" Line
+nop              ;                  | 040636        || nop                            ; 0400E6
+nop              ;                  | 040637        || nop                            ; 0400E7
+nop              ; nop              | 040638 0400E8 || 040638 00 00 00 00 0809  RANDOM:         BLKB    5,0               ; Random Number
+nop              ;                  | 040639        || nop                            ; 0400E9
+nop              ;                  | 04063A        || nop                            ; 0400DA
+nop              ;                  | 04063B        || nop                            ; 0400DB
+nop              ;                  | 04063C        || nop                            ; 0400DC
+nop              ; nop              | 04063D 0400DD || 04063D 00          0810  COUNT:          BLKB    1,0               ; Print Position
+nop              ; nop              | 04063E 0400DE || 04063E 00          0811  WIDTH:          BLKB    1,0               ; Print Width
+nop              ; nop              | 04063F 0400DF || 04063F 00          0812  ERR:            BLKB    1,0               ; Error Number
+nop              ; nop              | 040640 0400E0 || 040640 00          0813  LISTON:         BLKB    1,0               ; LISTO (bottom nibble)
+nop              ; nop              | 040641 0400E1 || 040641 00          0823  INCREM:         BLKB    1,0               ; Auto-Increment Value
+nop              ; nop              | 040642 0400E2 || 040642 00          0827  FLAGS:          BLKB    1,0       ; Miscellaneous flags
+nop              ; nop              | 040643 0400E3 || 040643 00 00       0830  OSWRCHPT:       BLKB    2,0       ; Pointer for *EDIT
+nop              ;                  | 040644        || nop                            ; 0400E4
+nop              ; nop              | 040645 0400E5 || 040645 00          0831  OSWRCHCH:       BLKB    1,0       ; Channel of OSWRCH
+nop              ; nop              | 040646 0400E6 || 040646 00          0834  OSWRCHFH:       BLKB    1,0       ; File handle for OSWRCHCHN
+nop              ; nop              | 040647 0400E7 || 040647 00          0835  KEYDOWN:        BLKB    1,0       ; Keydown flag
+nop              ; nop              | 040648 0400E8 || 040648 00          0836  KEYASCII:       BLKB    1,0       ; ASCII code of pressed key
+nop              ; nop              | 040649 0400E9 || 040649 00          0837  KEYCOUNT:       BLKB    1,0       ; Counts every time a key is pressed
+nop              ;                  | 04064A        || 04064A 00 00 00    0838  R0:             BLKB    3,0       ; General purpose storage for 8/16 to 24 bit operations
+nop              ;                  | 04064B        || 
+nop              ;                  | 04064C        || 
+nop              ;                  | 04064D        || 04064D 00 00 00    0839  R1:             BLKB    3,0
+nop              ;                  | 04064E        || 
+nop              ;                  | 04064F        || nop                            ; 040010
+rst $38          ; rst $38          | 040650 040011 || 040650 FF FF FF FF 0856     ALIGN 256
+rst $38          ;                  | 040651        || rst $38                        ; 040012
+rst $38          ;                  | 040652        || rst $38                        ; 040013
+rst $38          ;                  | 040653        || rst $38                        ; 040014
+rst $38          ;                  | 040654        || rst $38                        ; 040015
+rst $38          ;                  | 040655        || rst $38                        ; 040016
+rst $38          ;                  | 040656        || rst $38                        ; 040017
+rst $38          ;                  | 040657        || rst $38                        ; 040018
+rst $38          ;                  | 040658        || rst $38                        ; 040019
+rst $38          ;                  | 040659        || rst $38                        ; 04001A
+rst $38          ;                  | 04065A        || rst $38                        ; 040011
+rst $38          ;                  | 04065B        || rst $38                        ; 040012
+rst $38          ;                  | 04065C        || rst $38                        ; 040013
+rst $38          ;                  | 04065D        || rst $38                        ; 040014
+rst $38          ;                  | 04065E        || rst $38                        ; 040015
+rst $38          ;                  | 04065F        || rst $38                        ; 040016
+rst $38          ;                  | 040660        || rst $38                        ; 040017
+rst $38          ;                  | 040661        || rst $38                        ; 040018
+rst $38          ;                  | 040662        || rst $38                        ; 040019
+rst $38          ;                  | 040663        || rst $38                        ; 04001A
+rst $38          ;                  | 040664        || rst $38                        ; 04001B
+rst $38          ;                  | 040665        || rst $38                        ; 04001C
+rst $38          ;                  | 040666        || rst $38                        ; 04001D
+rst $38          ;                  | 040667        || rst $38                        ; 04001E
+rst $38          ;                  | 040668        || rst $38                        ; 04001F
+rst $38          ;                  | 040669        || rst $38                        ; 040020
+rst $38          ;                  | 04066A        || rst $38                        ; 040011
+rst $38          ;                  | 04066B        || rst $38                        ; 040012
+rst $38          ;                  | 04066C        || rst $38                        ; 040013
+rst $38          ;                  | 04066D        || rst $38                        ; 040014
+rst $38          ;                  | 04066E        || rst $38                        ; 040015
+rst $38          ;                  | 04066F        || rst $38                        ; 040016
+rst $38          ;                  | 040670        || rst $38                        ; 040017
+rst $38          ;                  | 040671        || rst $38                        ; 040018
+rst $38          ;                  | 040672        || rst $38                        ; 040019
+rst $38          ;                  | 040673        || rst $38                        ; 04001A
+rst $38          ;                  | 040674        || rst $38                        ; 04001B
+rst $38          ;                  | 040675        || rst $38                        ; 04001C
+rst $38          ;                  | 040676        || rst $38                        ; 04001D
+rst $38          ;                  | 040677        || rst $38                        ; 04001E
+rst $38          ;                  | 040678        || rst $38                        ; 04001F
+rst $38          ;                  | 040679        || rst $38                        ; 040020
+rst $38          ;                  | 04067A        || rst $38                        ; 040011
+rst $38          ;                  | 04067B        || rst $38                        ; 040012
+rst $38          ;                  | 04067C        || rst $38                        ; 040013
+rst $38          ;                  | 04067D        || rst $38                        ; 040014
+rst $38          ;                  | 04067E        || rst $38                        ; 040015
+rst $38          ;                  | 04067F        || rst $38                        ; 040016
+rst $38          ;                  | 040680        || rst $38                        ; 040017
+rst $38          ;                  | 040681        || rst $38                        ; 040018
+rst $38          ;                  | 040682        || rst $38                        ; 040019
+rst $38          ;                  | 040683        || rst $38                        ; 04001A
+rst $38          ;                  | 040684        || rst $38                        ; 04001B
+rst $38          ;                  | 040685        || rst $38                        ; 04001C
+rst $38          ;                  | 040686        || rst $38                        ; 04001D
+rst $38          ;                  | 040687        || rst $38                        ; 04001E
+rst $38          ;                  | 040688        || rst $38                        ; 04001F
+rst $38          ;                  | 040689        || rst $38                        ; 040020
+rst $38          ;                  | 04068A        || rst $38                        ; 040011
+rst $38          ;                  | 04068B        || rst $38                        ; 040012
+rst $38          ;                  | 04068C        || rst $38                        ; 040013
+rst $38          ;                  | 04068D        || rst $38                        ; 040014
+rst $38          ;                  | 04068E        || rst $38                        ; 040015
+rst $38          ;                  | 04068F        || rst $38                        ; 040016
+rst $38          ;                  | 040690        || rst $38                        ; 040017
+rst $38          ;                  | 040691        || rst $38                        ; 040018
+rst $38          ;                  | 040692        || rst $38                        ; 040019
+rst $38          ;                  | 040693        || rst $38                        ; 04001A
+rst $38          ;                  | 040694        || rst $38                        ; 04001B
+rst $38          ;                  | 040695        || rst $38                        ; 04001C
+rst $38          ;                  | 040696        || rst $38                        ; 04001D
+rst $38          ;                  | 040697        || rst $38                        ; 04001E
+rst $38          ;                  | 040698        || rst $38                        ; 04001F
+rst $38          ;                  | 040699        || rst $38                        ; 040020
+rst $38          ;                  | 04069A        || rst $38                        ; 040011
+rst $38          ;                  | 04069B        || rst $38                        ; 040012
+rst $38          ;                  | 04069C        || rst $38                        ; 040013
+rst $38          ;                  | 04069D        || rst $38                        ; 040014
+rst $38          ;                  | 04069E        || rst $38                        ; 040015
+rst $38          ;                  | 04069F        || rst $38                        ; 040016
+rst $38          ;                  | 0406A0        || rst $38                        ; 040017
+rst $38          ;                  | 0406A1        || rst $38                        ; 040018
+rst $38          ;                  | 0406A2        || rst $38                        ; 040019
+rst $38          ;                  | 0406A3        || rst $38                        ; 04001A
+rst $38          ;                  | 0406A4        || rst $38                        ; 04001B
+rst $38          ;                  | 0406A5        || rst $38                        ; 04001C
+rst $38          ;                  | 0406A6        || rst $38                        ; 04001D
+rst $38          ;                  | 0406A7        || rst $38                        ; 04001E
+rst $38          ;                  | 0406A8        || rst $38                        ; 04001F
+rst $38          ;                  | 0406A9        || rst $38                        ; 040020
+rst $38          ;                  | 0406AA        || rst $38                        ; 040011
+rst $38          ;                  | 0406AB        || rst $38                        ; 040012
+rst $38          ;                  | 0406AC        || rst $38                        ; 040013
+rst $38          ;                  | 0406AD        || rst $38                        ; 040014
+rst $38          ;                  | 0406AE        || rst $38                        ; 040015
+rst $38          ;                  | 0406AF        || rst $38                        ; 040016
+rst $38          ;                  | 0406B0        || rst $38                        ; 040017
+rst $38          ;                  | 0406B1        || rst $38                        ; 040018
+rst $38          ;                  | 0406B2        || rst $38                        ; 040019
+rst $38          ;                  | 0406B3        || rst $38                        ; 04001A
+rst $38          ;                  | 0406B4        || rst $38                        ; 04001B
+rst $38          ;                  | 0406B5        || rst $38                        ; 04001C
+rst $38          ;                  | 0406B6        || rst $38                        ; 04001D
+rst $38          ;                  | 0406B7        || rst $38                        ; 04001E
+rst $38          ;                  | 0406B8        || rst $38                        ; 04001F
+rst $38          ;                  | 0406B9        || rst $38                        ; 040020
+rst $38          ;                  | 0406BA        || rst $38                        ; 040011
+rst $38          ;                  | 0406BB        || rst $38                        ; 040012
+rst $38          ;                  | 0406BC        || rst $38                        ; 040013
+rst $38          ;                  | 0406BD        || rst $38                        ; 040014
+rst $38          ;                  | 0406BE        || rst $38                        ; 040015
+rst $38          ;                  | 0406BF        || rst $38                        ; 040016
+rst $38          ;                  | 0406C0        || rst $38                        ; 040017
+rst $38          ;                  | 0406C1        || rst $38                        ; 040018
+rst $38          ;                  | 0406C2        || rst $38                        ; 040019
+rst $38          ;                  | 0406C3        || rst $38                        ; 04001A
+rst $38          ;                  | 0406C4        || rst $38                        ; 04001B
+rst $38          ;                  | 0406C5        || rst $38                        ; 04001C
+rst $38          ;                  | 0406C6        || rst $38                        ; 04001D
+rst $38          ;                  | 0406C7        || rst $38                        ; 04001E
+rst $38          ;                  | 0406C8        || rst $38                        ; 04001F
+rst $38          ;                  | 0406C9        || rst $38                        ; 040020
+rst $38          ;                  | 0406CA        || rst $38                        ; 040011
+rst $38          ;                  | 0406CB        || rst $38                        ; 040012
+rst $38          ;                  | 0406CC        || rst $38                        ; 040013
+rst $38          ;                  | 0406CD        || rst $38                        ; 040014
+rst $38          ;                  | 0406CE        || rst $38                        ; 040015
+rst $38          ;                  | 0406CF        || rst $38                        ; 040016
+rst $38          ;                  | 0406D0        || rst $38                        ; 040017
+rst $38          ;                  | 0406D1        || rst $38                        ; 040018
+rst $38          ;                  | 0406D2        || rst $38                        ; 040019
+rst $38          ;                  | 0406D3        || rst $38                        ; 04001A
+rst $38          ;                  | 0406D4        || rst $38                        ; 04001B
+rst $38          ;                  | 0406D5        || rst $38                        ; 04001C
+rst $38          ;                  | 0406D6        || rst $38                        ; 04001D
+rst $38          ;                  | 0406D7        || rst $38                        ; 04001E
+rst $38          ;                  | 0406D8        || rst $38                        ; 04001F
+rst $38          ;                  | 0406D9        || rst $38                        ; 040020
+rst $38          ;                  | 0406DA        || rst $38                        ; 040011
+rst $38          ;                  | 0406DB        || rst $38                        ; 040012
+rst $38          ;                  | 0406DC        || rst $38                        ; 040013
+rst $38          ;                  | 0406DD        || rst $38                        ; 040014
+rst $38          ;                  | 0406DE        || rst $38                        ; 040015
+rst $38          ;                  | 0406DF        || rst $38                        ; 040016
+rst $38          ;                  | 0406E0        || rst $38                        ; 040017
+rst $38          ;                  | 0406E1        || rst $38                        ; 040018
+rst $38          ;                  | 0406E2        || rst $38                        ; 040019
+rst $38          ;                  | 0406E3        || rst $38                        ; 04001A
+rst $38          ;                  | 0406E4        || rst $38                        ; 04001B
+rst $38          ;                  | 0406E5        || rst $38                        ; 04001C
+rst $38          ;                  | 0406E6        || rst $38                        ; 04001D
+rst $38          ;                  | 0406E7        || rst $38                        ; 04001E
+rst $38          ;                  | 0406E8        || rst $38                        ; 04001F
+rst $38          ;                  | 0406E9        || rst $38                        ; 040020
+rst $38          ;                  | 0406EA        || rst $38                        ; 040011
+rst $38          ;                  | 0406EB        || rst $38                        ; 040012
+rst $38          ;                  | 0406EC        || rst $38                        ; 040013
+rst $38          ;                  | 0406ED        || rst $38                        ; 040014
+rst $38          ;                  | 0406EE        || rst $38                        ; 040015
+rst $38          ;                  | 0406EF        || rst $38                        ; 040016
+rst $38          ;                  | 0406F0        || rst $38                        ; 040017
+rst $38          ;                  | 0406F1        || rst $38                        ; 040018
+rst $38          ;                  | 0406F2        || rst $38                        ; 040019
+rst $38          ;                  | 0406F3        || rst $38                        ; 04001A
+rst $38          ;                  | 0406F4        || rst $38                        ; 04001B
+rst $38          ;                  | 0406F5        || rst $38                        ; 04001C
+rst $38          ;                  | 0406F6        || rst $38                        ; 04001D
+rst $38          ;                  | 0406F7        || rst $38                        ; 04001E
+rst $38          ;                  | 0406F8        || rst $38                        ; 04001F
+rst $38          ;                  | 0406F9        || rst $38                        ; 040020
+rst $38          ;                  | 0406FA        || 
+rst $38          ;                  | 0406FB        || 
+rst $38          ;                  | 0406FC        || 
+rst $38          ;                  | 0406FD        || 
+rst $38          ;                  | 0406FE        || 
+rst $38          ;                  | 0406FF        || 
+                 ;                  |               || 

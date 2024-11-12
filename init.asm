@@ -18,7 +18,7 @@
 			; XREF	RAM_START			; In ram.asm
 			; XREF	RAM_END
 			
-			.ASSUME	ADL = 1
+			; .ASSUME	ADL = 1
 				
 			; INCLUDE	"equs.inc"
 			
@@ -31,7 +31,7 @@ argv_ptrs_max:		EQU	16				; Maximum number of arguments allowed in argv
 ;
 ; The header stuff is from byte 64 onwards
 ;
-_exec_name:		DB	"bbcbasic24ez.bin", 0		; The executable name, only used in argv	
+_exec_name:		DB	"BBCBASIC.BIN", 0		; The executable name, only used in argv	
 
 			ALIGN	64
 			

@@ -468,7 +468,7 @@ OFFSET:			EQU     CFH-TOKLO		; Offset to the parameterised SET versions
 			; XREF	RAM_START			; In ram.asm
 			; XREF	RAM_END
 			
-			.ASSUME	ADL = 1
+			; .ASSUME	ADL = 1
 				
 			; INCLUDE	"equs.inc"
 			
@@ -481,7 +481,7 @@ argv_ptrs_max:		EQU	16				; Maximum number of arguments allowed in argv
 ;
 ; The header stuff is from byte 64 onwards
 ;
-_exec_name:		DB	"bbcbasic24ez.bin", 0		; The executable name, only used in argv	
+_exec_name:		DB	"BBCBASIC.BIN", 0		; The executable name, only used in argv	
 
 			ALIGN	64
 			
@@ -607,37 +607,7 @@ _skip_spaces:		LD	A, (HL)			; Get the character from the parameter string
 ; Storage
 ;
 _sps:			DS	3			; Storage for the stack pointer
-_argv_ptrs:		BLKP	argv_ptrs_max, 0	; Storage for the argv array pointers
-; --- End init.asm ---
-
-; --- Begin sorry.asm ---
-;
-; Title:	BBC Basic Interpreter - Z80 version
-;		Catch-all for unimplemented functionality
-; Author:	Dean Belfield
-; Created:	12/05/2023
-; Last Updated:	12/05/2023
-;
-; Modinfo:
-
-			; .ASSUME	ADL = 1
-
-			; SEGMENT CODE
-			
-			; XDEF	ENVEL
-			; XDEF	ADVAL
-			; XDEF	PUTIMS
-			
-			; XREF	EXTERR
-			
-ENVEL:
-ADVAL:
-PUTIMS:
-			XOR     A
-			CALL    EXTERR
-			DEFB    "Sorry"
-			DEFB    0
-; --- End sorry.asm ---
+_argv_ptrs:		BLKP	argv_ptrs_max, 0	; Storage for the argv array pointers; --- End init.asm ---
 
 ; --- Begin eval.asm ---
 ;
@@ -11737,6 +11707,35 @@ VBLANK_HANDLER:		DI
 ; Finally jump to the MOS interrupt
 ;
 VBLANK_HANDLER_JP:	JP		0				; This is self-modified by VBLANK_INIT				; --- End interrupts.asm ---
+
+; --- Begin sorry.asm ---
+;
+; Title:	BBC Basic Interpreter - Z80 version
+;		Catch-all for unimplemented functionality
+; Author:	Dean Belfield
+; Created:	12/05/2023
+; Last Updated:	12/05/2023
+;
+; Modinfo:
+
+			; .ASSUME	ADL = 1
+
+			; SEGMENT CODE
+			
+			; XDEF	ENVEL
+			; XDEF	ADVAL
+			; XDEF	PUTIMS
+			
+			; XREF	EXTERR
+			
+ENVEL:
+ADVAL:
+PUTIMS:
+			XOR     A
+			CALL    EXTERR
+			DEFB    "Sorry"
+			DEFB    0
+; --- End sorry.asm ---
 
 ; --- Begin ram.asm ---
 ;
