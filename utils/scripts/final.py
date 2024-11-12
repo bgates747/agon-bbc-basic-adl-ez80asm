@@ -250,7 +250,10 @@ if __name__ == '__main__':
 
     try:
         # Run the disassembler command and write output to the temporary file
-        subprocess.run(f"(cd {tgt_bin_dir} && zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {src_base_filename}.bin > {temp_disasm_path})", shell=True, check=True)
+        cmd = f"(cd {tgt_bin_dir} && zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {src_base_filename}.bin > {temp_disasm_path})"
+        print (f"Running command: {cmd}")
+        subprocess.run(cmd, shell=True, check=True)
+        print
         
         # Call adjust_addresses to add padding and correct addresses in the disassembly output
         adjust_addresses(temp_disasm_path, adjusted_disasm_path, 0x040000)
@@ -266,7 +269,7 @@ if __name__ == '__main__':
     diff_output_path = f'{dif_dir}/{src_base_filename}.dif.asm'
 
     # Configurable parameters
-    window_size = 16               # Adjust window size as needed
+    window_size = 32               # Adjust window size as needed
     step_size = window_size        # Window advances by one window at a time
     min_match_percentage = 60      # Minimum percentage of matching lines to consider a match
 
@@ -280,3 +283,4 @@ if __name__ == '__main__':
 
     # Merge the diff file and the listing file
     merge_diff_and_listing(diff_output_path, list_path, final_output_path)
+    print(f"Final output written to {final_output_path}")
