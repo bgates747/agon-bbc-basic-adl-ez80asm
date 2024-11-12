@@ -4,27 +4,23 @@ import re
 import tempfile
 
 
-def concatenate_files(file_list, output_filename):
-    with open(output_filename, 'w') as outfile:
-        for filename in file_list:
-            # Determine if the file is an include of .inc or .asm
-            if filename.startswith('include'):
-                # Extract the filename within quotes
-                include_filename = filename.split('"')[1]
-                # Check if the file exists
-                if os.path.isfile(include_filename):
-                    with open(include_filename, 'r') as infile:
-                        content = infile.read()
-                        # Write a header comment indicating the start of the file
-                        outfile.write(f'; --- Begin {include_filename} ---\n')
-                        outfile.write(content)
-                        # Write a footer comment indicating the end of the file
-                        outfile.write(f'; --- End {include_filename} ---\n\n')
-                    print(f"Included {include_filename}")
-                else:
-                    print(f"Warning: {include_filename} not found.")
+def concatenate_files(include_files, source_dir, combined_src_filenamename):
+    with open(combined_src_filenamename, 'w') as outfile:
+        for filename in include_files:
+            include_filename = os.path.join(source_dir, filename)
+            if os.path.isfile(include_filename):
+                with open(include_filename, 'r') as infile:
+                    content = infile.read()
+                    # Write a header comment indicating the start of the file
+                    outfile.write(f'; --- Begin {filename} ---\n')
+                    outfile.write(content)
+                    # Write a footer comment indicating the end of the file
+                    outfile.write(f'; --- End {filename} ---\n\n')
+                print(f"Included {filename}")
             else:
-                print(f"Skipping line: {filename}")
+                print(f"Warning: {include_filename} not found.")
+        else:
+            print(f"Skipping line: {filename}")
 
 
 def adjust_addresses(input_path, output_path, offset):
@@ -85,10 +81,10 @@ def compare_windows(norm_window1, norm_window2):
     matches = sum(line1 == line2 for line1, line2 in zip(norm_window1, norm_window2))
     return matches
 
-def generate_diff(file1_path, file2_path, output_path, window_size, step_size, min_match_percentage):
+def generate_diff(disasm_filepath1, disasm_filepath2, output_path, window_size, step_size, min_match_percentage):
     # Read and preprocess both files
-    orig_lines1, norm_lines1 = read_and_preprocess(file1_path)
-    orig_lines2, norm_lines2 = read_and_preprocess(file2_path)
+    orig_lines1, norm_lines1 = read_and_preprocess(disasm_filepath1)
+    orig_lines2, norm_lines2 = read_and_preprocess(disasm_filepath2)
     
     len1 = len(norm_lines1)
     len2 = len(norm_lines2)
@@ -206,45 +202,47 @@ def merge_diff_and_listing(diff_path, list_path, output_path):
 
 if __name__ == '__main__':
     # List of include statements as provided
-    include_lines = [
-        'include "mos_api.inc"',
-        'include "macros.inc"',
-        'include "equs_top.inc"',
-        'include "init.asm"',
-        '',
-        # 'include "sorry.asm"',
+    include_files = [
+        'mos_api.inc',
+        'macros.inc',
+        'equs_top.inc',
+        'init.asm',
+        'eval.asm',
+        'exec.asm',
+        'fpp.asm',
+        'gpio.asm',
+        'main.asm',
+        'misc.asm',
+        'patch.asm',
+        'agon_graphics.asm',
+        'agon_sound.asm',
+        'interrupts.asm',
 
-        'include "eval.asm"',
-        'include "exec.asm"',
-        'include "fpp.asm"',
-        'include "gpio.asm"',
-        'include "main.asm"',
-        'include "misc.asm"',
-        'include "patch.asm"',
-        'include "agon_graphics.asm"',
-        'include "agon_sound.asm"',
-        'include "interrupts.asm"',
-        'include "sorry.asm"',
-        '',
-        'include "ram.asm"',
-        'include "user.asm"',
-        'include "equs_bottom.inc"',
+        'sorry.asm',
+        
+        'ram.asm',
+        'user.asm',
+        'equs_bottom.inc',
     ]
 
+    source_dir = 'src'
+    tgt_bin_dir = 'utils/bin'
+
     # Output filename
-    output_file = 'bbcbasic24ez.asm'
+    src_base_filename = 'bbcbasic24ez'
+    src_filepath = f'{source_dir}/{src_base_filename}.asm'
+    tgt_bin_filepath = f'{tgt_bin_dir}/{src_base_filename}.bin'
 
     # Call the function to concatenate files
-    concatenate_files(include_lines, output_file)
+    concatenate_files(include_files, source_dir, src_filepath)
 
-    print(f"\nAll files have been concatenated into {output_file}")
+    print(f"\nAll files have been concatenated into {src_filepath}")
 
     # Assemble the output file
-    subprocess.run(f"ez80asm -l -b 00 {output_file}", shell=True, check=True)
+    subprocess.run(f'(cd {source_dir} && ez80asm -l -b 00 {src_filepath} {tgt_bin_filepath} )', shell=True, check=True)
 
     # Now disassemble the generated binary and adjust addresses
-    bin_file = 'bbcbasic24ez.bin'
-    adjusted_disasm_path = 'bbcbasic24ez.dis.asm'
+    adjusted_disasm_path = f'{src_base_filename}.dis.asm'
 
     # Create a temporary file for the unadjusted disassembly output
     with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_disasm_file:
@@ -252,7 +250,7 @@ if __name__ == '__main__':
 
     try:
         # Run the disassembler command and write output to the temporary file
-        subprocess.run(f"zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {bin_file} > {temp_disasm_path}", shell=True, check=True)
+        subprocess.run(f"zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {tgt_bin_filepath} > {temp_disasm_path}", shell=True, check=True)
         
         # Call adjust_addresses to add padding and correct addresses in the disassembly output
         adjust_addresses(temp_disasm_path, adjusted_disasm_path, 0x040000)
@@ -263,9 +261,9 @@ if __name__ == '__main__':
         os.remove(temp_disasm_path)
 
     # Proceed to generate the diff and merge with listing
-    file1_path = 'bbcbasic24ez.dis.asm'
-    file2_path = 'utils/mod/bbcbasic24.dis.asm'
-    diff_output_path = 'bbcbasic24ez.dif.asm'
+    disasm_filepath1 = f'{src_base_filename}.dis.asm'
+    disasm_filepath2 = 'utils/mod/bbcbasic24.dis.asm'
+    diff_output_path = f'{src_base_filename}.dif.asm'
 
     # Configurable parameters
     window_size = 16               # Adjust window size as needed
@@ -273,12 +271,12 @@ if __name__ == '__main__':
     min_match_percentage = 60      # Minimum percentage of matching lines to consider a match
 
     # Generate the diff and write to the diff output file
-    generate_diff(file1_path, file2_path, diff_output_path, window_size, step_size, min_match_percentage)
+    generate_diff(disasm_filepath1, disasm_filepath2, diff_output_path, window_size, step_size, min_match_percentage)
 
     # Now merge the diff file with the listing file
     # Assuming the listing file is the same as file1 but with the extension changed to .lst
-    list_path = 'bbcbasic24ez.lst'
-    final_output_path = 'bbcbasic24ez.dif'
+    list_path = f'{src_base_filename}.lst'
+    final_output_path = f'{src_base_filename}.dif'
 
     # Merge the diff file and the listing file
     merge_diff_and_listing(diff_output_path, list_path, final_output_path)
