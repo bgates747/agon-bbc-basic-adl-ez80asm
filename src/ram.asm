@@ -98,6 +98,18 @@ LISTON:         BLKB    1,0               ; LISTO (bottom nibble)
                                 ; - BIT 7: If set, then assemble in ADL mode, otherwise assemble in Z80 mode
 INCREM:         BLKB    1,0               ; Auto-Increment Value
 ;
+; --------------------------------------------------------------------------------------------
+; BEGIN MODIFIED CODE
+; --------------------------------------------------------------------------------------------
+; Originally in equs.inc
+;
+OC:			EQU     STAVAR+15*4     ; CODE ORIGIN (O%)
+PC:			EQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)
+VDU_BUFFER:		EQU	ACCS		; Storage for VDU commands
+; --------------------------------------------------------------------------------------------
+; END MODIFIED CODE
+; --------------------------------------------------------------------------------------------
+
 ; Extra Agon-implementation specific system variables
 ;
 FLAGS:          BLKB    1,0       ; Miscellaneous flags
@@ -118,7 +130,6 @@ R1:             BLKB    3,0
 ; This must be at the end
 ;
 RAM_END:
-; moved to user.asm		
-; 			ALIGN	256			
-; USER:							; Must be aligned on a page boundary
+			ALIGN	256			
+USER:							; Must be aligned on a page boundary
 	

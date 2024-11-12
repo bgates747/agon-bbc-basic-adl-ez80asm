@@ -39,13 +39,13 @@
 ;Error codes:
 ;
 
-; BADOP:			EQU     1               ;Bad operation code
-; DIVBY0:			EQU     18              ;Division by zero
-; TOOBIG_FP:			EQU     20              ;Too big
-; NGROOT:			EQU     21              ;Negative root
-; LOGRNG:			EQU     22              ;Log range
-; ACLOST:			EQU     23              ;Accuracy lost
-; EXPRNG:			EQU     24              ;Exp range
+BADOP:			EQU     1               ;Bad operation code
+DIVBY0:			EQU     18              ;Division by zero
+TOOBIG_FP:			EQU     20              ;Too big
+NGROOT:			EQU     21              ;Negative root
+LOGRNG:			EQU     22              ;Log range
+ACLOST:			EQU     23              ;Accuracy lost
+EXPRNG:			EQU     24              ;Exp range
 ;
 ;Call entry and despatch code:
 ;
@@ -217,7 +217,7 @@ IEOR:			LD      A,H
         		EXX
         		RET
 ;
-;FFOR - Floating-point OR.
+;FOR - Floating-point OR.
 ;IOR - Integer OR.
 ;
 FFOR:			CALL    FIX2

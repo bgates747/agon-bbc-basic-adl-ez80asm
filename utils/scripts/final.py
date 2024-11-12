@@ -19,8 +19,6 @@ def concatenate_files(include_files, source_dir, combined_src_filenamename):
                 print(f"Included {filename}")
             else:
                 print(f"Warning: {include_filename} not found.")
-        else:
-            print(f"Skipping line: {filename}")
 
 
 def adjust_addresses(input_path, output_path, offset):
@@ -205,7 +203,7 @@ if __name__ == '__main__':
     include_files = [
         'mos_api.inc',
         'macros.inc',
-        'equs_top.inc',
+        'equs.inc',
         'init.asm',
         'eval.asm',
         'exec.asm',
@@ -219,19 +217,17 @@ if __name__ == '__main__':
         'interrupts.asm',
 
         'sorry.asm',
-        
+
         'ram.asm',
-        'user.asm',
-        'equs_bottom.inc',
     ]
 
     source_dir = 'src'
     tgt_bin_dir = 'utils/bin'
+    dif_dir = 'utils/dif'
 
     # Output filename
     src_base_filename = 'bbcbasic24ez'
     src_filepath = f'{source_dir}/{src_base_filename}.asm'
-    tgt_bin_filepath = f'{tgt_bin_dir}/{src_base_filename}.bin'
 
     # Call the function to concatenate files
     concatenate_files(include_files, source_dir, src_filepath)
@@ -239,10 +235,14 @@ if __name__ == '__main__':
     print(f"\nAll files have been concatenated into {src_filepath}")
 
     # Assemble the output file
-    subprocess.run(f'(cd {source_dir} && ez80asm -l -b 00 {src_filepath} {tgt_bin_filepath} )', shell=True, check=True)
+    subprocess.run(f'(cd {source_dir} && ez80asm -l -b FF {src_base_filename}.asm)', shell=True, check=True)
+    # Move the generated binary to the target directory
+    subprocess.run(f'mv {source_dir}/{src_base_filename}.bin {tgt_bin_dir}', shell=True, check=True)
+    # Move the generated listing file to the diff directory
+    subprocess.run(f'mv {source_dir}/{src_base_filename}.lst {dif_dir}', shell=True, check=True)
 
     # Now disassemble the generated binary and adjust addresses
-    adjusted_disasm_path = f'{src_base_filename}.dis.asm'
+    adjusted_disasm_path = f'{dif_dir}/{src_base_filename}.dis.asm'
 
     # Create a temporary file for the unadjusted disassembly output
     with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_disasm_file:
@@ -250,7 +250,7 @@ if __name__ == '__main__':
 
     try:
         # Run the disassembler command and write output to the temporary file
-        subprocess.run(f"zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {tgt_bin_filepath} > {temp_disasm_path}", shell=True, check=True)
+        subprocess.run(f"(cd {tgt_bin_dir} && zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {src_base_filename}.bin > {temp_disasm_path})", shell=True, check=True)
         
         # Call adjust_addresses to add padding and correct addresses in the disassembly output
         adjust_addresses(temp_disasm_path, adjusted_disasm_path, 0x040000)
@@ -261,9 +261,9 @@ if __name__ == '__main__':
         os.remove(temp_disasm_path)
 
     # Proceed to generate the diff and merge with listing
-    disasm_filepath1 = f'{src_base_filename}.dis.asm'
-    disasm_filepath2 = 'utils/mod/bbcbasic24.dis.asm'
-    diff_output_path = f'{src_base_filename}.dif.asm'
+    disasm_filepath1 = f'{dif_dir}/{src_base_filename}.dis.asm'
+    disasm_filepath2 = f'{dif_dir}/bbcbasic24.dis.asm'
+    diff_output_path = f'{dif_dir}/{src_base_filename}.dif.asm'
 
     # Configurable parameters
     window_size = 16               # Adjust window size as needed
@@ -275,8 +275,8 @@ if __name__ == '__main__':
 
     # Now merge the diff file with the listing file
     # Assuming the listing file is the same as file1 but with the extension changed to .lst
-    list_path = f'{src_base_filename}.lst'
-    final_output_path = f'{src_base_filename}.dif'
+    list_path = f'{dif_dir}/{src_base_filename}.lst'
+    final_output_path = f'{dif_dir}/{src_base_filename}.dif'
 
     # Merge the diff file and the listing file
     merge_diff_and_listing(diff_output_path, list_path, final_output_path)

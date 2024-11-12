@@ -52,7 +52,7 @@ COL2_WIDTH = 16
 COL3_WIDTH = 13
 
 # Input and output files
-INPUT_FILE = 'utils/mod/ram.dif'
+INPUT_FILE = 'utils/dif/bbcbasic24ez.dif'
 OUTPUT_FILE = f'{INPUT_FILE.split(".")[0]}.inc'
 
 # Run the reformatting

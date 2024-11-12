@@ -126,29 +126,28 @@
 			; XREF	R0
 ;
 ; List of token values used in this module
-; consolidated with the token values in main.asm
-; TAND:			EQU     80H
-; TOR:			EQU     84H
-; TERROR:			EQU     85H
-; LINE_:			EQU     86H
-; OFF_:			EQU     87H
-; STEP:			EQU     88H
-; SPC:			EQU     89H
-; TAB:			EQU     8AH
-; ELSE_:			EQU     8BH
-; THEN:			EQU     8CH
-; LINO:			EQU     8DH
-; TO:				EQU     B8H
-; TCALL:			EQU     D6H
-; DATA_:			EQU     DCH
-; DEF_:			EQU     DDH
-; TGOSUB:			EQU     E4H
-; TGOTO:			EQU     E5H
-; TON:			EQU     EEH
-; TPROC:			EQU     F2H
-; TSTOP:			EQU     FAH
-
-; TCMD:			EQU     C6H ; in eval.asm
+;
+TAND:			EQU     80H
+TOR:			EQU     84H
+TERROR_EX:			EQU     85H
+LINE_EX_:			EQU     86H
+OFF_:			EQU     87H
+STEP:			EQU     88H
+SPC:			EQU     89H
+TAB:			EQU     8AH
+ELSE_EX_:			EQU     8BH
+THEN_EX_:			EQU     8CH
+LINO_EX:			EQU     8DH
+TO_EX:			EQU     B8H
+TCMD_EX:			EQU     C6H
+TCALL:			EQU     D6H
+DATA_EX_:			EQU     DCH
+DEF_:			EQU     DDH
+TGOSUB:			EQU     E4H
+TGOTO:			EQU     E5H
+TON:			EQU     EEH
+TPROC:			EQU     F2H
+TSTOP:			EQU     FAH
 
 ; The command table
 ; Commands are tokens from C6H onwards; this lookup table is used to
@@ -241,7 +240,7 @@ RUN0:			LD      SP,(HIMEM)      	; Prepare for RUN
 			LD      HL,0			; Clear the error trap sysvar
 			LD      (ERRTRP),HL
 			LD      HL,(PAGE_)		; Load HL with the start of program memory (PAGE)
-			LD      A,DATA_			; The DATA token value
+			LD      A,DATA_EX_			; The DATA token value
 			CALL    SEARCH_EX          	; Search for the first DATA token in the tokenised listing
 			LD      (DATPTR),HL     	; Set data pointer
 			LD      IY,(PAGE_)		; Load IY with the start of program memory
@@ -255,7 +254,7 @@ XEQ1:			CALL    NXT
 			JR      Z,XEQ1
 			CP      CR
 			JR      Z,XEQ0          	; New program line
-			SUB     TCMD
+			SUB     TCMD_EX
 			JP      C,LET0          	; Implied "LET"
 			
 			LD	BC, 3
@@ -338,7 +337,7 @@ REM_EX:			PUSH    IY
 
 ; [LET] var = expr
 ;
-LET0:			CP      ELSE_-TCMD
+LET0:			CP      ELSE_EX_-TCMD_EX
 			JR      Z,REM_EX
 			; CP      ('*'-TCMD) & 0FFH
 			; JR      Z,EXT_EX
@@ -346,11 +345,11 @@ LET0:			CP      ELSE_-TCMD
 			; JR      Z,FNEND
 			; CP      ('['-TCMD) & 0FFH
 			; ez80asm doesn't like () in expressions
-			CP      '*'-TCMD & 0FFH
+			CP      '*'-TCMD_EX & 0FFH
 			JR      Z,EXT_EX
-			CP      '='-TCMD & 0FFH
+			CP      '='-TCMD_EX & 0FFH
 			JR      Z,FNEND
-			CP      '['-TCMD & 0FFH
+			CP      '['-TCMD_EX & 0FFH
 			JR      Z,ASM
 			DEC     IY
 LET:			CALL    ASSIGN			; Assign the variable
@@ -676,7 +675,7 @@ ONERR:			INC     IY              ;SKIP "ERROR"
 ; ON expr GOSUB line[,line...] [ELSE line]
 ; ON expr PROCone [,PROCtwo..] [ELSE PROCotherwise]
 ;
-ON_EX_:			CP      TERROR
+ON_EX_:			CP      TERROR_EX
 			JR      Z,ONERR         ;"ON ERROR"
 			CALL    EXPRI
 			LD      A,(IY)
@@ -724,7 +723,7 @@ ON3:			LD      A,E
 ;
 ON4:			LD      A,(IY)
 			INC     IY
-			CP      ELSE_
+			CP      ELSE_EX_
 			JP      Z,IF1           ;ELSE CLAUSE
 			CP      CR
 			JR      NZ,ON4
@@ -821,7 +820,7 @@ FOR_EX:			CALL    ASSIGN			; Assign the START expression value to a variable
 			JR      NZ,FORVAR       	; If the variable is a string, or invalid, then throw a "FOR variable" error
 			PUSH    AF              	; Save the variable type
 			LD      A,(IY)			; Check the next token
-			CP      TO			; Compare with the token value for "TO"
+			CP      TO_EX			; Compare with the token value for "TO"
 			LD      A,36			; Set the error code to 36 ("No TO")
 			JP      NZ,ERROR2_EX       	; And throw the error if that token is missing
 			INC     IY			; Skip to the next token
@@ -1183,7 +1182,7 @@ INPN4:			POP     IX
 INPUT:			CP      '#'
 			JR      Z,INPUTN
 			LD      C,0             ;FLAG PROMPT
-			CP      LINE_
+			CP      LINE_EX_
 			JR      NZ,INPUT0
 			INC     IY              ;SKIP "LINE"
 			LD      C,80H
@@ -1304,7 +1303,7 @@ READ2:			POP     HL
 			CALL    NXT
 			JR      READ0
 ;
-GETDAT:			LD      A,DATA_
+GETDAT:			LD      A,DATA_EX_
 			CALL    SEARCH_EX
 			INC     HL
 			RET     NC
@@ -1319,18 +1318,18 @@ IF_:			CALL    EXPRI
 			CALL    TEST
 			JR      Z,IFNOT         ;FALSE
 			LD      A,(IY)
-			CP      THEN
+			CP      THEN_EX_
 			JP      NZ,XEQ
 			INC     IY              ;SKIP "THEN"
 IF1:			CALL    NXT
-			CP      LINO
+			CP      LINO_EX
 			JP      NZ,XEQ          ;STATEMENT FOLLOWS
 			JP      GOTO_EX            ;LINE NO. FOLLOWS
 IFNOT:			LD      A,(IY)
 			CP      CR
 			INC     IY
 			JP      Z,XEQ0          ;END OF LINE
-			CP      ELSE_
+			CP      ELSE_EX_
 			JR      NZ,IFNOT
 			JR      IF1
 
@@ -1374,7 +1373,7 @@ RESTOR_EX:			LD      HL,(PAGE_)
 			CALL    FINDL           ;SEARCH FOR LINE
 			LD      A,41
 			JP      NZ,ERROR4       ;"No such line"
-RESTR1:			LD      A,DATA_
+RESTR1:			LD      A,DATA_EX_
 			CALL    SEARCH_EX
 			LD      (DATPTR),HL
 			JP      XEQ
@@ -1964,7 +1963,7 @@ TERM:			CP      ';'             	; Assembler terminator
 			JR      TERM0
 ;
 TERMQ:			CALL    NXT
-			CP      ELSE_
+			CP      ELSE_EX_
 			RET     NC
 TERM0:			CP      ':'             	; Assembler seperator
 			RET     NC

@@ -98,7 +98,7 @@
 ;
 ; Table of addresses for functions
 ;
-; FUNTOK:			EQU	8DH			; First token number
+FUNTOK:			EQU	8DH			; First token number
 ;
 FUNTBL:			DW24	DECODE			; Line number
 			DW24	OPENIN			; OPENIN
@@ -160,13 +160,13 @@ FUNTBL:			DW24	DECODE			; Line number
 ;
 FUNTBL_END:		EQU	$
 ; TCMD:			EQU     FUNTOK+(FUNTBL_END-FUNTBL)/3
-; TCMD:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
-;
-; ANDK:			EQU     80H
-; DIVK:			EQU     81H
-; EORK:			EQU     82H
-; MODK:			EQU     83H
-; ORK:			EQU     84H
+TCMD_EV:			EQU     FUNTBL_END-FUNTBL/3+FUNTOK ; reorder because ez80asm doesn't do order of operations
+
+ANDK:			EQU     80H
+DIVK:			EQU     81H
+EORK:			EQU     82H
+MODK:			EQU     83H
+ORK:			EQU     84H
 ;
 SOPTBL:			DW24	SLE			; <= (STRING)
 			DW24	SNE			; <>
@@ -523,7 +523,7 @@ ITEM:			CALL    CHECK			; Check there's at least a page of free memory left and 
 			JP      Z,ITEM1         	; Start of a bracketed expression
 			CP      34			; If `"`
 			JR      Z,CONS          	; Start of a string constant
-			CP      TCMD			; Is it out of range of the function table?
+			CP      TCMD_EV			; Is it out of range of the function table?
 			JP      NC,SYNTAX       	; Error: "Syntax Error"
 			CP      FUNTOK			; If it is in range, then 
 			JP      NC,DISPAT       	; It's a function
