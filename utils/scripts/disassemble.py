@@ -242,6 +242,150 @@ def import_csv_to_table(db_path, csv_filepath, table_name):
     conn.close()
     print(f"Data imported into table '{table_name}' from {csv_filepath}")
 
+def import_fixed_width_to_db(db_path, lst_filepath, table_name):
+    """Import data from a fixed-width .lst file into a SQLite table with an auto-incrementing primary key."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    # Drop the table if it exists and create a new one with `idx` as primary key
+    cursor.execute(f"DROP TABLE IF EXISTS {table_name}")
+    cursor.execute(f"""
+        CREATE TABLE {table_name} (
+            idx INTEGER PRIMARY KEY AUTOINCREMENT,
+            address TEXT,
+            bytecode TEXT,
+            linenum INTEGER,
+            srccode TEXT,
+            src_file TEXT
+        )
+    """)
+    conn.commit()
+
+    current_file = "no_file"  # Initial filename for lines preceding any matched pattern
+    
+    pattern = re.compile(r'; --- Begin (.+) ---')  # Pattern to match and extract filenames
+
+    with open(lst_filepath, 'r') as lst_file:
+        for line in lst_file:
+            # Check for a new source file declaration
+            match = pattern.search(line)
+            if match:
+                current_file = match.group(1).strip()
+                continue  # Move to the next line after updating the filename
+
+            # Parse fixed-width columns
+            address = line[0:6].strip()
+            bytecode = line[7:9].strip()
+            linenum = line[10:19].strip()
+            srccode = line[20:].strip()
+
+            # Insert parsed data along with the current source file name into the database
+            cursor.execute(f"""
+                INSERT INTO {table_name} (address, bytecode, linenum, srccode, src_file)
+                VALUES (?, ?, ?, ?, ?)
+            """, (address, bytecode, linenum, srccode, current_file))
+
+    conn.commit()
+    conn.close()
+    print(f"Data imported into table '{table_name}' from {lst_filepath}")
+
+def create_final_table(db_path, final_table_name):
+    """Create the final table with a primary key and schema matching the query output plus idx as primary key."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Drop the final table if it exists
+    cursor.execute(f"DROP TABLE IF EXISTS {final_table_name}")
+    # Create the final table with fields for both t1 (left-hand) and t2 (right-hand) data
+    cursor.execute(f"""
+        CREATE TABLE {final_table_name} (
+            idx INTEGER PRIMARY KEY AUTOINCREMENT,
+            idx1 INTEGER,
+            address1 TEXT,
+            opcode1 TEXT,
+            instruction1 TEXT,
+            matching1 TEXT,
+            idx2 INTEGER,
+            address2 TEXT,
+            opcode2 TEXT,
+            instruction2 TEXT,
+            matching2 TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+    print(f"Table '{final_table_name}' created.")
+
+def populate_final_table(db_path, final_table_name):
+    """Process the query results and populate the final table with gap-filling logic."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Execute the query
+    cursor.execute("""
+        SELECT t1.idx1, t1.address1, t1.opcode1, t1.instruction1, t1.matching1,
+               t2.idx2, t2.address2, t2.opcode2, t2.instruction2, t2.matching2
+        FROM (
+            SELECT t1.idx AS idx1, t1.address AS address1, t1.opcode AS opcode1, 
+                   t1.instruction AS instruction1, t1.matching AS matching1 
+            FROM bbcbasic24 AS t1
+        ) AS t1
+        JOIN matched_indices AS t3 ON t1.idx1 = t3.left_idx
+        LEFT JOIN (
+            SELECT t2.idx AS idx2, t2.address AS address2, t2.opcode AS opcode2, 
+                   t2.instruction AS instruction2, t2.matching AS matching2 
+            FROM bbcbasic24ez AS t2
+        ) AS t2 ON t3.right_idx = t2.idx2
+        ORDER BY t1.idx1
+    """)
+    
+    results = cursor.fetchall()
+    
+    # Initialize variables for tracking the last non-null idx2 and handling gaps
+    last_non_null_idx2 = None
+    to_insert = []
+    
+    for i, row in enumerate(results):
+        idx1, address1, opcode1, instruction1, matching1, idx2, address2, opcode2, instruction2, matching2 = row
+        
+        if idx2 is not None:
+            # If idx2 is non-null, just insert the row as is
+            to_insert.append((idx1, address1, opcode1, instruction1, matching1, idx2, address2, opcode2, instruction2, matching2))
+            last_non_null_idx2 = idx2
+        else:
+            # If idx2 is null, we need to look ahead to fill the gap
+            # Count the number of consecutive null idx2s
+            gap_count = 0
+            next_non_null_idx2 = None
+            for j in range(i + 1, len(results)):
+                if results[j][5] is not None:
+                    next_non_null_idx2 = results[j][5]
+                    break
+                gap_count += 1
+            
+            if last_non_null_idx2 is not None and next_non_null_idx2 is not None:
+                # Calculate the range of idx2 values to fill from bbcbasic24ez
+                for idx in range(last_non_null_idx2 + 1, next_non_null_idx2):
+                    # Insert placeholder row from bbcbasic24ez (right-hand table)
+                    cursor.execute(f"SELECT idx, address, opcode, instruction, matching FROM bbcbasic24ez WHERE idx = ?", (idx,))
+                    placeholder_row = cursor.fetchone()
+                    if placeholder_row:
+                        to_insert.append((None, None, None, None, None, *placeholder_row))
+            
+            # Now insert the current row with left-hand fields filled in and right-hand fields empty
+            to_insert.append((idx1, address1, opcode1, instruction1, matching1, None, None, None, None, None))
+            
+    # Insert all gathered rows into the final table
+    cursor.executemany(f"""
+        INSERT INTO {final_table_name} (idx1, address1, opcode1, instruction1, matching1, idx2, address2, opcode2, instruction2, matching2)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, to_insert)
+
+    conn.commit()
+    conn.close()
+    print(f"Data populated into table '{final_table_name}' with gap handling.")
+
+
 if __name__ == "__main__":
     db_path = 'utils/dif/difs.db'
     source_dir = 'src'
@@ -280,10 +424,6 @@ if __name__ == "__main__":
     # Main workflow
     left_table = 'bbcbasic24'
     right_table = src_base_filename
-
-    # Load data from the databases
-    idx_array1, instruction_array1 = load_data_to_arrays(db_path, left_table)
-    idx_array2, instruction_array2 = load_data_to_arrays(db_path, right_table)
     
     # Set parameters
     window_size = 16
@@ -291,6 +431,9 @@ if __name__ == "__main__":
     min_match_percentage = 60  # Adjust as needed
 
     if False:
+        # Load data from the databases
+        idx_array1, instruction_array1 = load_data_to_arrays(db_path, left_table)
+        idx_array2, instruction_array2 = load_data_to_arrays(db_path, right_table)
         # Call the function
         generate_diff_from_arrays(
             idx_array1,
@@ -305,8 +448,18 @@ if __name__ == "__main__":
     
     # Import the diff file into a table
     diff_table = 'matched_indices'
-    import_csv_to_table(db_path, diff_output_path, diff_table)
+    if False: import_csv_to_table(db_path, diff_output_path, diff_table)
 
     list_filename_in = 'utils/dif/bbcbasic24ez.lst'
     list_filename_out = 'utils/dif/bbcbasic24ez_expanded.lst'
-    expand_lines(list_filename_in, list_filename_out)
+    if False: expand_lines(list_filename_in, list_filename_out)
+
+    table_name = 'bbcbasic24ez_lst'
+    # Import the .lst file into the SQLite table
+    if False: import_fixed_width_to_db(db_path, list_filename_out, table_name)
+
+    # Create the final table
+    final_table_name = 'final_table'
+    if True: 
+        create_final_table(db_path, final_table_name)
+        populate_final_table(db_path, final_table_name)
