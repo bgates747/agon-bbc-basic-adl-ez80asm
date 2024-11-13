@@ -157,67 +157,6 @@ def load_data_to_arrays(db_path, table_name):
     instruction_array = np.array([row[1] for row in rows], dtype=object)  # Use object type for strings
     return idx_array, instruction_array
 
-def generate_diff_from_arrays(idx_array1, instruction_array1, idx_array2, instruction_array2, output_path, window_size, step_size, min_match_percentage):
-    len1 = len(instruction_array1)
-    len2 = len(instruction_array2)
-
-    matches = []
-    i = 0  # Position in instruction_array1
-    while i <= len1 - window_size:
-        # Extract window from instruction_array1
-        window_instr1 = instruction_array1[i:i + window_size]
-        window_idx1 = idx_array1[i:i + window_size]
-        
-        # Initialize variables to track best match
-        best_match_j = -1
-        best_match_score = -1
-        best_matches_mask = None
-        
-        # For each possible position in instruction_array2
-        for j in range(0, len2 - window_size + 1):
-            # Extract window from instruction_array2
-            window_instr2 = instruction_array2[j:j + window_size]
-            # Compare the windows
-            matches_mask = window_instr1 == window_instr2
-            match_count = np.sum(matches_mask)
-            match_percentage = (match_count / window_size) * 100
-            if match_percentage > best_match_score:
-                best_match_score = match_percentage
-                best_match_j = j
-                best_matches_mask = matches_mask
-        # Now, align the window from instruction_array1 with the best matching window from instruction_array2
-        if best_match_score >= min_match_percentage:
-            # Matching lines found
-            window_idx2 = idx_array2[best_match_j:best_match_j + window_size]
-            # Record matches
-            for k in range(window_size):
-                idx1 = window_idx1[k]
-                idx2 = window_idx2[k]
-                if best_matches_mask[k]:
-                    matches.append((idx1, idx2))
-                else:
-                    matches.append((idx1, None))
-        else:
-            # No matching lines found or match percentage below threshold
-            for idx1 in window_idx1:
-                matches.append((idx1, None))
-        i += step_size  # Move to next window in instruction_array1
-    # Handle any remaining lines in instruction_array1
-    while i < len1:
-        idx1 = idx_array1[i]
-        matches.append((idx1, None))
-        i += 1
-
-    # Now, write the matches to the output file
-    with open(output_path, 'w') as f:
-        for left_idx, right_idx in matches:
-            if right_idx is not None:
-                f.write(f"{left_idx},{right_idx}\n")
-            else:
-                f.write(f"{left_idx},\n")  # No matching right index
-
-    print(f"Diff generated and written to {output_path}")
-
 def import_csv_to_table(db_path, csv_filepath, table_name):
     """Import a CSV file directly into a SQLite table."""
     conn = sqlite3.connect(db_path)
@@ -385,12 +324,125 @@ def populate_final_table(db_path, final_table_name):
     conn.close()
     print(f"Data populated into table '{final_table_name}' with gap handling.")
 
+def generate_diff_from_arrays(idx_array1, instruction_array1, idx_array2, instruction_array2, diff_output_path, window_size, min_match_percentage):
+    len1 = len(instruction_array1)
+    matches = []
+    i = 0  # Position in instruction_array1
+    total_matches = 0
+    max_consecutive_matches = 0
+    unmatched_left = 0
+    consecutive_matches = 0
+
+    while i < len1:
+        # Initialize variables to track the best matching window
+        best_match_j = -1
+        best_match_score = -1
+        best_matches_mask = None
+        len2 = len(instruction_array2)  # Update length of right array after any deletions
+
+        # Adjust window size if we're near the end of the left array
+        current_window_size = min(window_size, len1 - i)
+
+        # Find the best matching window in instruction_array2 for the current window in instruction_array1
+        for j in range(len2 - current_window_size + 1):
+            # Ensure the first records in each window match exactly
+            if not np.all(instruction_array1[i] == instruction_array2[j]):
+                continue  # Skip to the next right-side window if the first records don't match
+
+            # Compare the entire windows if the first records matched
+            window_instr1 = instruction_array1[i:i + current_window_size]
+            window_instr2 = instruction_array2[j:j + current_window_size]
+
+            matches_mask = window_instr1 == window_instr2
+            match_count = np.sum(matches_mask)
+            match_percentage = (match_count / current_window_size) * 100
+
+            if match_percentage > best_match_score:
+                best_match_score = match_percentage
+                best_match_j = j
+                best_matches_mask = matches_mask
+
+        # Proceed only if the best match percentage is greater than the threshold
+        if best_match_score > min_match_percentage:
+            j = best_match_j  # Start matching from the best-matching position in instruction_array2
+
+            # Count consecutive matches
+            consecutive_matches = 0
+            while i < len1 and j < len(instruction_array2):
+                instr1 = instruction_array1[i]
+                instr2 = instruction_array2[j]
+
+                if np.all(instr1 == instr2):  # Exact match
+                    # Record the match and remove matched entries from the right-hand arrays
+                    matches.append((idx_array1[i], idx_array2[j]))
+                    idx_array2 = np.delete(idx_array2, j)
+                    instruction_array2 = np.delete(instruction_array2, j)
+                    consecutive_matches += 1
+                    i += 1
+                else:
+                    break  # Stop matching on the first mismatch
+            
+            # Log successful match resolution
+            print(f"Matched {consecutive_matches} records at left index {i}/{len1} on right index {j}/{len2} with score of {best_match_score:.2f}%.")
+            max_consecutive_matches = max(max_consecutive_matches, consecutive_matches)
+            total_matches += consecutive_matches
+        else:
+            # No sufficient match found, move to the next left index
+            matches.append((idx_array1[i], None))  # No match on the right-hand side
+            unmatched_left += 1
+            i += 1
+
+    # Handle any remaining lines in instruction_array1 with no matches
+    trailing_unmatched_left = 0
+    while i < len1:
+        matches.append((idx_array1[i], None))
+        unmatched_left += 1
+        trailing_unmatched_left += 1
+        i += 1
+
+    # Append any remaining unmatched lines from instruction_array2
+    unmatched_right = len(idx_array2)
+    for idx in idx_array2:
+        matches.append((None, idx))
+
+    # Calculate and display summary
+    total_left = len(idx_array1)
+    total_right = len(instruction_array2)
+    percent_matched = (total_matches / total_left) * 100 if total_left > 0 else 0
+    avg_consecutive_matches = total_matches / (total_left - unmatched_left) if total_left > unmatched_left else 0
+
+    print("\n--- Summary ---")
+    print(f"Total matched records: {total_matches}")
+    print(f"Total unmatched left-hand records: {unmatched_left}")
+    print(f"Total trailing unmatched left-hand records inserted: {trailing_unmatched_left}")
+    print(f"Total unmatched right-hand records inserted: {unmatched_right}")
+    print(f"Percent total matched: {percent_matched:.2f}%")
+    print(f"Average consecutive matches: {avg_consecutive_matches:.2f}")
+    print(f"Max consecutive matches: {max_consecutive_matches}")
+
+    # Write the matches to the output file
+    with open(diff_output_path, 'w') as f:
+        for left_idx, right_idx in matches:
+            if right_idx is not None:
+                f.write(f"{left_idx},{right_idx}\n")
+            else:
+                f.write(f"{left_idx},\n")  # No matching right index
+
+    print(f"\nDiff generated and written to {diff_output_path}")
 
 if __name__ == "__main__":
     db_path = 'utils/dif/difs.db'
     source_dir = 'src'
     tgt_bin_dir = 'utils/bin'
     dif_dir = 'utils/dif'
+
+    list_filename_in = 'utils/dif/bbcbasic24ez.lst'
+    list_filename_out = 'utils/dif/bbcbasic24ez_expanded.lst'
+    if False: expand_lines(list_filename_in, list_filename_out)
+
+    table_name = 'bbcbasic24ez_lst'
+    # Import the .lst file into the SQLite table
+    if False: import_fixed_width_to_db(db_path, list_filename_out, table_name)
 
     src_base_filename = 'bbcbasic24ez'
     src_filepath = f'{source_dir}/{src_base_filename}.asm'
@@ -426,37 +478,20 @@ if __name__ == "__main__":
     right_table = src_base_filename
     
     # Set parameters
-    window_size = 16
+    window_size = 32
     step_size = window_size  # Or adjust as needed
-    min_match_percentage = 60  # Adjust as needed
+    min_match_percentage = 80  # Adjust as needed
 
-    if False:
+    if True:
         # Load data from the databases
         idx_array1, instruction_array1 = load_data_to_arrays(db_path, left_table)
         idx_array2, instruction_array2 = load_data_to_arrays(db_path, right_table)
         # Call the function
-        generate_diff_from_arrays(
-            idx_array1,
-            instruction_array1,
-            idx_array2,
-            instruction_array2,
-            diff_output_path,
-            window_size,
-            step_size,
-            min_match_percentage
-        )
+        generate_diff_from_arrays(idx_array1, instruction_array1, idx_array2, instruction_array2, diff_output_path, window_size, min_match_percentage)
     
     # Import the diff file into a table
     diff_table = 'matched_indices'
-    if False: import_csv_to_table(db_path, diff_output_path, diff_table)
-
-    list_filename_in = 'utils/dif/bbcbasic24ez.lst'
-    list_filename_out = 'utils/dif/bbcbasic24ez_expanded.lst'
-    if False: expand_lines(list_filename_in, list_filename_out)
-
-    table_name = 'bbcbasic24ez_lst'
-    # Import the .lst file into the SQLite table
-    if False: import_fixed_width_to_db(db_path, list_filename_out, table_name)
+    if True: import_csv_to_table(db_path, diff_output_path, diff_table)
 
     # Create the final table
     final_table_name = 'final_table'
