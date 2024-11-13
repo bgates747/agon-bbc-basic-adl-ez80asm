@@ -1,8 +1,6 @@
 import os
 import subprocess
 import re
-import tempfile
-
 
 def concatenate_files(include_files, source_dir, combined_src_filenamename):
     with open(combined_src_filenamename, 'w') as outfile:
@@ -19,40 +17,6 @@ def concatenate_files(include_files, source_dir, combined_src_filenamename):
                 print(f"Included {filename}")
             else:
                 print(f"Warning: {include_filename} not found.")
-
-
-def adjust_addresses(input_path, output_path, offset):
-    """Adjust address comments in the disassembly output by adding an offset."""
-    with open(input_path, 'r') as infile, open(output_path, 'w') as outfile:
-        for line in infile:
-            # Remove newline characters
-            line = line.rstrip('\n')
-            # Split the line into code and comment
-            parts = line.split(';', 1)
-            code_part = parts[0].rstrip()
-            if len(parts) > 1:
-                # Extract the existing address from the comment
-                comment_part = parts[1].strip()
-                # Try to parse the address in the comment
-                try:
-                    # Assume the address is in hexadecimal
-                    address = int(comment_part, 16)
-                    # Add the offset to the address
-                    adjusted_address = address + offset
-                    # Format the new address comment
-                    new_comment_part = f"; {adjusted_address:06X}"
-                except ValueError:
-                    # If parsing fails, keep the original comment
-                    new_comment_part = f"; {comment_part}"
-            else:
-                # No comment present
-                new_comment_part = ''
-            # Calculate padding to align the address comments at a specific column (e.g., 32)
-            padding = max(1, 32 - len(code_part))
-            # Combine code and new comment
-            padded_line = f"{code_part}{' ' * padding}{new_comment_part}\n"
-            # Write the adjusted line to the output file
-            outfile.write(padded_line)
 
 def preprocess_line(line):
     """Normalize hex numbers in the code part."""
@@ -229,58 +193,51 @@ if __name__ == '__main__':
     src_base_filename = 'bbcbasic24ez'
     src_filepath = f'{source_dir}/{src_base_filename}.asm'
 
-    # Call the function to concatenate files
-    concatenate_files(include_files, source_dir, src_filepath)
+    if False:
+        # Call the function to concatenate files
+        concatenate_files(include_files, source_dir, src_filepath)
 
-    print(f"\nAll files have been concatenated into {src_filepath}")
+        print(f"\nAll files have been concatenated into {src_filepath}")
 
-    # Assemble the output file
-    subprocess.run(f'(cd {source_dir} && ez80asm -l -b FF {src_base_filename}.asm)', shell=True, check=True)
-    # Move the generated binary to the target directory
-    subprocess.run(f'mv {source_dir}/{src_base_filename}.bin {tgt_bin_dir}', shell=True, check=True)
-    # Move the generated listing file to the diff directory
-    subprocess.run(f'mv {source_dir}/{src_base_filename}.lst {dif_dir}', shell=True, check=True)
+        # Assemble the output file
+        subprocess.run(f'(cd {source_dir} && ez80asm -l -b FF {src_base_filename}.asm)', shell=True, check=True)
+        # Move the generated binary to the target directory
+        subprocess.run(f'mv {source_dir}/{src_base_filename}.bin {tgt_bin_dir}', shell=True, check=True)
+        # Move the generated listing file to the diff directory
+        subprocess.run(f'mv {source_dir}/{src_base_filename}.lst {dif_dir}', shell=True, check=True)
 
-    # Now disassemble the generated binary and adjust addresses
-    adjusted_disasm_path = f'{dif_dir}/{src_base_filename}.dis.asm'
-
-    # Create a temporary file for the unadjusted disassembly output
-    with tempfile.NamedTemporaryFile(mode='w+', delete=False) as temp_disasm_file:
-        temp_disasm_path = temp_disasm_file.name
-
-    try:
-        # Run the disassembler command and write output to the temporary file
-        cmd = f"(cd {tgt_bin_dir} && zdis --start 0x040000 --lowercase --explicit-dest --ez80 --hex {src_base_filename}.bin > {temp_disasm_path})"
+    if False:
+        # Now disassemble the generated binary
+        disasm_filepath1 = f'{dif_dir}/{src_base_filename}.dis.asm'
+        cmd = f"ez80-dis --start 0 --target $040000 --address --hex-dump --lowercase --explicit-dest --ez80 --prefix --hex --mnemonic-space --no-argument-space --compute-relative --literal-absolute  {tgt_bin_dir}/{src_base_filename}.bin > {disasm_filepath1}"
         print (f"Running command: {cmd}")
         subprocess.run(cmd, shell=True, check=True)
-        print
-        
-        # Call adjust_addresses to add padding and correct addresses in the disassembly output
-        adjust_addresses(temp_disasm_path, adjusted_disasm_path, 0x040000)
-        
-        print(f"Disassembly with adjusted addresses written to {adjusted_disasm_path}")
-    finally:
-        # Remove the temporary file
-        os.remove(temp_disasm_path)
+        print(f"Disassembly written to {disasm_filepath1}")
 
-    # Proceed to generate the diff and merge with listing
-    disasm_filepath1 = f'{dif_dir}/{src_base_filename}.dis.asm'
-    disasm_filepath2 = f'{dif_dir}/bbcbasic24.dis.asm'
-    diff_output_path = f'{dif_dir}/{src_base_filename}.dif.asm'
+    if False:
+        # Now disassemble the generated binary
+        disasm_filepath2 = f'{dif_dir}/bbcbasic24.dis.asm'
+        cmd = f"ez80-dis --start 0 --target $040000 --address --hex-dump --lowercase --explicit-dest --ez80 --prefix --hex --mnemonic-space --no-argument-space --compute-relative --literal-absolute orig/bbcbasic24.bin > {disasm_filepath2}"
+        print (f"Running command: {cmd}")
+        subprocess.run(cmd, shell=True, check=True)
+        print(f"Disassembly written to {disasm_filepath2}")
 
-    # Configurable parameters
-    window_size = 32               # Adjust window size as needed
-    step_size = window_size        # Window advances by one window at a time
-    min_match_percentage = 60      # Minimum percentage of matching lines to consider a match
+    # # Proceed to generate the diff and merge with listing
+    # diff_output_path = f'{dif_dir}/{src_base_filename}.dif.asm'
 
-    # Generate the diff and write to the diff output file
-    generate_diff(disasm_filepath1, disasm_filepath2, diff_output_path, window_size, step_size, min_match_percentage)
+    # # Configurable parameters
+    # window_size = 32               # Adjust window size as needed
+    # step_size = window_size        # Window advances by one window at a time
+    # min_match_percentage = 60      # Minimum percentage of matching lines to consider a match
 
-    # Now merge the diff file with the listing file
-    # Assuming the listing file is the same as file1 but with the extension changed to .lst
-    list_path = f'{dif_dir}/{src_base_filename}.lst'
-    final_output_path = f'{dif_dir}/{src_base_filename}.dif'
+    # # Generate the diff and write to the diff output file
+    # generate_diff(disasm_filepath1, disasm_filepath2, diff_output_path, window_size, step_size, min_match_percentage)
 
-    # Merge the diff file and the listing file
-    merge_diff_and_listing(diff_output_path, list_path, final_output_path)
-    print(f"Final output written to {final_output_path}")
+    # # Now merge the diff file with the listing file
+    # # Assuming the listing file is the same as file1 but with the extension changed to .lst
+    # list_path = f'{dif_dir}/{src_base_filename}.lst'
+    # final_output_path = f'{dif_dir}/{src_base_filename}.dif'
+
+    # # Merge the diff file and the listing file
+    # merge_diff_and_listing(diff_output_path, list_path, final_output_path)
+    # print(f"Final output written to {final_output_path}")
