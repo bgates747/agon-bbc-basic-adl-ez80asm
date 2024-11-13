@@ -3,6 +3,53 @@ import re
 import subprocess
 import sqlite3
 import numpy as np
+import csv
+
+
+def expand_lines(list_filename_in, list_filename_out):
+    """Read input lines, expand multibyte lines, and write to the output file."""
+    with open(list_filename_in, 'r') as infile, open(list_filename_out, 'w') as outfile:
+        lines = infile.readlines()
+        current_address = None  # Tracks the current address
+
+        for line in lines:
+            # Splitting the line based on fixed-width columns
+            col1 = line[:7].strip()      # Address (7 chars)
+            col2 = line[7:19].strip()    # Byte code (12 chars)
+            col3_and_4 = line[19:].rstrip()  # Line number and source code (rest of the line)
+
+            # Separate the line number and source code
+            col3_split = col3_and_4.split(maxsplit=1)
+            col3 = col3_split[0].strip().rjust(8) if col3_split else ""
+            col4 = col3_split[1] if len(col3_split) > 1 else ""
+
+            # Update the current address if available
+            if col1:
+                try:
+                    current_address = int(col1, 16)
+                except ValueError:
+                    current_address = None
+
+            # Expand byte code if present
+            if col2:
+                bytes_list = col2.split()
+
+                # Write the first byte with source line details
+                if current_address is not None:
+                    outfile.write(f"{current_address:06X} {bytes_list[0]:<3} {col3} {col4}\n")
+                    for byte in bytes_list[1:]:
+                        current_address += 1
+                        outfile.write(f"{current_address:06X} {byte:<3}\n")
+                else:
+                    outfile.write(f"{' ' * 7} {bytes_list[0]:<3} {col3} {col4}\n")
+                    for byte in bytes_list[1:]:
+                        outfile.write(f"{' ' * 7} {byte:<3}\n")
+            else:
+                # Handle lines without byte code
+                if col3 or col4:
+                    outfile.write(f"{' ' * 7} {' ' * 2} {col3} {col4}\n")
+                else:
+                    outfile.write(f"{' ' * 7}\n")
 
 def make_dis_table(db_path, dif_filepath, table_name):
     """
@@ -110,8 +157,6 @@ def load_data_to_arrays(db_path, table_name):
     instruction_array = np.array([row[1] for row in rows], dtype=object)  # Use object type for strings
     return idx_array, instruction_array
 
-import numpy as np
-
 def generate_diff_from_arrays(idx_array1, instruction_array1, idx_array2, instruction_array2, output_path, window_size, step_size, min_match_percentage):
     len1 = len(instruction_array1)
     len2 = len(instruction_array2)
@@ -173,6 +218,30 @@ def generate_diff_from_arrays(idx_array1, instruction_array1, idx_array2, instru
 
     print(f"Diff generated and written to {output_path}")
 
+def import_csv_to_table(db_path, csv_filepath, table_name):
+    """Import a CSV file directly into a SQLite table."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    # Drop and create the table for a fresh import
+    cursor.execute(f"DROP TABLE IF EXISTS {table_name}")
+    cursor.execute(f"""
+        CREATE TABLE {table_name} (
+            left_idx INTEGER,
+            right_idx INTEGER
+        )
+    """)
+    conn.commit()
+
+    # Open the CSV file and insert data into the table
+    with open(csv_filepath, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        cursor.executemany(f"INSERT INTO {table_name} (left_idx, right_idx) VALUES (?, ?)", reader)
+
+    conn.commit()
+    conn.close()
+    print(f"Data imported into table '{table_name}' from {csv_filepath}")
+
 if __name__ == "__main__":
     db_path = 'utils/dif/difs.db'
     source_dir = 'src'
@@ -187,7 +256,7 @@ if __name__ == "__main__":
 
     ez80_dis_args = '--start 0 --target 0x040000 --address --hex-dump --lowercase --explicit-dest --ez80 --prefix --hex --mnemonic-space --no-argument-space --compute-absolute --literal-absolute'
 
-    if True:
+    if False:
         # Now disassemble the generated binary
         cmd = f"ez80-dis {ez80_dis_args} orig/bbcbasic24.bin > {left_hand_filepath}"
         print (f"Running command: {cmd}")
@@ -196,7 +265,7 @@ if __name__ == "__main__":
         print(f"Disassembly written to {left_hand_filepath}")
         make_dis_table(db_path, left_hand_filepath, 'bbcbasic24')
 
-    if True:
+    if False:
         # Now disassemble the generated binary
         cmd = f"ez80-dis {ez80_dis_args} {tgt_bin_dir}/{src_base_filename}.bin > {right_hand_filepath}"
         print (f"Running command: {cmd}")
@@ -221,21 +290,23 @@ if __name__ == "__main__":
     step_size = window_size  # Or adjust as needed
     min_match_percentage = 60  # Adjust as needed
 
-    # Call the function
-    generate_diff_from_arrays(
-        idx_array1,
-        instruction_array1,
-        idx_array2,
-        instruction_array2,
-        diff_output_path,
-        window_size,
-        step_size,
-        min_match_percentage
-    )
+    if False:
+        # Call the function
+        generate_diff_from_arrays(
+            idx_array1,
+            instruction_array1,
+            idx_array2,
+            instruction_array2,
+            diff_output_path,
+            window_size,
+            step_size,
+            min_match_percentage
+        )
     
-    # # Write the diff output to a file
-    # with open(diff_output_path, 'w') as f:
-    #     for left_idx, right_idx in diff_output_path:
-    #         f.write(f"{left_idx},{right_idx}\n")
-    
-    # print(f'Diff generation complete. Output written to {diff_output_path}')
+    # Import the diff file into a table
+    diff_table = 'matched_indices'
+    import_csv_to_table(db_path, diff_output_path, diff_table)
+
+    list_filename_in = 'utils/dif/bbcbasic24ez.lst'
+    list_filename_out = 'utils/dif/bbcbasic24ez_expanded.lst'
+    expand_lines(list_filename_in, list_filename_out)
