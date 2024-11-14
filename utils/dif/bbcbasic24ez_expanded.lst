@@ -880,7 +880,7 @@
 040122 50      0681 DW24	ACS			; ACS
 040123 06 
 040124 04 
-040125 4C      0682 DW24	ADVAL			; ADVAL
+040125 3B      0682 DW24	ADVAL			; ADVAL
 040126 49 
 040127 04 
 040128 25      0683 DW24	ASC			; ASC
@@ -958,7 +958,7 @@
 040170 10      0707 DW24	PI			; PI
 040171 06 
 040172 04 
-040173 6F      0708 DW24	POINT			; POINT(
+040173 5E      0708 DW24	POINT			; POINT(
 040174 44 
 040175 04 
 040176 CD      0709 DW24	POS			; POS
@@ -1999,7 +1999,7 @@
 0404E0 18 
 0404E1 04 
 0404E2 CD      1261 CALL    OSSTAT
-0404E3 55 
+0404E3 44 
 0404E4 43 
 0404E5 04 
 0404E6 CA      1262 JP      Z,TRUE			; Yes, so return true
@@ -2016,7 +2016,7 @@
 0404F0 18 
 0404F1 04 
 0404F2 CD      1266 CALL    OSBGET
-0404F3 44 
+0404F3 33 
 0404F4 43 
 0404F5 04 
 0404F6 6F      1267 LD      L,A
@@ -2217,7 +2217,7 @@
 0405A3 4A 
 0405A4 04 
 0405A5 CD      1363 CALL    OSOPEN			; Call the OS specific OPEN routine in patch.asm
-0405A6 2D 
+0405A6 1C 
 0405A7 43 
 0405A8 04 
 0405A9 6F      1364 LD      L,A			; L: Channel number
@@ -2233,7 +2233,7 @@
 0405AE 18 
 0405AF 04 
 0405B0 CD      1372 CALL    GETEXT
-0405B1 8B 
+0405B1 7A 
 0405B2 43 
 0405B3 04 
 0405B4 18      1373 JR      TIME0
@@ -2244,7 +2244,7 @@
 0405B8 18 
 0405B9 04 
 0405BA CD      1376 CALL    GETPTR
-0405BB 5F 
+0405BB 4E 
 0405BC 43 
 0405BD 04 
 0405BE 18      1377 JR      TIME0
@@ -2277,7 +2277,7 @@
 0405D1 FD      1396 TIMEVS:			INC     IY              ;SKIP $
 0405D2 23 
 0405D3 CD      1397 CALL    GETIMS
-0405D4 A4 
+0405D4 93 
 0405D5 43 
 0405D6 04 
 0405D7 3E      1398 LD      A,80H           ;MARK STRING
@@ -2908,8 +2908,8 @@
 0407CB FE      1773 CP	'('
 0407CC 28 
 0407CD CA      1774 JP	Z, GETSCHR	;CALL FUNCTION IN PATCH.Z80
-0407CE 02 
-0407CF 44 
+0407CE F1 
+0407CF 43 
 0407D0 04 
 0407D1 CD      1775 CALL    OSRDCH
 0407D2 29 
@@ -3949,7 +3949,7 @@
 040ABF 37      2456 DW24  HIMEMV_EX			; D3H
 040AC0 14 
 040AC1 04 
-040AC2 2C      2457 DW24  SOUND			; D4H
+040AC2 1B      2457 DW24  SOUND			; D4H
 040AC3 46 
 040AC4 04 
 040AC5 C2      2458 DW24  BPUT			; D5H
@@ -3967,7 +3967,7 @@
 040AD1 B6      2462 DW24  CLOSE			; D9H
 040AD2 14 
 040AD3 04 
-040AD4 C8      2463 DW24  CLG			; DAH
+040AD4 B7      2463 DW24  CLG			; DAH
 040AD5 43 
 040AD6 04 
 040AD7 6A      2464 DW24  CLS			; DBH
@@ -3982,7 +3982,7 @@
 040AE0 F1      2467 DW24  DIM_EX			; DEH
 040AE1 0C 
 040AE2 04 
-040AE3 F2      2468 DW24  DRAW			; DFH
+040AE3 E1      2468 DW24  DRAW			; DFH
 040AE4 45 
 040AE5 04 
 040AE6 C6      2469 DW24  END_			; E0H
@@ -3991,7 +3991,7 @@
 040AE9 82      2470 DW24  ENDPRO			; E1H
 040AEA 11 
 040AEB 04 
-040AEC 4C      2471 DW24  ENVEL			; E2H
+040AEC 3B      2471 DW24  ENVEL			; E2H
 040AED 49 
 040AEE 04 
 040AEF 97      2472 DW24  FOR_EX			; E3H
@@ -4003,7 +4003,7 @@
 040AF5 2B      2474 DW24  GOTO_EX			; E5H
 040AF6 0F 
 040AF7 04 
-040AF8 86      2475 DW24  GCOL			; E6H
+040AF8 75      2475 DW24  GCOL			; E6H
 040AF9 45 
 040AFA 04 
 040AFB 36      2476 DW24  IF_			; E7H
@@ -4018,10 +4018,10 @@
 040B04 27      2479 DW24  LOCAL_EX_			; EAH
 040B05 11 
 040B06 04 
-040B07 D8      2480 DW24  MODE			; EBH
+040B07 C7      2480 DW24  MODE			; EBH
 040B08 43 
 040B09 04 
-040B0A EA      2481 DW24  MOVE			; ECH
+040B0A D9      2481 DW24  MOVE			; ECH
 040B0B 45 
 040B0C 04 
 040B0D E5      2482 DW24  NEXT_EX			; EDH
@@ -4033,7 +4033,7 @@
 040B13 90      2484 DW24  VDU			; EFH
 040B14 14 
 040B15 04 
-040B16 B8      2485 DW24  PLOT			; F0H
+040B16 A7      2485 DW24  PLOT			; F0H
 040B17 45 
 040B18 04 
 040B19 C7      2486 DW24  PRINT_			; F1H
@@ -4066,7 +4066,7 @@
 040B34 77      2495 DW24  STOP			; FAH
 040B35 13 
 040B36 04 
-040B37 D4      2496 DW24  COLOUR			; FBH
+040B37 C3      2496 DW24  COLOUR			; FBH
 040B38 44 
 040B39 04 
 040B3A 72      2497 DW24  TRACE_EX			; FCH
@@ -4246,7 +4246,7 @@
 040BD0 1E      2572 LD      E,0
 040BD1 00 
 040BD2 CD      2573 CALL    OSSHUT          ;CLOSE ALL FILES
-040BD3 3C 
+040BD3 2B 
 040BD4 43 
 040BD5 04 
 040BD6 C3      2574 JP      WARM            ;"Ready"
@@ -4831,30 +4831,30 @@
 040DE8 7D      2858 LD      A,L
 040DE9 D9      2859 EXX
 040DEA CD      2860 CALL    OSBPUT
-040DEB 4C 
+040DEB 3B 
 040DEC 43 
 040DED 04 
 040DEE D9      2861 EXX
 040DEF 7C      2862 LD      A,H
 040DF0 D9      2863 EXX
 040DF1 CD      2864 CALL    OSBPUT
-040DF2 4C 
+040DF2 3B 
 040DF3 43 
 040DF4 04 
 040DF5 7D      2865 LD      A,L
 040DF6 CD      2866 CALL    OSBPUT
-040DF7 4C 
+040DF7 3B 
 040DF8 43 
 040DF9 04 
 040DFA 7C      2867 LD      A,H
 040DFB CD      2868 CALL    OSBPUT
-040DFC 4C 
+040DFC 3B 
 040DFD 43 
 040DFE 04 
 040DFF C1      2869 POP     BC
 040E00 79      2870 LD      A,C
 040E01 CD      2871 CALL    OSBPUT
-040E02 4C 
+040E02 3B 
 040E03 43 
 040E04 04 
 040E05 18      2872 JR      PRNTN1
@@ -4873,7 +4873,7 @@
 040E12 23      2880 INC     HL
 040E13 C5      2881 PUSH    BC
 040E14 CD      2882 CALL    OSBPUT
-040E15 4C 
+040E15 3B 
 040E16 43 
 040E17 04 
 040E18 C1      2883 POP     BC
@@ -4882,7 +4882,7 @@
 040E1B 3E      2885 PRNTN4:			LD      A,CR
 040E1C 0D 
 040E1D CD      2886 CALL    OSBPUT
-040E1E 4C 
+040E1E 3B 
 040E1F 43 
 040E20 04 
 040E21 18      2887 JR      PRNTN1
@@ -5962,31 +5962,31 @@
 0411DE 12 
 0411DF 04 
 0411E0 CD      3430 CALL    OSBGET
-0411E1 44 
+0411E1 33 
 0411E2 43 
 0411E3 04 
 0411E4 D9      3431 EXX
 0411E5 6F      3432 LD      L,A
 0411E6 D9      3433 EXX
 0411E7 CD      3434 CALL    OSBGET
-0411E8 44 
+0411E8 33 
 0411E9 43 
 0411EA 04 
 0411EB D9      3435 EXX
 0411EC 67      3436 LD      H,A
 0411ED D9      3437 EXX
 0411EE CD      3438 CALL    OSBGET
-0411EF 44 
+0411EF 33 
 0411F0 43 
 0411F1 04 
 0411F2 6F      3439 LD      L,A
 0411F3 CD      3440 CALL    OSBGET
-0411F4 44 
+0411F4 33 
 0411F5 43 
 0411F6 04 
 0411F7 67      3441 LD      H,A
 0411F8 CD      3442 CALL    OSBGET
-0411F9 44 
+0411F9 33 
 0411FA 43 
 0411FB 04 
 0411FC 4F      3443 LD      C,A
@@ -6006,7 +6006,7 @@
 04120A 4A 
 04120B 04 
 04120C CD      3451 INPN3:			CALL    OSBGET
-04120D 44 
+04120D 33 
 04120E 43 
 04120F 04 
 041210 FE      3452 CP      CR
@@ -6373,7 +6373,7 @@
                3622 ; CLS
                3623 ;
 04136A CD      3624 CLS:		CALL    CLRSCN
-04136B D2 
+04136B C1 
 04136C 43 
 04136D 04 
 04136E AF      3625 XOR     A
@@ -6504,7 +6504,7 @@
 0413D8 D1      3680 POP     DE
 0413D9 F1      3681 POP     AF
 0413DA CD      3682 CALL    PUTPTR
-0413DB 78 
+0413DB 67 
 0413DC 43 
 0413DD 04 
 0413DE C3      3683 JP      XEQ
@@ -6567,7 +6567,7 @@
 041414 03 
 041415 04 
 041416 CD      3705 CALL    PUTIMS
-041417 4C 
+041417 3B 
 041418 49 
 041419 04 
 04141A C3      3706 JP      XEQ
@@ -6789,7 +6789,7 @@
 0414B8 18 
 0414B9 04 
 0414BA CD      3822 CALL    OSSHUT			; Close the channel
-0414BB 3C 
+0414BB 2B 
 0414BC 43 
 0414BD 04 
 0414BE C3      3823 JP      XEQ
@@ -6816,7 +6816,7 @@
 0414D0 7D      3832 LD      A,L			; A: The byte to write
 0414D1 D1      3833 POP     DE
 0414D2 CD      3834 CALL    OSBPUT			; Write the byte out
-0414D3 4C 
+0414D3 3B 
 0414D4 43 
 0414D5 04 
 0414D6 C3      3835 JP      XEQ
@@ -6947,8 +6947,8 @@
 041541 4C 
 041541 04   
 041543 CC      3900 CALL    Z,OSCALL        	; Intercept &00FFxx
-041544 02 
-041545 43 
+041544 F1 
+041545 42 
 041546 04 
                3901 ;
 041547 DD      3902 LD      C, (IX+24)		; F%
@@ -15109,7 +15109,7 @@
 042FC1 38      8833 JR	C, COLD			; 1 parameter = normal start
 042FC2 3F 
 042FC3 CD      8834 CALL	STAR_VERSION
-042FC4 49 
+042FC4 38 
 042FC5 40 
 042FC6 04 
 042FC7 CD      8835 CALL	TELL
@@ -15226,7 +15226,7 @@
 043034 0B 
 043035 04 
 043036 CD      8872 CALL	STAR_VERSION		;
-043037 49 
+043037 38 
 043038 40 
 043039 04 
 04303A CD      8873 CALL    TELL			; Output the welcome message
@@ -17176,7 +17176,7 @@
 043756 4A 
 043757 04 
 043758 CD      9577 CALL    OSSAVE			; Call the SAVE routine in patch.asm
-043759 3E 
+043759 2D 
 04375A 42 
 04375B 04 
 04375C C3      9578 WARM0:			JP      WARM			; Jump back to the command loop
@@ -17287,7 +17287,7 @@
 0437A7 4D 
 0437A8 04 
 0437A9 CD      9639 CALL    RESET           	; Reset OPSYS
-0437AA C7 
+0437AA B6 
 0437AB 43 
 0437AC 04 
 0437AD CD      9640 CALL    CRLF			; Output newline
@@ -17305,7 +17305,7 @@
 0437B9 1E      9643 LD      E,0			; Close all files
 0437BA 00 
 0437BB DC      9644 CALL    C,OSSHUT
-0437BC 3C 
+0437BC 2B 
 0437BD 43 
 0437BE 04 
 0437BF CD      9645 CALL    CRLF			; Output newline
@@ -17464,7 +17464,7 @@
 04382F 4A 
 043830 04 
 043831 CD      9747 CALL    OSLOAD          	; Call the OSLOAD function in patch
-043832 A5 
+043832 94 
 043833 41 
 043834 04 
 043835 D4      9748 CALL    NC,NEWIT		; If NC then NEW
@@ -19622,7 +19622,7 @@
 043E87 4D 
 043E88 04 
 043E89 CD     11145 CALL	WAIT_VBLANK 		; Wait a frame
-043E8A 4E 
+043E8A 3D 
 043E8B 41 
 043E8C 04 
 043E8D AF     11146 XOR	A			; Return A = 0
@@ -19804,7 +19804,7 @@
 043F20 D5     11228 OSWRCH_FILE:		PUSH	DE
 043F21 5C     11229 LD	E, H			; Filehandle to E
 043F22 CD     11230 CALL	OSBPUT			; Write the byte out
-043F23 4C 
+043F23 3B 
 043F24 43 
 043F25 04 
 043F26 D1     11231 POP	DE
@@ -19843,7 +19843,7 @@
 043F39 B5     11254 OR 	L
 043F3A C8     11255 RET 	Z 			; Return, we've not got a key at this point
 043F3B CD     11256 CALL	WAIT_VBLANK 		; Wait a frame
-043F3C 4E 
+043F3C 3D 
 043F3D 41 
 043F3E 04 
 043F3F 2B     11257 DEC 	HL			; Decrement
@@ -19942,7 +19942,7 @@
               11314 ;  Destroys: A,D,E,H,L,F
               11315 ;
 043F81 CD     11316 OSINIT:			CALL	VBLANK_INIT
-043F82 E6 
+043F82 D5 
 043F83 48 
 043F84 04 
 043F85 AF     11317 XOR	A
@@ -20059,7 +20059,7 @@
 043FEC B7     11380 OR	A			; 0 means MOS returned OK
 043FED C8     11381 RET	Z			; So don't do anything
 043FEE C3     11382 JP 	OSERROR			; Otherwise it's a MOS error
-043FEF 28 
+043FEF 17 
 043FF0 42 
 043FF1 04 
               11383 
@@ -20102,3160 +20102,3187 @@
               11401 ; Each command has bit 7 of the last character set, and is followed by the address of the handler
               11402 ; These must be in alphabetical order
               11403 ;
-044013 41     11404 COMDS:  		DB	"AS","M"+80h		; ASM
-044014 53 
-044015 4D 
-044016 31     11405 DW	STAR_ASM
-044017 40 
-044018 42     11406 DB	"BY","E"+80h		; BYE
-044019 59 
-04401A 45 
-04401B 3D     11407 DW	STAR_BYE
-04401C 40 
-04401D 45     11408 DB	"EDI","T"+80h		; EDIT
-04401E 44 
-04401F 49 
-044020 54 
-044021 72     11409 DW	STAR_EDIT
-044022 40 
-044023 46     11410 DB	"F","X"+80h		; FX
-044024 58 
-044025 B2     11411 DW	STAR_FX
-044026 40 
-044027 56     11412 DB	"VERSIO","N"+80h	; VERSION
-044028 45 
-044029 52 
-04402A 53 
-04402A 49   
-04402B 4F 
-04402C 4E 
-04402E 49     11413 DW	STAR_VERSION
-04402F 40 
-044030 FF     11414 DB	FFh
-              11415 
-              11416 ; *ASM string
-              11417 ;
-044031 FD     11418 STAR_ASM:		PUSH	IY			; Stack the BASIC pointer
-044032 E5 
-044033 E5     11419 PUSH	HL			; HL = IY
-044034 FD     11420 POP	IY
-044035 E1 
-044036 CD     11421 CALL	ASSEM			; Invoke the assembler
-044037 9B 
-044038 18 
-044039 04 
-04403A FD     11422 POP	IY
-04403B E1 
-04403C C9     11423 RET
-              11424 
-              11425 ; *BYE
-              11426 ;
-04403D CD     11427 STAR_BYE:		CALL	VBLANK_STOP		; Restore MOS interrupts
-04403E FA 
-04403F 48 
-044040 04 
-044041 21     11428 LD	HL, 0			; The return value
-044042 00 
-044043 00 
-044044 00 
-044045 C3     11429 JP	_end 			; Jump back to the end routine in init.asm
-044046 68 
-044047 00 
-044048 04 
-              11430 
-              11431 ; *VERSION
-              11432 ;
-044049 CD     11433 STAR_VERSION:		CALL    TELL			; Output the welcome message
-04404A 90 
-04404B 3D 
-04404C 04 
-04404D 42     11434 DB    	"BBC BASIC (Agon ADL) Version 1.03\n\r",0
-04404E 42 
-04404F 43 
-044050 20 
-044050 42   
-044051 41 
-044052 53 
-044053 49 
-044053 43   
-044054 20 
-044055 28 
-044056 41 
-044056 67   
-044057 6F 
-044058 6E 
-044059 20 
-044059 41   
-04405A 44 
-04405B 4C 
-04405C 29 
-04405C 20   
-04405D 56 
-04405E 65 
-04405F 72 
-04405F 73   
-044060 69 
-044061 6F 
-044062 6E 
-044062 20   
-044063 31 
-044064 2E 
-044065 30 
-044065 33   
-044066 0A 
-044067 0D 
-044068 00 
-044071 C9     11435 RET
-              11436 
-              11437 ; *EDIT linenum
-              11438 ;
-044072 CD     11439 STAR_EDIT:		CALL	ASC_TO_NUMBER		; DE: Line number to edit
-044073 97 
-044074 3D 
-044075 04 
-044076 EB     11440 EX	DE, HL			; HL: Line number
-044077 CD     11441 CALL	FINDL			; HL: Address in RAM of tokenised line
-044078 8F 
-044079 39 
-04407A 04 
-04407B 3E     11442 LD	A, 41			; F:NZ If the line is not found
-04407C 29 
-04407D C2     11443 JP	NZ, ERROR_		; Do error 41: No such line in that case
-04407E 60 
-04407F 37 
-044080 04 
-              11444 ;
-              11445 ; Use LISTIT to output the line to the ACCS buffer
-              11446 ;
-044081 23     11447 INC	HL			; Skip the length byte
-044082 5E     11448 LD	E, (HL)			; Fetch the line number
-044083 23     11449 INC	HL
-044084 56     11450 LD	D, (HL)
-044085 23     11451 INC	HL
-044086 DD     11452 LD	IX, ACCS		; Pointer to where the copy is to be stored
-044087 21 
-044088 00 
-044089 4A 
-044089 04   
-04408B DD     11453 LD	(OSWRCHPT), IX
-04408C 22 
-04408D 43 
-04408E 4D 
-04408E 04   
-044090 DD     11454 LD	IX, LISTON		; Pointer to LISTON variable in RAM
-044091 21 
-044092 40 
-044093 4D 
-044093 04   
-044095 DD     11455 LD	A, (IX)			; Store that variable
-044096 7E 
-044097 00 
-044098 F5     11456 PUSH	AF
-044099 DD     11457 LD	(IX), 09h		; Set to echo to buffer
-04409A 36 
-04409B 00 
-04409C 09 
-04409D CD     11458 CALL	LISTIT
-04409E 92 
-04409F 38 
-0440A0 04 
-0440A1 F1     11459 POP	AF
-0440A2 DD     11460 LD	(IX), A			; Restore the original LISTON variable
-0440A3 77 
-0440A4 00 
-0440A5 21     11461 LD	HL, ACCS		; HL: ACCS
-0440A6 00 
-0440A7 4A 
-0440A8 04 
-0440A9 5D     11462 LD	E, L			;  E: 0 - Don't clear the buffer; ACCS is on a page boundary so L is 0
-0440AA CD     11463 CALL	OSLINE1			; Invoke the editor
-0440AB 61 
-0440AC 3E 
-0440AD 04 
-0440AE C3     11464 JP	ONEDIT			; Jump back to the BASIC loop just after the normal line edit
-0440AF D0 
-0440B0 30 
-0440B1 04 
+              11404 ; BEGIN NOT FOUND IN BINARY
+              11405 ; COMDS:  		DB	"AS","M"+80h		; ASM
+              11406 ; 			DW	STAR_ASM
+              11407 ; 			DB	"BY","E"+80h		; BYE
+              11408 ; 			DW	STAR_BYE
+              11409 ; 			DB	"EDI","T"+80h		; EDIT
+              11410 ; 			DW	STAR_EDIT
+              11411 ; 			DB	"F","X"+80h		; FX
+              11412 ; 			DW	STAR_FX
+              11413 ; 			DB	"VERSIO","N"+80h	; VERSION
+              11414 ; 			DW	STAR_VERSION
+              11415 ; 			DB	FFh
+              11416 ; END NOT FOUND IN BINARY
+              11417 ; BEGIN INSERTED FROM BINARY
+              11418 ; Each command has bit 7 of the last character set, and is followed by the address of the handler
+              11419 ; These must be in alphabetical order
+              11420 ;
+              11421 COMDS:
+044013 42     11422 db 0x42 ; 044013 41     11404 COMDS:  		DB	"AS","M"+80h		; ASM
+044014 59     11423 db 0x59 ; 044014
+044015 C5     11424 db 0xc5 ; 044015
+044016 2C     11425 db 0x2c ; 044016 31     11405 DW	STAR_ASM
+044017 40     11426 db 0x40 ; 044017
+044018 45     11427 db 0x45 ; 044018 42     11406 DB	"BY","E"+80h		; BYE
+044019 44     11428 db 0x44 ; 044019
+04401A 49     11429 db 0x49 ; 04401A
+04401B D4     11430 db 0xd4 ; 04401B 3D     11407 DW	STAR_BYE
+04401C 61     11431 db 0x61 ; 04401C
+04401D 40     11432 db 0x40 ; 04401D 45     11408 DB	"EDI","T"+80h		; EDIT
+04401E 46     11433 db 0x46 ; 04401E
+04401F D8     11434 db 0xd8 ; 04401F
+044020 A1     11435 db 0xa1 ; 044020
+044021 40     11436 db 0x40 ; 044021 72     11409 DW	STAR_EDIT
+044022 56     11437 db 0x56 ; 044022
+044023 45     11438 db 0x45 ; 044023 46     11410 DB	"F","X"+80h		; FX
+044024 52     11439 db 0x52 ; 044024
+044025 53     11440 db 0x53 ; 044025 B2     11411 DW	STAR_FX
+044026 49     11441 db 0x49 ; 044026
+044027 4F     11442 db 0x4f ; 044027 56     11412 DB	"VERSIO","N"+80h	; VERSION
+044028 CE     11443 db 0xce ; 044028
+044029 38     11444 db 0x38 ; 044029
+04402A 40     11445 db 0x40 ; 04402A
+04402B FF     11446 db 0xff ; 04402B
+              11447 ; END INSERTED FROM BINARY
+              11448 
+              11449 ; BEGIN NOT FOUND IN BINARY
+              11450 ; ; *ASM string
+              11451 ; ;
+              11452 ; STAR_ASM:		PUSH	IY			; Stack the BASIC pointer
+              11453 ; 			PUSH	HL			; HL = IY
+              11454 ; 			POP	IY
+              11455 ; 			CALL	ASSEM			; Invoke the assembler
+              11456 ; 			POP	IY
+              11457 ; 			RET
+              11458 ; END NOT FOUND IN BINARY
+              11459 
+              11460 ; *BYE
+              11461 ;
+04402C CD     11462 STAR_BYE:		CALL	VBLANK_STOP		; Restore MOS interrupts
+04402D E9 
+04402E 48 
+04402F 04 
+044030 21     11463 LD	HL, 0			; The return value
+044031 00 
+044032 00 
+044033 00 
+044034 C3     11464 JP	_end 			; Jump back to the end routine in init.asm
+044035 68 
+044036 00 
+044037 04 
               11465 
-              11466 ; OSCLI FX n
+              11466 ; *VERSION
               11467 ;
-0440B2 CD     11468 STAR_FX:		CALL	ASC_TO_NUMBER
+044038 CD     11468 STAR_VERSION:		CALL    TELL			; Output the welcome message
+044039 90 
+04403A 3D 
+04403B 04 
+04403C 42     11469 DB    	"BBC BASIC (Agon ADL) Version 1.03\n\r",0
+04403D 42 
+04403E 43 
+04403F 20 
+04403F 42   
+044040 41 
+044041 53 
+044042 49 
+044042 43   
+044043 20 
+044044 28 
+044045 41 
+044045 67   
+044046 6F 
+044047 6E 
+044048 20 
+044048 41   
+044049 44 
+04404A 4C 
+04404B 29 
+04404B 20   
+04404C 56 
+04404D 65 
+04404E 72 
+04404E 73   
+04404F 69 
+044050 6F 
+044051 6E 
+044051 20   
+044052 31 
+044053 2E 
+044054 30 
+044054 33   
+044055 0A 
+044056 0D 
+044057 00 
+044060 C9     11470 RET
+              11471 
+              11472 ; *EDIT linenum
+              11473 ;
+044061 CD     11474 STAR_EDIT:		CALL	ASC_TO_NUMBER		; DE: Line number to edit
+044062 97 
+044063 3D 
+044064 04 
+044065 EB     11475 EX	DE, HL			; HL: Line number
+044066 CD     11476 CALL	FINDL			; HL: Address in RAM of tokenised line
+044067 8F 
+044068 39 
+044069 04 
+04406A 3E     11477 LD	A, 41			; F:NZ If the line is not found
+04406B 29 
+04406C C2     11478 JP	NZ, ERROR_		; Do error 41: No such line in that case
+04406D 60 
+04406E 37 
+04406F 04 
+              11479 ;
+              11480 ; Use LISTIT to output the line to the ACCS buffer
+              11481 ;
+044070 23     11482 INC	HL			; Skip the length byte
+044071 5E     11483 LD	E, (HL)			; Fetch the line number
+044072 23     11484 INC	HL
+044073 56     11485 LD	D, (HL)
+044074 23     11486 INC	HL
+044075 DD     11487 LD	IX, ACCS		; Pointer to where the copy is to be stored
+044076 21 
+044077 00 
+044078 4A 
+044078 04   
+04407A DD     11488 LD	(OSWRCHPT), IX
+04407B 22 
+04407C 43 
+04407D 4D 
+04407D 04   
+04407F DD     11489 LD	IX, LISTON		; Pointer to LISTON variable in RAM
+044080 21 
+044081 40 
+044082 4D 
+044082 04   
+044084 DD     11490 LD	A, (IX)			; Store that variable
+044085 7E 
+044086 00 
+044087 F5     11491 PUSH	AF
+044088 DD     11492 LD	(IX), 09h		; Set to echo to buffer
+044089 36 
+04408A 00 
+04408B 09 
+04408C CD     11493 CALL	LISTIT
+04408D 92 
+04408E 38 
+04408F 04 
+044090 F1     11494 POP	AF
+044091 DD     11495 LD	(IX), A			; Restore the original LISTON variable
+044092 77 
+044093 00 
+044094 21     11496 LD	HL, ACCS		; HL: ACCS
+044095 00 
+044096 4A 
+044097 04 
+044098 5D     11497 LD	E, L			;  E: 0 - Don't clear the buffer; ACCS is on a page boundary so L is 0
+044099 CD     11498 CALL	OSLINE1			; Invoke the editor
+04409A 61 
+04409B 3E 
+04409C 04 
+04409D C3     11499 JP	ONEDIT			; Jump back to the BASIC loop just after the normal line edit
+04409E D0 
+04409F 30 
+0440A0 04 
+              11500 
+              11501 ; OSCLI FX n
+              11502 ;
+0440A1 CD     11503 STAR_FX:		CALL	ASC_TO_NUMBER
+0440A2 97 
+0440A3 3D 
+0440A4 04 
+0440A5 4B     11504 LD	C, E			; C: Save FX #
+0440A6 CD     11505 CALL	ASC_TO_NUMBER
+0440A7 97 
+0440A8 3D 
+0440A9 04 
+0440AA 7A     11506 LD	A, D  			; Is first parameter > 255?
+0440AB B7     11507 OR 	A
+0440AC 28     11508 JR	Z, STAR_FX1		; Yes, so skip next bit
+0440AD 03 
+0440AE EB     11509 EX	DE, HL 			; Parameter is 16-bit
+0440AF 18     11510 JR	STAR_FX2
+0440B0 07 
+              11511 ;
+0440B1 43     11512 STAR_FX1:		LD	B, E 			; B: Save First parameter
+0440B2 CD     11513 CALL	ASC_TO_NUMBER		; Fetch second parameter
 0440B3 97 
 0440B4 3D 
 0440B5 04 
-0440B6 4B     11469 LD	C, E			; C: Save FX #
-0440B7 CD     11470 CALL	ASC_TO_NUMBER
-0440B8 97 
-0440B9 3D 
-0440BA 04 
-0440BB 7A     11471 LD	A, D  			; Is first parameter > 255?
-0440BC B7     11472 OR 	A
-0440BD 28     11473 JR	Z, STAR_FX1		; Yes, so skip next bit
-0440BE 03 
-0440BF EB     11474 EX	DE, HL 			; Parameter is 16-bit
-0440C0 18     11475 JR	STAR_FX2
-0440C1 07 
-              11476 ;
-0440C2 43     11477 STAR_FX1:		LD	B, E 			; B: Save First parameter
-0440C3 CD     11478 CALL	ASC_TO_NUMBER		; Fetch second parameter
-0440C4 97 
-0440C5 3D 
-0440C6 04 
-0440C7 68     11479 LD	L, B 			; L: First parameter
-0440C8 63     11480 LD	H, E 			; H: Second parameter
-              11481 ;
-0440C9 79     11482 STAR_FX2:		LD	A, C 			; A: FX #, and fall through to OSBYTE
-              11483 ;
-              11484 ; OSBYTE
-              11485 ;  A: FX #
-              11486 ;  L: First parameter
-              11487 ;  H: Second parameter
-              11488 ;
-0440CA FE     11489 OSBYTE:			CP	0BH			; *FX 11, n: Keyboard auto-repeat delay
-0440CB 0B 
-0440CC 28     11490 JR	Z, OSBYTE_0B
-0440CD 18 
-0440CE FE     11491 CP	0CH			; *FX 12, n: Keyboard auto-repeat rate
-0440CF 0C 
-0440D0 28     11492 JR	Z, OSBYTE_0C
-0440D1 43 
-0440D2 FE     11493 CP	13H			; *FX 19: Wait for vblank
-0440D3 13 
-0440D4 28     11494 JR	Z, OSBYTE_13
-0440D5 6E 
-0440D6 FE     11495 CP	76H			; *FX 118, n: Set keyboard LED
-0440D7 76 
-0440D8 CA     11496 JP	Z, OSBYTE_76
-0440D9 5F 
-0440DA 41 
-0440DB 04 
-0440DC FE     11497 CP	A0H
-0440DD A0 
-0440DE CA     11498 JP	Z, OSBYTE_A0
-0440DF 8F 
-0440E0 41 
-0440E1 04 
-0440E2 C3     11499 JP	HUH			; Anything else trips an error
-0440E3 F2 
-0440E4 3F 
-0440E5 04 
-              11500 
-              11501 ; OSBYTE 0x0B (FX 11,n): Keyboard auto-repeat delay
-              11502 ; Parameters:
-              11503 ; - HL: Repeat delay
-              11504 ;
-              11505 OSBYTE_0B:		VDU	23
-0440E6 3E     0001M LD	A, val
-0440E7 17 
+0440B6 68     11514 LD	L, B 			; L: First parameter
+0440B7 63     11515 LD	H, E 			; H: Second parameter
+              11516 ;
+0440B8 79     11517 STAR_FX2:		LD	A, C 			; A: FX #, and fall through to OSBYTE
+              11518 ;
+              11519 ; OSBYTE
+              11520 ;  A: FX #
+              11521 ;  L: First parameter
+              11522 ;  H: Second parameter
+              11523 ;
+0440B9 FE     11524 OSBYTE:			CP	0BH			; *FX 11, n: Keyboard auto-repeat delay
+0440BA 0B 
+0440BB 28     11525 JR	Z, OSBYTE_0B
+0440BC 18 
+0440BD FE     11526 CP	0CH			; *FX 12, n: Keyboard auto-repeat rate
+0440BE 0C 
+0440BF 28     11527 JR	Z, OSBYTE_0C
+0440C0 43 
+0440C1 FE     11528 CP	13H			; *FX 19: Wait for vblank
+0440C2 13 
+0440C3 28     11529 JR	Z, OSBYTE_13
+0440C4 6E 
+0440C5 FE     11530 CP	76H			; *FX 118, n: Set keyboard LED
+0440C6 76 
+0440C7 CA     11531 JP	Z, OSBYTE_76
+0440C8 4E 
+0440C9 41 
+0440CA 04 
+0440CB FE     11532 CP	A0H
+0440CC A0 
+0440CD CA     11533 JP	Z, OSBYTE_A0
+0440CE 7E 
+0440CF 41 
+0440D0 04 
+0440D1 C3     11534 JP	HUH			; Anything else trips an error
+0440D2 F2 
+0440D3 3F 
+0440D4 04 
+              11535 
+              11536 ; OSBYTE 0x0B (FX 11,n): Keyboard auto-repeat delay
+              11537 ; Parameters:
+              11538 ; - HL: Repeat delay
+              11539 ;
+              11540 OSBYTE_0B:		VDU	23
+0440D5 3E     0001M LD	A, val
+0440D6 17 
+0440D7 CD     0002M CALL	OSWRCH
+0440D8 00 
+0440D9 3F 
+0440DA 04 
+              11541 VDU	0
+0440DB 3E     0001M LD	A, val
+0440DC 00 
+0440DD CD     0002M CALL	OSWRCH
+0440DE 00 
+0440DF 3F 
+0440E0 04 
+              11542 VDU	vdp_keystate
+0440E1 3E     0001M LD	A, val
+0440E2 88 
+0440E3 CD     0002M CALL	OSWRCH
+0440E4 00 
+0440E5 3F 
+0440E6 04 
+              11543 VDU	L
+0440E7 7D     0001M LD	A, val
 0440E8 CD     0002M CALL	OSWRCH
 0440E9 00 
 0440EA 3F 
 0440EB 04 
-              11506 VDU	0
-0440EC 3E     0001M LD	A, val
-0440ED 00 
-0440EE CD     0002M CALL	OSWRCH
-0440EF 00 
-0440F0 3F 
-0440F1 04 
-              11507 VDU	vdp_keystate
-0440F2 3E     0001M LD	A, val
-0440F3 88 
-0440F4 CD     0002M CALL	OSWRCH
-0440F5 00 
-0440F6 3F 
-0440F7 04 
-              11508 VDU	L
-0440F8 7D     0001M LD	A, val
+              11544 VDU	H
+0440EC 7C     0001M LD	A, val
+0440ED CD     0002M CALL	OSWRCH
+0440EE 00 
+0440EF 3F 
+0440F0 04 
+              11545 VDU	0
+0440F1 3E     0001M LD	A, val
+0440F2 00 
+0440F3 CD     0002M CALL	OSWRCH
+0440F4 00 
+0440F5 3F 
+0440F6 04 
+              11546 VDU 	0
+0440F7 3E     0001M LD	A, val
+0440F8 00 
 0440F9 CD     0002M CALL	OSWRCH
 0440FA 00 
 0440FB 3F 
 0440FC 04 
-              11509 VDU	H
-0440FD 7C     0001M LD	A, val
-0440FE CD     0002M CALL	OSWRCH
-0440FF 00 
-044100 3F 
-044101 04 
-              11510 VDU	0
-044102 3E     0001M LD	A, val
-044103 00 
-044104 CD     0002M CALL	OSWRCH
-044105 00 
-044106 3F 
-044107 04 
-              11511 VDU 	0
-044108 3E     0001M LD	A, val
-044109 00 
-04410A CD     0002M CALL	OSWRCH
+              11547 VDU	255
+0440FD 3E     0001M LD	A, val
+0440FE FF 
+0440FF CD     0002M CALL	OSWRCH
+044100 00 
+044101 3F 
+044102 04 
+044103 C9     11548 RET
+              11549 
+              11550 ; OSBYTE 0x0C (FX 12,n): Keyboard auto-repeat rate
+              11551 ; Parameters:
+              11552 ; - HL: Repeat rate
+              11553 ;
+              11554 OSBYTE_0C:		VDU	23
+044104 3E     0001M LD	A, val
+044105 17 
+044106 CD     0002M CALL	OSWRCH
+044107 00 
+044108 3F 
+044109 04 
+              11555 VDU	0
+04410A 3E     0001M LD	A, val
 04410B 00 
-04410C 3F 
-04410D 04 
-              11512 VDU	255
-04410E 3E     0001M LD	A, val
-04410F FF 
-044110 CD     0002M CALL	OSWRCH
-044111 00 
-044112 3F 
-044113 04 
-044114 C9     11513 RET
-              11514 
-              11515 ; OSBYTE 0x0C (FX 12,n): Keyboard auto-repeat rate
-              11516 ; Parameters:
-              11517 ; - HL: Repeat rate
-              11518 ;
-              11519 OSBYTE_0C:		VDU	23
-044115 3E     0001M LD	A, val
-044116 17 
-044117 CD     0002M CALL	OSWRCH
-044118 00 
-044119 3F 
-04411A 04 
-              11520 VDU	0
-04411B 3E     0001M LD	A, val
-04411C 00 
-04411D CD     0002M CALL	OSWRCH
-04411E 00 
-04411F 3F 
-044120 04 
-              11521 VDU	vdp_keystate
-044121 3E     0001M LD	A, val
-044122 88 
+04410C CD     0002M CALL	OSWRCH
+04410D 00 
+04410E 3F 
+04410F 04 
+              11556 VDU	vdp_keystate
+044110 3E     0001M LD	A, val
+044111 88 
+044112 CD     0002M CALL	OSWRCH
+044113 00 
+044114 3F 
+044115 04 
+              11557 VDU	0
+044116 3E     0001M LD	A, val
+044117 00 
+044118 CD     0002M CALL	OSWRCH
+044119 00 
+04411A 3F 
+04411B 04 
+              11558 VDU 	0
+04411C 3E     0001M LD	A, val
+04411D 00 
+04411E CD     0002M CALL	OSWRCH
+04411F 00 
+044120 3F 
+044121 04 
+              11559 VDU	L
+044122 7D     0001M LD	A, val
 044123 CD     0002M CALL	OSWRCH
 044124 00 
 044125 3F 
 044126 04 
-              11522 VDU	0
-044127 3E     0001M LD	A, val
-044128 00 
-044129 CD     0002M CALL	OSWRCH
-04412A 00 
-04412B 3F 
-04412C 04 
-              11523 VDU 	0
-04412D 3E     0001M LD	A, val
-04412E 00 
-04412F CD     0002M CALL	OSWRCH
-044130 00 
-044131 3F 
-044132 04 
-              11524 VDU	L
-044133 7D     0001M LD	A, val
-044134 CD     0002M CALL	OSWRCH
-044135 00 
-044136 3F 
-044137 04 
-              11525 VDU	H
-044138 7C     0001M LD	A, val
-044139 CD     0002M CALL	OSWRCH
-04413A 00 
-04413B 3F 
+              11560 VDU	H
+044127 7C     0001M LD	A, val
+044128 CD     0002M CALL	OSWRCH
+044129 00 
+04412A 3F 
+04412B 04 
+              11561 VDU	255
+04412C 3E     0001M LD	A, val
+04412D FF 
+04412E CD     0002M CALL	OSWRCH
+04412F 00 
+044130 3F 
+044131 04 
+044132 C9     11562 RET
+              11563 
+              11564 ; OSBYTE 0x13 (FX 19): Wait for vertical blank interrupt
+              11565 ;
+044133 CD     11566 OSBYTE_13:		CALL	WAIT_VBLANK
+044134 3D 
+044135 41 
+044136 04 
+044137 2E     11567 LD	L, 0			; Returns 0
+044138 00 
+044139 C3     11568 JP	COUNT0
+04413A 7F 
+04413B 05 
 04413C 04 
-              11526 VDU	255
-04413D 3E     0001M LD	A, val
-04413E FF 
-04413F CD     0002M CALL	OSWRCH
-044140 00 
-044141 3F 
-044142 04 
-044143 C9     11527 RET
-              11528 
-              11529 ; OSBYTE 0x13 (FX 19): Wait for vertical blank interrupt
-              11530 ;
-044144 CD     11531 OSBYTE_13:		CALL	WAIT_VBLANK
-044145 4E 
-044146 41 
-044147 04 
-044148 2E     11532 LD	L, 0			; Returns 0
-044149 00 
-04414A C3     11533 JP	COUNT0
-04414B 7F 
-04414C 05 
-04414D 04 
-              11534 ;
-04414E DD     11535 WAIT_VBLANK:		PUSH 	IX			; Wait for VBLANK interrupt
-04414F E5 
-              11536 MOSCALL	mos_sysvars		; Fetch pointer to system variables
-044150 3E     0001M LD	A, function
-044151 08 
-044152 49     0002M RST.LIS	08h
-044153 CF 
-044154 DD     11537 LD	A, (IX + sysvar_time + 0)
-044155 7E 
-044156 00 
-044157 DD     11538 @@:			CP 	A, (IX + sysvar_time + 0)
-044158 BE 
-044159 00 
-04415A 28     11539 JR	Z, @B
-04415B FB 
-04415C DD     11540 POP	IX
-04415D E1 
-04415E C9     11541 RET
-              11542 
-              11543 ; OSBYTE 0x76 (FX 118,n): Set Keyboard LED
-              11544 ; Parameters:
-              11545 ; - L: LED (Bit 0: Scroll Lock, Bit 1: Caps Lock, Bit 2: Num Lock)
-              11546 ;
-              11547 OSBYTE_76:		VDU	23
-04415F 3E     0001M LD	A, val
-044160 17 
-044161 CD     0002M CALL	OSWRCH
-044162 00 
-044163 3F 
-044164 04 
-              11548 VDU	0
-044165 3E     0001M LD	A, val
-044166 00 
-044167 CD     0002M CALL	OSWRCH
-044168 00 
-044169 3F 
-04416A 04 
-              11549 VDU	vdp_keystate
-04416B 3E     0001M LD	A, val
-04416C 88 
-04416D CD     0002M CALL	OSWRCH
-04416E 00 
-04416F 3F 
-044170 04 
-              11550 VDU	0
-044171 3E     0001M LD	A, val
-044172 00 
-044173 CD     0002M CALL	OSWRCH
-044174 00 
-044175 3F 
-044176 04 
-              11551 VDU 	0
-044177 3E     0001M LD	A, val
-044178 00 
+              11569 ;
+04413D DD     11570 WAIT_VBLANK:		PUSH 	IX			; Wait for VBLANK interrupt
+04413E E5 
+              11571 MOSCALL	mos_sysvars		; Fetch pointer to system variables
+04413F 3E     0001M LD	A, function
+044140 08 
+044141 49     0002M RST.LIS	08h
+044142 CF 
+044143 DD     11572 LD	A, (IX + sysvar_time + 0)
+044144 7E 
+044145 00 
+044146 DD     11573 @@:			CP 	A, (IX + sysvar_time + 0)
+044147 BE 
+044148 00 
+044149 28     11574 JR	Z, @B
+04414A FB 
+04414B DD     11575 POP	IX
+04414C E1 
+04414D C9     11576 RET
+              11577 
+              11578 ; OSBYTE 0x76 (FX 118,n): Set Keyboard LED
+              11579 ; Parameters:
+              11580 ; - L: LED (Bit 0: Scroll Lock, Bit 1: Caps Lock, Bit 2: Num Lock)
+              11581 ;
+              11582 OSBYTE_76:		VDU	23
+04414E 3E     0001M LD	A, val
+04414F 17 
+044150 CD     0002M CALL	OSWRCH
+044151 00 
+044152 3F 
+044153 04 
+              11583 VDU	0
+044154 3E     0001M LD	A, val
+044155 00 
+044156 CD     0002M CALL	OSWRCH
+044157 00 
+044158 3F 
+044159 04 
+              11584 VDU	vdp_keystate
+04415A 3E     0001M LD	A, val
+04415B 88 
+04415C CD     0002M CALL	OSWRCH
+04415D 00 
+04415E 3F 
+04415F 04 
+              11585 VDU	0
+044160 3E     0001M LD	A, val
+044161 00 
+044162 CD     0002M CALL	OSWRCH
+044163 00 
+044164 3F 
+044165 04 
+              11586 VDU 	0
+044166 3E     0001M LD	A, val
+044167 00 
+044168 CD     0002M CALL	OSWRCH
+044169 00 
+04416A 3F 
+04416B 04 
+              11587 VDU	0
+04416C 3E     0001M LD	A, val
+04416D 00 
+04416E CD     0002M CALL	OSWRCH
+04416F 00 
+044170 3F 
+044171 04 
+              11588 VDU	0
+044172 3E     0001M LD	A, val
+044173 00 
+044174 CD     0002M CALL	OSWRCH
+044175 00 
+044176 3F 
+044177 04 
+              11589 VDU	L
+044178 7D     0001M LD	A, val
 044179 CD     0002M CALL	OSWRCH
 04417A 00 
 04417B 3F 
 04417C 04 
-              11552 VDU	0
-04417D 3E     0001M LD	A, val
-04417E 00 
-04417F CD     0002M CALL	OSWRCH
-044180 00 
-044181 3F 
-044182 04 
-              11553 VDU	0
-044183 3E     0001M LD	A, val
-044184 00 
-044185 CD     0002M CALL	OSWRCH
+04417D C9     11590 RET
+              11591 
+              11592 ; OSBYTE 0xA0: Fetch system variable
+              11593 ; Parameters:
+              11594 ; - L: The system variable to fetch
+              11595 ;
+04417E DD     11596 OSBYTE_A0:		PUSH	IX
+04417F E5 
+              11597 MOSCALL	mos_sysvars		; Fetch pointer to system variables
+044180 3E     0001M LD	A, function
+044181 08 
+044182 49     0002M RST.LIS	08h
+044183 CF 
+044184 01     11598 LD	BC, 0
+044185 00 
 044186 00 
-044187 3F 
-044188 04 
-              11554 VDU	L
-044189 7D     0001M LD	A, val
-04418A CD     0002M CALL	OSWRCH
-04418B 00 
-04418C 3F 
-04418D 04 
-04418E C9     11555 RET
-              11556 
-              11557 ; OSBYTE 0xA0: Fetch system variable
-              11558 ; Parameters:
-              11559 ; - L: The system variable to fetch
-              11560 ;
-04418F DD     11561 OSBYTE_A0:		PUSH	IX
-044190 E5 
-              11562 MOSCALL	mos_sysvars		; Fetch pointer to system variables
-044191 3E     0001M LD	A, function
-044192 08 
-044193 49     0002M RST.LIS	08h
-044194 CF 
-044195 01     11563 LD	BC, 0
-044196 00 
-044197 00 
-044198 00 
-044199 4D     11564 LD	C, L			; BCU = L
-04419A DD     11565 ADD	IX, BC			; Add to IX
-04419B 09 
-04419C DD     11566 LD	L, (IX + 0)		; Fetch the return value
-04419D 6E 
-04419E 00 
-04419F DD     11567 POP	IX
-0441A0 E1 
-0441A1 C3     11568 JP 	COUNT0
-0441A2 7F 
-0441A3 05 
-0441A4 04 
-              11569 
-              11570 ;OSLOAD - Load an area of memory from a file.
-              11571 ;   Inputs: HL addresses filename (CR terminated)
-              11572 ;           DE = address at which to load
-              11573 ;           BC = maximum allowed size (bytes)
-              11574 ;  Outputs: Carry reset indicates no room for file.
-              11575 ; Destroys: A,B,C,D,E,H,L,F
-              11576 ;
-0441A5 C5     11577 OSLOAD:			PUSH	BC			; Stack the size
-0441A6 D5     11578 PUSH	DE			; Stack the load address
-0441A7 11     11579 LD	DE, ACCS		; Buffer address for filename
-0441A8 00 
-0441A9 4A 
-0441AA 04 
-0441AB CD     11580 CALL	CSTR_FNAME		; Fetch filename from MOS into buffer
-0441AC 19 
-0441AD 3E 
-0441AE 04 
-0441AF 21     11581 LD	HL, ACCS		; HL: Filename
-0441B0 00 
-0441B1 4A 
-0441B2 04 
-0441B3 CD     11582 CALL	EXT_DEFAULT		; Tack on the extension .BBC if not specified
-0441B4 A5 
-0441B5 42 
-0441B6 04 
-0441B7 CD     11583 CALL	EXT_HANDLER		; Get the default handler
-0441B8 B9 
-0441B9 42 
-0441BA 04 
-0441BB D1     11584 POP	DE			; Restore the load address
-0441BC C1     11585 POP	BC			; Restore the size
-0441BD B7     11586 OR	A
-0441BE 28     11587 JR 	Z, OSLOAD_BBC
-0441BF 60 
-              11588 ;
-              11589 ; Load the file in as a text file
-              11590 ;
-0441C0 AF     11591 OSLOAD_TXT:		XOR	A			; Set file attributes to read
-0441C1 CD     11592 CALL	OSOPEN			; Open the file
-0441C2 2D 
-0441C3 43 
-0441C4 04 
-0441C5 5F     11593 LD 	E, A 			; The filehandle
-0441C6 B7     11594 OR	A
-0441C7 3E     11595 LD	A, 4			; File not found error
-0441C8 04 
-0441C9 28     11596 JR	Z, OSERROR		; Jump to error handler
-0441CA 5D 
-0441CB CD     11597 CALL	NEWIT			; Call NEW to clear the program space
-0441CC 6C 
-0441CD 38 
-0441CE 04 
-              11598 ;
-0441CF 21     11599 OSLOAD_TXT1:		LD	HL, ACCS 		; Where the input is going to be stored
-0441D0 00 
-0441D1 4A 
-0441D2 04 
-              11600 ;
-              11601 ; First skip any whitespace (indents) at the beginning of the input
-              11602 ;
-0441D3 CD     11603 @@:			CALL	OSBGET			; Read the byte into A
-0441D4 44 
-0441D5 43 
-0441D6 04 
-0441D7 38     11604 JR	C, OSLOAD_TXT3		; Is it EOF?
-0441D8 1E 
-0441D9 FE     11605 CP	LF 			; Is it LF?
-0441DA 0A 
-0441DB 28     11606 JR	Z, OSLOAD_TXT3 		; Yes, so skip to the next line
-0441DC 1A 
-0441DD FE     11607 CP	21h			; Is it less than or equal to ASCII space?
-0441DE 21 
-0441DF 38     11608 JR	C, @B 			; Yes, so keep looping
-0441E0 F2 
-0441E1 77     11609 LD	(HL), A 		; Store the first character
-0441E2 2C     11610 INC	L
+044187 00 
+044188 4D     11599 LD	C, L			; BCU = L
+044189 DD     11600 ADD	IX, BC			; Add to IX
+04418A 09 
+04418B DD     11601 LD	L, (IX + 0)		; Fetch the return value
+04418C 6E 
+04418D 00 
+04418E DD     11602 POP	IX
+04418F E1 
+044190 C3     11603 JP 	COUNT0
+044191 7F 
+044192 05 
+044193 04 
+              11604 
+              11605 ;OSLOAD - Load an area of memory from a file.
+              11606 ;   Inputs: HL addresses filename (CR terminated)
+              11607 ;           DE = address at which to load
+              11608 ;           BC = maximum allowed size (bytes)
+              11609 ;  Outputs: Carry reset indicates no room for file.
+              11610 ; Destroys: A,B,C,D,E,H,L,F
               11611 ;
-              11612 ; Now read the rest of the line in
-              11613 ;
-0441E3 CD     11614 OSLOAD_TXT2:		CALL	OSBGET			; Read the byte into A
-0441E4 44 
-0441E5 43 
-0441E6 04 
-0441E7 38     11615 JR	C, OSLOAD_TXT4		; Is it EOF?
-0441E8 2B 
-0441E9 FE     11616 CP	20h			; Skip if not an ASCII character
-0441EA 20 
-0441EB 38     11617 JR	C, @F
-0441EC 06 
-0441ED 77     11618 LD	(HL), A 		; Store in the input buffer
-0441EE 2C     11619 INC	L			; Increment the buffer pointer
-0441EF CA     11620 JP	Z, BAD			; If the buffer is full (wrapped to 0) then jump to Bad Program error
-0441F0 F8 
-0441F1 36 
-0441F2 04 
-0441F3 FE     11621 @@:			CP	LF			; Check for LF
-0441F4 0A 
-0441F5 20     11622 JR	NZ, OSLOAD_TXT2		; If not, then loop to read the rest of the characters in
-0441F6 EC 
+044194 C5     11612 OSLOAD:			PUSH	BC			; Stack the size
+044195 D5     11613 PUSH	DE			; Stack the load address
+044196 11     11614 LD	DE, ACCS		; Buffer address for filename
+044197 00 
+044198 4A 
+044199 04 
+04419A CD     11615 CALL	CSTR_FNAME		; Fetch filename from MOS into buffer
+04419B 19 
+04419C 3E 
+04419D 04 
+04419E 21     11616 LD	HL, ACCS		; HL: Filename
+04419F 00 
+0441A0 4A 
+0441A1 04 
+0441A2 CD     11617 CALL	EXT_DEFAULT		; Tack on the extension .BBC if not specified
+0441A3 94 
+0441A4 42 
+0441A5 04 
+0441A6 CD     11618 CALL	EXT_HANDLER		; Get the default handler
+0441A7 A8 
+0441A8 42 
+0441A9 04 
+0441AA D1     11619 POP	DE			; Restore the load address
+0441AB C1     11620 POP	BC			; Restore the size
+0441AC B7     11621 OR	A
+0441AD 28     11622 JR 	Z, OSLOAD_BBC
+0441AE 60 
               11623 ;
-              11624 ; Finally, handle EOL/EOF
+              11624 ; Load the file in as a text file
               11625 ;
-0441F7 36     11626 OSLOAD_TXT3:		LD	(HL), CR		; Store a CR for BBC BASIC
-0441F8 0D 
-0441F9 7D     11627 LD	A, L			; Check for minimum line length
-0441FA FE     11628 CP	2			; If it is 2 characters or less (including CR)
-0441FB 02 
-0441FC 38     11629 JR	C, @F			; Then don't bother entering it
-0441FD 0A 
-0441FE D5     11630 PUSH	DE			; Preserve the filehandle
-0441FF CD     11631 CALL	ONEDIT1			; Enter the line in memory
-044200 DC 
-044201 30 
-044202 04 
-044203 DC     11632 CALL	C,CLEAN			; If a new line has been entered, then call CLEAN to set TOP and write &FFFF end of program marker
-044204 3F 
-044205 38 
-044206 04 
-044207 D1     11633 POP	DE
-044208 CD     11634 @@:			CALL	OSSTAT			; End of file?
-044209 55 
-04420A 43 
-04420B 04 
-04420C 20     11635 JR	NZ, OSLOAD_TXT1		; No, so loop
-04420D C1 
-04420E CD     11636 CALL	OSSHUT			; Close the file
-04420F 3C 
-044210 43 
-044211 04 
-044212 37     11637 SCF				; Flag to BASIC that we're good
-044213 C9     11638 RET
-              11639 ;
-              11640 ; Special case for BASIC programs with no blank line at the end
-              11641 ;
-044214 FE     11642 OSLOAD_TXT4:		CP	20h			; Skip if not an ASCII character
-044215 20 
-044216 38     11643 JR	C, @F
-044217 06 
-044218 77     11644 LD	(HL), A			; Store the character
-044219 2C     11645 INC	L
-04421A CA     11646 JP	Z, BAD
-04421B F8 
-04421C 36 
-04421D 04 
-04421E 18     11647 @@:			JR	OSLOAD_TXT3
-04421F D7 
-              11648 
-              11649 ;
-              11650 ; Load the file in as a tokenised binary blob
-              11651 ;
-              11652 OSLOAD_BBC:		MOSCALL	mos_load		; Call LOAD in MOS
-044220 3E     0001M LD	A, function
-044221 01 
-044222 49     0002M RST.LIS	08h
-044223 CF 
-044224 D0     11653 RET	NC			; If load returns with carry reset - NO ROOM
-044225 B7     11654 OR	A			; If there is no error (A=0)
-044226 37     11655 SCF				; Need to set carry indicating there was room
-044227 C8     11656 RET	Z			; Return
-              11657 ;
-044228 F5     11658 OSERROR:		PUSH	AF			; Handle the MOS error
-044229 21     11659 LD	HL, ACCS		; Address of the buffer
-04422A 00 
-04422B 4A 
+0441AF AF     11626 OSLOAD_TXT:		XOR	A			; Set file attributes to read
+0441B0 CD     11627 CALL	OSOPEN			; Open the file
+0441B1 1C 
+0441B2 43 
+0441B3 04 
+0441B4 5F     11628 LD 	E, A 			; The filehandle
+0441B5 B7     11629 OR	A
+0441B6 3E     11630 LD	A, 4			; File not found error
+0441B7 04 
+0441B8 28     11631 JR	Z, OSERROR		; Jump to error handler
+0441B9 5D 
+0441BA CD     11632 CALL	NEWIT			; Call NEW to clear the program space
+0441BB 6C 
+0441BC 38 
+0441BD 04 
+              11633 ;
+0441BE 21     11634 OSLOAD_TXT1:		LD	HL, ACCS 		; Where the input is going to be stored
+0441BF 00 
+0441C0 4A 
+0441C1 04 
+              11635 ;
+              11636 ; First skip any whitespace (indents) at the beginning of the input
+              11637 ;
+0441C2 CD     11638 @@:			CALL	OSBGET			; Read the byte into A
+0441C3 33 
+0441C4 43 
+0441C5 04 
+0441C6 38     11639 JR	C, OSLOAD_TXT3		; Is it EOF?
+0441C7 1E 
+0441C8 FE     11640 CP	LF 			; Is it LF?
+0441C9 0A 
+0441CA 28     11641 JR	Z, OSLOAD_TXT3 		; Yes, so skip to the next line
+0441CB 1A 
+0441CC FE     11642 CP	21h			; Is it less than or equal to ASCII space?
+0441CD 21 
+0441CE 38     11643 JR	C, @B 			; Yes, so keep looping
+0441CF F2 
+0441D0 77     11644 LD	(HL), A 		; Store the first character
+0441D1 2C     11645 INC	L
+              11646 ;
+              11647 ; Now read the rest of the line in
+              11648 ;
+0441D2 CD     11649 OSLOAD_TXT2:		CALL	OSBGET			; Read the byte into A
+0441D3 33 
+0441D4 43 
+0441D5 04 
+0441D6 38     11650 JR	C, OSLOAD_TXT4		; Is it EOF?
+0441D7 2B 
+0441D8 FE     11651 CP	20h			; Skip if not an ASCII character
+0441D9 20 
+0441DA 38     11652 JR	C, @F
+0441DB 06 
+0441DC 77     11653 LD	(HL), A 		; Store in the input buffer
+0441DD 2C     11654 INC	L			; Increment the buffer pointer
+0441DE CA     11655 JP	Z, BAD			; If the buffer is full (wrapped to 0) then jump to Bad Program error
+0441DF F8 
+0441E0 36 
+0441E1 04 
+0441E2 FE     11656 @@:			CP	LF			; Check for LF
+0441E3 0A 
+0441E4 20     11657 JR	NZ, OSLOAD_TXT2		; If not, then loop to read the rest of the characters in
+0441E5 EC 
+              11658 ;
+              11659 ; Finally, handle EOL/EOF
+              11660 ;
+0441E6 36     11661 OSLOAD_TXT3:		LD	(HL), CR		; Store a CR for BBC BASIC
+0441E7 0D 
+0441E8 7D     11662 LD	A, L			; Check for minimum line length
+0441E9 FE     11663 CP	2			; If it is 2 characters or less (including CR)
+0441EA 02 
+0441EB 38     11664 JR	C, @F			; Then don't bother entering it
+0441EC 0A 
+0441ED D5     11665 PUSH	DE			; Preserve the filehandle
+0441EE CD     11666 CALL	ONEDIT1			; Enter the line in memory
+0441EF DC 
+0441F0 30 
+0441F1 04 
+0441F2 DC     11667 CALL	C,CLEAN			; If a new line has been entered, then call CLEAN to set TOP and write &FFFF end of program marker
+0441F3 3F 
+0441F4 38 
+0441F5 04 
+0441F6 D1     11668 POP	DE
+0441F7 CD     11669 @@:			CALL	OSSTAT			; End of file?
+0441F8 44 
+0441F9 43 
+0441FA 04 
+0441FB 20     11670 JR	NZ, OSLOAD_TXT1		; No, so loop
+0441FC C1 
+0441FD CD     11671 CALL	OSSHUT			; Close the file
+0441FE 2B 
+0441FF 43 
+044200 04 
+044201 37     11672 SCF				; Flag to BASIC that we're good
+044202 C9     11673 RET
+              11674 ;
+              11675 ; Special case for BASIC programs with no blank line at the end
+              11676 ;
+044203 FE     11677 OSLOAD_TXT4:		CP	20h			; Skip if not an ASCII character
+044204 20 
+044205 38     11678 JR	C, @F
+044206 06 
+044207 77     11679 LD	(HL), A			; Store the character
+044208 2C     11680 INC	L
+044209 CA     11681 JP	Z, BAD
+04420A F8 
+04420B 36 
+04420C 04 
+04420D 18     11682 @@:			JR	OSLOAD_TXT3
+04420E D7 
+              11683 
+              11684 ;
+              11685 ; Load the file in as a tokenised binary blob
+              11686 ;
+              11687 OSLOAD_BBC:		MOSCALL	mos_load		; Call LOAD in MOS
+04420F 3E     0001M LD	A, function
+044210 01 
+044211 49     0002M RST.LIS	08h
+044212 CF 
+044213 D0     11688 RET	NC			; If load returns with carry reset - NO ROOM
+044214 B7     11689 OR	A			; If there is no error (A=0)
+044215 37     11690 SCF				; Need to set carry indicating there was room
+044216 C8     11691 RET	Z			; Return
+              11692 ;
+044217 F5     11693 OSERROR:		PUSH	AF			; Handle the MOS error
+044218 21     11694 LD	HL, ACCS		; Address of the buffer
+044219 00 
+04421A 4A 
+04421B 04 
+04421C 01     11695 LD	BC, 256			; Length of the buffer
+04421D 00 
+04421E 01 
+04421F 00 
+044220 5F     11696 LD	E, A			; The error code
+              11697 MOSCALL	mos_getError		; Copy the error message into the buffer
+044221 3E     0001M LD	A, function
+044222 0F 
+044223 49     0002M RST.LIS	08h
+044224 CF 
+044225 F1     11698 POP	AF
+044226 E5     11699 PUSH	HL			; Stack the address of the error (now in ACCS)
+044227 C6     11700 ADD	A, 127			; Add 127 to the error code (MOS errors start at 128, and are trappable)
+044228 7F 
+044229 C3     11701 JP	EXTERR			; Trigger an external error
+04422A 77 
+04422B 37 
 04422C 04 
-04422D 01     11660 LD	BC, 256			; Length of the buffer
-04422E 00 
-04422F 01 
+              11702 
+              11703 ;OSSAVE - Save an area of memory to a file.
+              11704 ;   Inputs: HL addresses filename (term CR)
+              11705 ;           DE = start address of data to save
+              11706 ;           BC = length of data to save (bytes)
+              11707 ; Destroys: A,B,C,D,E,H,L,F
+              11708 ;
+04422D C5     11709 OSSAVE:			PUSH	BC			; Stack the size
+04422E D5     11710 PUSH	DE			; Stack the save address
+04422F 11     11711 LD	DE, ACCS		; Buffer address for filename
 044230 00 
-044231 5F     11661 LD	E, A			; The error code
-              11662 MOSCALL	mos_getError		; Copy the error message into the buffer
-044232 3E     0001M LD	A, function
-044233 0F 
-044234 49     0002M RST.LIS	08h
-044235 CF 
-044236 F1     11663 POP	AF
-044237 E5     11664 PUSH	HL			; Stack the address of the error (now in ACCS)
-044238 C6     11665 ADD	A, 127			; Add 127 to the error code (MOS errors start at 128, and are trappable)
-044239 7F 
-04423A C3     11666 JP	EXTERR			; Trigger an external error
-04423B 77 
-04423C 37 
-04423D 04 
-              11667 
-              11668 ;OSSAVE - Save an area of memory to a file.
-              11669 ;   Inputs: HL addresses filename (term CR)
-              11670 ;           DE = start address of data to save
-              11671 ;           BC = length of data to save (bytes)
-              11672 ; Destroys: A,B,C,D,E,H,L,F
-              11673 ;
-04423E C5     11674 OSSAVE:			PUSH	BC			; Stack the size
-04423F D5     11675 PUSH	DE			; Stack the save address
-044240 11     11676 LD	DE, ACCS		; Buffer address for filename
-044241 00 
-044242 4A 
-044243 04 
-044244 CD     11677 CALL	CSTR_FNAME		; Fetch filename from MOS into buffer
-044245 19 
-044246 3E 
-044247 04 
-044248 21     11678 LD	HL, ACCS		; HL: Filename
-044249 00 
-04424A 4A 
+044231 4A 
+044232 04 
+044233 CD     11712 CALL	CSTR_FNAME		; Fetch filename from MOS into buffer
+044234 19 
+044235 3E 
+044236 04 
+044237 21     11713 LD	HL, ACCS		; HL: Filename
+044238 00 
+044239 4A 
+04423A 04 
+04423B CD     11714 CALL	EXT_DEFAULT		; Tack on the extension .BBC if not specified
+04423C 94 
+04423D 42 
+04423E 04 
+04423F CD     11715 CALL	EXT_HANDLER		; Get the default handler
+044240 A8 
+044241 42 
+044242 04 
+044243 D1     11716 POP	DE			; Restore the save address
+044244 C1     11717 POP	BC			; Restore the size
+044245 B7     11718 OR	A			; Is the extension .BBC
+044246 28     11719 JR	Z, OSSAVE_BBC		; Yes, so use that
+044247 44 
+              11720 ;
+              11721 ; Save the file out as a text file
+              11722 ;
+044248 3A     11723 OSSAVE_TXT:		LD 	A, (OSWRCHCH)		; Stack the current channel
+044249 45 
+04424A 4D 
 04424B 04 
-04424C CD     11679 CALL	EXT_DEFAULT		; Tack on the extension .BBC if not specified
-04424D A5 
-04424E 42 
-04424F 04 
-044250 CD     11680 CALL	EXT_HANDLER		; Get the default handler
-044251 B9 
-044252 42 
-044253 04 
-044254 D1     11681 POP	DE			; Restore the save address
-044255 C1     11682 POP	BC			; Restore the size
-044256 B7     11683 OR	A			; Is the extension .BBC
-044257 28     11684 JR	Z, OSSAVE_BBC		; Yes, so use that
-044258 44 
-              11685 ;
-              11686 ; Save the file out as a text file
-              11687 ;
-044259 3A     11688 OSSAVE_TXT:		LD 	A, (OSWRCHCH)		; Stack the current channel
-04425A 45 
-04425B 4D 
-04425C 04 
-04425D F5     11689 PUSH	AF
-04425E AF     11690 XOR	A
-04425F 3C     11691 INC	A			; Make sure C is clear, A is 1, for OPENOUT
-044260 32     11692 LD	(OSWRCHCH), A
-044261 45 
+04424C F5     11724 PUSH	AF
+04424D AF     11725 XOR	A
+04424E 3C     11726 INC	A			; Make sure C is clear, A is 1, for OPENOUT
+04424F 32     11727 LD	(OSWRCHCH), A
+044250 45 
+044251 4D 
+044252 04 
+044253 CD     11728 CALL	OSOPEN			; Open the file
+044254 1C 
+044255 43 
+044256 04 
+044257 32     11729 LD	(OSWRCHFH), A		; Store the file handle for OSWRCH
+044258 46 
+044259 4D 
+04425A 04 
+04425B DD     11730 LD	IX, LISTON		; Required for LISTIT
+04425C 21 
+04425D 40 
+04425E 4D 
+04425E 04   
+044260 2A     11731 LD	HL, (PAGE_)		; Get start of program area
+044261 14 
 044262 4D 
 044263 04 
-044264 CD     11693 CALL	OSOPEN			; Open the file
-044265 2D 
-044266 43 
-044267 04 
-044268 32     11694 LD	(OSWRCHFH), A		; Store the file handle for OSWRCH
-044269 46 
-04426A 4D 
-04426B 04 
-04426C DD     11695 LD	IX, LISTON		; Required for LISTIT
-04426D 21 
-04426E 40 
-04426F 4D 
-04426F 04   
-044271 2A     11696 LD	HL, (PAGE_)		; Get start of program area
-044272 14 
-044273 4D 
-044274 04 
-044275 D9     11697 EXX
-044276 01     11698 LD	BC, 0			; Set the initial indent counters
-044277 00 
-044278 00 
-044279 00 
-04427A D9     11699 EXX
-04427B 7E     11700 OSSAVE_TXT1:		LD	A, (HL)			; Check for end of program marker
-04427C B7     11701 OR	A
-04427D 28     11702 JR	Z, OSSAVE_TXT2
-04427E 0F 
-04427F 23     11703 INC	HL			; Skip the length byte
-044280 11     11704 LD	DE, 0			; Clear DE to ensure we get a 16-bit line number
-044281 00 
-044282 00 
-044283 00 
-044284 5E     11705 LD	E, (HL)			; Get the line number
-044285 23     11706 INC	HL
-044286 56     11707 LD	D, (HL)
-044287 23     11708 INC	HL
-044288 CD     11709 CALL	LISTIT			; List the line
-044289 92 
-04428A 38 
-04428B 04 
-04428C 18     11710 JR	OSSAVE_TXT1
-04428D ED 
-04428E 3A     11711 OSSAVE_TXT2:		LD	A, (OSWRCHFH)		; Get the file handle
-04428F 46 
-044290 4D 
-044291 04 
-044292 5F     11712 LD	E, A
-044293 CD     11713 CALL	OSSHUT			; Close it
-044294 3C 
-044295 43 
-044296 04 
-044297 F1     11714 POP	AF			; Restore the channel
-044298 32     11715 LD	(OSWRCHCH), A
-044299 45 
-04429A 4D 
-04429B 04 
-04429C C9     11716 RET
-              11717 ;
-              11718 ; Save the file out as a tokenised binary blob
-              11719 ;
-              11720 OSSAVE_BBC:		MOSCALL	mos_save		; Call SAVE in MOS
-04429D 3E     0001M LD	A, function
-04429E 02 
-04429F 49     0002M RST.LIS	08h
-0442A0 CF 
-0442A1 B7     11721 OR	A			; If there is no error (A=0)
-0442A2 C8     11722 RET	Z			; Just return
-0442A3 18     11723 JR	OSERROR			; Trip an error
-0442A4 83 
-              11724 
-              11725 ; Check if an extension is specified in the filename
-              11726 ; Add a default if not specified
-              11727 ; HL: Filename (CSTR format)
-              11728 ;
-0442A5 E5     11729 EXT_DEFAULT:		PUSH	HL			; Stack the filename pointer
-0442A6 0E     11730 LD	C, '.'			; Search for dot (marks start of extension)
-0442A7 2E 
-0442A8 CD     11731 CALL	CSTR_FINDCH
-0442A9 39 
-0442AA 3E 
-0442AB 04 
-0442AC B7     11732 OR	A			; Check for end of string marker
-0442AD 20     11733 JR	NZ, @F			; No, so skip as we have an extension at this point
-0442AE 08 
-0442AF 11     11734 LD	DE, EXT_LOOKUP		; Get the first (default extension)
-0442B0 E9 
+044264 D9     11732 EXX
+044265 01     11733 LD	BC, 0			; Set the initial indent counters
+044266 00 
+044267 00 
+044268 00 
+044269 D9     11734 EXX
+04426A 7E     11735 OSSAVE_TXT1:		LD	A, (HL)			; Check for end of program marker
+04426B B7     11736 OR	A
+04426C 28     11737 JR	Z, OSSAVE_TXT2
+04426D 0F 
+04426E 23     11738 INC	HL			; Skip the length byte
+04426F 11     11739 LD	DE, 0			; Clear DE to ensure we get a 16-bit line number
+044270 00 
+044271 00 
+044272 00 
+044273 5E     11740 LD	E, (HL)			; Get the line number
+044274 23     11741 INC	HL
+044275 56     11742 LD	D, (HL)
+044276 23     11743 INC	HL
+044277 CD     11744 CALL	LISTIT			; List the line
+044278 92 
+044279 38 
+04427A 04 
+04427B 18     11745 JR	OSSAVE_TXT1
+04427C ED 
+04427D 3A     11746 OSSAVE_TXT2:		LD	A, (OSWRCHFH)		; Get the file handle
+04427E 46 
+04427F 4D 
+044280 04 
+044281 5F     11747 LD	E, A
+044282 CD     11748 CALL	OSSHUT			; Close it
+044283 2B 
+044284 43 
+044285 04 
+044286 F1     11749 POP	AF			; Restore the channel
+044287 32     11750 LD	(OSWRCHCH), A
+044288 45 
+044289 4D 
+04428A 04 
+04428B C9     11751 RET
+              11752 ;
+              11753 ; Save the file out as a tokenised binary blob
+              11754 ;
+              11755 OSSAVE_BBC:		MOSCALL	mos_save		; Call SAVE in MOS
+04428C 3E     0001M LD	A, function
+04428D 02 
+04428E 49     0002M RST.LIS	08h
+04428F CF 
+044290 B7     11756 OR	A			; If there is no error (A=0)
+044291 C8     11757 RET	Z			; Just return
+044292 18     11758 JR	OSERROR			; Trip an error
+044293 83 
+              11759 
+              11760 ; Check if an extension is specified in the filename
+              11761 ; Add a default if not specified
+              11762 ; HL: Filename (CSTR format)
+              11763 ;
+044294 E5     11764 EXT_DEFAULT:		PUSH	HL			; Stack the filename pointer
+044295 0E     11765 LD	C, '.'			; Search for dot (marks start of extension)
+044296 2E 
+044297 CD     11766 CALL	CSTR_FINDCH
+044298 39 
+044299 3E 
+04429A 04 
+04429B B7     11767 OR	A			; Check for end of string marker
+04429C 20     11768 JR	NZ, @F			; No, so skip as we have an extension at this point
+04429D 08 
+04429E 11     11769 LD	DE, EXT_LOOKUP		; Get the first (default extension)
+04429F D8 
+0442A0 42 
+0442A1 04 
+0442A2 CD     11770 CALL	CSTR_CAT		; Concat it to string pointed to by HL
+0442A3 50 
+0442A4 3E 
+0442A5 04 
+0442A6 E1     11771 @@:			POP	HL			; Restore the filename pointer
+0442A7 C9     11772 RET
+              11773 
+              11774 ; Check if an extension is valid and, if so, provide a pointer to a handler
+              11775 ; HL: Filename (CSTR format)
+              11776 ; Returns:
+              11777 ;  A: Filename extension type (0=BBC tokenised, 1=ASCII untokenised)
+              11778 ;
+0442A8 E5     11779 EXT_HANDLER:		PUSH	HL			; Stack the filename pointer
+0442A9 0E     11780 LD	C, '.'			; Find the '.'
+0442AA 2E 
+0442AB CD     11781 CALL	CSTR_FINDCH
+0442AC 39 
+0442AD 3E 
+0442AE 04 
+0442AF 11     11782 LD	DE, EXT_LOOKUP		; The lookup table
+0442B0 D8 
 0442B1 42 
 0442B2 04 
-0442B3 CD     11735 CALL	CSTR_CAT		; Concat it to string pointed to by HL
-0442B4 50 
-0442B5 3E 
-0442B6 04 
-0442B7 E1     11736 @@:			POP	HL			; Restore the filename pointer
-0442B8 C9     11737 RET
-              11738 
-              11739 ; Check if an extension is valid and, if so, provide a pointer to a handler
-              11740 ; HL: Filename (CSTR format)
-              11741 ; Returns:
-              11742 ;  A: Filename extension type (0=BBC tokenised, 1=ASCII untokenised)
-              11743 ;
-0442B9 E5     11744 EXT_HANDLER:		PUSH	HL			; Stack the filename pointer
-0442BA 0E     11745 LD	C, '.'			; Find the '.'
-0442BB 2E 
-0442BC CD     11746 CALL	CSTR_FINDCH
-0442BD 39 
-0442BE 3E 
-0442BF 04 
-0442C0 11     11747 LD	DE, EXT_LOOKUP		; The lookup table
-0442C1 E9 
-0442C2 42 
-0442C3 04 
-              11748 ;
-0442C4 E5     11749 EXT_HANDLER_1:		PUSH	HL			; Stack the pointer to the extension
-0442C5 CD     11750 CALL	CSTR_ENDSWITH		; Check whether the string ends with the entry in the lookup
-0442C6 41 
-0442C7 3E 
-0442C8 04 
-0442C9 E1     11751 POP	HL			; Restore the pointer to the extension
-0442CA 28     11752 JR	Z, EXT_HANDLER_2	; We have a match!
-0442CB 19 
-              11753 ;
-0442CC 1A     11754 @@:			LD	A, (DE)			; Skip to the end of the entry in the lookup
-0442CD 13     11755 INC	DE
-0442CE B7     11756 OR	A
-0442CF 20     11757 JR	NZ, @B
-0442D0 FB 
-0442D1 13     11758 INC	DE			; Skip the file extension # byte
-              11759 ;
-0442D2 1A     11760 LD	A, (DE)			; Are we at the end of the table?
-0442D3 B7     11761 OR	A
-0442D4 20     11762 JR	NZ, EXT_HANDLER_1	; No, so loop
-0442D5 EE 
-              11763 ;
-0442D6 3E     11764 LD      A,204			; Throw a "Bad name" error
-0442D7 CC 
-0442D8 CD     11765 CALL    EXTERR
-0442D9 77 
-0442DA 37 
-0442DB 04 
-0442DC 42     11766 DB    	"Bad name", 0
-0442DD 61 
-0442DE 64 
-0442DF 20 
-0442DF 6E   
-0442E0 61 
-0442E1 6D 
-0442E2 65 
-0442E2 00   
-              11767 ;
-0442E5 13     11768 EXT_HANDLER_2:		INC	DE			; Skip to the file extension # byte
-0442E6 1A     11769 LD	A, (DE)
-0442E7 E1     11770 POP	HL			; Restore the filename pointer
-0442E8 C9     11771 RET
-              11772 ;
-              11773 
-              11774 
-              11775 ; Extension lookup table
-              11776 ; CSTR, TYPE
-              11777 ; 	- 0: BBC (tokenised BBC BASIC for Z80 format)
-              11778 ; 	- 1: Human readable plain text
-              11779 ;
-0442E9 2E     11780 EXT_LOOKUP:		DB	".BBC", 0, 0		; First entry is the default extension
-0442EA 42 
+              11783 ;
+0442B3 E5     11784 EXT_HANDLER_1:		PUSH	HL			; Stack the pointer to the extension
+0442B4 CD     11785 CALL	CSTR_ENDSWITH		; Check whether the string ends with the entry in the lookup
+0442B5 41 
+0442B6 3E 
+0442B7 04 
+0442B8 E1     11786 POP	HL			; Restore the pointer to the extension
+0442B9 28     11787 JR	Z, EXT_HANDLER_2	; We have a match!
+0442BA 19 
+              11788 ;
+0442BB 1A     11789 @@:			LD	A, (DE)			; Skip to the end of the entry in the lookup
+0442BC 13     11790 INC	DE
+0442BD B7     11791 OR	A
+0442BE 20     11792 JR	NZ, @B
+0442BF FB 
+0442C0 13     11793 INC	DE			; Skip the file extension # byte
+              11794 ;
+0442C1 1A     11795 LD	A, (DE)			; Are we at the end of the table?
+0442C2 B7     11796 OR	A
+0442C3 20     11797 JR	NZ, EXT_HANDLER_1	; No, so loop
+0442C4 EE 
+              11798 ;
+0442C5 3E     11799 LD      A,204			; Throw a "Bad name" error
+0442C6 CC 
+0442C7 CD     11800 CALL    EXTERR
+0442C8 77 
+0442C9 37 
+0442CA 04 
+0442CB 42     11801 DB    	"Bad name", 0
+0442CC 61 
+0442CD 64 
+0442CE 20 
+0442CE 6E   
+0442CF 61 
+0442D0 6D 
+0442D1 65 
+0442D1 00   
+              11802 ;
+0442D4 13     11803 EXT_HANDLER_2:		INC	DE			; Skip to the file extension # byte
+0442D5 1A     11804 LD	A, (DE)
+0442D6 E1     11805 POP	HL			; Restore the filename pointer
+0442D7 C9     11806 RET
+              11807 ;
+              11808 
+              11809 
+              11810 ; Extension lookup table
+              11811 ; CSTR, TYPE
+              11812 ; 	- 0: BBC (tokenised BBC BASIC for Z80 format)
+              11813 ; 	- 1: Human readable plain text
+              11814 ;
+0442D8 2E     11815 EXT_LOOKUP:		DB	".BBC", 0, 0		; First entry is the default extension
+0442D9 42 
+0442DA 42 
+0442DB 43 
+0442DB 00   
+0442DC 00 
+0442DE 2E     11816 DB	".TXT", 0, 1
+0442DF 54 
+0442E0 58 
+0442E1 54 
+0442E1 00   
+0442E2 01 
+0442E4 2E     11817 DB	".ASC", 0, 1
+0442E5 41 
+0442E6 53 
+0442E7 43 
+0442E7 00   
+0442E8 01 
+0442EA 2E     11818 DB	".BAS", 0, 1
 0442EB 42 
-0442EC 43 
-0442EC 00   
-0442ED 00 
-0442EF 2E     11781 DB	".TXT", 0, 1
-0442F0 54 
-0442F1 58 
-0442F2 54 
-0442F2 00   
-0442F3 01 
-0442F5 2E     11782 DB	".ASC", 0, 1
-0442F6 41 
-0442F7 53 
-0442F8 43 
-0442F8 00   
-0442F9 01 
-0442FB 2E     11783 DB	".BAS", 0, 1
-0442FC 42 
-0442FD 41 
-0442FE 53 
-0442FE 00   
-0442FF 01 
-044301 00     11784 DB	0			; End of table
-              11785 
-              11786 ;OSCALL - Intercept page &FF calls and provide an alternative address
-              11787 ;
-              11788 ;&FFF7:	OSCLI	Execute *command.
-              11789 ;&FFF4:	OSBYTE	Various byte-wide functions.
-              11790 ;&FFF1:	OSWORD	Various control block functions.
-              11791 ;&FFEE:	OSWRCH	Write character to output stream.
-              11792 ;&FFE7:	OSNEWL	Write NewLine to output stream.
-              11793 ;&FFE3:	OSASCI	Write character or NewLine to output stream.
-              11794 ;&FFE0:	OSRDCH	Wait for character from input stream.
-              11795 ;&FFDD:	OSFILE	Perform actions on whole files or directories.
-              11796 ;&FFDA:	OSARGS	Read and write information on open files or filing systems.
-              11797 ;&FFD7:	OSBGET	Read a byte from an a channel.
-              11798 ;&FFD4:	OSBPUT	Write a byte to a channel.
-              11799 ;&FFD1:	OSGBPB	Read and write blocks of data.
-              11800 ;&FFCE:	OSFIND	Open or close a file.
-              11801 ;
-044302 21     11802 OSCALL:			LD	HL, OSCALL_TABLE
-044303 18 
-044304 43 
-044305 04 
-044306 7E     11803 OSCALL_1:		LD	A, (HL)
-044307 23     11804 INC	HL
-044308 FE     11805 CP	FFh
-044309 FF 
-04430A C8     11806 RET	Z
-04430B FD     11807 CP	A, IYL
-04430C BD 
-04430D 28     11808 JR	Z, OSCALL_2
-04430E 06 
-04430F D0     11809 RET	NC
-044310 23     11810 INC	HL
-044311 23     11811 INC	HL
-044312 23     11812 INC	HL
-044313 18     11813 JR	OSCALL_1
-044314 F1 
-044315 ED     11814 OSCALL_2:		LD	IY,(HL)
-044316 31 
-044317 C9     11815 RET
-044318 D4     11816 OSCALL_TABLE:		DB 	D4h
-044319 4C     11817 DW24 	OSBPUT
-04431A 43 
-04431B 04 
-04431C D7     11818 DB 	D7h
-04431D 44     11819 DW24 	OSBGET
-04431E 43 
-04431F 04 
-044320 EE     11820 DB 	EEh
-044321 00     11821 DW24 	OSWRCH
-044322 3F 
-044323 04 
-044324 F4     11822 DB	F4h
-044325 CA     11823 DW24 	OSBYTE
-044326 40 
-044327 04 
-044328 F7     11824 DB	F7h
-044329 90     11825 DW24	OSCLI
-04432A 3F 
-04432B 04 
-04432C FF     11826 DB	FFh
-              11827 
-              11828 ; OSOPEN
-              11829 ; HL: Pointer to path
-              11830 ;  F: C Z
-              11831 ;     x x OPENIN
-              11832 ; 	  OPENOUT
-              11833 ;     x	  OPENUP
-              11834 ; Returns:
-              11835 ;  A: Filehandle, 0 if cannot open
+0442EC 41 
+0442ED 53 
+0442ED 00   
+0442EE 01 
+0442F0 00     11819 DB	0			; End of table
+              11820 
+              11821 ;OSCALL - Intercept page &FF calls and provide an alternative address
+              11822 ;
+              11823 ;&FFF7:	OSCLI	Execute *command.
+              11824 ;&FFF4:	OSBYTE	Various byte-wide functions.
+              11825 ;&FFF1:	OSWORD	Various control block functions.
+              11826 ;&FFEE:	OSWRCH	Write character to output stream.
+              11827 ;&FFE7:	OSNEWL	Write NewLine to output stream.
+              11828 ;&FFE3:	OSASCI	Write character or NewLine to output stream.
+              11829 ;&FFE0:	OSRDCH	Wait for character from input stream.
+              11830 ;&FFDD:	OSFILE	Perform actions on whole files or directories.
+              11831 ;&FFDA:	OSARGS	Read and write information on open files or filing systems.
+              11832 ;&FFD7:	OSBGET	Read a byte from an a channel.
+              11833 ;&FFD4:	OSBPUT	Write a byte to a channel.
+              11834 ;&FFD1:	OSGBPB	Read and write blocks of data.
+              11835 ;&FFCE:	OSFIND	Open or close a file.
               11836 ;
-04432D 0E     11837 OSOPEN:			LD	C, fa_read
-04432E 01 
-04432F 28     11838 JR	Z, @F
-044330 06 
-044331 0E     11839 LD	C, fa_write | fa_open_append
-044332 32 
-044333 38     11840 JR	C, @F
-044334 02 
-044335 0E     11841 LD	C, fa_write | fa_create_always
-044336 0A 
-              11842 @@:			MOSCALL	mos_fopen
-044337 3E     0001M LD	A, function
-044338 0A 
-044339 49     0002M RST.LIS	08h
-04433A CF 
-04433B C9     11843 RET
-              11844 
-              11845 ;OSSHUT - Close disk file(s).
-              11846 ; E = file channel
-              11847 ;  If E=0 all files are closed (except SPOOL)
-              11848 ; Destroys: A,B,C,D,E,H,L,F
-              11849 ;
-04433C C5     11850 OSSHUT:			PUSH	BC
-04433D 4B     11851 LD	C, E
-              11852 MOSCALL	mos_fclose
+0442F1 21     11837 OSCALL:			LD	HL, OSCALL_TABLE
+0442F2 07 
+0442F3 43 
+0442F4 04 
+0442F5 7E     11838 OSCALL_1:		LD	A, (HL)
+0442F6 23     11839 INC	HL
+0442F7 FE     11840 CP	FFh
+0442F8 FF 
+0442F9 C8     11841 RET	Z
+0442FA FD     11842 CP	A, IYL
+0442FB BD 
+0442FC 28     11843 JR	Z, OSCALL_2
+0442FD 06 
+0442FE D0     11844 RET	NC
+0442FF 23     11845 INC	HL
+044300 23     11846 INC	HL
+044301 23     11847 INC	HL
+044302 18     11848 JR	OSCALL_1
+044303 F1 
+044304 ED     11849 OSCALL_2:		LD	IY,(HL)
+044305 31 
+044306 C9     11850 RET
+044307 D4     11851 OSCALL_TABLE:		DB 	D4h
+044308 3B     11852 DW24 	OSBPUT
+044309 43 
+04430A 04 
+04430B D7     11853 DB 	D7h
+04430C 33     11854 DW24 	OSBGET
+04430D 43 
+04430E 04 
+04430F EE     11855 DB 	EEh
+044310 00     11856 DW24 	OSWRCH
+044311 3F 
+044312 04 
+044313 F4     11857 DB	F4h
+044314 B9     11858 DW24 	OSBYTE
+044315 40 
+044316 04 
+044317 F7     11859 DB	F7h
+044318 90     11860 DW24	OSCLI
+044319 3F 
+04431A 04 
+04431B FF     11861 DB	FFh
+              11862 
+              11863 ; OSOPEN
+              11864 ; HL: Pointer to path
+              11865 ;  F: C Z
+              11866 ;     x x OPENIN
+              11867 ; 	  OPENOUT
+              11868 ;     x	  OPENUP
+              11869 ; Returns:
+              11870 ;  A: Filehandle, 0 if cannot open
+              11871 ;
+04431C 0E     11872 OSOPEN:			LD	C, fa_read
+04431D 01 
+04431E 28     11873 JR	Z, @F
+04431F 06 
+044320 0E     11874 LD	C, fa_write | fa_open_append
+044321 32 
+044322 38     11875 JR	C, @F
+044323 02 
+044324 0E     11876 LD	C, fa_write | fa_create_always
+044325 0A 
+              11877 @@:			MOSCALL	mos_fopen
+044326 3E     0001M LD	A, function
+044327 0A 
+044328 49     0002M RST.LIS	08h
+044329 CF 
+04432A C9     11878 RET
+              11879 
+              11880 ;OSSHUT - Close disk file(s).
+              11881 ; E = file channel
+              11882 ;  If E=0 all files are closed (except SPOOL)
+              11883 ; Destroys: A,B,C,D,E,H,L,F
+              11884 ;
+04432B C5     11885 OSSHUT:			PUSH	BC
+04432C 4B     11886 LD	C, E
+              11887 MOSCALL	mos_fclose
+04432D 3E     0001M LD	A, function
+04432E 0B 
+04432F 49     0002M RST.LIS	08h
+044330 CF 
+044331 C1     11888 POP	BC
+044332 C9     11889 RET
+              11890 
+              11891 ; OSBGET - Read a byte from a random disk file.
+              11892 ;  E = file channel
+              11893 ; Returns
+              11894 ;  A = byte read
+              11895 ;  Carry set if LAST BYTE of file
+              11896 ; Destroys: A,B,C,F
+              11897 ;
+044333 C5     11898 OSBGET:			PUSH	BC
+044334 4B     11899 LD	C, E
+              11900 MOSCALL	mos_fgetc
+044335 3E     0001M LD	A, function
+044336 0C 
+044337 49     0002M RST.LIS	08h
+044338 CF 
+044339 C1     11901 POP	BC
+04433A C9     11902 RET
+              11903 
+              11904 ; OSBPUT - Write a byte to a random disk file.
+              11905 ;  E = file channel
+              11906 ;  A = byte to write
+              11907 ; Destroys: A,B,C,F
+              11908 ;
+04433B C5     11909 OSBPUT:			PUSH	BC
+04433C 4B     11910 LD	C, E
+04433D 47     11911 LD	B, A
+              11912 MOSCALL	mos_fputc
 04433E 3E     0001M LD	A, function
-04433F 0B 
+04433F 0D 
 044340 49     0002M RST.LIS	08h
 044341 CF 
-044342 C1     11853 POP	BC
-044343 C9     11854 RET
-              11855 
-              11856 ; OSBGET - Read a byte from a random disk file.
-              11857 ;  E = file channel
-              11858 ; Returns
-              11859 ;  A = byte read
-              11860 ;  Carry set if LAST BYTE of file
-              11861 ; Destroys: A,B,C,F
-              11862 ;
-044344 C5     11863 OSBGET:			PUSH	BC
-044345 4B     11864 LD	C, E
-              11865 MOSCALL	mos_fgetc
+044342 C1     11913 POP	BC
+044343 C9     11914 RET
+              11915 
+              11916 ; OSSTAT - Read file status
+              11917 ;  E = file channel
+              11918 ; Returns
+              11919 ;  F: Z flag set - EOF
+              11920 ;  A: If Z then A = 0
+              11921 ; Destroys: A,D,E,H,L,F
+              11922 ;
+044344 C5     11923 OSSTAT:			PUSH	BC
+044345 4B     11924 LD	C, E
+              11925 MOSCALL	mos_feof
 044346 3E     0001M LD	A, function
-044347 0C 
+044347 0E 
 044348 49     0002M RST.LIS	08h
 044349 CF 
-04434A C1     11866 POP	BC
-04434B C9     11867 RET
-              11868 
-              11869 ; OSBPUT - Write a byte to a random disk file.
-              11870 ;  E = file channel
-              11871 ;  A = byte to write
-              11872 ; Destroys: A,B,C,F
-              11873 ;
-04434C C5     11874 OSBPUT:			PUSH	BC
-04434D 4B     11875 LD	C, E
-04434E 47     11876 LD	B, A
-              11877 MOSCALL	mos_fputc
-04434F 3E     0001M LD	A, function
-044350 0D 
-044351 49     0002M RST.LIS	08h
-044352 CF 
-044353 C1     11878 POP	BC
-044354 C9     11879 RET
-              11880 
-              11881 ; OSSTAT - Read file status
-              11882 ;  E = file channel
-              11883 ; Returns
-              11884 ;  F: Z flag set - EOF
-              11885 ;  A: If Z then A = 0
-              11886 ; Destroys: A,D,E,H,L,F
-              11887 ;
-044355 C5     11888 OSSTAT:			PUSH	BC
-044356 4B     11889 LD	C, E
-              11890 MOSCALL	mos_feof
-044357 3E     0001M LD	A, function
-044358 0E 
-044359 49     0002M RST.LIS	08h
-04435A CF 
-04435B C1     11891 POP	BC
-04435C FE     11892 CP	1
-04435D 01 
-04435E C9     11893 RET
-              11894 
-              11895 ; GETPTR - Return file pointer.
-              11896 ;    E = file channel
-              11897 ; Returns:
-              11898 ; DEHL = pointer (0-&7FFFFF)
-              11899 ; Destroys: A,B,C,D,E,H,L,F
-              11900 ;
-04435F FD     11901 GETPTR:			PUSH		IY
-044360 E5 
-044361 4B     11902 LD		C, E
-              11903 MOSCALL		mos_getfil 	; HLU: Pointer to FIL structure
-044362 3E     0001M LD	A, function
-044363 19 
-044364 49     0002M RST.LIS	08h
-044365 CF 
-044366 E5     11904 PUSH		HL
-044367 FD     11905 POP		IY		; IYU: Pointer to FIL structure
-044368 E1 
-044369 FD     11906 LD		L, (IY + FIL.fptr + 0)
-04436A 6E 
-04436B 11 
-04436C FD     11907 LD		H, (IY + FIL.fptr + 1)
-04436D 66 
-04436E 12 
-04436F FD     11908 LD		E, (IY + FIL.fptr + 2)
-044370 5E 
-044371 13 
-044372 FD     11909 LD		D, (IY + FIL.fptr + 3)
-044373 56 
-044374 14 
-044375 FD     11910 POP		IY
-044376 E1 
-044377 C9     11911 RET
-              11912 
-              11913 ; PUTPTR - Update file pointer.
-              11914 ;    A = file channel
-              11915 ; DEHL = new pointer (0-&7FFFFF)
-              11916 ; Destroys: A,B,C,D,E,H,L,F
-              11917 ;
-044378 FD     11918 PUTPTR:			PUSH		IY
-044379 E5 
-04437A 4F     11919 LD		C, A  		; C: Filehandle
-04437B E5     11920 PUSH		HL
-04437C 21     11921 LD		HL, 2
-04437D 02 
-04437E 00 
-04437F 00 
-044380 39     11922 ADD		HL, SP
-044381 73     11923 LD		(HL), E 	; 3rd byte of DWORD set to E
-044382 E1     11924 POP		HL
-044383 5A     11925 LD		E, D  		; 4th byte passed as E
-              11926 MOSCALL		mos_flseek
-044384 3E     0001M LD	A, function
-044385 1C 
-044386 49     0002M RST.LIS	08h
-044387 CF 
-044388 FD     11927 POP		IY
-044389 E1 
-04438A C9     11928 RET
+04434A C1     11926 POP	BC
+04434B FE     11927 CP	1
+04434C 01 
+04434D C9     11928 RET
               11929 
-              11930 ; GETEXT - Find file size.
+              11930 ; GETPTR - Return file pointer.
               11931 ;    E = file channel
               11932 ; Returns:
-              11933 ; DEHL = file size (0-&800000)
+              11933 ; DEHL = pointer (0-&7FFFFF)
               11934 ; Destroys: A,B,C,D,E,H,L,F
               11935 ;
-04438B FD     11936 GETEXT:         PUSH    IY
-04438C E5 
-04438D 4B     11937 LD      C, E
-              11938 MOSCALL mos_getfil  ; HLU: Pointer to FIL structure
-04438E 3E     0001M LD	A, function
-04438F 19 
-044390 49     0002M RST.LIS	08h
-044391 CF 
-044392 E5     11939 PUSH    HL
-044393 FD     11940 POP     IY          ; IYU: Pointer to FIL structure
-044394 E1 
-              11941 ; Access the obj.objsize field using the offset values
-044395 FD     11942 LD      L, (IY + FIL.obj + FFOBJID.objsize + 0)
-044396 6E 
-044397 0B 
-044398 FD     11943 LD      H, (IY + FIL.obj + FFOBJID.objsize + 1)
-044399 66 
-04439A 0C 
-04439B FD     11944 LD      E, (IY + FIL.obj + FFOBJID.objsize + 2)
-04439C 5E 
-04439D 0D 
-04439E FD     11945 LD      D, (IY + FIL.obj + FFOBJID.objsize + 3)
-04439F 56 
-0443A0 0E 
-              11946 
-0443A1 FD     11947 POP     IY
-0443A2 E1 
-0443A3 C9     11948 RET
-              11949 
-              11950 ; GETIMS - Get time from RTC
-              11951 ;
-0443A4 FD     11952 GETIMS:			PUSH	IY
-0443A5 E5 
-0443A6 21     11953 LD	HL, ACCS 		; Where to store the time string
-0443A7 00 
-0443A8 4A 
-0443A9 04 
-              11954 MOSCALL	mos_getrtc
-0443AA 3E     0001M LD	A, function
-0443AB 12 
-0443AC 49     0002M RST.LIS	08h
-0443AD CF 
-0443AE 11     11955 LD	DE, ACCS		; DE: pointer to start of string accumulator
-0443AF 00 
-0443B0 4A 
-0443B1 04 
-0443B2 5F     11956 LD	E, A 			;  E: now points to the end of the string
-0443B3 FD     11957 POP	IY
-0443B4 E1 
-0443B5 C9     11958 RET
-              11959 
-              11960 ; Get two word values from EXPR in DE, HL
-              11961 ; IY: Pointer to expression string
-              11962 ; Returns:
-              11963 ; DE: P1
-              11964 ; HL: P2
-              11965 ;
-0443B6 CD     11966 EXPR_W2:		CALL	EXPRI			; Get first parameter
-0443B7 0A 
-0443B8 03 
-0443B9 04 
-0443BA D9     11967 EXX
-0443BB E5     11968 PUSH	HL
-0443BC CD     11969 CALL	COMMA
-0443BD 22 
-0443BE 0A 
-0443BF 04 
-0443C0 CD     11970 CALL	EXPRI			; Get second parameter
-0443C1 0A 
-0443C2 03 
-0443C3 04 
-0443C4 D9     11971 EXX
-0443C5 D1     11972 POP	DE
-0443C6 C9     11973 RET
-              11974 
-              11975 ; Stuff not implemented yet
-              11976 ;
-0443C7 C9     11977 RESET:			RET
-              11978 ; --- End patch.asm ---
-              11979 
-              11980 ; --- Begin agon_graphics.asm ---
-              11981 ;
-              11982 ; Title:	BBC Basic for AGON - Graphics stuff
-              11983 ; Author:	Dean Belfield
-              11984 ; Created:	12/05/2023
-              11985 ; Last Updated:	07/06/2023
+04434E FD     11936 GETPTR:			PUSH		IY
+04434F E5 
+044350 4B     11937 LD		C, E
+              11938 MOSCALL		mos_getfil 	; HLU: Pointer to FIL structure
+044351 3E     0001M LD	A, function
+044352 19 
+044353 49     0002M RST.LIS	08h
+044354 CF 
+044355 E5     11939 PUSH		HL
+044356 FD     11940 POP		IY		; IYU: Pointer to FIL structure
+044357 E1 
+044358 FD     11941 LD		L, (IY + FIL.fptr + 0)
+044359 6E 
+04435A 11 
+04435B FD     11942 LD		H, (IY + FIL.fptr + 1)
+04435C 66 
+04435D 12 
+04435E FD     11943 LD		E, (IY + FIL.fptr + 2)
+04435F 5E 
+044360 13 
+044361 FD     11944 LD		D, (IY + FIL.fptr + 3)
+044362 56 
+044363 14 
+044364 FD     11945 POP		IY
+044365 E1 
+044366 C9     11946 RET
+              11947 
+              11948 ; PUTPTR - Update file pointer.
+              11949 ;    A = file channel
+              11950 ; DEHL = new pointer (0-&7FFFFF)
+              11951 ; Destroys: A,B,C,D,E,H,L,F
+              11952 ;
+044367 FD     11953 PUTPTR:			PUSH		IY
+044368 E5 
+044369 4F     11954 LD		C, A  		; C: Filehandle
+04436A E5     11955 PUSH		HL
+04436B 21     11956 LD		HL, 2
+04436C 02 
+04436D 00 
+04436E 00 
+04436F 39     11957 ADD		HL, SP
+044370 73     11958 LD		(HL), E 	; 3rd byte of DWORD set to E
+044371 E1     11959 POP		HL
+044372 5A     11960 LD		E, D  		; 4th byte passed as E
+              11961 MOSCALL		mos_flseek
+044373 3E     0001M LD	A, function
+044374 1C 
+044375 49     0002M RST.LIS	08h
+044376 CF 
+044377 FD     11962 POP		IY
+044378 E1 
+044379 C9     11963 RET
+              11964 
+              11965 ; GETEXT - Find file size.
+              11966 ;    E = file channel
+              11967 ; Returns:
+              11968 ; DEHL = file size (0-&800000)
+              11969 ; Destroys: A,B,C,D,E,H,L,F
+              11970 ;
+04437A FD     11971 GETEXT:         PUSH    IY
+04437B E5 
+04437C 4B     11972 LD      C, E
+              11973 MOSCALL mos_getfil  ; HLU: Pointer to FIL structure
+04437D 3E     0001M LD	A, function
+04437E 19 
+04437F 49     0002M RST.LIS	08h
+044380 CF 
+044381 E5     11974 PUSH    HL
+044382 FD     11975 POP     IY          ; IYU: Pointer to FIL structure
+044383 E1 
+              11976 ; Access the obj.objsize field using the offset values
+044384 FD     11977 LD      L, (IY + FIL.obj + FFOBJID.objsize + 0)
+044385 6E 
+044386 0B 
+044387 FD     11978 LD      H, (IY + FIL.obj + FFOBJID.objsize + 1)
+044388 66 
+044389 0C 
+04438A FD     11979 LD      E, (IY + FIL.obj + FFOBJID.objsize + 2)
+04438B 5E 
+04438C 0D 
+04438D FD     11980 LD      D, (IY + FIL.obj + FFOBJID.objsize + 3)
+04438E 56 
+04438F 0E 
+              11981 
+044390 FD     11982 POP     IY
+044391 E1 
+044392 C9     11983 RET
+              11984 
+              11985 ; GETIMS - Get time from RTC
               11986 ;
-              11987 ; Modinfo:
-              11988 ; 07/06/2023:	Modified to run in ADL mode
-              11989 
-              11990 ; .ASSUME	ADL = 1
-              11991 
-              11992 ; INCLUDE	"equs.inc"
-              11993 ; INCLUDE "macros.inc"
-              11994 ; INCLUDE "mos_api.inc"	; In MOS/src
-              11995 
-              11996 ; SEGMENT CODE
-              11997 
-              11998 ; XDEF	CLG
-              11999 ; XDEF	CLRSCN
-              12000 ; XDEF	MODE
-              12001 ; XDEF	COLOUR
-              12002 ; XDEF	GCOL
-              12003 ; XDEF	MOVE
-              12004 ; XDEF	PLOT
-              12005 ; XDEF	DRAW
-              12006 ; XDEF	POINT
-              12007 ; XDEF	GETSCHR
-              12008 
-              12009 ; XREF	OSWRCH
-              12010 ; XREF	ASC_TO_NUMBER
-              12011 ; XREF	EXTERR
-              12012 ; XREF	EXPRI
-              12013 ; XREF	COMMA
-              12014 ; XREF	XEQ
-              12015 ; XREF	NXT
-              12016 ; XREF	BRAKET
-              12017 ; XREF	COUNT0
-              12018 ; XREF	CRTONULL
-              12019 ; XREF	NULLTOCR
-              12020 ; XREF	CRLF
-              12021 ; XREF	EXPR_W2
-              12022 ; XREF	INKEY1
-              12023 
-              12024 ; CLG: clears the graphics area
-              12025 ;
-              12026 CLG:			VDU	10h
-0443C8 3E     0001M LD	A, val
-0443C9 10 
-0443CA CD     0002M CALL	OSWRCH
-0443CB 00 
-0443CC 3F 
-0443CD 04 
-0443CE C3     12027 JP	XEQ
-0443CF 96 
-0443D0 0B 
-0443D1 04 
-              12028 
-              12029 ; CLS: clears the text area
-              12030 ;
-0443D2 3E     12031 CLRSCN:			LD	A, 0Ch
-0443D3 0C 
-0443D4 C3     12032 JP	OSWRCH
-0443D5 00 
-0443D6 3F 
-0443D7 04 
-              12033 
-              12034 ; MODE n: Set video mode
-              12035 ;
-0443D8 DD     12036 MODE:			PUSH	IX			; Get the system vars in IX
-0443D9 E5 
-              12037 MOSCALL	mos_sysvars		; Reset the semaphore
-0443DA 3E     0001M LD	A, function
-0443DB 08 
-0443DC 49     0002M RST.LIS	08h
-0443DD CF 
-0443DE DD     12038 RES	4, (IX+sysvar_vpd_pflags)
-0443DF CB 
-0443E0 04 
-0443E1 A6 
-0443E2 CD     12039 CALL    EXPRI
-0443E3 0A 
-0443E4 03 
-0443E5 04 
-0443E6 D9     12040 EXX
-              12041 VDU	16H			; Mode change
-0443E7 3E     0001M LD	A, val
-0443E8 16 
-0443E9 CD     0002M CALL	OSWRCH
-0443EA 00 
-0443EB 3F 
-0443EC 04 
-              12042 VDU	L
-0443ED 7D     0001M LD	A, val
-0443EE CD     0002M CALL	OSWRCH
-0443EF 00 
-0443F0 3F 
-0443F1 04 
-              12043 MOSCALL	mos_sysvars
-0443F2 3E     0001M LD	A, function
-0443F3 08 
-0443F4 49     0002M RST.LIS	08h
-0443F5 CF 
-0443F6 DD     12044 @@:			BIT	4, (IX+sysvar_vpd_pflags)
-0443F7 CB 
-0443F8 04 
-0443F9 66 
-0443FA 28     12045 JR	Z, @B			; Wait for the result
-0443FB FA 
-0443FC DD     12046 POP	IX
-0443FD E1 
-0443FE C3     12047 JP	XEQ
-0443FF 96 
-044400 0B 
-044401 04 
-              12048 
-              12049 ; GET(x,y): Get the ASCII code of a character on screen
-              12050 ;
-044402 FD     12051 GETSCHR:		INC	IY
-044403 23 
-044404 CD     12052 CALL    EXPRI      		; Get X coordinate
-044405 0A 
-044406 03 
-044407 04 
-044408 D9     12053 EXX
-044409 22     12054 LD	(VDU_BUFFER+0), HL
-04440A 00 
-04440B 4A 
-04440C 04 
-04440D CD     12055 CALL	COMMA
-04440E 22 
-04440F 0A 
-044410 04 
-044411 CD     12056 CALL	EXPRI			; Get Y coordinate
-044412 0A 
-044413 03 
-044414 04 
-044415 D9     12057 EXX
-044416 22     12058 LD	(VDU_BUFFER+2), HL
-044417 02 
-044418 4A 
-044419 04 
-04441A CD     12059 CALL	BRAKET			; Closing bracket
-04441B 2F 
-04441C 0A 
-04441D 04 
+044393 FD     11987 GETIMS:			PUSH	IY
+044394 E5 
+044395 21     11988 LD	HL, ACCS 		; Where to store the time string
+044396 00 
+044397 4A 
+044398 04 
+              11989 MOSCALL	mos_getrtc
+044399 3E     0001M LD	A, function
+04439A 12 
+04439B 49     0002M RST.LIS	08h
+04439C CF 
+04439D 11     11990 LD	DE, ACCS		; DE: pointer to start of string accumulator
+04439E 00 
+04439F 4A 
+0443A0 04 
+0443A1 5F     11991 LD	E, A 			;  E: now points to the end of the string
+0443A2 FD     11992 POP	IY
+0443A3 E1 
+0443A4 C9     11993 RET
+              11994 
+              11995 ; Get two word values from EXPR in DE, HL
+              11996 ; IY: Pointer to expression string
+              11997 ; Returns:
+              11998 ; DE: P1
+              11999 ; HL: P2
+              12000 ;
+0443A5 CD     12001 EXPR_W2:		CALL	EXPRI			; Get first parameter
+0443A6 0A 
+0443A7 03 
+0443A8 04 
+0443A9 D9     12002 EXX
+0443AA E5     12003 PUSH	HL
+0443AB CD     12004 CALL	COMMA
+0443AC 22 
+0443AD 0A 
+0443AE 04 
+0443AF CD     12005 CALL	EXPRI			; Get second parameter
+0443B0 0A 
+0443B1 03 
+0443B2 04 
+0443B3 D9     12006 EXX
+0443B4 D1     12007 POP	DE
+0443B5 C9     12008 RET
+              12009 
+              12010 ; Stuff not implemented yet
+              12011 ;
+0443B6 C9     12012 RESET:			RET
+              12013 ; --- End patch.asm ---
+              12014 
+              12015 ; --- Begin agon_graphics.asm ---
+              12016 ;
+              12017 ; Title:	BBC Basic for AGON - Graphics stuff
+              12018 ; Author:	Dean Belfield
+              12019 ; Created:	12/05/2023
+              12020 ; Last Updated:	07/06/2023
+              12021 ;
+              12022 ; Modinfo:
+              12023 ; 07/06/2023:	Modified to run in ADL mode
+              12024 
+              12025 ; .ASSUME	ADL = 1
+              12026 
+              12027 ; INCLUDE	"equs.inc"
+              12028 ; INCLUDE "macros.inc"
+              12029 ; INCLUDE "mos_api.inc"	; In MOS/src
+              12030 
+              12031 ; SEGMENT CODE
+              12032 
+              12033 ; XDEF	CLG
+              12034 ; XDEF	CLRSCN
+              12035 ; XDEF	MODE
+              12036 ; XDEF	COLOUR
+              12037 ; XDEF	GCOL
+              12038 ; XDEF	MOVE
+              12039 ; XDEF	PLOT
+              12040 ; XDEF	DRAW
+              12041 ; XDEF	POINT
+              12042 ; XDEF	GETSCHR
+              12043 
+              12044 ; XREF	OSWRCH
+              12045 ; XREF	ASC_TO_NUMBER
+              12046 ; XREF	EXTERR
+              12047 ; XREF	EXPRI
+              12048 ; XREF	COMMA
+              12049 ; XREF	XEQ
+              12050 ; XREF	NXT
+              12051 ; XREF	BRAKET
+              12052 ; XREF	COUNT0
+              12053 ; XREF	CRTONULL
+              12054 ; XREF	NULLTOCR
+              12055 ; XREF	CRLF
+              12056 ; XREF	EXPR_W2
+              12057 ; XREF	INKEY1
+              12058 
+              12059 ; CLG: clears the graphics area
               12060 ;
-04441E DD     12061 PUSH	IX			; Get the system vars in IX
-04441F E5 
-              12062 MOSCALL	mos_sysvars		; Reset the semaphore
-044420 3E     0001M LD	A, function
-044421 08 
-044422 49     0002M RST.LIS	08h
-044423 CF 
-044424 DD     12063 RES	1, (IX+sysvar_vpd_pflags)
-044425 CB 
-044426 04 
-044427 8E 
-              12064 VDU	23
-044428 3E     0001M LD	A, val
-044429 17 
-04442A CD     0002M CALL	OSWRCH
-04442B 00 
-04442C 3F 
-04442D 04 
-              12065 VDU	0
-04442E 3E     0001M LD	A, val
-04442F 00 
-044430 CD     0002M CALL	OSWRCH
-044431 00 
-044432 3F 
-044433 04 
-              12066 VDU	vdp_scrchar
-044434 3E     0001M LD	A, val
-044435 83 
-044436 CD     0002M CALL	OSWRCH
-044437 00 
-044438 3F 
-044439 04 
-              12067 VDU	(VDU_BUFFER+0)
-04443A 3A     0001M LD	A, val
-04443B 00 
-04443C 4A 
-04443D 04 
-04443E CD     0002M CALL	OSWRCH
-04443F 00 
-044440 3F 
-044441 04 
-              12068 VDU	(VDU_BUFFER+1)
-044442 3A     0001M LD	A, val
-044443 01 
-044444 4A 
-044445 04 
-044446 CD     0002M CALL	OSWRCH
-044447 00 
-044448 3F 
-044449 04 
-              12069 VDU	(VDU_BUFFER+2)
-04444A 3A     0001M LD	A, val
-04444B 02 
-04444C 4A 
-04444D 04 
-04444E CD     0002M CALL	OSWRCH
-04444F 00 
-044450 3F 
-044451 04 
-              12070 VDU	(VDU_BUFFER+3)
-044452 3A     0001M LD	A, val
-044453 03 
-044454 4A 
-044455 04 
-044456 CD     0002M CALL	OSWRCH
-044457 00 
-044458 3F 
-044459 04 
-04445A DD     12071 @@:			BIT	1, (IX+sysvar_vpd_pflags)
-04445B CB 
-04445C 04 
-04445D 4E 
-04445E 28     12072 JR	Z, @B			; Wait for the result
-04445F FA 
-044460 DD     12073 LD	A, (IX+sysvar_scrchar)	; Fetch the result in A
-044461 7E 
-044462 09 
-044463 B7     12074 OR	A			; Check for 00h
-044464 37     12075 SCF				; C = character map
-044465 20     12076 JR	NZ, @F			; We have a character, so skip next bit
-044466 02 
-044467 AF     12077 XOR	A			; Clear carry
-044468 3D     12078 DEC	A			; Set A to FFh
-044469 DD     12079 @@:			POP	IX
-04446A E1 
-04446B C3     12080 JP	INKEY1			; Jump back to the GET command
-04446C E1 
-04446D 07 
+              12061 CLG:			VDU	10h
+0443B7 3E     0001M LD	A, val
+0443B8 10 
+0443B9 CD     0002M CALL	OSWRCH
+0443BA 00 
+0443BB 3F 
+0443BC 04 
+0443BD C3     12062 JP	XEQ
+0443BE 96 
+0443BF 0B 
+0443C0 04 
+              12063 
+              12064 ; CLS: clears the text area
+              12065 ;
+0443C1 3E     12066 CLRSCN:			LD	A, 0Ch
+0443C2 0C 
+0443C3 C3     12067 JP	OSWRCH
+0443C4 00 
+0443C5 3F 
+0443C6 04 
+              12068 
+              12069 ; MODE n: Set video mode
+              12070 ;
+0443C7 DD     12071 MODE:			PUSH	IX			; Get the system vars in IX
+0443C8 E5 
+              12072 MOSCALL	mos_sysvars		; Reset the semaphore
+0443C9 3E     0001M LD	A, function
+0443CA 08 
+0443CB 49     0002M RST.LIS	08h
+0443CC CF 
+0443CD DD     12073 RES	4, (IX+sysvar_vpd_pflags)
+0443CE CB 
+0443CF 04 
+0443D0 A6 
+0443D1 CD     12074 CALL    EXPRI
+0443D2 0A 
+0443D3 03 
+0443D4 04 
+0443D5 D9     12075 EXX
+              12076 VDU	16H			; Mode change
+0443D6 3E     0001M LD	A, val
+0443D7 16 
+0443D8 CD     0002M CALL	OSWRCH
+0443D9 00 
+0443DA 3F 
+0443DB 04 
+              12077 VDU	L
+0443DC 7D     0001M LD	A, val
+0443DD CD     0002M CALL	OSWRCH
+0443DE 00 
+0443DF 3F 
+0443E0 04 
+              12078 MOSCALL	mos_sysvars
+0443E1 3E     0001M LD	A, function
+0443E2 08 
+0443E3 49     0002M RST.LIS	08h
+0443E4 CF 
+0443E5 DD     12079 @@:			BIT	4, (IX+sysvar_vpd_pflags)
+0443E6 CB 
+0443E7 04 
+0443E8 66 
+0443E9 28     12080 JR	Z, @B			; Wait for the result
+0443EA FA 
+0443EB DD     12081 POP	IX
+0443EC E1 
+0443ED C3     12082 JP	XEQ
+0443EE 96 
+0443EF 0B 
+0443F0 04 
+              12083 
+              12084 ; GET(x,y): Get the ASCII code of a character on screen
+              12085 ;
+0443F1 FD     12086 GETSCHR:		INC	IY
+0443F2 23 
+0443F3 CD     12087 CALL    EXPRI      		; Get X coordinate
+0443F4 0A 
+0443F5 03 
+0443F6 04 
+0443F7 D9     12088 EXX
+0443F8 22     12089 LD	(VDU_BUFFER+0), HL
+0443F9 00 
+0443FA 4A 
+0443FB 04 
+0443FC CD     12090 CALL	COMMA
+0443FD 22 
+0443FE 0A 
+0443FF 04 
+044400 CD     12091 CALL	EXPRI			; Get Y coordinate
+044401 0A 
+044402 03 
+044403 04 
+044404 D9     12092 EXX
+044405 22     12093 LD	(VDU_BUFFER+2), HL
+044406 02 
+044407 4A 
+044408 04 
+044409 CD     12094 CALL	BRAKET			; Closing bracket
+04440A 2F 
+04440B 0A 
+04440C 04 
+              12095 ;
+04440D DD     12096 PUSH	IX			; Get the system vars in IX
+04440E E5 
+              12097 MOSCALL	mos_sysvars		; Reset the semaphore
+04440F 3E     0001M LD	A, function
+044410 08 
+044411 49     0002M RST.LIS	08h
+044412 CF 
+044413 DD     12098 RES	1, (IX+sysvar_vpd_pflags)
+044414 CB 
+044415 04 
+044416 8E 
+              12099 VDU	23
+044417 3E     0001M LD	A, val
+044418 17 
+044419 CD     0002M CALL	OSWRCH
+04441A 00 
+04441B 3F 
+04441C 04 
+              12100 VDU	0
+04441D 3E     0001M LD	A, val
+04441E 00 
+04441F CD     0002M CALL	OSWRCH
+044420 00 
+044421 3F 
+044422 04 
+              12101 VDU	vdp_scrchar
+044423 3E     0001M LD	A, val
+044424 83 
+044425 CD     0002M CALL	OSWRCH
+044426 00 
+044427 3F 
+044428 04 
+              12102 VDU	(VDU_BUFFER+0)
+044429 3A     0001M LD	A, val
+04442A 00 
+04442B 4A 
+04442C 04 
+04442D CD     0002M CALL	OSWRCH
+04442E 00 
+04442F 3F 
+044430 04 
+              12103 VDU	(VDU_BUFFER+1)
+044431 3A     0001M LD	A, val
+044432 01 
+044433 4A 
+044434 04 
+044435 CD     0002M CALL	OSWRCH
+044436 00 
+044437 3F 
+044438 04 
+              12104 VDU	(VDU_BUFFER+2)
+044439 3A     0001M LD	A, val
+04443A 02 
+04443B 4A 
+04443C 04 
+04443D CD     0002M CALL	OSWRCH
+04443E 00 
+04443F 3F 
+044440 04 
+              12105 VDU	(VDU_BUFFER+3)
+044441 3A     0001M LD	A, val
+044442 03 
+044443 4A 
+044444 04 
+044445 CD     0002M CALL	OSWRCH
+044446 00 
+044447 3F 
+044448 04 
+044449 DD     12106 @@:			BIT	1, (IX+sysvar_vpd_pflags)
+04444A CB 
+04444B 04 
+04444C 4E 
+04444D 28     12107 JR	Z, @B			; Wait for the result
+04444E FA 
+04444F DD     12108 LD	A, (IX+sysvar_scrchar)	; Fetch the result in A
+044450 7E 
+044451 09 
+044452 B7     12109 OR	A			; Check for 00h
+044453 37     12110 SCF				; C = character map
+044454 20     12111 JR	NZ, @F			; We have a character, so skip next bit
+044455 02 
+044456 AF     12112 XOR	A			; Clear carry
+044457 3D     12113 DEC	A			; Set A to FFh
+044458 DD     12114 @@:			POP	IX
+044459 E1 
+04445A C3     12115 JP	INKEY1			; Jump back to the GET command
+04445B E1 
+04445C 07 
+04445D 04 
+              12116 
+              12117 ; POINT(x,y): Get the pixel colour of a point on screen
+              12118 ;
+04445E CD     12119 POINT:			CALL    EXPRI      		; Get X coordinate
+04445F 0A 
+044460 03 
+044461 04 
+044462 D9     12120 EXX
+044463 22     12121 LD	(VDU_BUFFER+0), HL
+044464 00 
+044465 4A 
+044466 04 
+044467 CD     12122 CALL	COMMA
+044468 22 
+044469 0A 
+04446A 04 
+04446B CD     12123 CALL	EXPRI			; Get Y coordinate
+04446C 0A 
+04446D 03 
 04446E 04 
-              12081 
-              12082 ; POINT(x,y): Get the pixel colour of a point on screen
-              12083 ;
-04446F CD     12084 POINT:			CALL    EXPRI      		; Get X coordinate
-044470 0A 
-044471 03 
-044472 04 
-044473 D9     12085 EXX
-044474 22     12086 LD	(VDU_BUFFER+0), HL
-044475 00 
-044476 4A 
+04446F D9     12124 EXX
+044470 22     12125 LD	(VDU_BUFFER+2), HL
+044471 02 
+044472 4A 
+044473 04 
+044474 CD     12126 CALL	BRAKET			; Closing bracket
+044475 2F 
+044476 0A 
 044477 04 
-044478 CD     12087 CALL	COMMA
-044479 22 
-04447A 0A 
-04447B 04 
-04447C CD     12088 CALL	EXPRI			; Get Y coordinate
-04447D 0A 
-04447E 03 
-04447F 04 
-044480 D9     12089 EXX
-044481 22     12090 LD	(VDU_BUFFER+2), HL
-044482 02 
-044483 4A 
-044484 04 
-044485 CD     12091 CALL	BRAKET			; Closing bracket
-044486 2F 
-044487 0A 
-044488 04 
-              12092 ;
-044489 DD     12093 PUSH	IX			; Get the system vars in IX
-04448A E5 
-              12094 MOSCALL	mos_sysvars		; Reset the semaphore
-04448B 3E     0001M LD	A, function
-04448C 08 
-04448D 49     0002M RST.LIS	08h
-04448E CF 
-04448F DD     12095 RES	2, (IX+sysvar_vpd_pflags)
-044490 CB 
-044491 04 
-044492 96 
-              12096 VDU	23
-044493 3E     0001M LD	A, val
-044494 17 
-044495 CD     0002M CALL	OSWRCH
-044496 00 
-044497 3F 
-044498 04 
-              12097 VDU	0
-044499 3E     0001M LD	A, val
-04449A 00 
-04449B CD     0002M CALL	OSWRCH
-04449C 00 
-04449D 3F 
-04449E 04 
-              12098 VDU	vdp_scrpixel
-04449F 3E     0001M LD	A, val
-0444A0 84 
-0444A1 CD     0002M CALL	OSWRCH
-0444A2 00 
-0444A3 3F 
-0444A4 04 
-              12099 VDU	(VDU_BUFFER+0)
-0444A5 3A     0001M LD	A, val
-0444A6 00 
-0444A7 4A 
-0444A8 04 
-0444A9 CD     0002M CALL	OSWRCH
-0444AA 00 
-0444AB 3F 
-0444AC 04 
-              12100 VDU	(VDU_BUFFER+1)
-0444AD 3A     0001M LD	A, val
-0444AE 01 
-0444AF 4A 
-0444B0 04 
-0444B1 CD     0002M CALL	OSWRCH
-0444B2 00 
-0444B3 3F 
-0444B4 04 
-              12101 VDU	(VDU_BUFFER+2)
-0444B5 3A     0001M LD	A, val
-0444B6 02 
-0444B7 4A 
-0444B8 04 
-0444B9 CD     0002M CALL	OSWRCH
-0444BA 00 
-0444BB 3F 
-0444BC 04 
-              12102 VDU	(VDU_BUFFER+3)
-0444BD 3A     0001M LD	A, val
-0444BE 03 
-0444BF 4A 
-0444C0 04 
-0444C1 CD     0002M CALL	OSWRCH
-0444C2 00 
-0444C3 3F 
-0444C4 04 
-0444C5 DD     12103 @@:			BIT	2, (IX+sysvar_vpd_pflags)
-0444C6 CB 
-0444C7 04 
-0444C8 56 
-0444C9 28     12104 JR	Z, @B			; Wait for the result
-0444CA FA 
-              12105 ;
-              12106 ; Return the data as a 1 byte index
-              12107 ;
-0444CB DD     12108 LD	L, (IX+sysvar_scrpixelIndex)
-0444CC 6E 
-0444CD 16 
-0444CE DD     12109 POP	IX
-0444CF E1 
-0444D0 C3     12110 JP	COUNT0
-0444D1 7F 
-0444D2 05 
-0444D3 04 
-              12111 
-              12112 
-              12113 ; COLOUR colour
-              12114 ; COLOUR L,P
-              12115 ; COLOUR L,R,G,B
-              12116 ;
-0444D4 CD     12117 COLOUR:			CALL	EXPRI			; The colour / mode
-0444D5 0A 
-0444D6 03 
-0444D7 04 
-0444D8 D9     12118 EXX
-0444D9 7D     12119 LD	A, L
-0444DA 32     12120 LD	(VDU_BUFFER+0), A	; Store first parameter
-0444DB 00 
-0444DC 4A 
-0444DD 04 
-0444DE CD     12121 CALL	NXT			; Are there any more parameters?
-0444DF 70 
-0444E0 0A 
-0444E1 04 
-0444E2 FE     12122 CP	','
-0444E3 2C 
-0444E4 28     12123 JR	Z, COLOUR_1		; Yes, so we're doing a palette change next
-0444E5 12 
-              12124 ;
-              12125 VDU	11h			; Just set the colour
-0444E6 3E     0001M LD	A, val
-0444E7 11 
-0444E8 CD     0002M CALL	OSWRCH
-0444E9 00 
-0444EA 3F 
-0444EB 04 
-              12126 VDU	(VDU_BUFFER+0)
-0444EC 3A     0001M LD	A, val
-0444ED 00 
-0444EE 4A 
-0444EF 04 
-0444F0 CD     0002M CALL	OSWRCH
-0444F1 00 
-0444F2 3F 
-0444F3 04 
-0444F4 C3     12127 JP	XEQ
-0444F5 96 
-0444F6 0B 
-0444F7 04 
-              12128 ;
-0444F8 CD     12129 COLOUR_1:		CALL	COMMA
-0444F9 22 
-0444FA 0A 
-0444FB 04 
-0444FC CD     12130 CALL	EXPRI			; Parse R (OR P)
-0444FD 0A 
-0444FE 03 
-0444FF 04 
-044500 D9     12131 EXX
-044501 7D     12132 LD	A, L
-044502 32     12133 LD	(VDU_BUFFER+1), A
-044503 01 
-044504 4A 
-044505 04 
-044506 CD     12134 CALL	NXT			; Are there any more parameters?
-044507 70 
-044508 0A 
-044509 04 
-04450A FE     12135 CP	','
-04450B 2C 
-04450C 28     12136 JR	Z, COLOUR_2		; Yes, so we're doing COLOUR L,R,G,B
-04450D 2C 
-              12137 ;
-              12138 VDU	13h			; VDU:COLOUR
-04450E 3E     0001M LD	A, val
-04450F 13 
-044510 CD     0002M CALL	OSWRCH
-044511 00 
-044512 3F 
-044513 04 
-              12139 VDU	(VDU_BUFFER+0)		; Logical Colour
-044514 3A     0001M LD	A, val
-044515 00 
-044516 4A 
-044517 04 
-044518 CD     0002M CALL	OSWRCH
-044519 00 
-04451A 3F 
-04451B 04 
-              12140 VDU	(VDU_BUFFER+1)		; Palette Colour
-04451C 3A     0001M LD	A, val
-04451D 01 
-04451E 4A 
-04451F 04 
-044520 CD     0002M CALL	OSWRCH
-044521 00 
-044522 3F 
-044523 04 
-              12141 VDU	0			; RGB set to 0
-044524 3E     0001M LD	A, val
-044525 00 
-044526 CD     0002M CALL	OSWRCH
-044527 00 
-044528 3F 
-044529 04 
-              12142 VDU	0
-04452A 3E     0001M LD	A, val
-04452B 00 
-04452C CD     0002M CALL	OSWRCH
-04452D 00 
-04452E 3F 
-04452F 04 
-              12143 VDU	0
-044530 3E     0001M LD	A, val
-044531 00 
-044532 CD     0002M CALL	OSWRCH
-044533 00 
-044534 3F 
-044535 04 
-044536 C3     12144 JP	XEQ
-044537 96 
-044538 0B 
-044539 04 
-              12145 ;
-04453A CD     12146 COLOUR_2:		CALL	COMMA
-04453B 22 
+              12127 ;
+044478 DD     12128 PUSH	IX			; Get the system vars in IX
+044479 E5 
+              12129 MOSCALL	mos_sysvars		; Reset the semaphore
+04447A 3E     0001M LD	A, function
+04447B 08 
+04447C 49     0002M RST.LIS	08h
+04447D CF 
+04447E DD     12130 RES	2, (IX+sysvar_vpd_pflags)
+04447F CB 
+044480 04 
+044481 96 
+              12131 VDU	23
+044482 3E     0001M LD	A, val
+044483 17 
+044484 CD     0002M CALL	OSWRCH
+044485 00 
+044486 3F 
+044487 04 
+              12132 VDU	0
+044488 3E     0001M LD	A, val
+044489 00 
+04448A CD     0002M CALL	OSWRCH
+04448B 00 
+04448C 3F 
+04448D 04 
+              12133 VDU	vdp_scrpixel
+04448E 3E     0001M LD	A, val
+04448F 84 
+044490 CD     0002M CALL	OSWRCH
+044491 00 
+044492 3F 
+044493 04 
+              12134 VDU	(VDU_BUFFER+0)
+044494 3A     0001M LD	A, val
+044495 00 
+044496 4A 
+044497 04 
+044498 CD     0002M CALL	OSWRCH
+044499 00 
+04449A 3F 
+04449B 04 
+              12135 VDU	(VDU_BUFFER+1)
+04449C 3A     0001M LD	A, val
+04449D 01 
+04449E 4A 
+04449F 04 
+0444A0 CD     0002M CALL	OSWRCH
+0444A1 00 
+0444A2 3F 
+0444A3 04 
+              12136 VDU	(VDU_BUFFER+2)
+0444A4 3A     0001M LD	A, val
+0444A5 02 
+0444A6 4A 
+0444A7 04 
+0444A8 CD     0002M CALL	OSWRCH
+0444A9 00 
+0444AA 3F 
+0444AB 04 
+              12137 VDU	(VDU_BUFFER+3)
+0444AC 3A     0001M LD	A, val
+0444AD 03 
+0444AE 4A 
+0444AF 04 
+0444B0 CD     0002M CALL	OSWRCH
+0444B1 00 
+0444B2 3F 
+0444B3 04 
+0444B4 DD     12138 @@:			BIT	2, (IX+sysvar_vpd_pflags)
+0444B5 CB 
+0444B6 04 
+0444B7 56 
+0444B8 28     12139 JR	Z, @B			; Wait for the result
+0444B9 FA 
+              12140 ;
+              12141 ; Return the data as a 1 byte index
+              12142 ;
+0444BA DD     12143 LD	L, (IX+sysvar_scrpixelIndex)
+0444BB 6E 
+0444BC 16 
+0444BD DD     12144 POP	IX
+0444BE E1 
+0444BF C3     12145 JP	COUNT0
+0444C0 7F 
+0444C1 05 
+0444C2 04 
+              12146 
+              12147 
+              12148 ; COLOUR colour
+              12149 ; COLOUR L,P
+              12150 ; COLOUR L,R,G,B
+              12151 ;
+0444C3 CD     12152 COLOUR:			CALL	EXPRI			; The colour / mode
+0444C4 0A 
+0444C5 03 
+0444C6 04 
+0444C7 D9     12153 EXX
+0444C8 7D     12154 LD	A, L
+0444C9 32     12155 LD	(VDU_BUFFER+0), A	; Store first parameter
+0444CA 00 
+0444CB 4A 
+0444CC 04 
+0444CD CD     12156 CALL	NXT			; Are there any more parameters?
+0444CE 70 
+0444CF 0A 
+0444D0 04 
+0444D1 FE     12157 CP	','
+0444D2 2C 
+0444D3 28     12158 JR	Z, COLOUR_1		; Yes, so we're doing a palette change next
+0444D4 12 
+              12159 ;
+              12160 VDU	11h			; Just set the colour
+0444D5 3E     0001M LD	A, val
+0444D6 11 
+0444D7 CD     0002M CALL	OSWRCH
+0444D8 00 
+0444D9 3F 
+0444DA 04 
+              12161 VDU	(VDU_BUFFER+0)
+0444DB 3A     0001M LD	A, val
+0444DC 00 
+0444DD 4A 
+0444DE 04 
+0444DF CD     0002M CALL	OSWRCH
+0444E0 00 
+0444E1 3F 
+0444E2 04 
+0444E3 C3     12162 JP	XEQ
+0444E4 96 
+0444E5 0B 
+0444E6 04 
+              12163 ;
+0444E7 CD     12164 COLOUR_1:		CALL	COMMA
+0444E8 22 
+0444E9 0A 
+0444EA 04 
+0444EB CD     12165 CALL	EXPRI			; Parse R (OR P)
+0444EC 0A 
+0444ED 03 
+0444EE 04 
+0444EF D9     12166 EXX
+0444F0 7D     12167 LD	A, L
+0444F1 32     12168 LD	(VDU_BUFFER+1), A
+0444F2 01 
+0444F3 4A 
+0444F4 04 
+0444F5 CD     12169 CALL	NXT			; Are there any more parameters?
+0444F6 70 
+0444F7 0A 
+0444F8 04 
+0444F9 FE     12170 CP	','
+0444FA 2C 
+0444FB 28     12171 JR	Z, COLOUR_2		; Yes, so we're doing COLOUR L,R,G,B
+0444FC 2C 
+              12172 ;
+              12173 VDU	13h			; VDU:COLOUR
+0444FD 3E     0001M LD	A, val
+0444FE 13 
+0444FF CD     0002M CALL	OSWRCH
+044500 00 
+044501 3F 
+044502 04 
+              12174 VDU	(VDU_BUFFER+0)		; Logical Colour
+044503 3A     0001M LD	A, val
+044504 00 
+044505 4A 
+044506 04 
+044507 CD     0002M CALL	OSWRCH
+044508 00 
+044509 3F 
+04450A 04 
+              12175 VDU	(VDU_BUFFER+1)		; Palette Colour
+04450B 3A     0001M LD	A, val
+04450C 01 
+04450D 4A 
+04450E 04 
+04450F CD     0002M CALL	OSWRCH
+044510 00 
+044511 3F 
+044512 04 
+              12176 VDU	0			; RGB set to 0
+044513 3E     0001M LD	A, val
+044514 00 
+044515 CD     0002M CALL	OSWRCH
+044516 00 
+044517 3F 
+044518 04 
+              12177 VDU	0
+044519 3E     0001M LD	A, val
+04451A 00 
+04451B CD     0002M CALL	OSWRCH
+04451C 00 
+04451D 3F 
+04451E 04 
+              12178 VDU	0
+04451F 3E     0001M LD	A, val
+044520 00 
+044521 CD     0002M CALL	OSWRCH
+044522 00 
+044523 3F 
+044524 04 
+044525 C3     12179 JP	XEQ
+044526 96 
+044527 0B 
+044528 04 
+              12180 ;
+044529 CD     12181 COLOUR_2:		CALL	COMMA
+04452A 22 
+04452B 0A 
+04452C 04 
+04452D CD     12182 CALL	EXPRI			; Parse G
+04452E 0A 
+04452F 03 
+044530 04 
+044531 D9     12183 EXX
+044532 7D     12184 LD	A, L
+044533 32     12185 LD	(VDU_BUFFER+2), A
+044534 02 
+044535 4A 
+044536 04 
+044537 CD     12186 CALL	COMMA
+044538 22 
+044539 0A 
+04453A 04 
+04453B CD     12187 CALL	EXPRI			; Parse B
 04453C 0A 
-04453D 04 
-04453E CD     12147 CALL	EXPRI			; Parse G
-04453F 0A 
-044540 03 
-044541 04 
-044542 D9     12148 EXX
-044543 7D     12149 LD	A, L
-044544 32     12150 LD	(VDU_BUFFER+2), A
-044545 02 
-044546 4A 
-044547 04 
-044548 CD     12151 CALL	COMMA
-044549 22 
-04454A 0A 
-04454B 04 
-04454C CD     12152 CALL	EXPRI			; Parse B
-04454D 0A 
-04454E 03 
-04454F 04 
-044550 D9     12153 EXX
-044551 7D     12154 LD	A, L
-044552 32     12155 LD	(VDU_BUFFER+3), A
-044553 03 
-044554 4A 
-044555 04 
-              12156 VDU	13h			; VDU:COLOUR
-044556 3E     0001M LD	A, val
-044557 13 
-044558 CD     0002M CALL	OSWRCH
-044559 00 
-04455A 3F 
-04455B 04 
-              12157 VDU	(VDU_BUFFER+0)		; Logical Colour
-04455C 3A     0001M LD	A, val
-04455D 00 
-04455E 4A 
-04455F 04 
-044560 CD     0002M CALL	OSWRCH
-044561 00 
-044562 3F 
-044563 04 
-              12158 VDU	FFh			; Physical Colour (-1 for RGB mode)
-044564 3E     0001M LD	A, val
-044565 FF 
-044566 CD     0002M CALL	OSWRCH
-044567 00 
-044568 3F 
-044569 04 
-              12159 VDU	(VDU_BUFFER+1)		; R
-04456A 3A     0001M LD	A, val
-04456B 01 
-04456C 4A 
-04456D 04 
-04456E CD     0002M CALL	OSWRCH
-04456F 00 
-044570 3F 
-044571 04 
-              12160 VDU	(VDU_BUFFER+2)		; G
-044572 3A     0001M LD	A, val
-044573 02 
-044574 4A 
-044575 04 
-044576 CD     0002M CALL	OSWRCH
-044577 00 
-044578 3F 
-044579 04 
-              12161 VDU	(VDU_BUFFER+3)		; B
-04457A 3A     0001M LD	A, val
-04457B 03 
-04457C 4A 
-04457D 04 
-04457E CD     0002M CALL	OSWRCH
-04457F 00 
-044580 3F 
-044581 04 
-044582 C3     12162 JP	XEQ
-044583 96 
-044584 0B 
-044585 04 
-              12163 
-              12164 ; GCOL mode,colour
-              12165 ;
-044586 CD     12166 GCOL:			CALL	EXPRI			; Parse MODE
-044587 0A 
-044588 03 
-044589 04 
-04458A D9     12167 EXX
-04458B 7D     12168 LD	A, L
-04458C 32     12169 LD	(VDU_BUFFER+0), A
-04458D 00 
-04458E 4A 
-04458F 04 
-044590 CD     12170 CALL	COMMA
-044591 22 
-044592 0A 
-044593 04 
-              12171 ;
-044594 CD     12172 CALL	EXPRI			; Parse Colour
-044595 0A 
-044596 03 
-044597 04 
-044598 D9     12173 EXX
-044599 7D     12174 LD	A, L
-04459A 32     12175 LD	(VDU_BUFFER+1), A
-04459B 01 
-04459C 4A 
-04459D 04 
-              12176 ;
-              12177 VDU	12h			; VDU:GCOL
-04459E 3E     0001M LD	A, val
-04459F 12 
-0445A0 CD     0002M CALL	OSWRCH
-0445A1 00 
-0445A2 3F 
-0445A3 04 
-              12178 VDU	(VDU_BUFFER+0)		; Mode
-0445A4 3A     0001M LD	A, val
-0445A5 00 
-0445A6 4A 
-0445A7 04 
-0445A8 CD     0002M CALL	OSWRCH
-0445A9 00 
-0445AA 3F 
-0445AB 04 
-              12179 VDU	(VDU_BUFFER+1)		; Colour
-0445AC 3A     0001M LD	A, val
-0445AD 01 
-0445AE 4A 
-0445AF 04 
-0445B0 CD     0002M CALL	OSWRCH
-0445B1 00 
-0445B2 3F 
-0445B3 04 
-0445B4 C3     12180 JP	XEQ
-0445B5 96 
-0445B6 0B 
-0445B7 04 
-              12181 
-              12182 ; PLOT mode,x,y
-              12183 ;
-0445B8 CD     12184 PLOT:			CALL	EXPRI		; Parse mode
-0445B9 0A 
-0445BA 03 
-0445BB 04 
-0445BC D9     12185 EXX
-0445BD E5     12186 PUSH	HL		; Push mode (L) onto stack
-0445BE CD     12187 CALL	COMMA
-0445BF 22 
-0445C0 0A 
-0445C1 04 
-0445C2 CD     12188 CALL	EXPR_W2		; Parse X and Y
-0445C3 B6 
-0445C4 43 
-0445C5 04 
-0445C6 C1     12189 POP	BC		; Pop mode (C) off stack
-              12190 PLOT_1:			VDU	19H		; VDU code for PLOT
-0445C7 3E     0001M LD	A, val
-0445C8 19 
-0445C9 CD     0002M CALL	OSWRCH
-0445CA 00 
-0445CB 3F 
-0445CC 04 
-              12191 VDU	C		;  C: Mode
-0445CD 79     0001M LD	A, val
-0445CE CD     0002M CALL	OSWRCH
-0445CF 00 
-0445D0 3F 
-0445D1 04 
-              12192 VDU	E		; DE: X
-0445D2 7B     0001M LD	A, val
-0445D3 CD     0002M CALL	OSWRCH
-0445D4 00 
-0445D5 3F 
-0445D6 04 
-              12193 VDU	D
-0445D7 7A     0001M LD	A, val
-0445D8 CD     0002M CALL	OSWRCH
-0445D9 00 
-0445DA 3F 
-0445DB 04 
-              12194 VDU	L		; HL: Y
-0445DC 7D     0001M LD	A, val
-0445DD CD     0002M CALL	OSWRCH
-0445DE 00 
-0445DF 3F 
-0445E0 04 
-              12195 VDU	H
-0445E1 7C     0001M LD	A, val
-0445E2 CD     0002M CALL	OSWRCH
-0445E3 00 
-0445E4 3F 
-0445E5 04 
-0445E6 C3     12196 JP	XEQ
-0445E7 96 
-0445E8 0B 
-0445E9 04 
-              12197 
-              12198 ; MOVE x,y
-              12199 ;
-0445EA CD     12200 MOVE:			CALL	EXPR_W2		; Parse X and Y
-0445EB B6 
-0445EC 43 
-0445ED 04 
-0445EE 0E     12201 LD	C, 04H		; Plot mode 04H (Move)
-0445EF 04 
-0445F0 18     12202 JR	PLOT_1		; Plot
-0445F1 D5 
-              12203 
-              12204 ; DRAW x1,y1
-              12205 ; DRAW x1,y1,x2,y2
+04453D 03 
+04453E 04 
+04453F D9     12188 EXX
+044540 7D     12189 LD	A, L
+044541 32     12190 LD	(VDU_BUFFER+3), A
+044542 03 
+044543 4A 
+044544 04 
+              12191 VDU	13h			; VDU:COLOUR
+044545 3E     0001M LD	A, val
+044546 13 
+044547 CD     0002M CALL	OSWRCH
+044548 00 
+044549 3F 
+04454A 04 
+              12192 VDU	(VDU_BUFFER+0)		; Logical Colour
+04454B 3A     0001M LD	A, val
+04454C 00 
+04454D 4A 
+04454E 04 
+04454F CD     0002M CALL	OSWRCH
+044550 00 
+044551 3F 
+044552 04 
+              12193 VDU	FFh			; Physical Colour (-1 for RGB mode)
+044553 3E     0001M LD	A, val
+044554 FF 
+044555 CD     0002M CALL	OSWRCH
+044556 00 
+044557 3F 
+044558 04 
+              12194 VDU	(VDU_BUFFER+1)		; R
+044559 3A     0001M LD	A, val
+04455A 01 
+04455B 4A 
+04455C 04 
+04455D CD     0002M CALL	OSWRCH
+04455E 00 
+04455F 3F 
+044560 04 
+              12195 VDU	(VDU_BUFFER+2)		; G
+044561 3A     0001M LD	A, val
+044562 02 
+044563 4A 
+044564 04 
+044565 CD     0002M CALL	OSWRCH
+044566 00 
+044567 3F 
+044568 04 
+              12196 VDU	(VDU_BUFFER+3)		; B
+044569 3A     0001M LD	A, val
+04456A 03 
+04456B 4A 
+04456C 04 
+04456D CD     0002M CALL	OSWRCH
+04456E 00 
+04456F 3F 
+044570 04 
+044571 C3     12197 JP	XEQ
+044572 96 
+044573 0B 
+044574 04 
+              12198 
+              12199 ; GCOL mode,colour
+              12200 ;
+044575 CD     12201 GCOL:			CALL	EXPRI			; Parse MODE
+044576 0A 
+044577 03 
+044578 04 
+044579 D9     12202 EXX
+04457A 7D     12203 LD	A, L
+04457B 32     12204 LD	(VDU_BUFFER+0), A
+04457C 00 
+04457D 4A 
+04457E 04 
+04457F CD     12205 CALL	COMMA
+044580 22 
+044581 0A 
+044582 04 
               12206 ;
-0445F2 CD     12207 DRAW:			CALL	EXPR_W2		; Get X1 and Y1
-0445F3 B6 
-0445F4 43 
-0445F5 04 
-0445F6 CD     12208 CALL	NXT		; Are there any more parameters?
-0445F7 70 
-0445F8 0A 
-0445F9 04 
-0445FA FE     12209 CP	','
-0445FB 2C 
-0445FC 0E     12210 LD	C, 05h		; Code for LINE
-0445FD 05 
-0445FE 20     12211 JR	NZ, PLOT_1	; No, so just do DRAW x1,y1
-0445FF C7 
-              12212 VDU	19h		; Move to the first coordinates
-044600 3E     0001M LD	A, val
-044601 19 
-044602 CD     0002M CALL	OSWRCH
-044603 00 
-044604 3F 
-044605 04 
-              12213 VDU	04h
-044606 3E     0001M LD	A, val
-044607 04 
-044608 CD     0002M CALL	OSWRCH
-044609 00 
-04460A 3F 
-04460B 04 
-              12214 VDU	E
-04460C 7B     0001M LD	A, val
-04460D CD     0002M CALL	OSWRCH
-04460E 00 
-04460F 3F 
-044610 04 
-              12215 VDU	D
-044611 7A     0001M LD	A, val
-044612 CD     0002M CALL	OSWRCH
-044613 00 
-044614 3F 
-044615 04 
-              12216 VDU	L
-044616 7D     0001M LD	A, val
-044617 CD     0002M CALL	OSWRCH
-044618 00 
-044619 3F 
-04461A 04 
-              12217 VDU	H
-04461B 7C     0001M LD	A, val
-04461C CD     0002M CALL	OSWRCH
-04461D 00 
-04461E 3F 
-04461F 04 
-044620 CD     12218 CALL	COMMA
-044621 22 
-044622 0A 
-044623 04 
-044624 C5     12219 PUSH	BC
-044625 CD     12220 CALL	EXPR_W2		; Get X2 and Y2
-044626 B6 
-044627 43 
-044628 04 
-044629 C1     12221 POP	BC
-04462A 18     12222 JR	PLOT_1		; Now DRAW the line to those positions
-04462B 9B 
-              12223 
-              12224 
-              12225 
-              12226 ; --- End agon_graphics.asm ---
-              12227 
-              12228 ; --- Begin agon_sound.asm ---
-              12229 ;
-              12230 ; Title:	BBC Basic for AGON - Audio stuff
-              12231 ; Author:	Dean Belfield
-              12232 ; Created:	12/05/2023
-              12233 ; Last Updated:	12/05/2023
+044583 CD     12207 CALL	EXPRI			; Parse Colour
+044584 0A 
+044585 03 
+044586 04 
+044587 D9     12208 EXX
+044588 7D     12209 LD	A, L
+044589 32     12210 LD	(VDU_BUFFER+1), A
+04458A 01 
+04458B 4A 
+04458C 04 
+              12211 ;
+              12212 VDU	12h			; VDU:GCOL
+04458D 3E     0001M LD	A, val
+04458E 12 
+04458F CD     0002M CALL	OSWRCH
+044590 00 
+044591 3F 
+044592 04 
+              12213 VDU	(VDU_BUFFER+0)		; Mode
+044593 3A     0001M LD	A, val
+044594 00 
+044595 4A 
+044596 04 
+044597 CD     0002M CALL	OSWRCH
+044598 00 
+044599 3F 
+04459A 04 
+              12214 VDU	(VDU_BUFFER+1)		; Colour
+04459B 3A     0001M LD	A, val
+04459C 01 
+04459D 4A 
+04459E 04 
+04459F CD     0002M CALL	OSWRCH
+0445A0 00 
+0445A1 3F 
+0445A2 04 
+0445A3 C3     12215 JP	XEQ
+0445A4 96 
+0445A5 0B 
+0445A6 04 
+              12216 
+              12217 ; PLOT mode,x,y
+              12218 ;
+0445A7 CD     12219 PLOT:			CALL	EXPRI		; Parse mode
+0445A8 0A 
+0445A9 03 
+0445AA 04 
+0445AB D9     12220 EXX
+0445AC E5     12221 PUSH	HL		; Push mode (L) onto stack
+0445AD CD     12222 CALL	COMMA
+0445AE 22 
+0445AF 0A 
+0445B0 04 
+0445B1 CD     12223 CALL	EXPR_W2		; Parse X and Y
+0445B2 A5 
+0445B3 43 
+0445B4 04 
+0445B5 C1     12224 POP	BC		; Pop mode (C) off stack
+              12225 PLOT_1:			VDU	19H		; VDU code for PLOT
+0445B6 3E     0001M LD	A, val
+0445B7 19 
+0445B8 CD     0002M CALL	OSWRCH
+0445B9 00 
+0445BA 3F 
+0445BB 04 
+              12226 VDU	C		;  C: Mode
+0445BC 79     0001M LD	A, val
+0445BD CD     0002M CALL	OSWRCH
+0445BE 00 
+0445BF 3F 
+0445C0 04 
+              12227 VDU	E		; DE: X
+0445C1 7B     0001M LD	A, val
+0445C2 CD     0002M CALL	OSWRCH
+0445C3 00 
+0445C4 3F 
+0445C5 04 
+              12228 VDU	D
+0445C6 7A     0001M LD	A, val
+0445C7 CD     0002M CALL	OSWRCH
+0445C8 00 
+0445C9 3F 
+0445CA 04 
+              12229 VDU	L		; HL: Y
+0445CB 7D     0001M LD	A, val
+0445CC CD     0002M CALL	OSWRCH
+0445CD 00 
+0445CE 3F 
+0445CF 04 
+              12230 VDU	H
+0445D0 7C     0001M LD	A, val
+0445D1 CD     0002M CALL	OSWRCH
+0445D2 00 
+0445D3 3F 
+0445D4 04 
+0445D5 C3     12231 JP	XEQ
+0445D6 96 
+0445D7 0B 
+0445D8 04 
+              12232 
+              12233 ; MOVE x,y
               12234 ;
-              12235 ; Modinfo:
-              12236 
-              12237 ; .ASSUME	ADL = 1
+0445D9 CD     12235 MOVE:			CALL	EXPR_W2		; Parse X and Y
+0445DA A5 
+0445DB 43 
+0445DC 04 
+0445DD 0E     12236 LD	C, 04H		; Plot mode 04H (Move)
+0445DE 04 
+0445DF 18     12237 JR	PLOT_1		; Plot
+0445E0 D5 
               12238 
-              12239 ; INCLUDE	"equs.inc"
-              12240 ; INCLUDE "macros.inc"
-              12241 ; INCLUDE "mos_api.inc"	; In MOS/src
-              12242 
-              12243 ; SEGMENT CODE
-              12244 
-              12245 ; XDEF	SOUND
-              12246 
-              12247 ; XREF	COMMA
-              12248 ; XREF	EXPR_W2
-              12249 ; XREF	XEQ
-              12250 ; XREF	LTRAP
-              12251 ; XREF	OSWRCH
-              12252 ; XREF	VDU_BUFFER
-              12253 
-              12254 
-              12255 ; SOUND channel,volume,pitch,duration
-              12256 ; volume: 0 (off) to -15 (full volume)
-              12257 ; pitch: 0 - 255
-              12258 ; duration: -1 to 254 (duration in 20ths of a second, -1 = play forever)
-              12259 ;
-04462C CD     12260 SOUND:			CALL	EXPR_W2			; DE: Channel/Control, HL: Volume
-04462D B6 
-04462E 43 
-04462F 04 
-044630 7D     12261 LD	A, L 			;  A: Volume
-044631 F5     12262 PUSH	AF
-044632 D5     12263 PUSH	DE
-044633 CD     12264 CALL	COMMA
-044634 22 
-044635 0A 
-044636 04 
-044637 CD     12265 CALL	EXPR_W2			; DE: Pitch, HL: Duration
-044638 B6 
-044639 43 
-04463A 04 
-04463B 53     12266 LD	D, E			;  D: Pitch
-04463C 5D     12267 LD	E, L 			;  E: Duration
-04463D E1     12268 POP	HL 			; HL: Channel/Control
-04463E F1     12269 POP	AF
-04463F ED     12270 NEG
-044640 44 
-044641 FE     12271 CP	16			; Check volume is in bounds
-044642 10 
-044643 D2     12272 JP	NC, XEQ			; Out of bounds, do nothing
-044644 96 
-044645 0B 
-044646 04 
-              12273 ;
-              12274 ; Store	in VDU vars
-              12275 ;
-044647 4F     12276 LD	C, A			; Store Volume in C
-044648 7D     12277 LD	A, L
-044649 32     12278 LD	(VDU_BUFFER+0), A	; Channel
-04464A 00 
-04464B 4A 
-04464C 04 
-04464D AF     12279 XOR	A
-04464E 32     12280 LD	(VDU_BUFFER+1), A	; Waveform
-04464F 01 
-044650 4A 
-044651 04 
-              12281 ;
-              12282 ; Calculate the volume
-              12283 ;
-044652 06     12284 LD	B, 6			; C already contains the volume
-044653 06 
-044654 ED     12285 MLT	BC			; Multiply by 6 (0-15 scales to 0-90)
-044655 4C 
-044656 79     12286 LD	A, C
-044657 32     12287 LD	(VDU_BUFFER+2), A
-044658 02 
-044659 4A 
-04465A 04 
-              12288 ;
-              12289 ; And the frequency
-              12290 ;
-04465B 4B     12291 LD	C, E			; Store duration in C
-04465C 26     12292 LD	H, 0			; Lookup the frequency
-04465D 00 
-04465E 6A     12293 LD	L, D
-04465F 11     12294 LD	DE, SOUND_FREQ_LOOKUP
-044660 E6 
-044661 46 
-044662 04 
-044663 29     12295 ADD	HL, HL
-044664 19     12296 ADD	HL, DE
-044665 7E     12297 LD	A, (HL)
-044666 32     12298 LD	(VDU_BUFFER+3), A
-044667 03 
-044668 4A 
-044669 04 
-04466A 23     12299 INC	HL
-04466B 7E     12300 LD	A, (HL)
-04466C 32     12301 LD	(VDU_BUFFER+4), A
-04466D 04 
-04466E 4A 
-04466F 04 
-              12302 ;
-              12303 ; And now the duration - multiply it by 50 to convert from 1/20ths of seconds to milliseconds
-              12304 ;
-044670 06     12305 LD	B, 50			; C contains the duration, so MLT by 50
-044671 32 
-044672 ED     12306 MLT	BC
-044673 4C 
-044674 ED     12307 LD	(VDU_BUFFER+5), BC
-044675 43 
-044676 05 
-044677 4A 
-044677 04   
+              12239 ; DRAW x1,y1
+              12240 ; DRAW x1,y1,x2,y2
+              12241 ;
+0445E1 CD     12242 DRAW:			CALL	EXPR_W2		; Get X1 and Y1
+0445E2 A5 
+0445E3 43 
+0445E4 04 
+0445E5 CD     12243 CALL	NXT		; Are there any more parameters?
+0445E6 70 
+0445E7 0A 
+0445E8 04 
+0445E9 FE     12244 CP	','
+0445EA 2C 
+0445EB 0E     12245 LD	C, 05h		; Code for LINE
+0445EC 05 
+0445ED 20     12246 JR	NZ, PLOT_1	; No, so just do DRAW x1,y1
+0445EE C7 
+              12247 VDU	19h		; Move to the first coordinates
+0445EF 3E     0001M LD	A, val
+0445F0 19 
+0445F1 CD     0002M CALL	OSWRCH
+0445F2 00 
+0445F3 3F 
+0445F4 04 
+              12248 VDU	04h
+0445F5 3E     0001M LD	A, val
+0445F6 04 
+0445F7 CD     0002M CALL	OSWRCH
+0445F8 00 
+0445F9 3F 
+0445FA 04 
+              12249 VDU	E
+0445FB 7B     0001M LD	A, val
+0445FC CD     0002M CALL	OSWRCH
+0445FD 00 
+0445FE 3F 
+0445FF 04 
+              12250 VDU	D
+044600 7A     0001M LD	A, val
+044601 CD     0002M CALL	OSWRCH
+044602 00 
+044603 3F 
+044604 04 
+              12251 VDU	L
+044605 7D     0001M LD	A, val
+044606 CD     0002M CALL	OSWRCH
+044607 00 
+044608 3F 
+044609 04 
+              12252 VDU	H
+04460A 7C     0001M LD	A, val
+04460B CD     0002M CALL	OSWRCH
+04460C 00 
+04460D 3F 
+04460E 04 
+04460F CD     12253 CALL	COMMA
+044610 22 
+044611 0A 
+044612 04 
+044613 C5     12254 PUSH	BC
+044614 CD     12255 CALL	EXPR_W2		; Get X2 and Y2
+044615 A5 
+044616 43 
+044617 04 
+044618 C1     12256 POP	BC
+044619 18     12257 JR	PLOT_1		; Now DRAW the line to those positions
+04461A 9B 
+              12258 
+              12259 
+              12260 
+              12261 ; --- End agon_graphics.asm ---
+              12262 
+              12263 ; --- Begin agon_sound.asm ---
+              12264 ;
+              12265 ; Title:	BBC Basic for AGON - Audio stuff
+              12266 ; Author:	Dean Belfield
+              12267 ; Created:	12/05/2023
+              12268 ; Last Updated:	12/05/2023
+              12269 ;
+              12270 ; Modinfo:
+              12271 
+              12272 ; .ASSUME	ADL = 1
+              12273 
+              12274 ; INCLUDE	"equs.inc"
+              12275 ; INCLUDE "macros.inc"
+              12276 ; INCLUDE "mos_api.inc"	; In MOS/src
+              12277 
+              12278 ; SEGMENT CODE
+              12279 
+              12280 ; XDEF	SOUND
+              12281 
+              12282 ; XREF	COMMA
+              12283 ; XREF	EXPR_W2
+              12284 ; XREF	XEQ
+              12285 ; XREF	LTRAP
+              12286 ; XREF	OSWRCH
+              12287 ; XREF	VDU_BUFFER
+              12288 
+              12289 
+              12290 ; SOUND channel,volume,pitch,duration
+              12291 ; volume: 0 (off) to -15 (full volume)
+              12292 ; pitch: 0 - 255
+              12293 ; duration: -1 to 254 (duration in 20ths of a second, -1 = play forever)
+              12294 ;
+04461B CD     12295 SOUND:			CALL	EXPR_W2			; DE: Channel/Control, HL: Volume
+04461C A5 
+04461D 43 
+04461E 04 
+04461F 7D     12296 LD	A, L 			;  A: Volume
+044620 F5     12297 PUSH	AF
+044621 D5     12298 PUSH	DE
+044622 CD     12299 CALL	COMMA
+044623 22 
+044624 0A 
+044625 04 
+044626 CD     12300 CALL	EXPR_W2			; DE: Pitch, HL: Duration
+044627 A5 
+044628 43 
+044629 04 
+04462A 53     12301 LD	D, E			;  D: Pitch
+04462B 5D     12302 LD	E, L 			;  E: Duration
+04462C E1     12303 POP	HL 			; HL: Channel/Control
+04462D F1     12304 POP	AF
+04462E ED     12305 NEG
+04462F 44 
+044630 FE     12306 CP	16			; Check volume is in bounds
+044631 10 
+044632 D2     12307 JP	NC, XEQ			; Out of bounds, do nothing
+044633 96 
+044634 0B 
+044635 04 
               12308 ;
-044679 DD     12309 PUSH	IX			; Get the system vars in IX
-04467A E5 
-              12310 MOSCALL	mos_sysvars		; Reset the semaphore
-04467B 3E     0001M LD	A, function
-04467C 08 
-04467D 49     0002M RST.LIS	08h
-04467E CF 
-04467F 5B     12311 SOUND0:			RES.LIL	3, (IX+sysvar_vpd_pflags)
-044680 DD 
-044681 CB 
-044682 04 
-044682 9E   
-              12312 ;
-              12313 VDU	23			; Send the sound command
-044684 3E     0001M LD	A, val
-044685 17 
-044686 CD     0002M CALL	OSWRCH
-044687 00 
-044688 3F 
-044689 04 
-              12314 VDU	0
-04468A 3E     0001M LD	A, val
-04468B 00 
-04468C CD     0002M CALL	OSWRCH
-04468D 00 
-04468E 3F 
-04468F 04 
-              12315 VDU	vdp_audio
-044690 3E     0001M LD	A, val
-044691 85 
-044692 CD     0002M CALL	OSWRCH
-044693 00 
-044694 3F 
-044695 04 
-              12316 VDU	(VDU_BUFFER+0)		; 0: Channel
-044696 3A     0001M LD	A, val
-044697 00 
-044698 4A 
-044699 04 
-04469A CD     0002M CALL	OSWRCH
-04469B 00 
-04469C 3F 
-04469D 04 
-              12317 VDU	(VDU_BUFFER+1)		; 1: Waveform (0)
-04469E 3A     0001M LD	A, val
-04469F 01 
-0446A0 4A 
-0446A1 04 
-0446A2 CD     0002M CALL	OSWRCH
-0446A3 00 
-0446A4 3F 
-0446A5 04 
-              12318 VDU	(VDU_BUFFER+2)		; 2: Volume (0-100)
-0446A6 3A     0001M LD	A, val
-0446A7 02 
-0446A8 4A 
-0446A9 04 
-0446AA CD     0002M CALL	OSWRCH
-0446AB 00 
-0446AC 3F 
-0446AD 04 
-              12319 VDU	(VDU_BUFFER+3)		; 3: Frequency L
-0446AE 3A     0001M LD	A, val
-0446AF 03 
-0446B0 4A 
-0446B1 04 
-0446B2 CD     0002M CALL	OSWRCH
-0446B3 00 
-0446B4 3F 
-0446B5 04 
-              12320 VDU	(VDU_BUFFER+4)		; 4: Frequency H
-0446B6 3A     0001M LD	A, val
-0446B7 04 
-0446B8 4A 
-0446B9 04 
-0446BA CD     0002M CALL	OSWRCH
-0446BB 00 
-0446BC 3F 
-0446BD 04 
-              12321 VDU	(VDU_BUFFER+5)		; 5: Duration L
-0446BE 3A     0001M LD	A, val
-0446BF 05 
-0446C0 4A 
-0446C1 04 
-0446C2 CD     0002M CALL	OSWRCH
-0446C3 00 
-0446C4 3F 
-0446C5 04 
-              12322 VDU	(VDU_BUFFER+6)		; 6: Duration H
-0446C6 3A     0001M LD	A, val
-0446C7 06 
-0446C8 4A 
-0446C9 04 
-0446CA CD     0002M CALL	OSWRCH
-0446CB 00 
-0446CC 3F 
-0446CD 04 
+              12309 ; Store	in VDU vars
+              12310 ;
+044636 4F     12311 LD	C, A			; Store Volume in C
+044637 7D     12312 LD	A, L
+044638 32     12313 LD	(VDU_BUFFER+0), A	; Channel
+044639 00 
+04463A 4A 
+04463B 04 
+04463C AF     12314 XOR	A
+04463D 32     12315 LD	(VDU_BUFFER+1), A	; Waveform
+04463E 01 
+04463F 4A 
+044640 04 
+              12316 ;
+              12317 ; Calculate the volume
+              12318 ;
+044641 06     12319 LD	B, 6			; C already contains the volume
+044642 06 
+044643 ED     12320 MLT	BC			; Multiply by 6 (0-15 scales to 0-90)
+044644 4C 
+044645 79     12321 LD	A, C
+044646 32     12322 LD	(VDU_BUFFER+2), A
+044647 02 
+044648 4A 
+044649 04 
               12323 ;
-              12324 ; Wait for acknowledgement
+              12324 ; And the frequency
               12325 ;
-0446CE 5B     12326 @@:			BIT.LIL	3, (IX+sysvar_vpd_pflags)
-0446CF DD 
-0446D0 CB 
-0446D1 04 
-0446D1 5E   
-0446D3 28     12327 JR	Z, @B			; Wait for the result
-0446D4 F9 
-0446D5 CD     12328 CALL	LTRAP			; Check for ESC
-0446D6 71 
-0446D7 3F 
-0446D8 04 
-0446D9 5B     12329 LD.LIL	A, (IX+sysvar_audioSuccess)
-0446DA DD 
-0446DB 7E 
-0446DC 0E 
-0446DD A7     12330 AND	A			; Check if VDP has queued the note
-0446DE 28     12331 JR	Z, SOUND0		; No, so loop back and send again
-0446DF 9F 
-              12332 ;
-0446E0 DD     12333 POP	IX
-0446E1 E1 
-0446E2 C3     12334 JP	XEQ
-0446E3 96 
-0446E4 0B 
-0446E5 04 
-              12335 
-              12336 ; Frequency Lookup Table
-              12337 ; Set up to replicate the BBC Micro audio frequencies
-              12338 ;
-              12339 ; Split over 5 complete octaves, with 53 being middle C
-              12340 ; * C4: 262hz
-              12341 ; + A4: 440hz
-              12342 ;
-              12343 ;	2	3	4	5	6	7	8
-              12344 ;
-              12345 ; B	1	49	97	145	193	241
-              12346 ; A#	0	45	93	141	189	237
-              12347 ; A		41	89+	137	185	233
-              12348 ; G#		37	85	133	181	229
-              12349 ; G		33	81	129	177	225
-              12350 ; F#		29	77	125	173	221
-              12351 ; F		25	73	121	169	217
-              12352 ; E		21	69	117	165	213
-              12353 ; D#		17	65	113	161	209
-              12354 ; D		13	61	109	157	205	253
-              12355 ; C#		9	57	105	153	201	249
-              12356 ; C		5	53*	101	149	197	245
-              12357 ;
-0446E6 75     12358 SOUND_FREQ_LOOKUP:	DW	 117,  118,  120,  122,  123,  131,  133,  135
-0446E7 00 
-0446E8 76 
+04464A 4B     12326 LD	C, E			; Store duration in C
+04464B 26     12327 LD	H, 0			; Lookup the frequency
+04464C 00 
+04464D 6A     12328 LD	L, D
+04464E 11     12329 LD	DE, SOUND_FREQ_LOOKUP
+04464F D5 
+044650 46 
+044651 04 
+044652 29     12330 ADD	HL, HL
+044653 19     12331 ADD	HL, DE
+044654 7E     12332 LD	A, (HL)
+044655 32     12333 LD	(VDU_BUFFER+3), A
+044656 03 
+044657 4A 
+044658 04 
+044659 23     12334 INC	HL
+04465A 7E     12335 LD	A, (HL)
+04465B 32     12336 LD	(VDU_BUFFER+4), A
+04465C 04 
+04465D 4A 
+04465E 04 
+              12337 ;
+              12338 ; And now the duration - multiply it by 50 to convert from 1/20ths of seconds to milliseconds
+              12339 ;
+04465F 06     12340 LD	B, 50			; C contains the duration, so MLT by 50
+044660 32 
+044661 ED     12341 MLT	BC
+044662 4C 
+044663 ED     12342 LD	(VDU_BUFFER+5), BC
+044664 43 
+044665 05 
+044666 4A 
+044666 04   
+              12343 ;
+044668 DD     12344 PUSH	IX			; Get the system vars in IX
+044669 E5 
+              12345 MOSCALL	mos_sysvars		; Reset the semaphore
+04466A 3E     0001M LD	A, function
+04466B 08 
+04466C 49     0002M RST.LIS	08h
+04466D CF 
+04466E 5B     12346 SOUND0:			RES.LIL	3, (IX+sysvar_vpd_pflags)
+04466F DD 
+044670 CB 
+044671 04 
+044671 9E   
+              12347 ;
+              12348 VDU	23			; Send the sound command
+044673 3E     0001M LD	A, val
+044674 17 
+044675 CD     0002M CALL	OSWRCH
+044676 00 
+044677 3F 
+044678 04 
+              12349 VDU	0
+044679 3E     0001M LD	A, val
+04467A 00 
+04467B CD     0002M CALL	OSWRCH
+04467C 00 
+04467D 3F 
+04467E 04 
+              12350 VDU	vdp_audio
+04467F 3E     0001M LD	A, val
+044680 85 
+044681 CD     0002M CALL	OSWRCH
+044682 00 
+044683 3F 
+044684 04 
+              12351 VDU	(VDU_BUFFER+0)		; 0: Channel
+044685 3A     0001M LD	A, val
+044686 00 
+044687 4A 
+044688 04 
+044689 CD     0002M CALL	OSWRCH
+04468A 00 
+04468B 3F 
+04468C 04 
+              12352 VDU	(VDU_BUFFER+1)		; 1: Waveform (0)
+04468D 3A     0001M LD	A, val
+04468E 01 
+04468F 4A 
+044690 04 
+044691 CD     0002M CALL	OSWRCH
+044692 00 
+044693 3F 
+044694 04 
+              12353 VDU	(VDU_BUFFER+2)		; 2: Volume (0-100)
+044695 3A     0001M LD	A, val
+044696 02 
+044697 4A 
+044698 04 
+044699 CD     0002M CALL	OSWRCH
+04469A 00 
+04469B 3F 
+04469C 04 
+              12354 VDU	(VDU_BUFFER+3)		; 3: Frequency L
+04469D 3A     0001M LD	A, val
+04469E 03 
+04469F 4A 
+0446A0 04 
+0446A1 CD     0002M CALL	OSWRCH
+0446A2 00 
+0446A3 3F 
+0446A4 04 
+              12355 VDU	(VDU_BUFFER+4)		; 4: Frequency H
+0446A5 3A     0001M LD	A, val
+0446A6 04 
+0446A7 4A 
+0446A8 04 
+0446A9 CD     0002M CALL	OSWRCH
+0446AA 00 
+0446AB 3F 
+0446AC 04 
+              12356 VDU	(VDU_BUFFER+5)		; 5: Duration L
+0446AD 3A     0001M LD	A, val
+0446AE 05 
+0446AF 4A 
+0446B0 04 
+0446B1 CD     0002M CALL	OSWRCH
+0446B2 00 
+0446B3 3F 
+0446B4 04 
+              12357 VDU	(VDU_BUFFER+6)		; 6: Duration H
+0446B5 3A     0001M LD	A, val
+0446B6 06 
+0446B7 4A 
+0446B8 04 
+0446B9 CD     0002M CALL	OSWRCH
+0446BA 00 
+0446BB 3F 
+0446BC 04 
+              12358 ;
+              12359 ; Wait for acknowledgement
+              12360 ;
+0446BD 5B     12361 @@:			BIT.LIL	3, (IX+sysvar_vpd_pflags)
+0446BE DD 
+0446BF CB 
+0446C0 04 
+0446C0 5E   
+0446C2 28     12362 JR	Z, @B			; Wait for the result
+0446C3 F9 
+0446C4 CD     12363 CALL	LTRAP			; Check for ESC
+0446C5 71 
+0446C6 3F 
+0446C7 04 
+0446C8 5B     12364 LD.LIL	A, (IX+sysvar_audioSuccess)
+0446C9 DD 
+0446CA 7E 
+0446CB 0E 
+0446CC A7     12365 AND	A			; Check if VDP has queued the note
+0446CD 28     12366 JR	Z, SOUND0		; No, so loop back and send again
+0446CE 9F 
+              12367 ;
+0446CF DD     12368 POP	IX
+0446D0 E1 
+0446D1 C3     12369 JP	XEQ
+0446D2 96 
+0446D3 0B 
+0446D4 04 
+              12370 
+              12371 ; Frequency Lookup Table
+              12372 ; Set up to replicate the BBC Micro audio frequencies
+              12373 ;
+              12374 ; Split over 5 complete octaves, with 53 being middle C
+              12375 ; * C4: 262hz
+              12376 ; + A4: 440hz
+              12377 ;
+              12378 ;	2	3	4	5	6	7	8
+              12379 ;
+              12380 ; B	1	49	97	145	193	241
+              12381 ; A#	0	45	93	141	189	237
+              12382 ; A		41	89+	137	185	233
+              12383 ; G#		37	85	133	181	229
+              12384 ; G		33	81	129	177	225
+              12385 ; F#		29	77	125	173	221
+              12386 ; F		25	73	121	169	217
+              12387 ; E		21	69	117	165	213
+              12388 ; D#		17	65	113	161	209
+              12389 ; D		13	61	109	157	205	253
+              12390 ; C#		9	57	105	153	201	249
+              12391 ; C		5	53*	101	149	197	245
+              12392 ;
+0446D5 75     12393 SOUND_FREQ_LOOKUP:	DW	 117,  118,  120,  122,  123,  131,  133,  135
+0446D6 00 
+0446D7 76 
+0446D8 00 
+0446D8 78   
+0446D9 00 
+0446DA 7A 
+0446DB 00 
+0446DB 7B   
+0446DC 00 
+0446DD 83 
+0446DE 00 
+0446DE 85   
+0446DF 00 
+0446E0 87 
+0446E1 00 
+0446E5 89     12394 DW	 137,  139,  141,  143,  145,  147,  149,  151
+0446E6 00 
+0446E7 8B 
+0446E8 00 
+0446E8 8D   
 0446E9 00 
-0446E9 78   
-0446EA 00 
-0446EB 7A 
+0446EA 8F 
+0446EB 00 
+0446EB 91   
 0446EC 00 
-0446EC 7B   
-0446ED 00 
-0446EE 83 
+0446ED 93 
+0446EE 00 
+0446EE 95   
 0446EF 00 
-0446EF 85   
-0446F0 00 
-0446F1 87 
-0446F2 00 
-0446F6 89     12359 DW	 137,  139,  141,  143,  145,  147,  149,  151
-0446F7 00 
-0446F8 8B 
+0446F0 97 
+0446F1 00 
+0446F5 99     12395 DW	 153,  156,  158,  160,  162,  165,  167,  170
+0446F6 00 
+0446F7 9C 
+0446F8 00 
+0446F8 9E   
 0446F9 00 
-0446F9 8D   
-0446FA 00 
-0446FB 8F 
+0446FA A0 
+0446FB 00 
+0446FB A2   
 0446FC 00 
-0446FC 91   
-0446FD 00 
-0446FE 93 
+0446FD A5 
+0446FE 00 
+0446FE A7   
 0446FF 00 
-0446FF 95   
-044700 00 
-044701 97 
-044702 00 
-044706 99     12360 DW	 153,  156,  158,  160,  162,  165,  167,  170
-044707 00 
-044708 9C 
+044700 AA 
+044701 00 
+044705 AC     12396 DW	 172,  175,  177,  180,  182,  185,  188,  190
+044706 00 
+044707 AF 
+044708 00 
+044708 B1   
 044709 00 
-044709 9E   
-04470A 00 
-04470B A0 
+04470A B4 
+04470B 00 
+04470B B6   
 04470C 00 
-04470C A2   
-04470D 00 
-04470E A5 
+04470D B9 
+04470E 00 
+04470E BC   
 04470F 00 
-04470F A7   
-044710 00 
-044711 AA 
-044712 00 
-044716 AC     12361 DW	 172,  175,  177,  180,  182,  185,  188,  190
-044717 00 
-044718 AF 
+044710 BE 
+044711 00 
+044715 C1     12397 DW	 193,  196,  199,  202,  205,  208,  211,  214
+044716 00 
+044717 C4 
+044718 00 
+044718 C7   
 044719 00 
-044719 B1   
-04471A 00 
-04471B B4 
+04471A CA 
+04471B 00 
+04471B CD   
 04471C 00 
-04471C B6   
-04471D 00 
-04471E B9 
+04471D D0 
+04471E 00 
+04471E D3   
 04471F 00 
-04471F BC   
-044720 00 
-044721 BE 
-044722 00 
-044726 C1     12362 DW	 193,  196,  199,  202,  205,  208,  211,  214
-044727 00 
-044728 C4 
+044720 D6 
+044721 00 
+044725 D9     12398 DW	 217,  220,  223,  226,  230,  233,  236,  240
+044726 00 
+044727 DC 
+044728 00 
+044728 DF   
 044729 00 
-044729 C7   
-04472A 00 
-04472B CA 
+04472A E2 
+04472B 00 
+04472B E6   
 04472C 00 
-04472C CD   
-04472D 00 
-04472E D0 
+04472D E9 
+04472E 00 
+04472E EC   
 04472F 00 
-04472F D3   
-044730 00 
-044731 D6 
-044732 00 
-044736 D9     12363 DW	 217,  220,  223,  226,  230,  233,  236,  240
-044737 00 
-044738 DC 
+044730 F0 
+044731 00 
+044735 F3     12399 DW	 243,  247,  251,  254,  258,  262,  265,  269
+044736 00 
+044737 F7 
+044738 00 
+044738 FB   
 044739 00 
-044739 DF   
-04473A 00 
-04473B E2 
-04473C 00 
-04473C E6   
-04473D 00 
-04473E E9 
-04473F 00 
-04473F EC   
-044740 00 
-044741 F0 
-044742 00 
-044746 F3     12364 DW	 243,  247,  251,  254,  258,  262,  265,  269
-044747 00 
-044748 F7 
-044749 00 
-044749 FB   
-04474A 00 
-04474B FE 
-04474C 00 
-04474C 02   
-04474D 01 
-04474E 06 
+04473A FE 
+04473B 00 
+04473B 02   
+04473C 01 
+04473D 06 
+04473E 01 
+04473E 09   
+04473F 01 
+044740 0D 
+044741 01 
+044745 11     12400 DW	 273,  277,  281,  285,  289,  294,  298,  302
+044746 01 
+044747 15 
+044748 01 
+044748 19   
+044749 01 
+04474A 1D 
+04474B 01 
+04474B 21   
+04474C 01 
+04474D 26 
+04474E 01 
+04474E 2A   
 04474F 01 
-04474F 09   
-044750 01 
-044751 0D 
-044752 01 
-044756 11     12365 DW	 273,  277,  281,  285,  289,  294,  298,  302
-044757 01 
-044758 15 
+044750 2E 
+044751 01 
+044755 33     12401 DW	 307,  311,  316,  320,  325,  330,  334,  339
+044756 01 
+044757 37 
+044758 01 
+044758 3C   
 044759 01 
-044759 19   
-04475A 01 
-04475B 1D 
+04475A 40 
+04475B 01 
+04475B 45   
 04475C 01 
-04475C 21   
-04475D 01 
-04475E 26 
+04475D 4A 
+04475E 01 
+04475E 4E   
 04475F 01 
-04475F 2A   
-044760 01 
-044761 2E 
-044762 01 
-044766 33     12366 DW	 307,  311,  316,  320,  325,  330,  334,  339
-044767 01 
-044768 37 
+044760 53 
+044761 01 
+044765 58     12402 DW	 344,  349,  354,  359,  365,  370,  375,  381
+044766 01 
+044767 5D 
+044768 01 
+044768 62   
 044769 01 
-044769 3C   
-04476A 01 
-04476B 40 
+04476A 67 
+04476B 01 
+04476B 6D   
 04476C 01 
-04476C 45   
-04476D 01 
-04476E 4A 
+04476D 72 
+04476E 01 
+04476E 77   
 04476F 01 
-04476F 4E   
-044770 01 
-044771 53 
-044772 01 
-044776 58     12367 DW	 344,  349,  354,  359,  365,  370,  375,  381
-044777 01 
-044778 5D 
+044770 7D 
+044771 01 
+044775 82     12403 DW	 386,  392,  398,  403,  409,  415,  421,  427
+044776 01 
+044777 88 
+044778 01 
+044778 8E   
 044779 01 
-044779 62   
-04477A 01 
-04477B 67 
+04477A 93 
+04477B 01 
+04477B 99   
 04477C 01 
-04477C 6D   
-04477D 01 
-04477E 72 
+04477D 9F 
+04477E 01 
+04477E A5   
 04477F 01 
-04477F 77   
-044780 01 
-044781 7D 
-044782 01 
-044786 82     12368 DW	 386,  392,  398,  403,  409,  415,  421,  427
-044787 01 
-044788 88 
+044780 AB 
+044781 01 
+044785 B2     12404 DW	 434,  440,  446,  453,  459,  466,  473,  480
+044786 01 
+044787 B8 
+044788 01 
+044788 BE   
 044789 01 
-044789 8E   
-04478A 01 
-04478B 93 
+04478A C5 
+04478B 01 
+04478B CB   
 04478C 01 
-04478C 99   
-04478D 01 
-04478E 9F 
+04478D D2 
+04478E 01 
+04478E D9   
 04478F 01 
-04478F A5   
-044790 01 
-044791 AB 
-044792 01 
-044796 B2     12369 DW	 434,  440,  446,  453,  459,  466,  473,  480
-044797 01 
-044798 B8 
+044790 E0 
+044791 01 
+044795 E7     12405 DW	 487,  494,  501,  508,  516,  523,  531,  539
+044796 01 
+044797 EE 
+044798 01 
+044798 F5   
 044799 01 
-044799 BE   
-04479A 01 
-04479B C5 
-04479C 01 
-04479C CB   
-04479D 01 
-04479E D2 
-04479F 01 
-04479F D9   
-0447A0 01 
-0447A1 E0 
-0447A2 01 
-0447A6 E7     12370 DW	 487,  494,  501,  508,  516,  523,  531,  539
-0447A7 01 
-0447A8 EE 
-0447A9 01 
-0447A9 F5   
-0447AA 01 
-0447AB FC 
-0447AC 01 
-0447AC 04   
-0447AD 02 
-0447AE 0B 
+04479A FC 
+04479B 01 
+04479B 04   
+04479C 02 
+04479D 0B 
+04479E 02 
+04479E 13   
+04479F 02 
+0447A0 1B 
+0447A1 02 
+0447A5 22     12406 DW	 546,  554,  562,  571,  579,  587,  596,  605
+0447A6 02 
+0447A7 2A 
+0447A8 02 
+0447A8 32   
+0447A9 02 
+0447AA 3B 
+0447AB 02 
+0447AB 43   
+0447AC 02 
+0447AD 4B 
+0447AE 02 
+0447AE 54   
 0447AF 02 
-0447AF 13   
-0447B0 02 
-0447B1 1B 
-0447B2 02 
-0447B6 22     12371 DW	 546,  554,  562,  571,  579,  587,  596,  605
-0447B7 02 
-0447B8 2A 
+0447B0 5D 
+0447B1 02 
+0447B5 65     12407 DW	 613,  622,  631,  641,  650,  659,  669,  679
+0447B6 02 
+0447B7 6E 
+0447B8 02 
+0447B8 77   
 0447B9 02 
-0447B9 32   
-0447BA 02 
-0447BB 3B 
+0447BA 81 
+0447BB 02 
+0447BB 8A   
 0447BC 02 
-0447BC 43   
-0447BD 02 
-0447BE 4B 
+0447BD 93 
+0447BE 02 
+0447BE 9D   
 0447BF 02 
-0447BF 54   
-0447C0 02 
-0447C1 5D 
-0447C2 02 
-0447C6 65     12372 DW	 613,  622,  631,  641,  650,  659,  669,  679
-0447C7 02 
-0447C8 6E 
+0447C0 A7 
+0447C1 02 
+0447C5 B1     12408 DW	 689,  699,  709,  719,  729,  740,  751,  762
+0447C6 02 
+0447C7 BB 
+0447C8 02 
+0447C8 C5   
 0447C9 02 
-0447C9 77   
-0447CA 02 
-0447CB 81 
+0447CA CF 
+0447CB 02 
+0447CB D9   
 0447CC 02 
-0447CC 8A   
-0447CD 02 
-0447CE 93 
+0447CD E4 
+0447CE 02 
+0447CE EF   
 0447CF 02 
-0447CF 9D   
-0447D0 02 
-0447D1 A7 
-0447D2 02 
-0447D6 B1     12373 DW	 689,  699,  709,  719,  729,  740,  751,  762
-0447D7 02 
-0447D8 BB 
-0447D9 02 
-0447D9 C5   
-0447DA 02 
-0447DB CF 
-0447DC 02 
-0447DC D9   
-0447DD 02 
-0447DE E4 
-0447DF 02 
-0447DF EF   
-0447E0 02 
-0447E1 FA 
-0447E2 02 
-0447E6 05     12374 DW	 773,  784,  795,  807,  819,  831,  843,  855
-0447E7 03 
-0447E8 10 
+0447D0 FA 
+0447D1 02 
+0447D5 05     12409 DW	 773,  784,  795,  807,  819,  831,  843,  855
+0447D6 03 
+0447D7 10 
+0447D8 03 
+0447D8 1B   
+0447D9 03 
+0447DA 27 
+0447DB 03 
+0447DB 33   
+0447DC 03 
+0447DD 3F 
+0447DE 03 
+0447DE 4B   
+0447DF 03 
+0447E0 57 
+0447E1 03 
+0447E5 63     12410 DW	 867,  880,  893,  906,  919,  932,  946,  960
+0447E6 03 
+0447E7 70 
+0447E8 03 
+0447E8 7D   
 0447E9 03 
-0447E9 1B   
-0447EA 03 
-0447EB 27 
+0447EA 8A 
+0447EB 03 
+0447EB 97   
 0447EC 03 
-0447EC 33   
-0447ED 03 
-0447EE 3F 
+0447ED A4 
+0447EE 03 
+0447EE B2   
 0447EF 03 
-0447EF 4B   
-0447F0 03 
-0447F1 57 
-0447F2 03 
-0447F6 63     12375 DW	 867,  880,  893,  906,  919,  932,  946,  960
-0447F7 03 
-0447F8 70 
+0447F0 C0 
+0447F1 03 
+0447F5 CE     12411 DW	 974,  988, 1002, 1017, 1032, 1047, 1062, 1078
+0447F6 03 
+0447F7 DC 
+0447F8 03 
+0447F8 EA   
 0447F9 03 
-0447F9 7D   
-0447FA 03 
-0447FB 8A 
-0447FC 03 
-0447FC 97   
-0447FD 03 
-0447FE A4 
-0447FF 03 
-0447FF B2   
-044800 03 
-044801 C0 
-044802 03 
-044806 CE     12376 DW	 974,  988, 1002, 1017, 1032, 1047, 1062, 1078
-044807 03 
-044808 DC 
-044809 03 
-044809 EA   
-04480A 03 
-04480B F9 
-04480C 03 
-04480C 08   
-04480D 04 
-04480E 17 
+0447FA F9 
+0447FB 03 
+0447FB 08   
+0447FC 04 
+0447FD 17 
+0447FE 04 
+0447FE 26   
+0447FF 04 
+044800 36 
+044801 04 
+044805 45     12412 DW	1093, 1109, 1125, 1142, 1158, 1175, 1192, 1210
+044806 04 
+044807 55 
+044808 04 
+044808 65   
+044809 04 
+04480A 76 
+04480B 04 
+04480B 86   
+04480C 04 
+04480D 97 
+04480E 04 
+04480E A8   
 04480F 04 
-04480F 26   
-044810 04 
-044811 36 
-044812 04 
-044816 45     12377 DW	1093, 1109, 1125, 1142, 1158, 1175, 1192, 1210
-044817 04 
-044818 55 
+044810 BA 
+044811 04 
+044815 CB     12413 DW	1227, 1245, 1263, 1282, 1300, 1319, 1338, 1358
+044816 04 
+044817 DD 
+044818 04 
+044818 EF   
 044819 04 
-044819 65   
-04481A 04 
-04481B 76 
-04481C 04 
-04481C 86   
-04481D 04 
-04481E 97 
-04481F 04 
-04481F A8   
-044820 04 
-044821 BA 
-044822 04 
-044826 CB     12378 DW	1227, 1245, 1263, 1282, 1300, 1319, 1338, 1358
-044827 04 
-044828 DD 
-044829 04 
-044829 EF   
-04482A 04 
-04482B 02 
+04481A 02 
+04481B 05 
+04481B 14   
+04481C 05 
+04481D 27 
+04481E 05 
+04481E 3A   
+04481F 05 
+044820 4E 
+044821 05 
+044825 62     12414 DW	1378, 1398, 1418, 1439, 1459, 1481, 1502, 1524
+044826 05 
+044827 76 
+044828 05 
+044828 8A   
+044829 05 
+04482A 9F 
+04482B 05 
+04482B B3   
 04482C 05 
-04482C 14   
-04482D 05 
-04482E 27 
+04482D C9 
+04482E 05 
+04482E DE   
 04482F 05 
-04482F 3A   
-044830 05 
-044831 4E 
-044832 05 
-044836 62     12379 DW	1378, 1398, 1418, 1439, 1459, 1481, 1502, 1524
-044837 05 
-044838 76 
-044839 05 
-044839 8A   
-04483A 05 
-04483B 9F 
-04483C 05 
-04483C B3   
-04483D 05 
-04483E C9 
-04483F 05 
-04483F DE   
-044840 05 
-044841 F4 
-044842 05 
-044846 0A     12380 DW	1546, 1569, 1592, 1615, 1638, 1662, 1686, 1711
-044847 06 
-044848 21 
+044830 F4 
+044831 05 
+044835 0A     12415 DW	1546, 1569, 1592, 1615, 1638, 1662, 1686, 1711
+044836 06 
+044837 21 
+044838 06 
+044838 38   
+044839 06 
+04483A 4F 
+04483B 06 
+04483B 66   
+04483C 06 
+04483D 7E 
+04483E 06 
+04483E 96   
+04483F 06 
+044840 AF 
+044841 06 
+044845 C8     12416 DW	1736, 1761, 1786, 1812, 1839, 1866, 1893, 1920
+044846 06 
+044847 E1 
+044848 06 
+044848 FA   
 044849 06 
-044849 38   
-04484A 06 
-04484B 4F 
-04484C 06 
-04484C 66   
-04484D 06 
-04484E 7E 
-04484F 06 
-04484F 96   
-044850 06 
-044851 AF 
-044852 06 
-044856 C8     12381 DW	1736, 1761, 1786, 1812, 1839, 1866, 1893, 1920
-044857 06 
-044858 E1 
-044859 06 
-044859 FA   
-04485A 06 
-04485B 14 
-04485C 07 
-04485C 2F   
-04485D 07 
-04485E 4A 
-04485F 07 
-04485F 65   
-044860 07 
-044861 80 
-044862 07 
-044866 9C     12382 DW	1948, 1976, 2005, 2034, 2064, 2093, 2123, 2154
-044867 07 
-044868 B8 
-044869 07 
-044869 D5   
-04486A 07 
-04486B F2 
-04486C 07 
-04486C 10   
-04486D 08 
-04486E 2D 
-04486F 08 
-04486F 4B   
-044870 08 
-044871 6A 
-044872 08 
-044876 8A     12383 DW	2186, 2217, 2250, 2282, 2316, 2349, 2383, 2418
-044877 08 
-044878 A9 
-044879 08 
-044879 CA   
-04487A 08 
-04487B EA 
-04487C 08 
-04487C 0C   
-04487D 09 
-04487E 2D 
-04487F 09 
-04487F 4F   
-044880 09 
-044881 72 
-044882 09 
-044886 95     12384 DW	2453, 2489, 2525, 2562, 2599, 2637, 2675, 2714
-044887 09 
-044888 B9 
-044889 09 
-044889 DD   
-04488A 09 
-04488B 02 
-04488C 0A 
-04488C 27   
-04488D 0A 
-04488E 4D 
-04488F 0A 
-04488F 73   
-044890 0A 
-044891 9A 
-044892 0A 
-044896 C2     12385 DW	2754, 2794, 2834, 2876, 2918, 2960, 3003, 3047
-044897 0A 
-044898 EA 
-044899 0A 
-044899 12   
-04489A 0B 
-04489B 3C 
-04489C 0B 
-04489C 66   
-04489D 0B 
-04489E 90 
-04489F 0B 
-04489F BB   
-0448A0 0B 
-0448A1 E7 
-0448A2 0B 
-0448A6 13     12386 DW	3091, 3136, 3182, 3228, 3275, 3322, 3371, 3420
-0448A7 0C 
-0448A8 40 
-0448A9 0C 
-0448A9 6E   
-0448AA 0C 
-0448AB 9C 
-0448AC 0C 
-0448AC CB   
-0448AD 0C 
-0448AE FA 
-0448AF 0C 
-0448AF 2B   
-0448B0 0D 
-0448B1 5C 
-0448B2 0D 
-0448B6 8E     12387 DW	3470, 3520, 3571, 3623, 3676, 3729, 3784, 3839
-0448B7 0D 
-0448B8 C0 
-0448B9 0D 
-0448B9 F3   
-0448BA 0D 
-0448BB 27 
-0448BC 0E 
-0448BC 5C   
-0448BD 0E 
-0448BE 91 
-0448BF 0E 
-0448BF C8   
-0448C0 0E 
-0448C1 FF 
-0448C2 0E 
-0448C6 36     12388 DW	3894, 3951, 4009, 4067, 4126, 4186, 4247, 4309
-0448C7 0F 
-0448C8 6F 
-0448C9 0F 
-0448C9 A9   
-0448CA 0F 
-0448CB E3 
-0448CC 0F 
-0448CC 1E   
-0448CD 10 
-0448CE 5A 
-0448CF 10 
-0448CF 97   
-0448D0 10 
-0448D1 D5 
-0448D2 10 
-0448D6 13     12389 DW	4371, 4435, 4499, 4565, 4631, 4699, 4767, 4836
-0448D7 11 
-0448D8 53 
-0448D9 11 
-0448D9 93   
-0448DA 11 
-0448DB D5 
-0448DC 11 
-0448DC 17   
-0448DD 12 
-0448DE 5B 
-0448DF 12 
-0448DF 9F   
-0448E0 12 
-0448E1 E4 
-0448E2 12 
-              12390 
-              12391 
-              12392 ; --- End agon_sound.asm ---
-              12393 
-              12394 ; --- Begin interrupts.asm ---
-              12395 ;
-              12396 ; Title:	BBC Basic for AGON - Interrupts
-              12397 ; Author:	Dean Belfield
-              12398 ; Created:	12/05/2023
-              12399 ; Last Updated:	07/06/2023
-              12400 ;
-              12401 ; Modinfo:
-              12402 ; 07/06/2023:	Modified to run in ADL mode
-              12403 
-              12404 ; .ASSUME	ADL = 1
-              12405 
-              12406 ; INCLUDE	"macros.inc"
-              12407 ; INCLUDE	"equs.inc"
-              12408 ; INCLUDE "mos_api.inc"	; In MOS/src
-              12409 
-              12410 ; SEGMENT CODE
-              12411 
-              12412 ; XDEF	VBLANK_INIT
-              12413 ; XDEF	VBLANK_STOP
-              12414 ; XDEF	VBLANK_HANDLER
-              12415 
-              12416 ; XREF	ESCSET
-              12417 ; XREF	KEYDOWN		; In ram.asm
-              12418 ; XREF	KEYASCII 	; In ram.asm
-              12419 ; XREF	KEYCOUNT	; In ram.asm
-              12420 
-              12421 ; Hook into the MOS VBLANK interrupt
-              12422 ;
-0448E6 F3     12423 VBLANK_INIT:		DI
-0448E7 21     12424 LD		HL, VBLANK_HANDLER		; this interrupt handler routine who's
-0448E8 3B 
-0448E9 49 
-0448EA 04 
-0448EB 1E     12425 LD		E, 32h				; Set up the VBlank Interrupt Vector
-0448EC 32 
-              12426 MOSCALL		mos_setintvector
-0448ED 3E     0001M LD	A, function
-0448EE 14 
-0448EF 49     0002M RST.LIS	08h
-0448F0 CF 
-              12427 ; EX		HL, DE 				; DEU: Pointer to the MOS interrupt vector
-0448F1 EB     12428 ex de,hl
-0448F2 21     12429 LD		HL, VBLANK_HANDLER_JP + 1	; Pointer to the JP address in this segment
-0448F3 49 
-0448F4 49 
-0448F5 04 
-0448F6 ED     12430 LD		(HL), DE			; Self-modify the code
-0448F7 1F 
-0448F8 FB     12431 EI
-0448F9 C9     12432 RET
-              12433 
-              12434 ; Unhook the custom VBLANK interrupt
+04484A 14 
+04484B 07 
+04484B 2F   
+04484C 07 
+04484D 4A 
+04484E 07 
+04484E 65   
+04484F 07 
+044850 80 
+044851 07 
+044855 9C     12417 DW	1948, 1976, 2005, 2034, 2064, 2093, 2123, 2154
+044856 07 
+044857 B8 
+044858 07 
+044858 D5   
+044859 07 
+04485A F2 
+04485B 07 
+04485B 10   
+04485C 08 
+04485D 2D 
+04485E 08 
+04485E 4B   
+04485F 08 
+044860 6A 
+044861 08 
+044865 8A     12418 DW	2186, 2217, 2250, 2282, 2316, 2349, 2383, 2418
+044866 08 
+044867 A9 
+044868 08 
+044868 CA   
+044869 08 
+04486A EA 
+04486B 08 
+04486B 0C   
+04486C 09 
+04486D 2D 
+04486E 09 
+04486E 4F   
+04486F 09 
+044870 72 
+044871 09 
+044875 95     12419 DW	2453, 2489, 2525, 2562, 2599, 2637, 2675, 2714
+044876 09 
+044877 B9 
+044878 09 
+044878 DD   
+044879 09 
+04487A 02 
+04487B 0A 
+04487B 27   
+04487C 0A 
+04487D 4D 
+04487E 0A 
+04487E 73   
+04487F 0A 
+044880 9A 
+044881 0A 
+044885 C2     12420 DW	2754, 2794, 2834, 2876, 2918, 2960, 3003, 3047
+044886 0A 
+044887 EA 
+044888 0A 
+044888 12   
+044889 0B 
+04488A 3C 
+04488B 0B 
+04488B 66   
+04488C 0B 
+04488D 90 
+04488E 0B 
+04488E BB   
+04488F 0B 
+044890 E7 
+044891 0B 
+044895 13     12421 DW	3091, 3136, 3182, 3228, 3275, 3322, 3371, 3420
+044896 0C 
+044897 40 
+044898 0C 
+044898 6E   
+044899 0C 
+04489A 9C 
+04489B 0C 
+04489B CB   
+04489C 0C 
+04489D FA 
+04489E 0C 
+04489E 2B   
+04489F 0D 
+0448A0 5C 
+0448A1 0D 
+0448A5 8E     12422 DW	3470, 3520, 3571, 3623, 3676, 3729, 3784, 3839
+0448A6 0D 
+0448A7 C0 
+0448A8 0D 
+0448A8 F3   
+0448A9 0D 
+0448AA 27 
+0448AB 0E 
+0448AB 5C   
+0448AC 0E 
+0448AD 91 
+0448AE 0E 
+0448AE C8   
+0448AF 0E 
+0448B0 FF 
+0448B1 0E 
+0448B5 36     12423 DW	3894, 3951, 4009, 4067, 4126, 4186, 4247, 4309
+0448B6 0F 
+0448B7 6F 
+0448B8 0F 
+0448B8 A9   
+0448B9 0F 
+0448BA E3 
+0448BB 0F 
+0448BB 1E   
+0448BC 10 
+0448BD 5A 
+0448BE 10 
+0448BE 97   
+0448BF 10 
+0448C0 D5 
+0448C1 10 
+0448C5 13     12424 DW	4371, 4435, 4499, 4565, 4631, 4699, 4767, 4836
+0448C6 11 
+0448C7 53 
+0448C8 11 
+0448C8 93   
+0448C9 11 
+0448CA D5 
+0448CB 11 
+0448CB 17   
+0448CC 12 
+0448CD 5B 
+0448CE 12 
+0448CE 9F   
+0448CF 12 
+0448D0 E4 
+0448D1 12 
+              12425 
+              12426 
+              12427 ; --- End agon_sound.asm ---
+              12428 
+              12429 ; --- Begin interrupts.asm ---
+              12430 ;
+              12431 ; Title:	BBC Basic for AGON - Interrupts
+              12432 ; Author:	Dean Belfield
+              12433 ; Created:	12/05/2023
+              12434 ; Last Updated:	07/06/2023
               12435 ;
-0448FA F3     12436 VBLANK_STOP:		DI
-0448FB 21     12437 LD		HL, VBLANK_HANDLER_JP + 1	; Pointer to the JP address in this segment
-0448FC 49 
-0448FD 49 
-0448FE 04 
-0448FF ED     12438 LD		DE, (HL)
-044900 17 
-044901 EB     12439 EX		DE, HL 				; HLU: Address of MOS interrupt vector
-044902 1E     12440 LD		E, 32h
-044903 32 
-              12441 MOSCALL		mos_setintvector		; Restore the MOS interrupt vector
-044904 3E     0001M LD	A, function
-044905 14 
-044906 49     0002M RST.LIS	08h
-044907 CF 
-044908 FB     12442 EI
-044909 C9     12443 RET
+              12436 ; Modinfo:
+              12437 ; 07/06/2023:	Modified to run in ADL mode
+              12438 
+              12439 ; .ASSUME	ADL = 1
+              12440 
+              12441 ; INCLUDE	"macros.inc"
+              12442 ; INCLUDE	"equs.inc"
+              12443 ; INCLUDE "mos_api.inc"	; In MOS/src
               12444 
-              12445 ; A safe LIS call to ESCSET
-              12446 ;
-              12447 DO_KEYBOARD:		MOSCALL		mos_sysvars			; Get the system variables
-04490A 3E     0001M LD	A, function
-04490B 08 
-04490C 49     0002M RST.LIS	08h
-04490D CF 
-04490E 21     12448 LD		HL, KEYCOUNT 			; Check whether the keycount has changed
-04490F 49 
-044910 4D 
-044911 04 
-044912 DD     12449 LD		A, (IX + sysvar_vkeycount)	; by comparing the MOS copy
-044913 7E 
-044914 19 
-044915 BE     12450 CP 		(HL)				; with our local copy
-044916 20     12451 JR		NZ, DO_KEYBOARD_1		; Yes it has, so jump to the next bit
-044917 0A 
-              12452 ;
-044918 AF     12453 DO_KEYBOARD_0:		XOR		A 				; Clear the keyboard values
-044919 32     12454 LD		(KEYASCII), A
-04491A 48 
-04491B 4D 
-04491C 04 
-04491D 32     12455 LD		(KEYDOWN), A
-04491E 47 
-04491F 4D 
-044920 04 
-044921 C9     12456 RET	 					; And return
+              12445 ; SEGMENT CODE
+              12446 
+              12447 ; XDEF	VBLANK_INIT
+              12448 ; XDEF	VBLANK_STOP
+              12449 ; XDEF	VBLANK_HANDLER
+              12450 
+              12451 ; XREF	ESCSET
+              12452 ; XREF	KEYDOWN		; In ram.asm
+              12453 ; XREF	KEYASCII 	; In ram.asm
+              12454 ; XREF	KEYCOUNT	; In ram.asm
+              12455 
+              12456 ; Hook into the MOS VBLANK interrupt
               12457 ;
-044922 77     12458 DO_KEYBOARD_1:		LD		(HL), A 			; Store the updated local copy of keycount
-044923 DD     12459 LD		A, (IX + sysvar_vkeydown)	; Fetch key down value (1 = key down, 0 = key up)
-044924 7E 
-044925 18 
-044926 B7     12460 OR		A
-044927 28     12461 JR		Z, DO_KEYBOARD_0		; If it is key up, then clear the keyboard values
-044928 EF 
-              12462 ;
-044929 32     12463 LD		(KEYDOWN), A 			; Store the keydown value
-04492A 47 
-04492B 4D 
-04492C 04 
-04492D DD     12464 LD		A, (IX + sysvar_keyascii)	; Fetch key ASCII value
-04492E 7E 
-04492F 05 
-044930 32     12465 LD		(KEYASCII), A 			; Store locally
+0448D5 F3     12458 VBLANK_INIT:		DI
+0448D6 21     12459 LD		HL, VBLANK_HANDLER		; this interrupt handler routine who's
+0448D7 2A 
+0448D8 49 
+0448D9 04 
+0448DA 1E     12460 LD		E, 32h				; Set up the VBlank Interrupt Vector
+0448DB 32 
+              12461 MOSCALL		mos_setintvector
+0448DC 3E     0001M LD	A, function
+0448DD 14 
+0448DE 49     0002M RST.LIS	08h
+0448DF CF 
+              12462 ; EX		HL, DE 				; DEU: Pointer to the MOS interrupt vector
+0448E0 EB     12463 ex de,hl
+0448E1 21     12464 LD		HL, VBLANK_HANDLER_JP + 1	; Pointer to the JP address in this segment
+0448E2 38 
+0448E3 49 
+0448E4 04 
+0448E5 ED     12465 LD		(HL), DE			; Self-modify the code
+0448E6 1F 
+0448E7 FB     12466 EI
+0448E8 C9     12467 RET
+              12468 
+              12469 ; Unhook the custom VBLANK interrupt
+              12470 ;
+0448E9 F3     12471 VBLANK_STOP:		DI
+0448EA 21     12472 LD		HL, VBLANK_HANDLER_JP + 1	; Pointer to the JP address in this segment
+0448EB 38 
+0448EC 49 
+0448ED 04 
+0448EE ED     12473 LD		DE, (HL)
+0448EF 17 
+0448F0 EB     12474 EX		DE, HL 				; HLU: Address of MOS interrupt vector
+0448F1 1E     12475 LD		E, 32h
+0448F2 32 
+              12476 MOSCALL		mos_setintvector		; Restore the MOS interrupt vector
+0448F3 3E     0001M LD	A, function
+0448F4 14 
+0448F5 49     0002M RST.LIS	08h
+0448F6 CF 
+0448F7 FB     12477 EI
+0448F8 C9     12478 RET
+              12479 
+              12480 ; A safe LIS call to ESCSET
+              12481 ;
+              12482 DO_KEYBOARD:		MOSCALL		mos_sysvars			; Get the system variables
+0448F9 3E     0001M LD	A, function
+0448FA 08 
+0448FB 49     0002M RST.LIS	08h
+0448FC CF 
+0448FD 21     12483 LD		HL, KEYCOUNT 			; Check whether the keycount has changed
+0448FE 49 
+0448FF 4D 
+044900 04 
+044901 DD     12484 LD		A, (IX + sysvar_vkeycount)	; by comparing the MOS copy
+044902 7E 
+044903 19 
+044904 BE     12485 CP 		(HL)				; with our local copy
+044905 20     12486 JR		NZ, DO_KEYBOARD_1		; Yes it has, so jump to the next bit
+044906 0A 
+              12487 ;
+044907 AF     12488 DO_KEYBOARD_0:		XOR		A 				; Clear the keyboard values
+044908 32     12489 LD		(KEYASCII), A
+044909 48 
+04490A 4D 
+04490B 04 
+04490C 32     12490 LD		(KEYDOWN), A
+04490D 47 
+04490E 4D 
+04490F 04 
+044910 C9     12491 RET	 					; And return
+              12492 ;
+044911 77     12493 DO_KEYBOARD_1:		LD		(HL), A 			; Store the updated local copy of keycount
+044912 DD     12494 LD		A, (IX + sysvar_vkeydown)	; Fetch key down value (1 = key down, 0 = key up)
+044913 7E 
+044914 18 
+044915 B7     12495 OR		A
+044916 28     12496 JR		Z, DO_KEYBOARD_0		; If it is key up, then clear the keyboard values
+044917 EF 
+              12497 ;
+044918 32     12498 LD		(KEYDOWN), A 			; Store the keydown value
+044919 47 
+04491A 4D 
+04491B 04 
+04491C DD     12499 LD		A, (IX + sysvar_keyascii)	; Fetch key ASCII value
+04491D 7E 
+04491E 05 
+04491F 32     12500 LD		(KEYASCII), A 			; Store locally
+044920 48 
+044921 4D 
+044922 04 
+044923 FE     12501 CP		1Bh				; Is it escape?
+044924 1B 
+044925 CC     12502 CALL		Z, ESCSET			; Yes, so set the escape flags
+044926 4C 
+044927 3F 
+044928 04 
+044929 C9     12503 RET						; Return to the interrupt handler
+              12504 
+04492A F3     12505 VBLANK_HANDLER:		DI
+04492B F5     12506 PUSH		AF
+04492C E5     12507 PUSH		HL
+04492D DD     12508 PUSH		IX
+04492E E5 
+04492F CD     12509 CALL		DO_KEYBOARD
+044930 F9 
 044931 48 
-044932 4D 
-044933 04 
-044934 FE     12466 CP		1Bh				; Is it escape?
-044935 1B 
-044936 CC     12467 CALL		Z, ESCSET			; Yes, so set the escape flags
-044937 4C 
-044938 3F 
-044939 04 
-04493A C9     12468 RET						; Return to the interrupt handler
-              12469 
-04493B F3     12470 VBLANK_HANDLER:		DI
-04493C F5     12471 PUSH		AF
-04493D E5     12472 PUSH		HL
-04493E DD     12473 PUSH		IX
-04493F E5 
-044940 CD     12474 CALL		DO_KEYBOARD
-044941 0A 
-044942 49 
-044943 04 
-044944 DD     12475 POP		IX
-044945 E1 
-044946 E1     12476 POP		HL
-044947 F1     12477 POP		AF
-              12478 ;
-              12479 ; Finally jump to the MOS interrupt
-              12480 ;
-044948 C3     12481 VBLANK_HANDLER_JP:	JP		0				; This is self-modified by VBLANK_INIT				; --- End interrupts.asm ---
-044949 00 
-04494A 00 
-04494B 00 
-              12482 
-              12483 ; --- Begin sorry.asm ---
-              12484 ;
-              12485 ; Title:	BBC Basic Interpreter - Z80 version
-              12486 ;		Catch-all for unimplemented functionality
-              12487 ; Author:	Dean Belfield
-              12488 ; Created:	12/05/2023
-              12489 ; Last Updated:	12/05/2023
-              12490 ;
-              12491 ; Modinfo:
-              12492 
-              12493 ; .ASSUME	ADL = 1
-              12494 
-              12495 ; SEGMENT CODE
-              12496 
-              12497 ; XDEF	ENVEL
-              12498 ; XDEF	ADVAL
-              12499 ; XDEF	PUTIMS
-              12500 
-              12501 ; XREF	EXTERR
-              12502 
-              12503 ENVEL:
-              12504 ADVAL:
-              12505 PUTIMS:
-04494C AF     12506 XOR     A
-04494D CD     12507 CALL    EXTERR
-04494E 77 
-04494F 37 
-044950 04 
-044951 53     12508 DEFB    "Sorry"
-044952 6F 
-044953 72 
-044954 72 
-044954 79   
-044956 00     12509 DEFB    0
-              12510 ; --- End sorry.asm ---
-              12511 
-              12512 ; --- Begin ram.asm ---
+044932 04 
+044933 DD     12510 POP		IX
+044934 E1 
+044935 E1     12511 POP		HL
+044936 F1     12512 POP		AF
               12513 ;
-              12514 ; Title:	BBC Basic Interpreter - Z80 version
-              12515 ;		RAM Module for BBC Basic Interpreter
-              12516 ;		For use with Version 2.0 of BBC BASIC
-              12517 ;		Standard CP/M Distribution Version
-              12518 ; Author:	(C) Copyright  R.T.Russell 31-12-1983
-              12519 ; Modified By:	Dean Belfield
-              12520 ; Created:	12/05/2023
-              12521 ; Last Updated:	26/06/2023
-              12522 ;
-              12523 ; Modinfo:
-              12524 ; 06/06/2023:	Modified to run in ADL mode
-              12525 ; 26/06/2023:	Added temporary stores R0 and R1
-              12526 
-              12527 ; .ASSUME	ADL = 1
-              12528 
-              12529 ; DEFINE	LORAM, SPACE = ROM
-              12530 ; SEGMENT LORAM
+              12514 ; Finally jump to the MOS interrupt
+              12515 ;
+044937 C3     12516 VBLANK_HANDLER_JP:	JP		0				; This is self-modified by VBLANK_INIT				; --- End interrupts.asm ---
+044938 00 
+044939 00 
+04493A 00 
+              12517 
+              12518 ; --- Begin sorry.asm ---
+              12519 ;
+              12520 ; Title:	BBC Basic Interpreter - Z80 version
+              12521 ;		Catch-all for unimplemented functionality
+              12522 ; Author:	Dean Belfield
+              12523 ; Created:	12/05/2023
+              12524 ; Last Updated:	12/05/2023
+              12525 ;
+              12526 ; Modinfo:
+              12527 
+              12528 ; .ASSUME	ADL = 1
+              12529 
+              12530 ; SEGMENT CODE
               12531 
-              12532 ; XDEF	ACCS
-              12533 ; XDEF	BUFFER
-              12534 ; XDEF	STAVAR
-              12535 ; XDEF	DYNVAR
-              12536 ; XDEF	FNPTR
-              12537 ; XDEF	PROPTR
-              12538 ; XDEF	PAGE_
-              12539 ; XDEF	TOP
-              12540 ; XDEF	LOMEM
-              12541 ; XDEF 	FREE
-              12542 ; XDEF	HIMEM
-              12543 ; XDEF	LINENO
-              12544 ; XDEF	TRACEN
-              12545 ; XDEF	AUTONO
-              12546 ; XDEF	ERRTRP
-              12547 ; XDEF	ERRTXT
-              12548 ; XDEF	DATPTR
-              12549 ; XDEF	ERL
-              12550 ; XDEF	ERRLIN
-              12551 ; XDEF	RANDOM
-              12552 ; XDEF	COUNT
-              12553 ; XDEF	WIDTH
-              12554 ; XDEF	ERR
-              12555 ; XDEF	LISTON
-              12556 ; XDEF	INCREM
-              12557 
-              12558 ; XDEF	FLAGS
-              12559 ; XDEF	OSWRCHPT
-              12560 ; XDEF	OSWRCHCH
-              12561 ; XDEF	OSWRCHFH
-              12562 ; XDEF	KEYDOWN
-              12563 ; XDEF	KEYASCII
-              12564 ; XDEF	KEYCOUNT
-              12565 
-              12566 ; XDEF	R0
-              12567 ; XDEF	R1
-              12568 
-              12569 ; XDEF	RAM_START
-              12570 ; XDEF	RAM_END
-              12571 ; XDEF	USER
-              12572 
-044957 FF     12573 ALIGN 		256		; ACCS, BUFFER & STAVAR must be on page boundaries
+              12532 ; XDEF	ENVEL
+              12533 ; XDEF	ADVAL
+              12534 ; XDEF	PUTIMS
+              12535 
+              12536 ; XREF	EXTERR
+              12537 
+              12538 ENVEL:
+              12539 ADVAL:
+              12540 PUTIMS:
+04493B AF     12541 XOR     A
+04493C CD     12542 CALL    EXTERR
+04493D 77 
+04493E 37 
+04493F 04 
+044940 53     12543 DEFB    "Sorry"
+044941 6F 
+044942 72 
+044943 72 
+044943 79   
+044945 00     12544 DEFB    0
+              12545 ; --- End sorry.asm ---
+              12546 
+              12547 ; --- Begin ram.asm ---
+              12548 ;
+              12549 ; Title:	BBC Basic Interpreter - Z80 version
+              12550 ;		RAM Module for BBC Basic Interpreter
+              12551 ;		For use with Version 2.0 of BBC BASIC
+              12552 ;		Standard CP/M Distribution Version
+              12553 ; Author:	(C) Copyright  R.T.Russell 31-12-1983
+              12554 ; Modified By:	Dean Belfield
+              12555 ; Created:	12/05/2023
+              12556 ; Last Updated:	26/06/2023
+              12557 ;
+              12558 ; Modinfo:
+              12559 ; 06/06/2023:	Modified to run in ADL mode
+              12560 ; 26/06/2023:	Added temporary stores R0 and R1
+              12561 
+              12562 ; .ASSUME	ADL = 1
+              12563 
+              12564 ; DEFINE	LORAM, SPACE = ROM
+              12565 ; SEGMENT LORAM
+              12566 
+              12567 ; XDEF	ACCS
+              12568 ; XDEF	BUFFER
+              12569 ; XDEF	STAVAR
+              12570 ; XDEF	DYNVAR
+              12571 ; XDEF	FNPTR
+              12572 ; XDEF	PROPTR
+              12573 ; XDEF	PAGE_
+              12574 ; XDEF	TOP
+              12575 ; XDEF	LOMEM
+              12576 ; XDEF 	FREE
+              12577 ; XDEF	HIMEM
+              12578 ; XDEF	LINENO
+              12579 ; XDEF	TRACEN
+              12580 ; XDEF	AUTONO
+              12581 ; XDEF	ERRTRP
+              12582 ; XDEF	ERRTXT
+              12583 ; XDEF	DATPTR
+              12584 ; XDEF	ERL
+              12585 ; XDEF	ERRLIN
+              12586 ; XDEF	RANDOM
+              12587 ; XDEF	COUNT
+              12588 ; XDEF	WIDTH
+              12589 ; XDEF	ERR
+              12590 ; XDEF	LISTON
+              12591 ; XDEF	INCREM
+              12592 
+              12593 ; XDEF	FLAGS
+              12594 ; XDEF	OSWRCHPT
+              12595 ; XDEF	OSWRCHCH
+              12596 ; XDEF	OSWRCHFH
+              12597 ; XDEF	KEYDOWN
+              12598 ; XDEF	KEYASCII
+              12599 ; XDEF	KEYCOUNT
+              12600 
+              12601 ; XDEF	R0
+              12602 ; XDEF	R1
+              12603 
+              12604 ; XDEF	RAM_START
+              12605 ; XDEF	RAM_END
+              12606 ; XDEF	USER
+              12607 
+044946 FF     12608 ALIGN 		256		; ACCS, BUFFER & STAVAR must be on page boundaries
+044947 FF 
+044948 FF 
+044949 FF 
+044949 FF   
+04494A FF 
+04494B FF 
+04494C FF 
+04494C FF   
+04494D FF 
+04494E FF 
+04494F FF 
+04494F FF   
+044950 FF 
+044951 FF 
+044952 FF 
+044952 FF   
+044953 FF 
+044954 FF 
+044955 FF 
+044955 FF   
+044956 FF 
+044957 FF 
 044958 FF 
+044958 FF   
 044959 FF 
 04495A FF 
-04495A FF   
 04495B FF 
+04495B FF   
 04495C FF 
 04495D FF 
-04495D FF   
 04495E FF 
+04495E FF   
 04495F FF 
 044960 FF 
-044960 FF   
 044961 FF 
+044961 FF   
 044962 FF 
 044963 FF 
-044963 FF   
 044964 FF 
+044964 FF   
 044965 FF 
 044966 FF 
-044966 FF   
 044967 FF 
+044967 FF   
 044968 FF 
 044969 FF 
-044969 FF   
 04496A FF 
+04496A FF   
 04496B FF 
 04496C FF 
-04496C FF   
 04496D FF 
+04496D FF   
 04496E FF 
 04496F FF 
-04496F FF   
 044970 FF 
+044970 FF   
 044971 FF 
 044972 FF 
-044972 FF   
 044973 FF 
+044973 FF   
 044974 FF 
 044975 FF 
-044975 FF   
 044976 FF 
+044976 FF   
 044977 FF 
 044978 FF 
-044978 FF   
 044979 FF 
+044979 FF   
 04497A FF 
 04497B FF 
-04497B FF   
 04497C FF 
+04497C FF   
 04497D FF 
 04497E FF 
-04497E FF   
 04497F FF 
+04497F FF   
 044980 FF 
 044981 FF 
-044981 FF   
 044982 FF 
+044982 FF   
 044983 FF 
 044984 FF 
-044984 FF   
 044985 FF 
+044985 FF   
 044986 FF 
 044987 FF 
-044987 FF   
 044988 FF 
+044988 FF   
 044989 FF 
 04498A FF 
-04498A FF   
 04498B FF 
+04498B FF   
 04498C FF 
 04498D FF 
-04498D FF   
 04498E FF 
+04498E FF   
 04498F FF 
 044990 FF 
-044990 FF   
 044991 FF 
+044991 FF   
 044992 FF 
 044993 FF 
-044993 FF   
 044994 FF 
+044994 FF   
 044995 FF 
 044996 FF 
-044996 FF   
 044997 FF 
+044997 FF   
 044998 FF 
 044999 FF 
-044999 FF   
 04499A FF 
+04499A FF   
 04499B FF 
 04499C FF 
-04499C FF   
 04499D FF 
+04499D FF   
 04499E FF 
 04499F FF 
-04499F FF   
 0449A0 FF 
+0449A0 FF   
 0449A1 FF 
 0449A2 FF 
-0449A2 FF   
 0449A3 FF 
+0449A3 FF   
 0449A4 FF 
 0449A5 FF 
-0449A5 FF   
 0449A6 FF 
+0449A6 FF   
 0449A7 FF 
 0449A8 FF 
-0449A8 FF   
 0449A9 FF 
+0449A9 FF   
 0449AA FF 
 0449AB FF 
-0449AB FF   
 0449AC FF 
+0449AC FF   
 0449AD FF 
 0449AE FF 
-0449AE FF   
 0449AF FF 
+0449AF FF   
 0449B0 FF 
 0449B1 FF 
-0449B1 FF   
 0449B2 FF 
+0449B2 FF   
 0449B3 FF 
 0449B4 FF 
-0449B4 FF   
 0449B5 FF 
+0449B5 FF   
 0449B6 FF 
 0449B7 FF 
-0449B7 FF   
 0449B8 FF 
+0449B8 FF   
 0449B9 FF 
 0449BA FF 
-0449BA FF   
 0449BB FF 
+0449BB FF   
 0449BC FF 
 0449BD FF 
-0449BD FF   
 0449BE FF 
+0449BE FF   
 0449BF FF 
 0449C0 FF 
-0449C0 FF   
 0449C1 FF 
+0449C1 FF   
 0449C2 FF 
 0449C3 FF 
-0449C3 FF   
 0449C4 FF 
+0449C4 FF   
 0449C5 FF 
 0449C6 FF 
-0449C6 FF   
 0449C7 FF 
+0449C7 FF   
 0449C8 FF 
 0449C9 FF 
-0449C9 FF   
 0449CA FF 
+0449CA FF   
 0449CB FF 
 0449CC FF 
-0449CC FF   
 0449CD FF 
+0449CD FF   
 0449CE FF 
 0449CF FF 
-0449CF FF   
 0449D0 FF 
+0449D0 FF   
 0449D1 FF 
-0449D2 FF 
-0449D2 FF   
-0449D3 FF 
-0449D4 FF 
-0449D5 FF 
-0449D5 FF   
-              12574 RAM_START:
-              12575 ;
-044A00 00     12576 ACCS:           BLKB    256,0             ; String Accumulator
+              12609 RAM_START:
+              12610 ;
+044A00 00     12611 ACCS:           BLKB    256,0             ; String Accumulator
 044A01 00 
 044A02 00 
 044A03 00 
@@ -23511,7 +23538,7 @@
 044ABE 00 
 044ABF 00 
 044AC0 00 
-044B00 00     12577 BUFFER:         BLKB    256,0             ; String Input Buffer
+044B00 00     12612 BUFFER:         BLKB    256,0             ; String Input Buffer
 044B01 00 
 044B02 00 
 044B03 00 
@@ -23767,7 +23794,7 @@
 044BBE 00 
 044BBF 00 
 044BC0 00 
-044C00 00     12578 STAVAR:         BLKB    27*4,0            ; Static Variables
+044C00 00     12613 STAVAR:         BLKB    27*4,0            ; Static Variables
 044C01 00 
 044C02 00 
 044C03 00 
@@ -23875,7 +23902,7 @@
 044C4F 00 
 044C50 00 
 044C51 00 
-044C6C 00     12579 DYNVAR:         BLKB    54*3,0            ; Dynamic Variable Pointers
+044C6C 00     12614 DYNVAR:         BLKB    54*3,0            ; Dynamic Variable Pointers
 044C6D 00 
 044C6E 00 
 044C6F 00 
@@ -24037,108 +24064,108 @@
 044CE4 00 
 044CE4 00   
 044CE5 00 
-044D0E 00     12580 FNPTR:          BLKB    3,0               ; Dynamic Function Pointers
+044D0E 00     12615 FNPTR:          BLKB    3,0               ; Dynamic Function Pointers
 044D0F 00 
 044D10 00 
-044D11 00     12581 PROPTR:         BLKB    3,0               ; Dynamic Procedure Pointers
+044D11 00     12616 PROPTR:         BLKB    3,0               ; Dynamic Procedure Pointers
 044D12 00 
 044D13 00 
-              12582 ;
-044D14 00     12583 PAGE_:          BLKB    3,0               ; Start of User Program
+              12617 ;
+044D14 00     12618 PAGE_:          BLKB    3,0               ; Start of User Program
 044D15 00 
 044D16 00 
-044D17 00     12584 TOP:            BLKB    3,0               ; First Location after User Program
+044D17 00     12619 TOP:            BLKB    3,0               ; First Location after User Program
 044D18 00 
 044D19 00 
-044D1A 00     12585 LOMEM:          BLKB    3,0               ; Start of Dynamic Storage
+044D1A 00     12620 LOMEM:          BLKB    3,0               ; Start of Dynamic Storage
 044D1B 00 
 044D1C 00 
-044D1D 00     12586 FREE:           BLKB    3,0               ; First Free Space Byte
+044D1D 00     12621 FREE:           BLKB    3,0               ; First Free Space Byte
 044D1E 00 
 044D1F 00 
-044D20 00     12587 HIMEM:          BLKB    3,0               ; First Protected Byte
+044D20 00     12622 HIMEM:          BLKB    3,0               ; First Protected Byte
 044D21 00 
 044D22 00 
-              12588 ;
-044D23 00     12589 LINENO:         BLKB    3,0               ; Line Number
+              12623 ;
+044D23 00     12624 LINENO:         BLKB    3,0               ; Line Number
 044D24 00 
 044D25 00 
-044D26 00     12590 TRACEN:         BLKB    3,0               ; Trace Flag
+044D26 00     12625 TRACEN:         BLKB    3,0               ; Trace Flag
 044D27 00 
 044D28 00 
-044D29 00     12591 AUTONO:         BLKB    3,0               ; Auto Flag
+044D29 00     12626 AUTONO:         BLKB    3,0               ; Auto Flag
 044D2A 00 
 044D2B 00 
-044D2C 00     12592 ERRTRP:         BLKB    3,0               ; Error Trap
+044D2C 00     12627 ERRTRP:         BLKB    3,0               ; Error Trap
 044D2D 00 
 044D2E 00 
-044D2F 00     12593 ERRTXT:         BLKB    2,0               ; Error Message Pointer
+044D2F 00     12628 ERRTXT:         BLKB    2,0               ; Error Message Pointer
 044D30 00 
-044D31 00     12594 DATPTR:         BLKB    2,0               ; Data Pointer
+044D31 00     12629 DATPTR:         BLKB    2,0               ; Data Pointer
 044D32 00 
-044D33 00     12595 ERL:            BLKB    2,0               ; Error Line
+044D33 00     12630 ERL:            BLKB    2,0               ; Error Line
 044D34 00 
-044D35 00     12596 ERRLIN:         BLKB    3,0               ; The "ON ERROR" Line
+044D35 00     12631 ERRLIN:         BLKB    3,0               ; The "ON ERROR" Line
 044D36 00 
 044D37 00 
-044D38 00     12597 RANDOM:         BLKB    5,0               ; Random Number
+044D38 00     12632 RANDOM:         BLKB    5,0               ; Random Number
 044D39 00 
 044D3A 00 
 044D3B 00 
 044D3B 00   
-044D3D 00     12598 COUNT:          BLKB    1,0               ; Print Position
-044D3E 00     12599 WIDTH:          BLKB    1,0               ; Print Width
-044D3F 00     12600 ERR:            BLKB    1,0               ; Error Number
-044D40 00     12601 LISTON:         BLKB    1,0               ; LISTO (bottom nibble)
-              12602 ; - BIT 0: If set, output a space after the line number
-              12603 ; - BIT 1: If set, then indent FOR/NEXT loops
-              12604 ; - BIT 2: If set, then indent REPEAT/UNTIL loops
-              12605 ; - BIT 3: If set, then output to buffer for *EDIT
-              12606 ; OPT FLAG (top nibble)
-              12607 ; - BIT 4: If set, then list whilst assembling
-              12608 ; - BIT 5: If set, then assembler errors are reported
-              12609 ; - BIT 6: If set, then place the code starting at address pointed to by O%
-              12610 ; - BIT 7: If set, then assemble in ADL mode, otherwise assemble in Z80 mode
-044D41 00     12611 INCREM:         BLKB    1,0               ; Auto-Increment Value
-              12612 ;
-              12613 ; --------------------------------------------------------------------------------------------
-              12614 ; BEGIN MODIFIED CODE
-              12615 ; --------------------------------------------------------------------------------------------
-              12616 ; Originally in equs.inc
-              12617 ;
-              12618 OC:			EQU     STAVAR+15*4     ; CODE ORIGIN (O%)
-              12619 PC:			EQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)
-              12620 VDU_BUFFER:		EQU	ACCS		; Storage for VDU commands
-              12621 ; --------------------------------------------------------------------------------------------
-              12622 ; END MODIFIED CODE
-              12623 ; --------------------------------------------------------------------------------------------
-              12624 
-              12625 ; Extra Agon-implementation specific system variables
-              12626 ;
-044D42 00     12627 FLAGS:          BLKB    1,0       ; Miscellaneous flags
-              12628 ; - BIT 7: Set if ESC pressed
-              12629 ; - BIT 6: Set to disable ESC
-044D43 00     12630 OSWRCHPT:       BLKB    2,0       ; Pointer for *EDIT
+044D3D 00     12633 COUNT:          BLKB    1,0               ; Print Position
+044D3E 00     12634 WIDTH:          BLKB    1,0               ; Print Width
+044D3F 00     12635 ERR:            BLKB    1,0               ; Error Number
+044D40 00     12636 LISTON:         BLKB    1,0               ; LISTO (bottom nibble)
+              12637 ; - BIT 0: If set, output a space after the line number
+              12638 ; - BIT 1: If set, then indent FOR/NEXT loops
+              12639 ; - BIT 2: If set, then indent REPEAT/UNTIL loops
+              12640 ; - BIT 3: If set, then output to buffer for *EDIT
+              12641 ; OPT FLAG (top nibble)
+              12642 ; - BIT 4: If set, then list whilst assembling
+              12643 ; - BIT 5: If set, then assembler errors are reported
+              12644 ; - BIT 6: If set, then place the code starting at address pointed to by O%
+              12645 ; - BIT 7: If set, then assemble in ADL mode, otherwise assemble in Z80 mode
+044D41 00     12646 INCREM:         BLKB    1,0               ; Auto-Increment Value
+              12647 ;
+              12648 ; --------------------------------------------------------------------------------------------
+              12649 ; BEGIN MODIFIED CODE
+              12650 ; --------------------------------------------------------------------------------------------
+              12651 ; Originally in equs.inc
+              12652 ;
+              12653 OC:			EQU     STAVAR+15*4     ; CODE ORIGIN (O%)
+              12654 PC:			EQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)
+              12655 VDU_BUFFER:		EQU	ACCS		; Storage for VDU commands
+              12656 ; --------------------------------------------------------------------------------------------
+              12657 ; END MODIFIED CODE
+              12658 ; --------------------------------------------------------------------------------------------
+              12659 
+              12660 ; Extra Agon-implementation specific system variables
+              12661 ;
+044D42 00     12662 FLAGS:          BLKB    1,0       ; Miscellaneous flags
+              12663 ; - BIT 7: Set if ESC pressed
+              12664 ; - BIT 6: Set to disable ESC
+044D43 00     12665 OSWRCHPT:       BLKB    2,0       ; Pointer for *EDIT
 044D44 00 
-044D45 00     12631 OSWRCHCH:       BLKB    1,0       ; Channel of OSWRCH
-              12632 ; - 0: Console
-              12633 ; - 1: File
-044D46 00     12634 OSWRCHFH:       BLKB    1,0       ; File handle for OSWRCHCHN
-044D47 00     12635 KEYDOWN:        BLKB    1,0       ; Keydown flag
-044D48 00     12636 KEYASCII:       BLKB    1,0       ; ASCII code of pressed key
-044D49 00     12637 KEYCOUNT:       BLKB    1,0       ; Counts every time a key is pressed
-044D4A 00     12638 R0:             BLKB    3,0       ; General purpose storage for 8/16 to 24 bit operations
+044D45 00     12666 OSWRCHCH:       BLKB    1,0       ; Channel of OSWRCH
+              12667 ; - 0: Console
+              12668 ; - 1: File
+044D46 00     12669 OSWRCHFH:       BLKB    1,0       ; File handle for OSWRCHCHN
+044D47 00     12670 KEYDOWN:        BLKB    1,0       ; Keydown flag
+044D48 00     12671 KEYASCII:       BLKB    1,0       ; ASCII code of pressed key
+044D49 00     12672 KEYCOUNT:       BLKB    1,0       ; Counts every time a key is pressed
+044D4A 00     12673 R0:             BLKB    3,0       ; General purpose storage for 8/16 to 24 bit operations
 044D4B 00 
 044D4C 00 
-044D4D 00     12639 R1:             BLKB    3,0
+044D4D 00     12674 R1:             BLKB    3,0
 044D4E 00 
 044D4F 00 
-              12640 
-              12641 ;
-              12642 ; This must be at the end
-              12643 ;
-              12644 RAM_END:
-044D50 FF     12645 ALIGN	256
+              12675 
+              12676 ;
+              12677 ; This must be at the end
+              12678 ;
+              12679 RAM_END:
+044D50 FF     12680 ALIGN	256
 044D51 FF 
 044D52 FF 
 044D53 FF 
@@ -24314,6 +24341,6 @@
 044DD2 FF 
 044DD3 FF 
 044DD4 FF 
-              12646 USER:							; Must be aligned on a page boundary
-              12647 ; --- End ram.asm ---
-              12648 
+              12681 USER:							; Must be aligned on a page boundary
+              12682 ; --- End ram.asm ---
+              12683 

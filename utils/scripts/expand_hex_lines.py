@@ -17,8 +17,22 @@ def expand_hex_lines(hex_text, start_address):
 
 # Example usage
 hex_text = """
-4e
-4f
+42
+59
+c5
+2c
+40 45
+44
+49 d4 61 40
+46
+d8
+a1
+40 56
+45
+52 53
+49 4f
+ce 38
+40 ff
 """
-start_address = "041dcC"
+start_address = "044013"
 expand_hex_lines(hex_text, start_address)
