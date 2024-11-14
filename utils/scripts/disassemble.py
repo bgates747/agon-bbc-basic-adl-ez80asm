@@ -5,7 +5,6 @@ import sqlite3
 import numpy as np
 import csv
 
-
 def expand_lines(list_filename_in, list_filename_out):
     """Read input lines, expand multibyte lines, and write to the output file."""
     with open(list_filename_in, 'r') as infile, open(list_filename_out, 'w') as outfile:
@@ -254,13 +253,14 @@ def create_final_table(db_path, final_table_name):
     conn.commit()
     conn.close()
     print(f"Table '{final_table_name}' created.")
+import sqlite3
 
 def populate_final_table(db_path, final_table_name):
-    """Process the query results and populate the final table with gap-filling logic."""
+    """Populate the final table with query results without additional gap-filling logic."""
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # Execute the query
+    # Execute the query to retrieve data from `bbcbasic24` and `bbcbasic24ez` joined through `matched_indices`
     cursor.execute("""
         SELECT t1.idx1, t1.address1, t1.opcode1, t1.instruction1, t1.matching1,
                t2.idx2, t2.address2, t2.opcode2, t2.instruction2, t2.matching2
@@ -278,51 +278,18 @@ def populate_final_table(db_path, final_table_name):
         ORDER BY t1.idx1
     """)
     
+    # Fetch all results directly from the query
     results = cursor.fetchall()
-    
-    # Initialize variables for tracking the last non-null idx2 and handling gaps
-    last_non_null_idx2 = None
-    to_insert = []
-    
-    for i, row in enumerate(results):
-        idx1, address1, opcode1, instruction1, matching1, idx2, address2, opcode2, instruction2, matching2 = row
-        
-        if idx2 is not None:
-            # If idx2 is non-null, just insert the row as is
-            to_insert.append((idx1, address1, opcode1, instruction1, matching1, idx2, address2, opcode2, instruction2, matching2))
-            last_non_null_idx2 = idx2
-        else:
-            # If idx2 is null, we need to look ahead to fill the gap
-            # Count the number of consecutive null idx2s
-            gap_count = 0
-            next_non_null_idx2 = None
-            for j in range(i + 1, len(results)):
-                if results[j][5] is not None:
-                    next_non_null_idx2 = results[j][5]
-                    break
-                gap_count += 1
-            
-            if last_non_null_idx2 is not None and next_non_null_idx2 is not None:
-                # Calculate the range of idx2 values to fill from bbcbasic24ez
-                for idx in range(last_non_null_idx2 + 1, next_non_null_idx2):
-                    # Insert placeholder row from bbcbasic24ez (right-hand table)
-                    cursor.execute(f"SELECT idx, address, opcode, instruction, matching FROM bbcbasic24ez WHERE idx = ?", (idx,))
-                    placeholder_row = cursor.fetchone()
-                    if placeholder_row:
-                        to_insert.append((None, None, None, None, None, *placeholder_row))
-            
-            # Now insert the current row with left-hand fields filled in and right-hand fields empty
-            to_insert.append((idx1, address1, opcode1, instruction1, matching1, None, None, None, None, None))
-            
-    # Insert all gathered rows into the final table
+
+    # Insert all fetched rows directly into the final table
     cursor.executemany(f"""
         INSERT INTO {final_table_name} (idx1, address1, opcode1, instruction1, matching1, idx2, address2, opcode2, instruction2, matching2)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, to_insert)
+    """, results)
 
     conn.commit()
     conn.close()
-    print(f"Data populated into table '{final_table_name}' with gap handling.")
+    print(f"Data populated into table '{final_table_name}'.")
 
 def generate_diff_from_arrays(idx_array1, instruction_array1, idx_array2, instruction_array2, diff_output_path, window_size, min_match_percentage):
     len1 = len(instruction_array1)
@@ -430,6 +397,44 @@ def generate_diff_from_arrays(idx_array1, instruction_array1, idx_array2, instru
 
     print(f"\nDiff generated and written to {diff_output_path}")
 
+import sqlite3
+import csv
+
+def export_query_to_csv(db_path, output_csv_path):
+    """Execute a query and save the results in CSV format with headers, outputting NULLs as empty fields."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    # Define the query with LEFT JOIN and ORDER BY clause
+    query = """
+        SELECT t1.idx, t1.idx1, t1.idx2, t1.address1, t1.address2, t1.instruction1, 
+               t1.instruction2, t1.matching1, t2.src_file, t2.srccode
+        FROM final_table AS t1
+        LEFT JOIN bbcbasic24ez_lst AS t2 ON t1.address2 = LOWER(t2.address)
+        ORDER BY t1.idx
+    """
+    
+    # Execute the query
+    cursor.execute(query)
+    # Fetch column names and query results
+    column_names = [description[0] for description in cursor.description]
+    rows = cursor.fetchall()
+    
+    # Write to CSV file
+    with open(output_csv_path, 'w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        
+        # Write headers
+        csv_writer.writerow(column_names)
+        
+        # Write rows with None as empty fields for CSV null representation
+        for row in rows:
+            csv_writer.writerow([field if field is not None else '' for field in row])
+
+    conn.close()
+    print(f"Query results saved to '{output_csv_path}' in CSV format with NULLs as empty fields.")
+
+
 if __name__ == "__main__":
     db_path = 'utils/dif/difs.db'
     source_dir = 'src'
@@ -438,11 +443,11 @@ if __name__ == "__main__":
 
     list_filename_in = 'utils/dif/bbcbasic24ez.lst'
     list_filename_out = 'utils/dif/bbcbasic24ez_expanded.lst'
-    if False: expand_lines(list_filename_in, list_filename_out)
+    if True: expand_lines(list_filename_in, list_filename_out)
 
     table_name = 'bbcbasic24ez_lst'
     # Import the .lst file into the SQLite table
-    if False: import_fixed_width_to_db(db_path, list_filename_out, table_name)
+    if True: import_fixed_width_to_db(db_path, list_filename_out, table_name)
 
     src_base_filename = 'bbcbasic24ez'
     src_filepath = f'{source_dir}/{src_base_filename}.asm'
@@ -452,7 +457,7 @@ if __name__ == "__main__":
 
     ez80_dis_args = '--start 0 --target 0x040000 --address --hex-dump --lowercase --explicit-dest --ez80 --prefix --hex --mnemonic-space --no-argument-space --compute-absolute --literal-absolute'
 
-    if False:
+    if True:
         # Now disassemble the generated binary
         cmd = f"ez80-dis {ez80_dis_args} orig/bbcbasic24.bin > {left_hand_filepath}"
         print (f"Running command: {cmd}")
@@ -461,7 +466,7 @@ if __name__ == "__main__":
         print(f"Disassembly written to {left_hand_filepath}")
         make_dis_table(db_path, left_hand_filepath, 'bbcbasic24')
 
-    if False:
+    if True:
         # Now disassemble the generated binary
         cmd = f"ez80-dis {ez80_dis_args} {tgt_bin_dir}/{src_base_filename}.bin > {right_hand_filepath}"
         print (f"Running command: {cmd}")
@@ -498,3 +503,7 @@ if __name__ == "__main__":
     if True: 
         create_final_table(db_path, final_table_name)
         populate_final_table(db_path, final_table_name)
+
+    # Export the final query results to a CSV file
+    output_csv_path = f'{dif_dir}/{src_base_filename}.csv'
+    if True: export_query_to_csv(db_path, output_csv_path)

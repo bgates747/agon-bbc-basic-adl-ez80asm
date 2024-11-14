@@ -301,9 +301,12 @@ EXPR3S:			EX      AF,AF'			; Handle string concatenation
 			POP     DE
 			PUSH    DE
 			LD      HL,ACCS
-			LD	A,E			;  E: Length of the first string
-			LD      DE,ACCS
-			LD	E,A 			; DE: Pointer to the end of the first string
+; BEGIN MISSING FROM BINARY
+			; LD	A,E			;  E: Length of the first string
+			; LD      DE,ACCS
+			; LD	E,A 			; DE: Pointer to the end of the first string
+; END MISSING FROM BINARY
+			LD		D,H ; ADDED FROM BINARY
 			LD      A,C			
 			OR      A
 			JR      Z,EXP3S3
@@ -1555,9 +1558,12 @@ PUSHS:			CALL    CHECK			; Check if there is sufficient space on the stack
 			ADD     HL,SP			; Grow the stack
 			LD      SP,HL
 			LD      D,A			;  D: This needs to be set to A for some functions
-			LD	B,A			; Stack A and C (the string length)
-			PUSH    BC			; Note that this stacks 3 bytes, not 2; the MSB is irrelevant
-			LD	B,0			; Reset B to 0 for the LDIR in this function
+; BEGIN MISSING FROM BINARY
+			; LD	B,A			; Stack A and C (the string length)
+			; PUSH    BC			; Note that this stacks 3 bytes, not 2; the MSB is irrelevant
+			; LD	B,0			; Reset B to 0 for the LDIR in this function
+; END MISSING FROM BINARY
+			PUSH 	DE ; ADDED FROM BINARY
 			JR      Z,PUSHS1        	; Is it zero length?
 			LD      DE,ACCS			; DE: Destination
 			EX      DE,HL			; HL: Destination, DE: Address on stack
