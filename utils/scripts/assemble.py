@@ -188,12 +188,13 @@ if __name__ == '__main__':
     source_dir = 'src'
     tgt_bin_dir = 'utils/bin'
     dif_dir = 'utils/dif'
+    emulator_dir = '~/Agon/emulator/sdcard/bin'
 
     # Output filename
     src_base_filename = 'bbcbasic24ez'
     src_filepath = f'{source_dir}/{src_base_filename}.asm'
 
-    if False:
+    if True:
         # Call the function to concatenate files
         concatenate_files(include_files, source_dir, src_filepath)
 
@@ -201,6 +202,8 @@ if __name__ == '__main__':
 
         # Assemble the output file
         subprocess.run(f'(cd {source_dir} && ez80asm -l -b FF {src_base_filename}.asm)', shell=True, check=True)
+        # Copy the generated binary to the emulator directory
+        subprocess.run(f'cp {source_dir}/{src_base_filename}.bin {emulator_dir}', shell=True, check=True)
         # Move the generated binary to the target directory
         subprocess.run(f'mv {source_dir}/{src_base_filename}.bin {tgt_bin_dir}', shell=True, check=True)
         # Move the generated listing file to the diff directory
