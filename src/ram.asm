@@ -58,6 +58,7 @@
 			; XDEF	RAM_END
 			; XDEF	USER
 
+end_binary: ;  for assemble.py to know where to truncate the binary file
 			ALIGN 		256		; ACCS, BUFFER & STAVAR must be on page boundaries			
 RAM_START:		
 ;
@@ -103,8 +104,8 @@ INCREM:         BLKB    1,0               ; Auto-Increment Value
 ; --------------------------------------------------------------------------------------------
 ; Originally in equs.inc
 ;
-OC:			EQU     STAVAR+15*4     ; CODE ORIGIN (O%)
-PC:			EQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)
+OC:			EQU     15*4+STAVAR     ; CODE ORIGIN (O%)
+PC:			EQU     16*4+STAVAR     ; PROGRAM COUNTER (P%)
 VDU_BUFFER:		EQU	ACCS		; Storage for VDU commands
 ; --------------------------------------------------------------------------------------------
 ; END MODIFIED CODE

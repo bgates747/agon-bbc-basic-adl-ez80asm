@@ -672,7 +672,7 @@ idx,idx1,idx2,address1,address2,opcode1,opcode2,instruction1,instruction2,matchi
 645,645,645,040456,040456,fd 23,fd 23,inc iy,inc iy,inc iy,eval.asm,NOS1:			INC     IY
 646,646,646,040458,040458,cd 6f 3c 04,cd 6f 3c 04,call $043c6f,call $043c6f,call $000000,eval.asm,CALL    RANGE
 647,647,647,04045c,04045c,30 f8,30 f8,"jr nc,$-$06","jr nc,$-$06","jr nc,$-$00",eval.asm,"JR      NC,NOS1"
-648,648,648,04045e,04045e,dd 21 40 4c 04,dd 21 40 30 11,"ld ix,$044c40","ld ix,$113040","ld ix,$000000",eval.asm,"LD      IX,PC"
+648,648,648,04045e,04045e,dd 21 40 4c 04,dd 21 40 4c 04,"ld ix,$044c40","ld ix,$044c40","ld ix,$000000",eval.asm,"LD      IX,PC"
 649,649,649,040463,040463,af,af,xor a,xor a,xor a,eval.asm,XOR     A
 650,650,650,040464,040464,4f,4f,"ld c,a","ld c,a","ld c,a",eval.asm,"LD      C,A"
 651,651,651,040465,040465,18 bb,18 bb,jr $-$43,jr $-$43,jr $-$00,eval.asm,JR      LOAD4
@@ -2637,14 +2637,14 @@ idx,idx1,idx2,address1,address2,opcode1,opcode2,instruction1,instruction2,matchi
 2610,2610,2610,041490,041490,cd 0a 03 04,cd 0a 03 04,call $04030a,call $04030a,call $000000,exec.asm,call EXPRI
 2611,2611,2611,041494,041494,d9,d9,exx,exx,exx,exec.asm,exx
 2612,2612,2612,041495,041495,7d,7d,"ld a,l","ld a,l","ld a,l",exec.asm,"ld a,l"
-2613,2613,2613,041496,041496,cd 00 3f 04,cd fa 3e 04,call $043f00,call $043efa,call $000000,exec.asm,call PROMPT
+2613,2613,2613,041496,041496,cd 00 3f 04,cd 00 3f 04,call $043f00,call $043f00,call $000000,exec.asm,call OSWRCH
 2614,2614,2614,04149a,04149a,fd 7e 00,fd 7e 00,"ld a,(iy)","ld a,(iy)","ld a,(iy)",exec.asm,"ld a,(iy)"
 2615,2615,2615,04149d,04149d,fe 2c,fe 2c,cp $2c,cp $2c,cp $00,exec.asm,cp $2c
 2616,2616,2616,04149f,04149f,28 09,28 09,"jr z,$+$0b","jr z,$+$0b","jr z,$+$00",exec.asm,"jr z,$+$0b"
 2617,2617,2617,0414a1,0414a1,fe 3b,fe 3b,cp $3b,cp $3b,cp $00,exec.asm,cp $3b
 2618,2618,2618,0414a3,0414a3,20 07,20 07,"jr nz,$+$09","jr nz,$+$09","jr nz,$+$00",exec.asm,"jr nz,$+$09"
 2619,2619,2619,0414a5,0414a5,7c,7c,"ld a,h","ld a,h","ld a,h",exec.asm,"ld a,h"
-2620,2620,2620,0414a6,0414a6,cd 00 3f 04,cd fa 3e 04,call $043f00,call $043efa,call $000000,exec.asm,call PROMPT
+2620,2620,2620,0414a6,0414a6,cd 00 3f 04,cd 00 3f 04,call $043f00,call $043f00,call $000000,exec.asm,call OSWRCH
 2621,2621,2621,0414aa,0414aa,fd 23,fd 23,inc iy,inc iy,inc iy,exec.asm,inc iy
 2622,2622,2622,0414ac,0414ac,cd 7a 17 04,cd 7a 17 04,call $04177a,call $04177a,call $000000,exec.asm,call TERMQ
 2623,2623,2623,0414b0,0414b0,20 de,20 de,"jr nz,$-$20","jr nz,$-$20","jr nz,$-$00",exec.asm,"jr nz,$-$20"
@@ -3170,11 +3170,11 @@ idx,idx1,idx2,address1,address2,opcode1,opcode2,instruction1,instruction2,matchi
 3143,3143,3143,0418a8,0418a8,fe 0d,fe 0d,cp $0d,cp $0d,cp $00,exec.asm,CP      CR
 3144,3144,3144,0418aa,0418aa,c8,c8,ret z,ret z,ret z,exec.asm,RET     Z
 3145,3145,3145,0418ab,0418ab,fd 2b,fd 2b,dec iy,dec iy,dec iy,exec.asm,DEC     IY
-3146,3146,3146,0418ad,0418ad,dd 2a 40 4c 04,dd 2a 40 30 11,"ld ix,($044c40)","ld ix,($113040)","ld ix,($000000)",exec.asm,"LD      IX,(PC)         	; Program counter (P% - defined in equs.inc)"
+3146,3146,3146,0418ad,0418ad,dd 2a 40 4c 04,dd 2a 40 4c 04,"ld ix,($044c40)","ld ix,($044c40)","ld ix,($000000)",exec.asm,"LD      IX,(PC)         	; Program counter (P% - defined in equs.inc)"
 3147,3147,3147,0418b2,0418b2,21 40 4d 04,21 40 4d 04,"ld hl,$044d40","ld hl,$044d40","ld hl,$000000",exec.asm,"LD      HL,LISTON"
 3148,3148,3148,0418b6,0418b6,cb 76,cb 76,"bit 6,(hl)","bit 6,(hl)","bit 6,(hl)",exec.asm,"BIT     6,(HL)"
 3149,3149,3149,0418b8,0418b8,28 05,28 05,"jr z,$+$07","jr z,$+$07","jr z,$+$00",exec.asm,"JR      Z,ASSEM0"
-3150,3150,3150,0418ba,0418ba,dd 2a 3c 4c 04,dd 2a 3c 30 11,"ld ix,($044c3c)","ld ix,($11303c)","ld ix,($000000)",exec.asm,"LD      IX,(OC)         	; Code origin (O% - defined in equs.inc)"
+3150,3150,3150,0418ba,0418ba,dd 2a 3c 4c 04,dd 2a 3c 4c 04,"ld ix,($044c3c)","ld ix,($044c3c)","ld ix,($000000)",exec.asm,"LD      IX,(OC)         	; Code origin (O% - defined in equs.inc)"
 3151,3151,3151,0418bf,0418bf,dd e5,dd e5,push ix,push ix,push ix,exec.asm,ASSEM0:			PUSH    IX
 3152,3152,3152,0418c1,0418c1,fd e5,fd e5,push iy,push iy,push iy,exec.asm,PUSH    IY
 3153,3153,3153,0418c3,0418c3,cd 73 19 04,cd 73 19 04,call $041973,call $041973,call $000000,exec.asm,CALL    ASMB
@@ -3196,15 +3196,15 @@ idx,idx1,idx2,address1,address2,opcode1,opcode2,instruction1,instruction2,matchi
 3169,3169,3169,0418e5,0418e5,ed 52,ed 52,"sbc hl,de","sbc hl,de","sbc hl,de",exec.asm,"SBC     HL,DE"
 3170,3170,3170,0418e7,0418e7,eb,eb,"ex de,hl","ex de,hl","ex de,hl",exec.asm,"EX      DE,HL           	; DE: Number of bytes"
 3171,3171,3171,0418e8,0418e8,e5,e5,push hl,push hl,push hl,exec.asm,PUSH    HL
-3172,3172,3172,0418e9,0418e9,2a 40 4c 04,2a 40 30 11,"ld hl,($044c40)","ld hl,($113040)","ld hl,($000000)",exec.asm,"LD      HL,(PC)"
+3172,3172,3172,0418e9,0418e9,2a 40 4c 04,2a 40 4c 04,"ld hl,($044c40)","ld hl,($044c40)","ld hl,($000000)",exec.asm,"LD      HL,(PC)"
 3173,3173,3173,0418ed,0418ed,e5,e5,push hl,push hl,push hl,exec.asm,PUSH    HL
 3174,3174,3174,0418ee,0418ee,19,19,"add hl,de","add hl,de","add hl,de",exec.asm,"ADD     HL,DE"
-3175,3175,3175,0418ef,0418ef,22 40 4c 04,22 40 30 11,"ld ($044c40),hl","ld ($113040),hl","ld ($000000),hl",exec.asm,"LD      (PC),HL         	; Update PC"
+3175,3175,3175,0418ef,0418ef,22 40 4c 04,22 40 4c 04,"ld ($044c40),hl","ld ($044c40),hl","ld ($000000),hl",exec.asm,"LD      (PC),HL         	; Update PC"
 3176,3176,3176,0418f3,0418f3,cb 77,cb 77,"bit 6,a","bit 6,a","bit 6,a",exec.asm,"BIT     6,A"
 3177,3177,3177,0418f5,0418f5,28 09,28 09,"jr z,$+$0b","jr z,$+$0b","jr z,$+$00",exec.asm,"JR      Z,ASSEM5"
-3178,3178,3178,0418f7,0418f7,2a 3c 4c 04,2a 3c 30 11,"ld hl,($044c3c)","ld hl,($11303c)","ld hl,($000000)",exec.asm,"LD      HL,(OC)"
+3178,3178,3178,0418f7,0418f7,2a 3c 4c 04,2a 3c 4c 04,"ld hl,($044c3c)","ld hl,($044c3c)","ld hl,($000000)",exec.asm,"LD      HL,(OC)"
 3179,3179,3179,0418fb,0418fb,19,19,"add hl,de","add hl,de","add hl,de",exec.asm,"ADD     HL,DE"
-3180,3180,3180,0418fc,0418fc,22 3c 4c 04,22 3c 30 11,"ld ($044c3c),hl","ld ($11303c),hl","ld ($000000),hl",exec.asm,"LD      (OC),HL         	; Update OC"
+3180,3180,3180,0418fc,0418fc,22 3c 4c 04,22 3c 4c 04,"ld ($044c3c),hl","ld ($044c3c),hl","ld ($000000),hl",exec.asm,"LD      (OC),HL         	; Update OC"
 3181,3181,3181,041900,041900,e1,e1,pop hl,pop hl,pop hl,exec.asm,ASSEM5:			POP     HL              	; Old PC
 3182,3182,3182,041901,041901,dd e1,dd e1,pop ix,pop ix,pop ix,exec.asm,POP     IX              	; Code here
 3183,3183,3183,041903,041903,cb 67,cb 67,"bit 4,a","bit 4,a","bit 4,a",exec.asm,"BIT     4,A"
@@ -3263,10 +3263,10 @@ idx,idx1,idx2,address1,address2,opcode1,opcode2,instruction1,instruction2,matchi
 3236,3236,3236,04197b,04197b,cd 8e 0c 04,cd 8e 0c 04,call $040c8e,call $040c8e,call $000000,exec.asm,CALL    VAR_			; Create a variable
 3237,3237,3237,04197f,04197f,f5,f5,push af,push af,push af,exec.asm,PUSH    AF
 3238,3238,3238,041980,041980,cd 93 09 04,cd 93 09 04,call $040993,call $040993,call $000000,exec.asm,CALL    ZERO			; Zero it
-3239,3239,3239,041984,041984,3a 42 4c 04,3a 42 30 11,"ld a,($044c42)","ld a,($113042)","ld a,($000000)",exec.asm,"LD	A,(PC+2)"
+3239,3239,3239,041984,041984,3a 42 4c 04,3a 42 4c 04,"ld a,($044c42)","ld a,($044c42)","ld a,($000000)",exec.asm,"LD	A,(PC+2)"
 3240,3240,3240,041988,041988,6f,6f,"ld l,a","ld l,a","ld l,a",exec.asm,"LD	L,A			; The MSB of the 24-bit address"
 3241,3241,3241,041989,041989,d9,d9,exx,exx,exx,exec.asm,EXX
-3242,3242,3242,04198a,04198a,2a 40 4c 04,2a 40 30 11,"ld hl,($044c40)","ld hl,($113040)","ld hl,($000000)",exec.asm,"LD      HL,(PC)			; The LSW of the 24-bit address (only 16-bits used)"
+3242,3242,3242,04198a,04198a,2a 40 4c 04,2a 40 4c 04,"ld hl,($044c40)","ld hl,($044c40)","ld hl,($000000)",exec.asm,"LD      HL,(PC)			; The LSW of the 24-bit address (only 16-bits used)"
 3243,3243,3243,04198e,04198e,d9,d9,exx,exx,exx,exec.asm,EXX
 3244,3244,3244,04198f,04198f,f1,f1,pop af,pop af,pop af,exec.asm,POP     AF
 3245,3245,3245,041990,041990,cd d6 15 04,cd d6 15 04,call $0415d6,call $0415d6,call $000000,exec.asm,CALL    STORE			; Store the program counter
@@ -3399,7 +3399,7 @@ idx,idx1,idx2,address1,address2,opcode1,opcode2,instruction1,instruction2,matchi
 3372,3372,3372,041a9f,041a9f,3e 18,3e 18,"ld a,$18","ld a,$18","ld a,$00",exec.asm,"LD      A,18H"
 3373,3373,3373,041aa1,041aa1,cd f2 1c 04,cd f2 1c 04,call $041cf2,call $041cf2,call $000000,exec.asm,@@:			CALL    BYTE_
 3374,3374,3374,041aa5,041aa5,cd 03 1d 04,cd 03 1d 04,call $041d03,call $041d03,call $000000,exec.asm,CALL    NUMBER
-3375,3375,3375,041aa9,041aa9,ed 5b 40 4c 04,ed 5b 40 30 11,"ld de,($044c40)","ld de,($113040)","ld de,($000000)",exec.asm,"LD      DE,(PC)"
+3375,3375,3375,041aa9,041aa9,ed 5b 40 4c 04,ed 5b 40 4c 04,"ld de,($044c40)","ld de,($044c40)","ld de,($000000)",exec.asm,"LD      DE,(PC)"
 3376,3376,3376,041aae,041aae,13,13,inc de,inc de,inc de,exec.asm,INC     DE
 3377,3377,3377,041aaf,041aaf,37,37,scf,scf,scf,exec.asm,SCF
 3378,3378,3378,041ab0,041ab0,ed 52,ed 52,"sbc hl,de","sbc hl,de","sbc hl,de",exec.asm,"SBC     HL,DE"

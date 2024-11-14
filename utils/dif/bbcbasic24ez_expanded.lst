@@ -1818,8 +1818,8 @@
 04045E DD      1146 LD      IX,PC
 04045F 21 
 040460 40 
-040461 30 
-040461 11   
+040461 4C 
+040461 04   
 040463 AF      1147 XOR     A
 040464 4F      1148 LD      C,A
 040465 18      1149 JR      LOAD4
@@ -6748,9 +6748,9 @@
 041493 04 
 041494 D9      3803 exx
 041495 7D      3804 ld a,l
-041496 CD      3805 call PROMPT
-041497 FA 
-041498 3E 
+041496 CD      3805 call OSWRCH
+041497 00 
+041498 3F 
 041499 04 
 04149A FD      3806 ld a,(iy)
 04149B 7E 
@@ -6764,9 +6764,9 @@
 0414A3 20      3810 jr nz,$+$09
 0414A4 07 
 0414A5 7C      3811 ld a,h
-0414A6 CD      3812 call PROMPT
-0414A7 FA 
-0414A8 3E 
+0414A6 CD      3812 call OSWRCH
+0414A7 00 
+0414A8 3F 
 0414A9 04 
 0414AA FD      3813 inc iy
 0414AB 23 
@@ -7964,8 +7964,8 @@
 0418AD DD      4504 LD      IX,(PC)         	; Program counter (P% - defined in equs.inc)
 0418AE 2A 
 0418AF 40 
-0418B0 30 
-0418B0 11   
+0418B0 4C 
+0418B0 04   
 0418B2 21      4505 LD      HL,LISTON
 0418B3 40 
 0418B4 4D 
@@ -7977,8 +7977,8 @@
 0418BA DD      4508 LD      IX,(OC)         	; Code origin (O% - defined in equs.inc)
 0418BB 2A 
 0418BC 3C 
-0418BD 30 
-0418BD 11   
+0418BD 4C 
+0418BD 04   
 0418BF DD      4509 ASSEM0:			PUSH    IX
 0418C0 E5 
 0418C1 FD      4510 PUSH    IY
@@ -8023,27 +8023,27 @@
 0418E8 E5      4529 PUSH    HL
 0418E9 2A      4530 LD      HL,(PC)
 0418EA 40 
-0418EB 30 
-0418EC 11 
+0418EB 4C 
+0418EC 04 
 0418ED E5      4531 PUSH    HL
 0418EE 19      4532 ADD     HL,DE
 0418EF 22      4533 LD      (PC),HL         	; Update PC
 0418F0 40 
-0418F1 30 
-0418F2 11 
+0418F1 4C 
+0418F2 04 
 0418F3 CB      4534 BIT     6,A
 0418F4 77 
 0418F5 28      4535 JR      Z,ASSEM5
 0418F6 09 
 0418F7 2A      4536 LD      HL,(OC)
 0418F8 3C 
-0418F9 30 
-0418FA 11 
+0418F9 4C 
+0418FA 04 
 0418FB 19      4537 ADD     HL,DE
 0418FC 22      4538 LD      (OC),HL         	; Update OC
 0418FD 3C 
-0418FE 30 
-0418FF 11 
+0418FE 4C 
+0418FF 04 
 041900 E1      4539 ASSEM5:			POP     HL              	; Old PC
 041901 DD      4540 POP     IX              	; Code here
 041902 E1 
@@ -8196,14 +8196,14 @@
 041983 04 
 041984 3A      4615 LD	A,(PC+2)
 041985 42 
-041986 30 
-041987 11 
+041986 4C 
+041987 04 
 041988 6F      4616 LD	L,A			; The MSB of the 24-bit address
 041989 D9      4617 EXX
 04198A 2A      4618 LD      HL,(PC)			; The LSW of the 24-bit address (only 16-bits used)
 04198B 40 
-04198C 30 
-04198D 11 
+04198C 4C 
+04198D 04 
 04198E D9      4619 EXX
 04198F F1      4620 POP     AF
 041990 CD      4621 CALL    STORE			; Store the program counter
@@ -8528,8 +8528,8 @@
 041AA9 ED      4789 LD      DE,(PC)
 041AAA 5B 
 041AAB 40 
-041AAC 30 
-041AAC 11   
+041AAC 4C 
+041AAC 04   
 041AAE 13      4790 INC     DE
 041AAF 37      4791 SCF
 041AB0 ED      4792 SBC     HL,DE
@@ -23095,7 +23095,8 @@
               12606 ; XDEF	RAM_END
               12607 ; XDEF	USER
               12608 
-044946 FF     12609 ALIGN 		256		; ACCS, BUFFER & STAVAR must be on page boundaries
+              12609 end_binary: ;  for assemble.py to know where to truncate the binary file
+044946 FF     12610 ALIGN 		256		; ACCS, BUFFER & STAVAR must be on page boundaries
 044947 FF 
 044948 FF 
 044949 FF 
@@ -23281,9 +23282,9 @@
 0449D0 FF 
 0449D0 FF   
 0449D1 FF 
-              12610 RAM_START:
-              12611 ;
-044A00 00     12612 ACCS:           BLKB    256,0             ; String Accumulator
+              12611 RAM_START:
+              12612 ;
+044A00 00     12613 ACCS:           BLKB    256,0             ; String Accumulator
 044A01 00 
 044A02 00 
 044A03 00 
@@ -23539,7 +23540,7 @@
 044ABE 00 
 044ABF 00 
 044AC0 00 
-044B00 00     12613 BUFFER:         BLKB    256,0             ; String Input Buffer
+044B00 00     12614 BUFFER:         BLKB    256,0             ; String Input Buffer
 044B01 00 
 044B02 00 
 044B03 00 
@@ -23795,7 +23796,7 @@
 044BBE 00 
 044BBF 00 
 044BC0 00 
-044C00 00     12614 STAVAR:         BLKB    27*4,0            ; Static Variables
+044C00 00     12615 STAVAR:         BLKB    27*4,0            ; Static Variables
 044C01 00 
 044C02 00 
 044C03 00 
@@ -23903,7 +23904,7 @@
 044C4F 00 
 044C50 00 
 044C51 00 
-044C6C 00     12615 DYNVAR:         BLKB    54*3,0            ; Dynamic Variable Pointers
+044C6C 00     12616 DYNVAR:         BLKB    54*3,0            ; Dynamic Variable Pointers
 044C6D 00 
 044C6E 00 
 044C6F 00 
@@ -24065,108 +24066,108 @@
 044CE4 00 
 044CE4 00   
 044CE5 00 
-044D0E 00     12616 FNPTR:          BLKB    3,0               ; Dynamic Function Pointers
+044D0E 00     12617 FNPTR:          BLKB    3,0               ; Dynamic Function Pointers
 044D0F 00 
 044D10 00 
-044D11 00     12617 PROPTR:         BLKB    3,0               ; Dynamic Procedure Pointers
+044D11 00     12618 PROPTR:         BLKB    3,0               ; Dynamic Procedure Pointers
 044D12 00 
 044D13 00 
-              12618 ;
-044D14 00     12619 PAGE_:          BLKB    3,0               ; Start of User Program
+              12619 ;
+044D14 00     12620 PAGE_:          BLKB    3,0               ; Start of User Program
 044D15 00 
 044D16 00 
-044D17 00     12620 TOP:            BLKB    3,0               ; First Location after User Program
+044D17 00     12621 TOP:            BLKB    3,0               ; First Location after User Program
 044D18 00 
 044D19 00 
-044D1A 00     12621 LOMEM:          BLKB    3,0               ; Start of Dynamic Storage
+044D1A 00     12622 LOMEM:          BLKB    3,0               ; Start of Dynamic Storage
 044D1B 00 
 044D1C 00 
-044D1D 00     12622 FREE:           BLKB    3,0               ; First Free Space Byte
+044D1D 00     12623 FREE:           BLKB    3,0               ; First Free Space Byte
 044D1E 00 
 044D1F 00 
-044D20 00     12623 HIMEM:          BLKB    3,0               ; First Protected Byte
+044D20 00     12624 HIMEM:          BLKB    3,0               ; First Protected Byte
 044D21 00 
 044D22 00 
-              12624 ;
-044D23 00     12625 LINENO:         BLKB    3,0               ; Line Number
+              12625 ;
+044D23 00     12626 LINENO:         BLKB    3,0               ; Line Number
 044D24 00 
 044D25 00 
-044D26 00     12626 TRACEN:         BLKB    3,0               ; Trace Flag
+044D26 00     12627 TRACEN:         BLKB    3,0               ; Trace Flag
 044D27 00 
 044D28 00 
-044D29 00     12627 AUTONO:         BLKB    3,0               ; Auto Flag
+044D29 00     12628 AUTONO:         BLKB    3,0               ; Auto Flag
 044D2A 00 
 044D2B 00 
-044D2C 00     12628 ERRTRP:         BLKB    3,0               ; Error Trap
+044D2C 00     12629 ERRTRP:         BLKB    3,0               ; Error Trap
 044D2D 00 
 044D2E 00 
-044D2F 00     12629 ERRTXT:         BLKB    2,0               ; Error Message Pointer
+044D2F 00     12630 ERRTXT:         BLKB    2,0               ; Error Message Pointer
 044D30 00 
-044D31 00     12630 DATPTR:         BLKB    2,0               ; Data Pointer
+044D31 00     12631 DATPTR:         BLKB    2,0               ; Data Pointer
 044D32 00 
-044D33 00     12631 ERL:            BLKB    2,0               ; Error Line
+044D33 00     12632 ERL:            BLKB    2,0               ; Error Line
 044D34 00 
-044D35 00     12632 ERRLIN:         BLKB    3,0               ; The "ON ERROR" Line
+044D35 00     12633 ERRLIN:         BLKB    3,0               ; The "ON ERROR" Line
 044D36 00 
 044D37 00 
-044D38 00     12633 RANDOM:         BLKB    5,0               ; Random Number
+044D38 00     12634 RANDOM:         BLKB    5,0               ; Random Number
 044D39 00 
 044D3A 00 
 044D3B 00 
 044D3B 00   
-044D3D 00     12634 COUNT:          BLKB    1,0               ; Print Position
-044D3E 00     12635 WIDTH:          BLKB    1,0               ; Print Width
-044D3F 00     12636 ERR:            BLKB    1,0               ; Error Number
-044D40 00     12637 LISTON:         BLKB    1,0               ; LISTO (bottom nibble)
-              12638 ; - BIT 0: If set, output a space after the line number
-              12639 ; - BIT 1: If set, then indent FOR/NEXT loops
-              12640 ; - BIT 2: If set, then indent REPEAT/UNTIL loops
-              12641 ; - BIT 3: If set, then output to buffer for *EDIT
-              12642 ; OPT FLAG (top nibble)
-              12643 ; - BIT 4: If set, then list whilst assembling
-              12644 ; - BIT 5: If set, then assembler errors are reported
-              12645 ; - BIT 6: If set, then place the code starting at address pointed to by O%
-              12646 ; - BIT 7: If set, then assemble in ADL mode, otherwise assemble in Z80 mode
-044D41 00     12647 INCREM:         BLKB    1,0               ; Auto-Increment Value
-              12648 ;
-              12649 ; --------------------------------------------------------------------------------------------
-              12650 ; BEGIN MODIFIED CODE
-              12651 ; --------------------------------------------------------------------------------------------
-              12652 ; Originally in equs.inc
-              12653 ;
-              12654 OC:			EQU     STAVAR+15*4     ; CODE ORIGIN (O%)
-              12655 PC:			EQU     STAVAR+16*4     ; PROGRAM COUNTER (P%)
-              12656 VDU_BUFFER:		EQU	ACCS		; Storage for VDU commands
-              12657 ; --------------------------------------------------------------------------------------------
-              12658 ; END MODIFIED CODE
-              12659 ; --------------------------------------------------------------------------------------------
-              12660 
-              12661 ; Extra Agon-implementation specific system variables
-              12662 ;
-044D42 00     12663 FLAGS:          BLKB    1,0       ; Miscellaneous flags
-              12664 ; - BIT 7: Set if ESC pressed
-              12665 ; - BIT 6: Set to disable ESC
-044D43 00     12666 OSWRCHPT:       BLKB    2,0       ; Pointer for *EDIT
+044D3D 00     12635 COUNT:          BLKB    1,0               ; Print Position
+044D3E 00     12636 WIDTH:          BLKB    1,0               ; Print Width
+044D3F 00     12637 ERR:            BLKB    1,0               ; Error Number
+044D40 00     12638 LISTON:         BLKB    1,0               ; LISTO (bottom nibble)
+              12639 ; - BIT 0: If set, output a space after the line number
+              12640 ; - BIT 1: If set, then indent FOR/NEXT loops
+              12641 ; - BIT 2: If set, then indent REPEAT/UNTIL loops
+              12642 ; - BIT 3: If set, then output to buffer for *EDIT
+              12643 ; OPT FLAG (top nibble)
+              12644 ; - BIT 4: If set, then list whilst assembling
+              12645 ; - BIT 5: If set, then assembler errors are reported
+              12646 ; - BIT 6: If set, then place the code starting at address pointed to by O%
+              12647 ; - BIT 7: If set, then assemble in ADL mode, otherwise assemble in Z80 mode
+044D41 00     12648 INCREM:         BLKB    1,0               ; Auto-Increment Value
+              12649 ;
+              12650 ; --------------------------------------------------------------------------------------------
+              12651 ; BEGIN MODIFIED CODE
+              12652 ; --------------------------------------------------------------------------------------------
+              12653 ; Originally in equs.inc
+              12654 ;
+              12655 OC:			EQU     15*4+STAVAR     ; CODE ORIGIN (O%)
+              12656 PC:			EQU     16*4+STAVAR     ; PROGRAM COUNTER (P%)
+              12657 VDU_BUFFER:		EQU	ACCS		; Storage for VDU commands
+              12658 ; --------------------------------------------------------------------------------------------
+              12659 ; END MODIFIED CODE
+              12660 ; --------------------------------------------------------------------------------------------
+              12661 
+              12662 ; Extra Agon-implementation specific system variables
+              12663 ;
+044D42 00     12664 FLAGS:          BLKB    1,0       ; Miscellaneous flags
+              12665 ; - BIT 7: Set if ESC pressed
+              12666 ; - BIT 6: Set to disable ESC
+044D43 00     12667 OSWRCHPT:       BLKB    2,0       ; Pointer for *EDIT
 044D44 00 
-044D45 00     12667 OSWRCHCH:       BLKB    1,0       ; Channel of OSWRCH
-              12668 ; - 0: Console
-              12669 ; - 1: File
-044D46 00     12670 OSWRCHFH:       BLKB    1,0       ; File handle for OSWRCHCHN
-044D47 00     12671 KEYDOWN:        BLKB    1,0       ; Keydown flag
-044D48 00     12672 KEYASCII:       BLKB    1,0       ; ASCII code of pressed key
-044D49 00     12673 KEYCOUNT:       BLKB    1,0       ; Counts every time a key is pressed
-044D4A 00     12674 R0:             BLKB    3,0       ; General purpose storage for 8/16 to 24 bit operations
+044D45 00     12668 OSWRCHCH:       BLKB    1,0       ; Channel of OSWRCH
+              12669 ; - 0: Console
+              12670 ; - 1: File
+044D46 00     12671 OSWRCHFH:       BLKB    1,0       ; File handle for OSWRCHCHN
+044D47 00     12672 KEYDOWN:        BLKB    1,0       ; Keydown flag
+044D48 00     12673 KEYASCII:       BLKB    1,0       ; ASCII code of pressed key
+044D49 00     12674 KEYCOUNT:       BLKB    1,0       ; Counts every time a key is pressed
+044D4A 00     12675 R0:             BLKB    3,0       ; General purpose storage for 8/16 to 24 bit operations
 044D4B 00 
 044D4C 00 
-044D4D 00     12675 R1:             BLKB    3,0
+044D4D 00     12676 R1:             BLKB    3,0
 044D4E 00 
 044D4F 00 
-              12676 
-              12677 ;
-              12678 ; This must be at the end
-              12679 ;
-              12680 RAM_END:
-044D50 FF     12681 ALIGN	256
+              12677 
+              12678 ;
+              12679 ; This must be at the end
+              12680 ;
+              12681 RAM_END:
+044D50 FF     12682 ALIGN	256
 044D51 FF 
 044D52 FF 
 044D53 FF 
@@ -24342,6 +24343,6 @@
 044DD2 FF 
 044DD3 FF 
 044DD4 FF 
-              12682 USER:							; Must be aligned on a page boundary
-              12683 ; --- End ram.asm ---
-              12684 
+              12683 USER:							; Must be aligned on a page boundary
+              12684 ; --- End ram.asm ---
+              12685 

@@ -1516,14 +1516,14 @@ VDU:
 			call EXPRI
 			exx
 			ld a,l
-			call PROMPT
+			call OSWRCH
 			ld a,(iy)
 			cp $2c
 			jr z,$+$0b
 			cp $3b
 			jr nz,$+$09
 			ld a,h
-			call PROMPT
+			call OSWRCH
 			inc iy
 			call TERMQ
 			jr nz,$-$20
