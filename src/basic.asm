@@ -1,8 +1,7 @@
     include "mos_api.inc"
     include "macros.inc"
-    include "equs_top.inc"
+    include "equs.inc"
     include "init.asm"
-
     include "eval.asm"
     include "exec.asm"
     include "fpp.asm"
@@ -11,11 +10,7 @@
     include "misc.asm"
     include "patch.asm"
     include "sorry.asm"
-
     include "agon_graphics.asm"
     include "agon_sound.asm"
     include "interrupts.asm"
-
     include "ram.asm"
-    include "user.asm"
-    include "equs_bottom.inc"

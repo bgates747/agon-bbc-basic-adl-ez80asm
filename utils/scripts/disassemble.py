@@ -434,6 +434,21 @@ def export_query_to_csv(db_path, output_csv_path):
     conn.close()
     print(f"Query results saved to '{output_csv_path}' in CSV format with NULLs as empty fields.")
 
+def compare_binaries(left_hand_filepath, right_hand_filepath, src_base_filename):
+    # Define the output file path
+    cmp_output_filepath = f"{src_base_filename}_cmp.txt"
+    
+    # Construct the shell command
+    cmp_command = (
+        f"cmp -l {left_hand_filepath} {right_hand_filepath} "
+        f"| gawk '{{printf \"%08X %02X %02X\\n\", $1-1, strtonum(0$2), strtonum(0$3)}}'"
+    )
+    
+    # Run the command and redirect output to the desired file
+    with open(cmp_output_filepath, 'w') as cmp_output_file:
+        subprocess.run(cmp_command, shell=True, stdout=cmp_output_file, check=True)
+    
+    print(f"Comparison output written to {cmp_output_filepath}")
 
 if __name__ == "__main__":
     db_path = 'utils/dif/difs.db'
@@ -454,6 +469,8 @@ if __name__ == "__main__":
 
     left_hand_filepath = f'{dif_dir}/bbcbasic24.dis.asm'
     right_hand_filepath = f'{dif_dir}/{src_base_filename}.dis.asm'
+
+    compare_binaries(left_hand_filepath, right_hand_filepath, src_base_filename)
 
     ez80_dis_args = '--start 0 --target 0x040000 --address --hex-dump --lowercase --explicit-dest --ez80 --prefix --hex --mnemonic-space --no-argument-space --compute-absolute --literal-absolute'
 
