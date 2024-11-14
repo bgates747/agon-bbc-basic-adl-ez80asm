@@ -208,7 +208,7 @@
 040120	06 04 	ld b,$04	ld b,$00
 040122	50 	ld d,b	ld d,b
 040123	06 04 	ld b,$04	ld b,$00
-040125	3b 	dec sp	dec sp
+040125	46 	ld b,(hl)	ld b,(hl)
 040126	49 04 	inc.lis b	inc.lis b
 040128	25 	dec h	dec h
 040129	05 	dec b	dec b
@@ -271,7 +271,7 @@
 04016f	04 	inc b	inc b
 040170	10 06 	djnz $+$08	djnz $+$00
 040172	04 	inc b	inc b
-040173	5e 	ld e,(hl)	ld e,(hl)
+040173	69 	ld l,c	ld l,c
 040174	44 	ld b,h	ld b,h
 040175	04 	inc b	inc b
 040176	cd 04 04 20 	call $200404	call $000000
@@ -1059,7 +1059,7 @@
 0407c5	18 0e 	jr $+$10	jr $+$00
 0407c7	cd 70 0a 04 	call $040a70	call $000000
 0407cb	fe 28 	cp $28	cp $00
-0407cd	ca f1 43 04 	jp z,$0443f1	jp z,$000000
+0407cd	ca fc 43 04 	jp z,$0443fc	jp z,$000000
 0407d1	cd 29 3f 04 	call $043f29	call $000000
 0407d5	37 	scf	scf
 0407d6	18 09 	jr $+$0b	jr $+$00
@@ -1480,8 +1480,7 @@
 040abf	37 	scf	scf
 040ac0	14 	inc d	inc d
 040ac1	04 	inc b	inc b
-040ac2	1b 	dec de	dec de
-040ac3	46 	ld b,(hl)	ld b,(hl)
+040ac2	26 46 	ld h,$46	ld h,$00
 040ac4	04 	inc b	inc b
 040ac5	c2 14 04 da 	jp nz,$da0414	jp nz,$000000
 040ac9	14 	inc d	inc d
@@ -1495,10 +1494,7 @@
 040ad1	b6 	or (hl)	or (hl)
 040ad2	14 	inc d	inc d
 040ad3	04 	inc b	inc b
-040ad4	b7 	or a	or a
-040ad5	43 	ld b,e	ld b,e
-040ad6	04 	inc b	inc b
-040ad7	6a 	ld l,d	ld l,d
+040ad4	c2 43 04 6a 	jp nz,$6a0443	jp nz,$000000
 040ad8	13 	inc de	inc de
 040ad9	04 	inc b	inc b
 040ada	2b 	dec hl	dec hl
@@ -1510,13 +1506,11 @@
 040ae0	f1 	pop af	pop af
 040ae1	0c 	inc c	inc c
 040ae2	04 	inc b	inc b
-040ae3	e1 	pop hl	pop hl
-040ae4	45 	ld b,l	ld b,l
-040ae5	04 	inc b	inc b
-040ae6	c6 0b 	add a,$0b	add a,$00
+040ae3	ec 45 04 c6 	call pe,$c60445	call pe,$000000
+040ae7	0b 	dec bc	dec bc
 040ae8	04 	inc b	inc b
 040ae9	82 	add a,d	add a,d
-040aea	11 04 3b 49 	ld de,$493b04	ld de,$000000
+040aea	11 04 46 49 	ld de,$494604	ld de,$000000
 040aee	04 	inc b	inc b
 040aef	97 	sub a	sub a
 040af0	0f 	rrca	rrca
@@ -1527,7 +1521,7 @@
 040af5	2b 	dec hl	dec hl
 040af6	0f 	rrca	rrca
 040af7	04 	inc b	inc b
-040af8	75 	ld (hl),l	ld (hl),l
+040af8	80 	add a,b	add a,b
 040af9	45 	ld b,l	ld b,l
 040afa	04 	inc b	inc b
 040afb	36 13 	ld (hl),$13	ld (hl),$00
@@ -1539,12 +1533,9 @@
 040b02	0c 	inc c	inc c
 040b03	04 	inc b	inc b
 040b04	27 	daa	daa
-040b05	11 04 c7 43 	ld de,$43c704	ld de,$000000
+040b05	11 04 d2 43 	ld de,$43d204	ld de,$000000
 040b09	04 	inc b	inc b
-040b0a	d9 	exx	exx
-040b0b	45 	ld b,l	ld b,l
-040b0c	04 	inc b	inc b
-040b0d	e5 	push hl	push hl
+040b0a	e4 45 04 e5 	call po,$e50445	call po,$000000
 040b0e	0f 	rrca	rrca
 040b0f	04 	inc b	inc b
 040b10	be 	cp (hl)	cp (hl)
@@ -1552,7 +1543,7 @@
 040b13	90 	sub b	sub b
 040b14	14 	inc d	inc d
 040b15	04 	inc b	inc b
-040b16	a7 	and a	and a
+040b16	b2 	or d	or d
 040b17	45 	ld b,l	ld b,l
 040b18	04 	inc b	inc b
 040b19	c7 	rst $00	rst $00
@@ -1583,7 +1574,9 @@
 040b34	77 	ld (hl),a	ld (hl),a
 040b35	13 	inc de	inc de
 040b36	04 	inc b	inc b
-040b37	c3 44 04 72 	jp $720444	jp $000000
+040b37	ce 44 	adc a,$44	adc a,$00
+040b39	04 	inc b	inc b
+040b3a	72 	ld (hl),d	ld (hl),d
 040b3b	14 	inc d	inc d
 040b3c	04 	inc b	inc b
 040b3d	71 	ld (hl),c	ld (hl),c
@@ -2511,7 +2504,7 @@
 041364	fe 8b 	cp $8b	cp $00
 041366	20 f1 	jr nz,$-$0d	jr nz,$-$00
 041368	18 e1 	jr $-$1d	jr $-$00
-04136a	cd c1 43 04 	call $0443c1	call $000000
+04136a	cd cc 43 04 	call $0443cc	call $000000
 04136e	af 	xor a	xor a
 04136f	32 3d 4d 04 	ld ($044d3d),a	ld ($000000),a
 041373	c3 96 0b 04 	jp $040b96	jp $000000
@@ -2570,7 +2563,7 @@
 04140c	fd 23 	inc iy	inc iy
 04140e	cd 90 17 04 	call $041790	call $000000
 041412	cd 15 03 04 	call $040315	call $000000
-041416	cd 3b 49 04 	call $04493b	call $000000
+041416	cd 46 49 04 	call $044946	call $000000
 04141a	c3 96 0b 04 	jp $040b96	jp $000000
 04141e	cd 90 17 04 	call $041790	call $000000
 041422	cd 0a 03 04 	call $04030a	call $000000
@@ -8654,7 +8647,7 @@
 043f77	21 42 4d 04 	ld hl,$044d42	ld hl,$000000
 043f7b	cb be 	res 7,(hl)	res 7,(hl)
 043f7d	c3 9b 0c 04 	jp $040c9b	jp $000000
-043f81	cd d5 48 04 	call $0448d5	call $000000
+043f81	cd e0 48 04 	call $0448e0	call $000000
 043f85	af 	xor a	xor a
 043f86	21 00 4e 04 	ld hl,$044e00	ld hl,$000000
 043f8a	11 00 00 0b 	ld de,$0b0000	ld de,$000000
@@ -8754,7 +8747,7 @@
 044026	49 4f 	ld.lis c,a	ld.lis c,a
 044028	ce 38 	adc a,$38	adc a,$00
 04402a	40 ff 	rst.sis $38	rst.sis $00
-04402c	cd e9 48 04 	call $0448e9	call $000000
+04402c	cd f4 48 04 	call $0448f4	call $000000
 044030	21 00 00 00 	ld hl,$000000	ld hl,$000000
 044034	c3 68 00 04 	jp $040068	jp $000000
 044038	cd 90 3d 04 	call $043d90	call $000000
@@ -9193,695 +9186,694 @@
 0443b4	d1 	pop de	pop de
 0443b5	c9 	ret	ret
 0443b6	c9 	ret	ret
-0443b7	3e 10 	ld a,$10	ld a,$00
-0443b9	cd 00 3f 04 	call $043f00	call $000000
-0443bd	c3 96 0b 04 	jp $040b96	jp $000000
-0443c1	3e 0c 	ld a,$0c	ld a,$00
-0443c3	c3 00 3f 04 	jp $043f00	jp $000000
-0443c7	dd e5 	push ix	push ix
-0443c9	3e 08 	ld a,$08	ld a,$00
-0443cb	49 cf 	rst.lis $08	rst.lis $00
-0443cd	dd cb 04 a6 	res 4,(ix+$04)	res 4,(ix+$00)
-0443d1	cd 0a 03 04 	call $04030a	call $000000
-0443d5	d9 	exx	exx
-0443d6	3e 16 	ld a,$16	ld a,$00
-0443d8	cd 00 3f 04 	call $043f00	call $000000
-0443dc	7d 	ld a,l	ld a,l
-0443dd	cd 00 3f 04 	call $043f00	call $000000
-0443e1	3e 08 	ld a,$08	ld a,$00
-0443e3	49 cf 	rst.lis $08	rst.lis $00
-0443e5	dd cb 04 66 	bit 4,(ix+$04)	bit 4,(ix+$00)
-0443e9	28 fa 	jr z,$-$04	jr z,$-$00
-0443eb	dd e1 	pop ix	pop ix
-0443ed	c3 96 0b 04 	jp $040b96	jp $000000
-0443f1	fd 23 	inc iy	inc iy
-0443f3	cd 0a 03 04 	call $04030a	call $000000
-0443f7	d9 	exx	exx
-0443f8	22 00 4a 04 	ld ($044a00),hl	ld ($000000),hl
-0443fc	cd 22 0a 04 	call $040a22	call $000000
-044400	cd 0a 03 04 	call $04030a	call $000000
-044404	d9 	exx	exx
-044405	22 02 4a 04 	ld ($044a02),hl	ld ($000000),hl
-044409	cd 2f 0a 04 	call $040a2f	call $000000
-04440d	dd e5 	push ix	push ix
-04440f	3e 08 	ld a,$08	ld a,$00
-044411	49 cf 	rst.lis $08	rst.lis $00
-044413	dd cb 04 8e 	res 1,(ix+$04)	res 1,(ix+$00)
-044417	3e 17 	ld a,$17	ld a,$00
-044419	cd 00 3f 04 	call $043f00	call $000000
-04441d	3e 00 	ld a,$00	ld a,$00
-04441f	cd 00 3f 04 	call $043f00	call $000000
-044423	3e 83 	ld a,$83	ld a,$00
-044425	cd 00 3f 04 	call $043f00	call $000000
-044429	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
-04442d	cd 00 3f 04 	call $043f00	call $000000
-044431	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
-044435	cd 00 3f 04 	call $043f00	call $000000
-044439	3a 02 4a 04 	ld a,($044a02)	ld a,($000000)
-04443d	cd 00 3f 04 	call $043f00	call $000000
-044441	3a 03 4a 04 	ld a,($044a03)	ld a,($000000)
-044445	cd 00 3f 04 	call $043f00	call $000000
-044449	dd cb 04 4e 	bit 1,(ix+$04)	bit 1,(ix+$00)
-04444d	28 fa 	jr z,$-$04	jr z,$-$00
-04444f	dd 7e 09 	ld a,(ix+$09)	ld a,(ix+$00)
-044452	b7 	or a	or a
-044453	37 	scf	scf
-044454	20 02 	jr nz,$+$04	jr nz,$+$00
-044456	af 	xor a	xor a
-044457	3d 	dec a	dec a
-044458	dd e1 	pop ix	pop ix
-04445a	c3 e1 07 04 	jp $0407e1	jp $000000
-04445e	cd 0a 03 04 	call $04030a	call $000000
-044462	d9 	exx	exx
-044463	22 00 4a 04 	ld ($044a00),hl	ld ($000000),hl
-044467	cd 22 0a 04 	call $040a22	call $000000
-04446b	cd 0a 03 04 	call $04030a	call $000000
-04446f	d9 	exx	exx
-044470	22 02 4a 04 	ld ($044a02),hl	ld ($000000),hl
-044474	cd 2f 0a 04 	call $040a2f	call $000000
-044478	dd e5 	push ix	push ix
-04447a	3e 08 	ld a,$08	ld a,$00
-04447c	49 cf 	rst.lis $08	rst.lis $00
-04447e	dd cb 04 96 	res 2,(ix+$04)	res 2,(ix+$00)
-044482	3e 17 	ld a,$17	ld a,$00
-044484	cd 00 3f 04 	call $043f00	call $000000
-044488	3e 00 	ld a,$00	ld a,$00
-04448a	cd 00 3f 04 	call $043f00	call $000000
-04448e	3e 84 	ld a,$84	ld a,$00
-044490	cd 00 3f 04 	call $043f00	call $000000
-044494	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
-044498	cd 00 3f 04 	call $043f00	call $000000
-04449c	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
-0444a0	cd 00 3f 04 	call $043f00	call $000000
-0444a4	3a 02 4a 04 	ld a,($044a02)	ld a,($000000)
-0444a8	cd 00 3f 04 	call $043f00	call $000000
-0444ac	3a 03 4a 04 	ld a,($044a03)	ld a,($000000)
-0444b0	cd 00 3f 04 	call $043f00	call $000000
-0444b4	dd cb 04 56 	bit 2,(ix+$04)	bit 2,(ix+$00)
-0444b8	28 fa 	jr z,$-$04	jr z,$-$00
-0444ba	dd 6e 16 	ld l,(ix+$16)	ld l,(ix+$00)
-0444bd	dd e1 	pop ix	pop ix
-0444bf	c3 7f 05 04 	jp $04057f	jp $000000
-0444c3	cd 0a 03 04 	call $04030a	call $000000
-0444c7	d9 	exx	exx
-0444c8	7d 	ld a,l	ld a,l
-0444c9	32 00 4a 04 	ld ($044a00),a	ld ($000000),a
-0444cd	cd 70 0a 04 	call $040a70	call $000000
-0444d1	fe 2c 	cp $2c	cp $00
-0444d3	28 12 	jr z,$+$14	jr z,$+$00
-0444d5	3e 11 	ld a,$11	ld a,$00
-0444d7	cd 00 3f 04 	call $043f00	call $000000
-0444db	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
-0444df	cd 00 3f 04 	call $043f00	call $000000
-0444e3	c3 96 0b 04 	jp $040b96	jp $000000
-0444e7	cd 22 0a 04 	call $040a22	call $000000
-0444eb	cd 0a 03 04 	call $04030a	call $000000
-0444ef	d9 	exx	exx
-0444f0	7d 	ld a,l	ld a,l
-0444f1	32 01 4a 04 	ld ($044a01),a	ld ($000000),a
-0444f5	cd 70 0a 04 	call $040a70	call $000000
-0444f9	fe 2c 	cp $2c	cp $00
-0444fb	28 2c 	jr z,$+$2e	jr z,$+$00
-0444fd	3e 13 	ld a,$13	ld a,$00
-0444ff	cd 00 3f 04 	call $043f00	call $000000
-044503	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
-044507	cd 00 3f 04 	call $043f00	call $000000
-04450b	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
-04450f	cd 00 3f 04 	call $043f00	call $000000
-044513	3e 00 	ld a,$00	ld a,$00
-044515	cd 00 3f 04 	call $043f00	call $000000
-044519	3e 00 	ld a,$00	ld a,$00
-04451b	cd 00 3f 04 	call $043f00	call $000000
-04451f	3e 00 	ld a,$00	ld a,$00
-044521	cd 00 3f 04 	call $043f00	call $000000
-044525	c3 96 0b 04 	jp $040b96	jp $000000
-044529	cd 22 0a 04 	call $040a22	call $000000
-04452d	cd 0a 03 04 	call $04030a	call $000000
-044531	d9 	exx	exx
-044532	7d 	ld a,l	ld a,l
-044533	32 02 4a 04 	ld ($044a02),a	ld ($000000),a
-044537	cd 22 0a 04 	call $040a22	call $000000
-04453b	cd 0a 03 04 	call $04030a	call $000000
-04453f	d9 	exx	exx
-044540	7d 	ld a,l	ld a,l
-044541	32 03 4a 04 	ld ($044a03),a	ld ($000000),a
-044545	3e 13 	ld a,$13	ld a,$00
-044547	cd 00 3f 04 	call $043f00	call $000000
-04454b	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
-04454f	cd 00 3f 04 	call $043f00	call $000000
-044553	3e ff 	ld a,$ff	ld a,$00
-044555	cd 00 3f 04 	call $043f00	call $000000
-044559	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
-04455d	cd 00 3f 04 	call $043f00	call $000000
-044561	3a 02 4a 04 	ld a,($044a02)	ld a,($000000)
-044565	cd 00 3f 04 	call $043f00	call $000000
-044569	3a 03 4a 04 	ld a,($044a03)	ld a,($000000)
-04456d	cd 00 3f 04 	call $043f00	call $000000
-044571	c3 96 0b 04 	jp $040b96	jp $000000
-044575	cd 0a 03 04 	call $04030a	call $000000
-044579	d9 	exx	exx
-04457a	7d 	ld a,l	ld a,l
-04457b	32 00 4a 04 	ld ($044a00),a	ld ($000000),a
-04457f	cd 22 0a 04 	call $040a22	call $000000
-044583	cd 0a 03 04 	call $04030a	call $000000
-044587	d9 	exx	exx
-044588	7d 	ld a,l	ld a,l
-044589	32 01 4a 04 	ld ($044a01),a	ld ($000000),a
-04458d	3e 12 	ld a,$12	ld a,$00
-04458f	cd 00 3f 04 	call $043f00	call $000000
-044593	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
-044597	cd 00 3f 04 	call $043f00	call $000000
-04459b	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
-04459f	cd 00 3f 04 	call $043f00	call $000000
-0445a3	c3 96 0b 04 	jp $040b96	jp $000000
-0445a7	cd 0a 03 04 	call $04030a	call $000000
-0445ab	d9 	exx	exx
-0445ac	e5 	push hl	push hl
-0445ad	cd 22 0a 04 	call $040a22	call $000000
-0445b1	cd a5 43 04 	call $0443a5	call $000000
-0445b5	c1 	pop bc	pop bc
-0445b6	3e 19 	ld a,$19	ld a,$00
-0445b8	cd 00 3f 04 	call $043f00	call $000000
-0445bc	79 	ld a,c	ld a,c
-0445bd	cd 00 3f 04 	call $043f00	call $000000
-0445c1	7b 	ld a,e	ld a,e
-0445c2	cd 00 3f 04 	call $043f00	call $000000
-0445c6	7a 	ld a,d	ld a,d
-0445c7	cd 00 3f 04 	call $043f00	call $000000
-0445cb	7d 	ld a,l	ld a,l
-0445cc	cd 00 3f 04 	call $043f00	call $000000
-0445d0	7c 	ld a,h	ld a,h
-0445d1	cd 00 3f 04 	call $043f00	call $000000
-0445d5	c3 96 0b 04 	jp $040b96	jp $000000
-0445d9	cd a5 43 04 	call $0443a5	call $000000
-0445dd	0e 04 	ld c,$04	ld c,$00
-0445df	18 d5 	jr $-$29	jr $-$00
-0445e1	cd a5 43 04 	call $0443a5	call $000000
-0445e5	cd 70 0a 04 	call $040a70	call $000000
-0445e9	fe 2c 	cp $2c	cp $00
-0445eb	0e 05 	ld c,$05	ld c,$00
-0445ed	20 c7 	jr nz,$-$37	jr nz,$-$00
-0445ef	3e 19 	ld a,$19	ld a,$00
-0445f1	cd 00 3f 04 	call $043f00	call $000000
-0445f5	3e 04 	ld a,$04	ld a,$00
-0445f7	cd 00 3f 04 	call $043f00	call $000000
-0445fb	7b 	ld a,e	ld a,e
+0443b7	af 	xor a	xor a
+0443b8	cd 77 37 04 	call $043777	call $000000
+0443bc	53 	ld d,e	ld d,e
+0443bd	6f 	ld l,a	ld l,a
+0443be	72 	ld (hl),d	ld (hl),d
+0443bf	72 	ld (hl),d	ld (hl),d
+0443c0	79 	ld a,c	ld a,c
+0443c1	00 	nop	nop
+0443c2	3e 10 	ld a,$10	ld a,$00
+0443c4	cd 00 3f 04 	call $043f00	call $000000
+0443c8	c3 96 0b 04 	jp $040b96	jp $000000
+0443cc	3e 0c 	ld a,$0c	ld a,$00
+0443ce	c3 00 3f 04 	jp $043f00	jp $000000
+0443d2	dd e5 	push ix	push ix
+0443d4	3e 08 	ld a,$08	ld a,$00
+0443d6	49 cf 	rst.lis $08	rst.lis $00
+0443d8	dd cb 04 a6 	res 4,(ix+$04)	res 4,(ix+$00)
+0443dc	cd 0a 03 04 	call $04030a	call $000000
+0443e0	d9 	exx	exx
+0443e1	3e 16 	ld a,$16	ld a,$00
+0443e3	cd 00 3f 04 	call $043f00	call $000000
+0443e7	7d 	ld a,l	ld a,l
+0443e8	cd 00 3f 04 	call $043f00	call $000000
+0443ec	3e 08 	ld a,$08	ld a,$00
+0443ee	49 cf 	rst.lis $08	rst.lis $00
+0443f0	dd cb 04 66 	bit 4,(ix+$04)	bit 4,(ix+$00)
+0443f4	28 fa 	jr z,$-$04	jr z,$-$00
+0443f6	dd e1 	pop ix	pop ix
+0443f8	c3 96 0b 04 	jp $040b96	jp $000000
+0443fc	fd 23 	inc iy	inc iy
+0443fe	cd 0a 03 04 	call $04030a	call $000000
+044402	d9 	exx	exx
+044403	22 00 4a 04 	ld ($044a00),hl	ld ($000000),hl
+044407	cd 22 0a 04 	call $040a22	call $000000
+04440b	cd 0a 03 04 	call $04030a	call $000000
+04440f	d9 	exx	exx
+044410	22 02 4a 04 	ld ($044a02),hl	ld ($000000),hl
+044414	cd 2f 0a 04 	call $040a2f	call $000000
+044418	dd e5 	push ix	push ix
+04441a	3e 08 	ld a,$08	ld a,$00
+04441c	49 cf 	rst.lis $08	rst.lis $00
+04441e	dd cb 04 8e 	res 1,(ix+$04)	res 1,(ix+$00)
+044422	3e 17 	ld a,$17	ld a,$00
+044424	cd 00 3f 04 	call $043f00	call $000000
+044428	3e 00 	ld a,$00	ld a,$00
+04442a	cd 00 3f 04 	call $043f00	call $000000
+04442e	3e 83 	ld a,$83	ld a,$00
+044430	cd 00 3f 04 	call $043f00	call $000000
+044434	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
+044438	cd 00 3f 04 	call $043f00	call $000000
+04443c	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
+044440	cd 00 3f 04 	call $043f00	call $000000
+044444	3a 02 4a 04 	ld a,($044a02)	ld a,($000000)
+044448	cd 00 3f 04 	call $043f00	call $000000
+04444c	3a 03 4a 04 	ld a,($044a03)	ld a,($000000)
+044450	cd 00 3f 04 	call $043f00	call $000000
+044454	dd cb 04 4e 	bit 1,(ix+$04)	bit 1,(ix+$00)
+044458	28 fa 	jr z,$-$04	jr z,$-$00
+04445a	dd 7e 09 	ld a,(ix+$09)	ld a,(ix+$00)
+04445d	b7 	or a	or a
+04445e	37 	scf	scf
+04445f	20 02 	jr nz,$+$04	jr nz,$+$00
+044461	af 	xor a	xor a
+044462	3d 	dec a	dec a
+044463	dd e1 	pop ix	pop ix
+044465	c3 e1 07 04 	jp $0407e1	jp $000000
+044469	cd 0a 03 04 	call $04030a	call $000000
+04446d	d9 	exx	exx
+04446e	22 00 4a 04 	ld ($044a00),hl	ld ($000000),hl
+044472	cd 22 0a 04 	call $040a22	call $000000
+044476	cd 0a 03 04 	call $04030a	call $000000
+04447a	d9 	exx	exx
+04447b	22 02 4a 04 	ld ($044a02),hl	ld ($000000),hl
+04447f	cd 2f 0a 04 	call $040a2f	call $000000
+044483	dd e5 	push ix	push ix
+044485	3e 08 	ld a,$08	ld a,$00
+044487	49 cf 	rst.lis $08	rst.lis $00
+044489	dd cb 04 96 	res 2,(ix+$04)	res 2,(ix+$00)
+04448d	3e 17 	ld a,$17	ld a,$00
+04448f	cd 00 3f 04 	call $043f00	call $000000
+044493	3e 00 	ld a,$00	ld a,$00
+044495	cd 00 3f 04 	call $043f00	call $000000
+044499	3e 84 	ld a,$84	ld a,$00
+04449b	cd 00 3f 04 	call $043f00	call $000000
+04449f	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
+0444a3	cd 00 3f 04 	call $043f00	call $000000
+0444a7	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
+0444ab	cd 00 3f 04 	call $043f00	call $000000
+0444af	3a 02 4a 04 	ld a,($044a02)	ld a,($000000)
+0444b3	cd 00 3f 04 	call $043f00	call $000000
+0444b7	3a 03 4a 04 	ld a,($044a03)	ld a,($000000)
+0444bb	cd 00 3f 04 	call $043f00	call $000000
+0444bf	dd cb 04 56 	bit 2,(ix+$04)	bit 2,(ix+$00)
+0444c3	28 fa 	jr z,$-$04	jr z,$-$00
+0444c5	dd 6e 16 	ld l,(ix+$16)	ld l,(ix+$00)
+0444c8	dd e1 	pop ix	pop ix
+0444ca	c3 7f 05 04 	jp $04057f	jp $000000
+0444ce	cd 0a 03 04 	call $04030a	call $000000
+0444d2	d9 	exx	exx
+0444d3	7d 	ld a,l	ld a,l
+0444d4	32 00 4a 04 	ld ($044a00),a	ld ($000000),a
+0444d8	cd 70 0a 04 	call $040a70	call $000000
+0444dc	fe 2c 	cp $2c	cp $00
+0444de	28 12 	jr z,$+$14	jr z,$+$00
+0444e0	3e 11 	ld a,$11	ld a,$00
+0444e2	cd 00 3f 04 	call $043f00	call $000000
+0444e6	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
+0444ea	cd 00 3f 04 	call $043f00	call $000000
+0444ee	c3 96 0b 04 	jp $040b96	jp $000000
+0444f2	cd 22 0a 04 	call $040a22	call $000000
+0444f6	cd 0a 03 04 	call $04030a	call $000000
+0444fa	d9 	exx	exx
+0444fb	7d 	ld a,l	ld a,l
+0444fc	32 01 4a 04 	ld ($044a01),a	ld ($000000),a
+044500	cd 70 0a 04 	call $040a70	call $000000
+044504	fe 2c 	cp $2c	cp $00
+044506	28 2c 	jr z,$+$2e	jr z,$+$00
+044508	3e 13 	ld a,$13	ld a,$00
+04450a	cd 00 3f 04 	call $043f00	call $000000
+04450e	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
+044512	cd 00 3f 04 	call $043f00	call $000000
+044516	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
+04451a	cd 00 3f 04 	call $043f00	call $000000
+04451e	3e 00 	ld a,$00	ld a,$00
+044520	cd 00 3f 04 	call $043f00	call $000000
+044524	3e 00 	ld a,$00	ld a,$00
+044526	cd 00 3f 04 	call $043f00	call $000000
+04452a	3e 00 	ld a,$00	ld a,$00
+04452c	cd 00 3f 04 	call $043f00	call $000000
+044530	c3 96 0b 04 	jp $040b96	jp $000000
+044534	cd 22 0a 04 	call $040a22	call $000000
+044538	cd 0a 03 04 	call $04030a	call $000000
+04453c	d9 	exx	exx
+04453d	7d 	ld a,l	ld a,l
+04453e	32 02 4a 04 	ld ($044a02),a	ld ($000000),a
+044542	cd 22 0a 04 	call $040a22	call $000000
+044546	cd 0a 03 04 	call $04030a	call $000000
+04454a	d9 	exx	exx
+04454b	7d 	ld a,l	ld a,l
+04454c	32 03 4a 04 	ld ($044a03),a	ld ($000000),a
+044550	3e 13 	ld a,$13	ld a,$00
+044552	cd 00 3f 04 	call $043f00	call $000000
+044556	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
+04455a	cd 00 3f 04 	call $043f00	call $000000
+04455e	3e ff 	ld a,$ff	ld a,$00
+044560	cd 00 3f 04 	call $043f00	call $000000
+044564	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
+044568	cd 00 3f 04 	call $043f00	call $000000
+04456c	3a 02 4a 04 	ld a,($044a02)	ld a,($000000)
+044570	cd 00 3f 04 	call $043f00	call $000000
+044574	3a 03 4a 04 	ld a,($044a03)	ld a,($000000)
+044578	cd 00 3f 04 	call $043f00	call $000000
+04457c	c3 96 0b 04 	jp $040b96	jp $000000
+044580	cd 0a 03 04 	call $04030a	call $000000
+044584	d9 	exx	exx
+044585	7d 	ld a,l	ld a,l
+044586	32 00 4a 04 	ld ($044a00),a	ld ($000000),a
+04458a	cd 22 0a 04 	call $040a22	call $000000
+04458e	cd 0a 03 04 	call $04030a	call $000000
+044592	d9 	exx	exx
+044593	7d 	ld a,l	ld a,l
+044594	32 01 4a 04 	ld ($044a01),a	ld ($000000),a
+044598	3e 12 	ld a,$12	ld a,$00
+04459a	cd 00 3f 04 	call $043f00	call $000000
+04459e	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
+0445a2	cd 00 3f 04 	call $043f00	call $000000
+0445a6	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
+0445aa	cd 00 3f 04 	call $043f00	call $000000
+0445ae	c3 96 0b 04 	jp $040b96	jp $000000
+0445b2	cd 0a 03 04 	call $04030a	call $000000
+0445b6	d9 	exx	exx
+0445b7	e5 	push hl	push hl
+0445b8	cd 22 0a 04 	call $040a22	call $000000
+0445bc	cd a5 43 04 	call $0443a5	call $000000
+0445c0	c1 	pop bc	pop bc
+0445c1	3e 19 	ld a,$19	ld a,$00
+0445c3	cd 00 3f 04 	call $043f00	call $000000
+0445c7	79 	ld a,c	ld a,c
+0445c8	cd 00 3f 04 	call $043f00	call $000000
+0445cc	7b 	ld a,e	ld a,e
+0445cd	cd 00 3f 04 	call $043f00	call $000000
+0445d1	7a 	ld a,d	ld a,d
+0445d2	cd 00 3f 04 	call $043f00	call $000000
+0445d6	7d 	ld a,l	ld a,l
+0445d7	cd 00 3f 04 	call $043f00	call $000000
+0445db	7c 	ld a,h	ld a,h
+0445dc	cd 00 3f 04 	call $043f00	call $000000
+0445e0	c3 96 0b 04 	jp $040b96	jp $000000
+0445e4	cd a5 43 04 	call $0443a5	call $000000
+0445e8	0e 04 	ld c,$04	ld c,$00
+0445ea	18 d5 	jr $-$29	jr $-$00
+0445ec	cd a5 43 04 	call $0443a5	call $000000
+0445f0	cd 70 0a 04 	call $040a70	call $000000
+0445f4	fe 2c 	cp $2c	cp $00
+0445f6	0e 05 	ld c,$05	ld c,$00
+0445f8	20 c7 	jr nz,$-$37	jr nz,$-$00
+0445fa	3e 19 	ld a,$19	ld a,$00
 0445fc	cd 00 3f 04 	call $043f00	call $000000
-044600	7a 	ld a,d	ld a,d
-044601	cd 00 3f 04 	call $043f00	call $000000
-044605	7d 	ld a,l	ld a,l
-044606	cd 00 3f 04 	call $043f00	call $000000
-04460a	7c 	ld a,h	ld a,h
-04460b	cd 00 3f 04 	call $043f00	call $000000
-04460f	cd 22 0a 04 	call $040a22	call $000000
-044613	c5 	push bc	push bc
-044614	cd a5 43 04 	call $0443a5	call $000000
-044618	c1 	pop bc	pop bc
-044619	18 9b 	jr $-$63	jr $-$00
-04461b	cd a5 43 04 	call $0443a5	call $000000
-04461f	7d 	ld a,l	ld a,l
-044620	f5 	push af	push af
-044621	d5 	push de	push de
-044622	cd 22 0a 04 	call $040a22	call $000000
+044600	3e 04 	ld a,$04	ld a,$00
+044602	cd 00 3f 04 	call $043f00	call $000000
+044606	7b 	ld a,e	ld a,e
+044607	cd 00 3f 04 	call $043f00	call $000000
+04460b	7a 	ld a,d	ld a,d
+04460c	cd 00 3f 04 	call $043f00	call $000000
+044610	7d 	ld a,l	ld a,l
+044611	cd 00 3f 04 	call $043f00	call $000000
+044615	7c 	ld a,h	ld a,h
+044616	cd 00 3f 04 	call $043f00	call $000000
+04461a	cd 22 0a 04 	call $040a22	call $000000
+04461e	c5 	push bc	push bc
+04461f	cd a5 43 04 	call $0443a5	call $000000
+044623	c1 	pop bc	pop bc
+044624	18 9b 	jr $-$63	jr $-$00
 044626	cd a5 43 04 	call $0443a5	call $000000
-04462a	53 	ld d,e	ld d,e
-04462b	5d 	ld e,l	ld e,l
-04462c	e1 	pop hl	pop hl
-04462d	f1 	pop af	pop af
-04462e	ed 44 	neg	neg
-044630	fe 10 	cp $10	cp $00
-044632	d2 96 0b 04 	jp nc,$040b96	jp nc,$000000
-044636	4f 	ld c,a	ld c,a
-044637	7d 	ld a,l	ld a,l
-044638	32 00 4a 04 	ld ($044a00),a	ld ($000000),a
-04463c	af 	xor a	xor a
-04463d	32 01 4a 04 	ld ($044a01),a	ld ($000000),a
-044641	06 06 	ld b,$06	ld b,$00
-044643	ed 4c 	mlt bc	mlt bc
-044645	79 	ld a,c	ld a,c
-044646	32 02 4a 04 	ld ($044a02),a	ld ($000000),a
-04464a	4b 	ld c,e	ld c,e
-04464b	26 00 	ld h,$00	ld h,$00
-04464d	6a 	ld l,d	ld l,d
-04464e	11 d5 46 04 	ld de,$0446d5	ld de,$000000
-044652	29 	add hl,hl	add hl,hl
-044653	19 	add hl,de	add hl,de
-044654	7e 	ld a,(hl)	ld a,(hl)
-044655	32 03 4a 04 	ld ($044a03),a	ld ($000000),a
-044659	23 	inc hl	inc hl
-04465a	7e 	ld a,(hl)	ld a,(hl)
-04465b	32 04 4a 04 	ld ($044a04),a	ld ($000000),a
-04465f	06 32 	ld b,$32	ld b,$00
-044661	ed 4c 	mlt bc	mlt bc
-044663	ed 43 05 4a 04 	ld ($044a05),bc	ld ($000000),bc
-044668	dd e5 	push ix	push ix
-04466a	3e 08 	ld a,$08	ld a,$00
-04466c	49 cf 	rst.lis $08	rst.lis $00
-04466e	5b dd cb 04 9e 	res.lil 3,(ix+$04)	res.lil 3,(ix+$00)
-044673	3e 17 	ld a,$17	ld a,$00
-044675	cd 00 3f 04 	call $043f00	call $000000
-044679	3e 00 	ld a,$00	ld a,$00
-04467b	cd 00 3f 04 	call $043f00	call $000000
-04467f	3e 85 	ld a,$85	ld a,$00
-044681	cd 00 3f 04 	call $043f00	call $000000
-044685	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
-044689	cd 00 3f 04 	call $043f00	call $000000
-04468d	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
-044691	cd 00 3f 04 	call $043f00	call $000000
-044695	3a 02 4a 04 	ld a,($044a02)	ld a,($000000)
-044699	cd 00 3f 04 	call $043f00	call $000000
-04469d	3a 03 4a 04 	ld a,($044a03)	ld a,($000000)
-0446a1	cd 00 3f 04 	call $043f00	call $000000
-0446a5	3a 04 4a 04 	ld a,($044a04)	ld a,($000000)
-0446a9	cd 00 3f 04 	call $043f00	call $000000
-0446ad	3a 05 4a 04 	ld a,($044a05)	ld a,($000000)
-0446b1	cd 00 3f 04 	call $043f00	call $000000
-0446b5	3a 06 4a 04 	ld a,($044a06)	ld a,($000000)
-0446b9	cd 00 3f 04 	call $043f00	call $000000
-0446bd	5b dd cb 04 5e 	bit.lil 3,(ix+$04)	bit.lil 3,(ix+$00)
-0446c2	28 f9 	jr z,$-$05	jr z,$-$00
-0446c4	cd 71 3f 04 	call $043f71	call $000000
-0446c8	5b dd 7e 0e 	ld.lil a,(ix+$0e)	ld.lil a,(ix+$00)
-0446cc	a7 	and a	and a
-0446cd	28 9f 	jr z,$-$5f	jr z,$-$00
-0446cf	dd e1 	pop ix	pop ix
-0446d1	c3 96 0b 04 	jp $040b96	jp $000000
-0446d5	75 	ld (hl),l	ld (hl),l
-0446d6	00 	nop	nop
-0446d7	76 	halt	halt
-0446d8	00 	nop	nop
-0446d9	78 	ld a,b	ld a,b
-0446da	00 	nop	nop
-0446db	7a 	ld a,d	ld a,d
-0446dc	00 	nop	nop
-0446dd	7b 	ld a,e	ld a,e
-0446de	00 	nop	nop
-0446df	83 	add a,e	add a,e
-0446e0	00 	nop	nop
-0446e1	85 	add a,l	add a,l
-0446e2	00 	nop	nop
-0446e3	87 	add a,a	add a,a
-0446e4	00 	nop	nop
-0446e5	89 	adc a,c	adc a,c
-0446e6	00 	nop	nop
-0446e7	8b 	adc a,e	adc a,e
-0446e8	00 	nop	nop
-0446e9	8d 	adc a,l	adc a,l
-0446ea	00 	nop	nop
-0446eb	8f 	adc a,a	adc a,a
-0446ec	00 	nop	nop
-0446ed	91 	sub c	sub c
-0446ee	00 	nop	nop
-0446ef	93 	sub e	sub e
-0446f0	00 	nop	nop
-0446f1	95 	sub l	sub l
-0446f2	00 	nop	nop
-0446f3	97 	sub a	sub a
-0446f4	00 	nop	nop
-0446f5	99 	sbc a,c	sbc a,c
-0446f6	00 	nop	nop
-0446f7	9c 	sbc a,h	sbc a,h
-0446f8	00 	nop	nop
-0446f9	9e 	sbc a,(hl)	sbc a,(hl)
-0446fa	00 	nop	nop
-0446fb	a0 	and b	and b
-0446fc	00 	nop	nop
-0446fd	a2 	and d	and d
-0446fe	00 	nop	nop
-0446ff	a5 	and l	and l
-044700	00 	nop	nop
-044701	a7 	and a	and a
-044702	00 	nop	nop
-044703	aa 	xor d	xor d
-044704	00 	nop	nop
-044705	ac 	xor h	xor h
-044706	00 	nop	nop
-044707	af 	xor a	xor a
-044708	00 	nop	nop
-044709	b1 	or c	or c
-04470a	00 	nop	nop
-04470b	b4 	or h	or h
-04470c	00 	nop	nop
-04470d	b6 	or (hl)	or (hl)
-04470e	00 	nop	nop
-04470f	b9 	cp c	cp c
-044710	00 	nop	nop
-044711	bc 	cp h	cp h
-044712	00 	nop	nop
-044713	be 	cp (hl)	cp (hl)
-044714	00 	nop	nop
-044715	c1 	pop bc	pop bc
-044716	00 	nop	nop
-044717	c4 00 c7 00 	call nz,$00c700	call nz,$000000
-04471b	ca 00 cd 00 	jp z,$00cd00	jp z,$000000
-04471f	d0 	ret nc	ret nc
-044720	00 	nop	nop
-044721	d3 00 	out ($00),a	out ($00),a
-044723	d6 00 	sub $00	sub $00
-044725	d9 	exx	exx
-044726	00 	nop	nop
-044727	dc 00 df 00 	call c,$00df00	call c,$000000
-04472b	e2 00 e6 00 	jp po,$00e600	jp po,$000000
-04472f	e9 	jp (hl)	jp (hl)
-044730	00 	nop	nop
-044731	ec 00 f0 00 	call pe,$00f000	call pe,$000000
-044735	f3 	di	di
-044736	00 	nop	nop
-044737	f7 	rst $30	rst $00
-044738	00 	nop	nop
-044739	fb 	ei	ei
-04473a	00 	nop	nop
-04473b	fe 00 	cp $00	cp $00
-04473d	02 	ld (bc),a	ld (bc),a
-04473e	01 06 01 09 	ld bc,$090106	ld bc,$000000
-044742	01 0d 01 11 	ld bc,$11010d	ld bc,$000000
-044746	01 15 01 19 	ld bc,$190115	ld bc,$000000
-04474a	01 1d 01 21 	ld bc,$21011d	ld bc,$000000
-04474e	01 26 01 2a 	ld bc,$2a0126	ld bc,$000000
-044752	01 2e 01 33 	ld bc,$33012e	ld bc,$000000
-044756	01 37 01 3c 	ld bc,$3c0137	ld bc,$000000
-04475a	01 40 01 45 	ld bc,$450140	ld bc,$000000
-04475e	01 4a 01 4e 	ld bc,$4e014a	ld bc,$000000
-044762	01 53 01 58 	ld bc,$580153	ld bc,$000000
-044766	01 5d 01 62 	ld bc,$62015d	ld bc,$000000
-04476a	01 67 01 6d 	ld bc,$6d0167	ld bc,$000000
-04476e	01 72 01 77 	ld bc,$770172	ld bc,$000000
-044772	01 7d 01 82 	ld bc,$82017d	ld bc,$000000
-044776	01 88 01 8e 	ld bc,$8e0188	ld bc,$000000
-04477a	01 93 01 99 	ld bc,$990193	ld bc,$000000
-04477e	01 9f 01 a5 	ld bc,$a5019f	ld bc,$000000
-044782	01 ab 01 b2 	ld bc,$b201ab	ld bc,$000000
-044786	01 b8 01 be 	ld bc,$be01b8	ld bc,$000000
-04478a	01 c5 01 cb 	ld bc,$cb01c5	ld bc,$000000
-04478e	01 d2 01 d9 	ld bc,$d901d2	ld bc,$000000
-044792	01 e0 01 e7 	ld bc,$e701e0	ld bc,$000000
-044796	01 ee 01 f5 	ld bc,$f501ee	ld bc,$000000
-04479a	01 fc 01 04 	ld bc,$0401fc	ld bc,$000000
-04479e	02 	ld (bc),a	ld (bc),a
-04479f	0b 	dec bc	dec bc
-0447a0	02 	ld (bc),a	ld (bc),a
-0447a1	13 	inc de	inc de
-0447a2	02 	ld (bc),a	ld (bc),a
-0447a3	1b 	dec de	dec de
-0447a4	02 	ld (bc),a	ld (bc),a
-0447a5	22 02 2a 02 	ld ($022a02),hl	ld ($000000),hl
-0447a9	32 02 3b 02 	ld ($023b02),a	ld ($000000),a
-0447ad	43 	ld b,e	ld b,e
-0447ae	02 	ld (bc),a	ld (bc),a
-0447af	4b 	ld c,e	ld c,e
-0447b0	02 	ld (bc),a	ld (bc),a
-0447b1	54 	ld d,h	ld d,h
-0447b2	02 	ld (bc),a	ld (bc),a
-0447b3	5d 	ld e,l	ld e,l
-0447b4	02 	ld (bc),a	ld (bc),a
-0447b5	65 	ld h,l	ld h,l
-0447b6	02 	ld (bc),a	ld (bc),a
-0447b7	6e 	ld l,(hl)	ld l,(hl)
-0447b8	02 	ld (bc),a	ld (bc),a
-0447b9	77 	ld (hl),a	ld (hl),a
-0447ba	02 	ld (bc),a	ld (bc),a
-0447bb	81 	add a,c	add a,c
-0447bc	02 	ld (bc),a	ld (bc),a
-0447bd	8a 	adc a,d	adc a,d
-0447be	02 	ld (bc),a	ld (bc),a
-0447bf	93 	sub e	sub e
-0447c0	02 	ld (bc),a	ld (bc),a
-0447c1	9d 	sbc a,l	sbc a,l
-0447c2	02 	ld (bc),a	ld (bc),a
-0447c3	a7 	and a	and a
-0447c4	02 	ld (bc),a	ld (bc),a
-0447c5	b1 	or c	or c
-0447c6	02 	ld (bc),a	ld (bc),a
-0447c7	bb 	cp e	cp e
-0447c8	02 	ld (bc),a	ld (bc),a
-0447c9	c5 	push bc	push bc
-0447ca	02 	ld (bc),a	ld (bc),a
-0447cb	cf 	rst $08	rst $00
-0447cc	02 	ld (bc),a	ld (bc),a
-0447cd	d9 	exx	exx
-0447ce	02 	ld (bc),a	ld (bc),a
-0447cf	e4 02 ef 02 	call po,$02ef02	call po,$000000
-0447d3	fa 02 05 03 	jp m,$030502	jp m,$000000
-0447d7	10 03 	djnz $+$05	djnz $+$00
-0447d9	1b 	dec de	dec de
-0447da	03 	inc bc	inc bc
-0447db	27 	daa	daa
-0447dc	03 	inc bc	inc bc
-0447dd	33 	inc sp	inc sp
-0447de	03 	inc bc	inc bc
-0447df	3f 	ccf	ccf
-0447e0	03 	inc bc	inc bc
-0447e1	4b 	ld c,e	ld c,e
-0447e2	03 	inc bc	inc bc
-0447e3	57 	ld d,a	ld d,a
-0447e4	03 	inc bc	inc bc
-0447e5	63 	ld h,e	ld h,e
-0447e6	03 	inc bc	inc bc
-0447e7	70 	ld (hl),b	ld (hl),b
-0447e8	03 	inc bc	inc bc
-0447e9	7d 	ld a,l	ld a,l
-0447ea	03 	inc bc	inc bc
-0447eb	8a 	adc a,d	adc a,d
-0447ec	03 	inc bc	inc bc
-0447ed	97 	sub a	sub a
-0447ee	03 	inc bc	inc bc
-0447ef	a4 	and h	and h
-0447f0	03 	inc bc	inc bc
-0447f1	b2 	or d	or d
-0447f2	03 	inc bc	inc bc
-0447f3	c0 	ret nz	ret nz
-0447f4	03 	inc bc	inc bc
-0447f5	ce 03 	adc a,$03	adc a,$00
-0447f7	dc 03 ea 03 	call c,$03ea03	call c,$000000
-0447fb	f9 	ld sp,hl	ld sp,hl
-0447fc	03 	inc bc	inc bc
-0447fd	08 	ex af,af'	ex af,af'
-0447fe	04 	inc b	inc b
-0447ff	17 	rla	rla
-044800	04 	inc b	inc b
-044801	26 04 	ld h,$04	ld h,$00
-044803	36 04 	ld (hl),$04	ld (hl),$00
-044805	45 	ld b,l	ld b,l
-044806	04 	inc b	inc b
-044807	55 	ld d,l	ld d,l
-044808	04 	inc b	inc b
-044809	65 	ld h,l	ld h,l
-04480a	04 	inc b	inc b
-04480b	76 	halt	halt
-04480c	04 	inc b	inc b
-04480d	86 	add a,(hl)	add a,(hl)
-04480e	04 	inc b	inc b
-04480f	97 	sub a	sub a
-044810	04 	inc b	inc b
-044811	a8 	xor b	xor b
-044812	04 	inc b	inc b
-044813	ba 	cp d	cp d
-044814	04 	inc b	inc b
-044815	cb 04 	rlc h	rlc h
-044817	dd 04 	trap	trap
-044819	ef 	rst $28	rst $00
-04481a	04 	inc b	inc b
-04481b	02 	ld (bc),a	ld (bc),a
-04481c	05 	dec b	dec b
-04481d	14 	inc d	inc d
-04481e	05 	dec b	dec b
-04481f	27 	daa	daa
-044820	05 	dec b	dec b
-044821	3a 05 4e 05 	ld a,($054e05)	ld a,($000000)
-044825	62 	ld h,d	ld h,d
-044826	05 	dec b	dec b
-044827	76 	halt	halt
-044828	05 	dec b	dec b
-044829	8a 	adc a,d	adc a,d
-04482a	05 	dec b	dec b
-04482b	9f 	sbc a,a	sbc a,a
-04482c	05 	dec b	dec b
-04482d	b3 	or e	or e
-04482e	05 	dec b	dec b
-04482f	c9 	ret	ret
-044830	05 	dec b	dec b
-044831	de 05 	sbc a,$05	sbc a,$00
-044833	f4 05 0a 06 	call p,$060a05	call p,$000000
-044837	21 06 38 06 	ld hl,$063806	ld hl,$000000
-04483b	4f 	ld c,a	ld c,a
-04483c	06 66 	ld b,$66	ld b,$00
-04483e	06 7e 	ld b,$7e	ld b,$00
-044840	06 96 	ld b,$96	ld b,$00
-044842	06 af 	ld b,$af	ld b,$00
-044844	06 c8 	ld b,$c8	ld b,$00
-044846	06 e1 	ld b,$e1	ld b,$00
-044848	06 fa 	ld b,$fa	ld b,$00
-04484a	06 14 	ld b,$14	ld b,$00
-04484c	07 	rlca	rlca
-04484d	2f 	cpl	cpl
-04484e	07 	rlca	rlca
-04484f	4a 	ld c,d	ld c,d
-044850	07 	rlca	rlca
-044851	65 	ld h,l	ld h,l
-044852	07 	rlca	rlca
-044853	80 	add a,b	add a,b
-044854	07 	rlca	rlca
-044855	9c 	sbc a,h	sbc a,h
-044856	07 	rlca	rlca
-044857	b8 	cp b	cp b
-044858	07 	rlca	rlca
-044859	d5 	push de	push de
-04485a	07 	rlca	rlca
-04485b	f2 07 10 08 	jp p,$081007	jp p,$000000
-04485f	2d 	dec l	dec l
-044860	08 	ex af,af'	ex af,af'
-044861	4b 	ld c,e	ld c,e
-044862	08 	ex af,af'	ex af,af'
-044863	6a 	ld l,d	ld l,d
-044864	08 	ex af,af'	ex af,af'
-044865	8a 	adc a,d	adc a,d
-044866	08 	ex af,af'	ex af,af'
-044867	a9 	xor c	xor c
-044868	08 	ex af,af'	ex af,af'
-044869	ca 08 ea 08 	jp z,$08ea08	jp z,$000000
-04486d	0c 	inc c	inc c
-04486e	09 	add hl,bc	add hl,bc
-04486f	2d 	dec l	dec l
-044870	09 	add hl,bc	add hl,bc
-044871	4f 	ld c,a	ld c,a
-044872	09 	add hl,bc	add hl,bc
-044873	72 	ld (hl),d	ld (hl),d
-044874	09 	add hl,bc	add hl,bc
-044875	95 	sub l	sub l
-044876	09 	add hl,bc	add hl,bc
-044877	b9 	cp c	cp c
-044878	09 	add hl,bc	add hl,bc
-044879	dd 09 	add ix,bc	add ix,bc
-04487b	02 	ld (bc),a	ld (bc),a
-04487c	0a 	ld a,(bc)	ld a,(bc)
-04487d	27 	daa	daa
-04487e	0a 	ld a,(bc)	ld a,(bc)
-04487f	4d 	ld c,l	ld c,l
-044880	0a 	ld a,(bc)	ld a,(bc)
-044881	73 	ld (hl),e	ld (hl),e
-044882	0a 	ld a,(bc)	ld a,(bc)
-044883	9a 	sbc a,d	sbc a,d
-044884	0a 	ld a,(bc)	ld a,(bc)
-044885	c2 0a ea 0a 	jp nz,$0aea0a	jp nz,$000000
-044889	12 	ld (de),a	ld (de),a
-04488a	0b 	dec bc	dec bc
-04488b	3c 	inc a	inc a
-04488c	0b 	dec bc	dec bc
-04488d	66 	ld h,(hl)	ld h,(hl)
-04488e	0b 	dec bc	dec bc
-04488f	90 	sub b	sub b
-044890	0b 	dec bc	dec bc
-044891	bb 	cp e	cp e
-044892	0b 	dec bc	dec bc
-044893	e7 	rst $20	rst $00
-044894	0b 	dec bc	dec bc
-044895	13 	inc de	inc de
-044896	0c 	inc c	inc c
-044897	40 0c 	inc.sis c	inc.sis c
-044899	6e 	ld l,(hl)	ld l,(hl)
-04489a	0c 	inc c	inc c
-04489b	9c 	sbc a,h	sbc a,h
-04489c	0c 	inc c	inc c
-04489d	cb 0c 	rrc h	rrc h
-04489f	fa 0c 2b 0d 	jp m,$0d2b0c	jp m,$000000
-0448a3	5c 	ld e,h	ld e,h
-0448a4	0d 	dec c	dec c
-0448a5	8e 	adc a,(hl)	adc a,(hl)
-0448a6	0d 	dec c	dec c
-0448a7	c0 	ret nz	ret nz
-0448a8	0d 	dec c	dec c
-0448a9	f3 	di	di
-0448aa	0d 	dec c	dec c
-0448ab	27 	daa	daa
-0448ac	0e 5c 	ld c,$5c	ld c,$00
-0448ae	0e 91 	ld c,$91	ld c,$00
-0448b0	0e c8 	ld c,$c8	ld c,$00
-0448b2	0e ff 	ld c,$ff	ld c,$00
-0448b4	0e 36 	ld c,$36	ld c,$00
-0448b6	0f 	rrca	rrca
-0448b7	6f 	ld l,a	ld l,a
-0448b8	0f 	rrca	rrca
-0448b9	a9 	xor c	xor c
-0448ba	0f 	rrca	rrca
-0448bb	e3 	ex (sp),hl	ex (sp),hl
-0448bc	0f 	rrca	rrca
-0448bd	1e 10 	ld e,$10	ld e,$00
-0448bf	5a 	ld e,d	ld e,d
-0448c0	10 97 	djnz $-$67	djnz $-$00
-0448c2	10 d5 	djnz $-$29	djnz $-$00
-0448c4	10 13 	djnz $+$15	djnz $+$00
-0448c6	11 53 11 93 	ld de,$931153	ld de,$000000
-0448ca	11 d5 11 17 	ld de,$1711d5	ld de,$000000
-0448ce	12 	ld (de),a	ld (de),a
-0448cf	5b 12 	ld.lil (de),a	ld.lil (de),a
-0448d1	9f 	sbc a,a	sbc a,a
-0448d2	12 	ld (de),a	ld (de),a
-0448d3	e4 12 f3 21 	call po,$21f312	call po,$000000
-0448d7	2a 49 04 1e 	ld hl,($1e0449)	ld hl,($000000)
-0448db	32 3e 14 49 	ld ($49143e),a	ld ($000000),a
-0448df	cf 	rst $08	rst $00
-0448e0	eb 	ex de,hl	ex de,hl
-0448e1	21 38 49 04 	ld hl,$044938	ld hl,$000000
-0448e5	ed 1f 	ld (hl),de	ld (hl),de
-0448e7	fb 	ei	ei
-0448e8	c9 	ret	ret
-0448e9	f3 	di	di
-0448ea	21 38 49 04 	ld hl,$044938	ld hl,$000000
-0448ee	ed 17 	ld de,(hl)	ld de,(hl)
-0448f0	eb 	ex de,hl	ex de,hl
-0448f1	1e 32 	ld e,$32	ld e,$00
-0448f3	3e 14 	ld a,$14	ld a,$00
-0448f5	49 cf 	rst.lis $08	rst.lis $00
-0448f7	fb 	ei	ei
-0448f8	c9 	ret	ret
-0448f9	3e 08 	ld a,$08	ld a,$00
-0448fb	49 cf 	rst.lis $08	rst.lis $00
-0448fd	21 49 4d 04 	ld hl,$044d49	ld hl,$000000
-044901	dd 7e 19 	ld a,(ix+$19)	ld a,(ix+$00)
-044904	be 	cp (hl)	cp (hl)
-044905	20 0a 	jr nz,$+$0c	jr nz,$+$00
-044907	af 	xor a	xor a
-044908	32 48 4d 04 	ld ($044d48),a	ld ($000000),a
-04490c	32 47 4d 04 	ld ($044d47),a	ld ($000000),a
-044910	c9 	ret	ret
-044911	77 	ld (hl),a	ld (hl),a
-044912	dd 7e 18 	ld a,(ix+$18)	ld a,(ix+$00)
-044915	b7 	or a	or a
-044916	28 ef 	jr z,$-$0f	jr z,$-$00
-044918	32 47 4d 04 	ld ($044d47),a	ld ($000000),a
-04491c	dd 7e 05 	ld a,(ix+$05)	ld a,(ix+$00)
-04491f	32 48 4d 04 	ld ($044d48),a	ld ($000000),a
-044923	fe 1b 	cp $1b	cp $00
-044925	cc 4c 3f 04 	call z,$043f4c	call z,$000000
-044929	c9 	ret	ret
-04492a	f3 	di	di
-04492b	f5 	push af	push af
-04492c	e5 	push hl	push hl
-04492d	dd e5 	push ix	push ix
-04492f	cd f9 48 04 	call $0448f9	call $000000
-044933	dd e1 	pop ix	pop ix
-044935	e1 	pop hl	pop hl
-044936	f1 	pop af	pop af
-044937	c3 00 00 00 	jp $000000	jp $000000
-04493b	af 	xor a	xor a
-04493c	cd 77 37 04 	call $043777	call $000000
-044940	53 	ld d,e	ld d,e
-044941	6f 	ld l,a	ld l,a
-044942	72 	ld (hl),d	ld (hl),d
-044943	72 	ld (hl),d	ld (hl),d
-044944	79 	ld a,c	ld a,c
-044945	00 	nop	nop
-044946	ff 	rst $38	rst $00
-044947	ff 	rst $38	rst $00
-044948	ff 	rst $38	rst $00
-044949	ff 	rst $38	rst $00
-04494a	ff 	rst $38	rst $00
-04494b	ff 	rst $38	rst $00
-04494c	ff 	rst $38	rst $00
-04494d	ff 	rst $38	rst $00
-04494e	ff 	rst $38	rst $00
-04494f	ff 	rst $38	rst $00
-044950	ff 	rst $38	rst $00
+04462a	7d 	ld a,l	ld a,l
+04462b	f5 	push af	push af
+04462c	d5 	push de	push de
+04462d	cd 22 0a 04 	call $040a22	call $000000
+044631	cd a5 43 04 	call $0443a5	call $000000
+044635	53 	ld d,e	ld d,e
+044636	5d 	ld e,l	ld e,l
+044637	e1 	pop hl	pop hl
+044638	f1 	pop af	pop af
+044639	ed 44 	neg	neg
+04463b	fe 10 	cp $10	cp $00
+04463d	d2 96 0b 04 	jp nc,$040b96	jp nc,$000000
+044641	4f 	ld c,a	ld c,a
+044642	7d 	ld a,l	ld a,l
+044643	32 00 4a 04 	ld ($044a00),a	ld ($000000),a
+044647	af 	xor a	xor a
+044648	32 01 4a 04 	ld ($044a01),a	ld ($000000),a
+04464c	06 06 	ld b,$06	ld b,$00
+04464e	ed 4c 	mlt bc	mlt bc
+044650	79 	ld a,c	ld a,c
+044651	32 02 4a 04 	ld ($044a02),a	ld ($000000),a
+044655	4b 	ld c,e	ld c,e
+044656	26 00 	ld h,$00	ld h,$00
+044658	6a 	ld l,d	ld l,d
+044659	11 e0 46 04 	ld de,$0446e0	ld de,$000000
+04465d	29 	add hl,hl	add hl,hl
+04465e	19 	add hl,de	add hl,de
+04465f	7e 	ld a,(hl)	ld a,(hl)
+044660	32 03 4a 04 	ld ($044a03),a	ld ($000000),a
+044664	23 	inc hl	inc hl
+044665	7e 	ld a,(hl)	ld a,(hl)
+044666	32 04 4a 04 	ld ($044a04),a	ld ($000000),a
+04466a	06 32 	ld b,$32	ld b,$00
+04466c	ed 4c 	mlt bc	mlt bc
+04466e	ed 43 05 4a 04 	ld ($044a05),bc	ld ($000000),bc
+044673	dd e5 	push ix	push ix
+044675	3e 08 	ld a,$08	ld a,$00
+044677	49 cf 	rst.lis $08	rst.lis $00
+044679	5b dd cb 04 9e 	res.lil 3,(ix+$04)	res.lil 3,(ix+$00)
+04467e	3e 17 	ld a,$17	ld a,$00
+044680	cd 00 3f 04 	call $043f00	call $000000
+044684	3e 00 	ld a,$00	ld a,$00
+044686	cd 00 3f 04 	call $043f00	call $000000
+04468a	3e 85 	ld a,$85	ld a,$00
+04468c	cd 00 3f 04 	call $043f00	call $000000
+044690	3a 00 4a 04 	ld a,($044a00)	ld a,($000000)
+044694	cd 00 3f 04 	call $043f00	call $000000
+044698	3a 01 4a 04 	ld a,($044a01)	ld a,($000000)
+04469c	cd 00 3f 04 	call $043f00	call $000000
+0446a0	3a 02 4a 04 	ld a,($044a02)	ld a,($000000)
+0446a4	cd 00 3f 04 	call $043f00	call $000000
+0446a8	3a 03 4a 04 	ld a,($044a03)	ld a,($000000)
+0446ac	cd 00 3f 04 	call $043f00	call $000000
+0446b0	3a 04 4a 04 	ld a,($044a04)	ld a,($000000)
+0446b4	cd 00 3f 04 	call $043f00	call $000000
+0446b8	3a 05 4a 04 	ld a,($044a05)	ld a,($000000)
+0446bc	cd 00 3f 04 	call $043f00	call $000000
+0446c0	3a 06 4a 04 	ld a,($044a06)	ld a,($000000)
+0446c4	cd 00 3f 04 	call $043f00	call $000000
+0446c8	5b dd cb 04 5e 	bit.lil 3,(ix+$04)	bit.lil 3,(ix+$00)
+0446cd	28 f9 	jr z,$-$05	jr z,$-$00
+0446cf	cd 71 3f 04 	call $043f71	call $000000
+0446d3	5b dd 7e 0e 	ld.lil a,(ix+$0e)	ld.lil a,(ix+$00)
+0446d7	a7 	and a	and a
+0446d8	28 9f 	jr z,$-$5f	jr z,$-$00
+0446da	dd e1 	pop ix	pop ix
+0446dc	c3 96 0b 04 	jp $040b96	jp $000000
+0446e0	75 	ld (hl),l	ld (hl),l
+0446e1	00 	nop	nop
+0446e2	76 	halt	halt
+0446e3	00 	nop	nop
+0446e4	78 	ld a,b	ld a,b
+0446e5	00 	nop	nop
+0446e6	7a 	ld a,d	ld a,d
+0446e7	00 	nop	nop
+0446e8	7b 	ld a,e	ld a,e
+0446e9	00 	nop	nop
+0446ea	83 	add a,e	add a,e
+0446eb	00 	nop	nop
+0446ec	85 	add a,l	add a,l
+0446ed	00 	nop	nop
+0446ee	87 	add a,a	add a,a
+0446ef	00 	nop	nop
+0446f0	89 	adc a,c	adc a,c
+0446f1	00 	nop	nop
+0446f2	8b 	adc a,e	adc a,e
+0446f3	00 	nop	nop
+0446f4	8d 	adc a,l	adc a,l
+0446f5	00 	nop	nop
+0446f6	8f 	adc a,a	adc a,a
+0446f7	00 	nop	nop
+0446f8	91 	sub c	sub c
+0446f9	00 	nop	nop
+0446fa	93 	sub e	sub e
+0446fb	00 	nop	nop
+0446fc	95 	sub l	sub l
+0446fd	00 	nop	nop
+0446fe	97 	sub a	sub a
+0446ff	00 	nop	nop
+044700	99 	sbc a,c	sbc a,c
+044701	00 	nop	nop
+044702	9c 	sbc a,h	sbc a,h
+044703	00 	nop	nop
+044704	9e 	sbc a,(hl)	sbc a,(hl)
+044705	00 	nop	nop
+044706	a0 	and b	and b
+044707	00 	nop	nop
+044708	a2 	and d	and d
+044709	00 	nop	nop
+04470a	a5 	and l	and l
+04470b	00 	nop	nop
+04470c	a7 	and a	and a
+04470d	00 	nop	nop
+04470e	aa 	xor d	xor d
+04470f	00 	nop	nop
+044710	ac 	xor h	xor h
+044711	00 	nop	nop
+044712	af 	xor a	xor a
+044713	00 	nop	nop
+044714	b1 	or c	or c
+044715	00 	nop	nop
+044716	b4 	or h	or h
+044717	00 	nop	nop
+044718	b6 	or (hl)	or (hl)
+044719	00 	nop	nop
+04471a	b9 	cp c	cp c
+04471b	00 	nop	nop
+04471c	bc 	cp h	cp h
+04471d	00 	nop	nop
+04471e	be 	cp (hl)	cp (hl)
+04471f	00 	nop	nop
+044720	c1 	pop bc	pop bc
+044721	00 	nop	nop
+044722	c4 00 c7 00 	call nz,$00c700	call nz,$000000
+044726	ca 00 cd 00 	jp z,$00cd00	jp z,$000000
+04472a	d0 	ret nc	ret nc
+04472b	00 	nop	nop
+04472c	d3 00 	out ($00),a	out ($00),a
+04472e	d6 00 	sub $00	sub $00
+044730	d9 	exx	exx
+044731	00 	nop	nop
+044732	dc 00 df 00 	call c,$00df00	call c,$000000
+044736	e2 00 e6 00 	jp po,$00e600	jp po,$000000
+04473a	e9 	jp (hl)	jp (hl)
+04473b	00 	nop	nop
+04473c	ec 00 f0 00 	call pe,$00f000	call pe,$000000
+044740	f3 	di	di
+044741	00 	nop	nop
+044742	f7 	rst $30	rst $00
+044743	00 	nop	nop
+044744	fb 	ei	ei
+044745	00 	nop	nop
+044746	fe 00 	cp $00	cp $00
+044748	02 	ld (bc),a	ld (bc),a
+044749	01 06 01 09 	ld bc,$090106	ld bc,$000000
+04474d	01 0d 01 11 	ld bc,$11010d	ld bc,$000000
+044751	01 15 01 19 	ld bc,$190115	ld bc,$000000
+044755	01 1d 01 21 	ld bc,$21011d	ld bc,$000000
+044759	01 26 01 2a 	ld bc,$2a0126	ld bc,$000000
+04475d	01 2e 01 33 	ld bc,$33012e	ld bc,$000000
+044761	01 37 01 3c 	ld bc,$3c0137	ld bc,$000000
+044765	01 40 01 45 	ld bc,$450140	ld bc,$000000
+044769	01 4a 01 4e 	ld bc,$4e014a	ld bc,$000000
+04476d	01 53 01 58 	ld bc,$580153	ld bc,$000000
+044771	01 5d 01 62 	ld bc,$62015d	ld bc,$000000
+044775	01 67 01 6d 	ld bc,$6d0167	ld bc,$000000
+044779	01 72 01 77 	ld bc,$770172	ld bc,$000000
+04477d	01 7d 01 82 	ld bc,$82017d	ld bc,$000000
+044781	01 88 01 8e 	ld bc,$8e0188	ld bc,$000000
+044785	01 93 01 99 	ld bc,$990193	ld bc,$000000
+044789	01 9f 01 a5 	ld bc,$a5019f	ld bc,$000000
+04478d	01 ab 01 b2 	ld bc,$b201ab	ld bc,$000000
+044791	01 b8 01 be 	ld bc,$be01b8	ld bc,$000000
+044795	01 c5 01 cb 	ld bc,$cb01c5	ld bc,$000000
+044799	01 d2 01 d9 	ld bc,$d901d2	ld bc,$000000
+04479d	01 e0 01 e7 	ld bc,$e701e0	ld bc,$000000
+0447a1	01 ee 01 f5 	ld bc,$f501ee	ld bc,$000000
+0447a5	01 fc 01 04 	ld bc,$0401fc	ld bc,$000000
+0447a9	02 	ld (bc),a	ld (bc),a
+0447aa	0b 	dec bc	dec bc
+0447ab	02 	ld (bc),a	ld (bc),a
+0447ac	13 	inc de	inc de
+0447ad	02 	ld (bc),a	ld (bc),a
+0447ae	1b 	dec de	dec de
+0447af	02 	ld (bc),a	ld (bc),a
+0447b0	22 02 2a 02 	ld ($022a02),hl	ld ($000000),hl
+0447b4	32 02 3b 02 	ld ($023b02),a	ld ($000000),a
+0447b8	43 	ld b,e	ld b,e
+0447b9	02 	ld (bc),a	ld (bc),a
+0447ba	4b 	ld c,e	ld c,e
+0447bb	02 	ld (bc),a	ld (bc),a
+0447bc	54 	ld d,h	ld d,h
+0447bd	02 	ld (bc),a	ld (bc),a
+0447be	5d 	ld e,l	ld e,l
+0447bf	02 	ld (bc),a	ld (bc),a
+0447c0	65 	ld h,l	ld h,l
+0447c1	02 	ld (bc),a	ld (bc),a
+0447c2	6e 	ld l,(hl)	ld l,(hl)
+0447c3	02 	ld (bc),a	ld (bc),a
+0447c4	77 	ld (hl),a	ld (hl),a
+0447c5	02 	ld (bc),a	ld (bc),a
+0447c6	81 	add a,c	add a,c
+0447c7	02 	ld (bc),a	ld (bc),a
+0447c8	8a 	adc a,d	adc a,d
+0447c9	02 	ld (bc),a	ld (bc),a
+0447ca	93 	sub e	sub e
+0447cb	02 	ld (bc),a	ld (bc),a
+0447cc	9d 	sbc a,l	sbc a,l
+0447cd	02 	ld (bc),a	ld (bc),a
+0447ce	a7 	and a	and a
+0447cf	02 	ld (bc),a	ld (bc),a
+0447d0	b1 	or c	or c
+0447d1	02 	ld (bc),a	ld (bc),a
+0447d2	bb 	cp e	cp e
+0447d3	02 	ld (bc),a	ld (bc),a
+0447d4	c5 	push bc	push bc
+0447d5	02 	ld (bc),a	ld (bc),a
+0447d6	cf 	rst $08	rst $00
+0447d7	02 	ld (bc),a	ld (bc),a
+0447d8	d9 	exx	exx
+0447d9	02 	ld (bc),a	ld (bc),a
+0447da	e4 02 ef 02 	call po,$02ef02	call po,$000000
+0447de	fa 02 05 03 	jp m,$030502	jp m,$000000
+0447e2	10 03 	djnz $+$05	djnz $+$00
+0447e4	1b 	dec de	dec de
+0447e5	03 	inc bc	inc bc
+0447e6	27 	daa	daa
+0447e7	03 	inc bc	inc bc
+0447e8	33 	inc sp	inc sp
+0447e9	03 	inc bc	inc bc
+0447ea	3f 	ccf	ccf
+0447eb	03 	inc bc	inc bc
+0447ec	4b 	ld c,e	ld c,e
+0447ed	03 	inc bc	inc bc
+0447ee	57 	ld d,a	ld d,a
+0447ef	03 	inc bc	inc bc
+0447f0	63 	ld h,e	ld h,e
+0447f1	03 	inc bc	inc bc
+0447f2	70 	ld (hl),b	ld (hl),b
+0447f3	03 	inc bc	inc bc
+0447f4	7d 	ld a,l	ld a,l
+0447f5	03 	inc bc	inc bc
+0447f6	8a 	adc a,d	adc a,d
+0447f7	03 	inc bc	inc bc
+0447f8	97 	sub a	sub a
+0447f9	03 	inc bc	inc bc
+0447fa	a4 	and h	and h
+0447fb	03 	inc bc	inc bc
+0447fc	b2 	or d	or d
+0447fd	03 	inc bc	inc bc
+0447fe	c0 	ret nz	ret nz
+0447ff	03 	inc bc	inc bc
+044800	ce 03 	adc a,$03	adc a,$00
+044802	dc 03 ea 03 	call c,$03ea03	call c,$000000
+044806	f9 	ld sp,hl	ld sp,hl
+044807	03 	inc bc	inc bc
+044808	08 	ex af,af'	ex af,af'
+044809	04 	inc b	inc b
+04480a	17 	rla	rla
+04480b	04 	inc b	inc b
+04480c	26 04 	ld h,$04	ld h,$00
+04480e	36 04 	ld (hl),$04	ld (hl),$00
+044810	45 	ld b,l	ld b,l
+044811	04 	inc b	inc b
+044812	55 	ld d,l	ld d,l
+044813	04 	inc b	inc b
+044814	65 	ld h,l	ld h,l
+044815	04 	inc b	inc b
+044816	76 	halt	halt
+044817	04 	inc b	inc b
+044818	86 	add a,(hl)	add a,(hl)
+044819	04 	inc b	inc b
+04481a	97 	sub a	sub a
+04481b	04 	inc b	inc b
+04481c	a8 	xor b	xor b
+04481d	04 	inc b	inc b
+04481e	ba 	cp d	cp d
+04481f	04 	inc b	inc b
+044820	cb 04 	rlc h	rlc h
+044822	dd 04 	trap	trap
+044824	ef 	rst $28	rst $00
+044825	04 	inc b	inc b
+044826	02 	ld (bc),a	ld (bc),a
+044827	05 	dec b	dec b
+044828	14 	inc d	inc d
+044829	05 	dec b	dec b
+04482a	27 	daa	daa
+04482b	05 	dec b	dec b
+04482c	3a 05 4e 05 	ld a,($054e05)	ld a,($000000)
+044830	62 	ld h,d	ld h,d
+044831	05 	dec b	dec b
+044832	76 	halt	halt
+044833	05 	dec b	dec b
+044834	8a 	adc a,d	adc a,d
+044835	05 	dec b	dec b
+044836	9f 	sbc a,a	sbc a,a
+044837	05 	dec b	dec b
+044838	b3 	or e	or e
+044839	05 	dec b	dec b
+04483a	c9 	ret	ret
+04483b	05 	dec b	dec b
+04483c	de 05 	sbc a,$05	sbc a,$00
+04483e	f4 05 0a 06 	call p,$060a05	call p,$000000
+044842	21 06 38 06 	ld hl,$063806	ld hl,$000000
+044846	4f 	ld c,a	ld c,a
+044847	06 66 	ld b,$66	ld b,$00
+044849	06 7e 	ld b,$7e	ld b,$00
+04484b	06 96 	ld b,$96	ld b,$00
+04484d	06 af 	ld b,$af	ld b,$00
+04484f	06 c8 	ld b,$c8	ld b,$00
+044851	06 e1 	ld b,$e1	ld b,$00
+044853	06 fa 	ld b,$fa	ld b,$00
+044855	06 14 	ld b,$14	ld b,$00
+044857	07 	rlca	rlca
+044858	2f 	cpl	cpl
+044859	07 	rlca	rlca
+04485a	4a 	ld c,d	ld c,d
+04485b	07 	rlca	rlca
+04485c	65 	ld h,l	ld h,l
+04485d	07 	rlca	rlca
+04485e	80 	add a,b	add a,b
+04485f	07 	rlca	rlca
+044860	9c 	sbc a,h	sbc a,h
+044861	07 	rlca	rlca
+044862	b8 	cp b	cp b
+044863	07 	rlca	rlca
+044864	d5 	push de	push de
+044865	07 	rlca	rlca
+044866	f2 07 10 08 	jp p,$081007	jp p,$000000
+04486a	2d 	dec l	dec l
+04486b	08 	ex af,af'	ex af,af'
+04486c	4b 	ld c,e	ld c,e
+04486d	08 	ex af,af'	ex af,af'
+04486e	6a 	ld l,d	ld l,d
+04486f	08 	ex af,af'	ex af,af'
+044870	8a 	adc a,d	adc a,d
+044871	08 	ex af,af'	ex af,af'
+044872	a9 	xor c	xor c
+044873	08 	ex af,af'	ex af,af'
+044874	ca 08 ea 08 	jp z,$08ea08	jp z,$000000
+044878	0c 	inc c	inc c
+044879	09 	add hl,bc	add hl,bc
+04487a	2d 	dec l	dec l
+04487b	09 	add hl,bc	add hl,bc
+04487c	4f 	ld c,a	ld c,a
+04487d	09 	add hl,bc	add hl,bc
+04487e	72 	ld (hl),d	ld (hl),d
+04487f	09 	add hl,bc	add hl,bc
+044880	95 	sub l	sub l
+044881	09 	add hl,bc	add hl,bc
+044882	b9 	cp c	cp c
+044883	09 	add hl,bc	add hl,bc
+044884	dd 09 	add ix,bc	add ix,bc
+044886	02 	ld (bc),a	ld (bc),a
+044887	0a 	ld a,(bc)	ld a,(bc)
+044888	27 	daa	daa
+044889	0a 	ld a,(bc)	ld a,(bc)
+04488a	4d 	ld c,l	ld c,l
+04488b	0a 	ld a,(bc)	ld a,(bc)
+04488c	73 	ld (hl),e	ld (hl),e
+04488d	0a 	ld a,(bc)	ld a,(bc)
+04488e	9a 	sbc a,d	sbc a,d
+04488f	0a 	ld a,(bc)	ld a,(bc)
+044890	c2 0a ea 0a 	jp nz,$0aea0a	jp nz,$000000
+044894	12 	ld (de),a	ld (de),a
+044895	0b 	dec bc	dec bc
+044896	3c 	inc a	inc a
+044897	0b 	dec bc	dec bc
+044898	66 	ld h,(hl)	ld h,(hl)
+044899	0b 	dec bc	dec bc
+04489a	90 	sub b	sub b
+04489b	0b 	dec bc	dec bc
+04489c	bb 	cp e	cp e
+04489d	0b 	dec bc	dec bc
+04489e	e7 	rst $20	rst $00
+04489f	0b 	dec bc	dec bc
+0448a0	13 	inc de	inc de
+0448a1	0c 	inc c	inc c
+0448a2	40 0c 	inc.sis c	inc.sis c
+0448a4	6e 	ld l,(hl)	ld l,(hl)
+0448a5	0c 	inc c	inc c
+0448a6	9c 	sbc a,h	sbc a,h
+0448a7	0c 	inc c	inc c
+0448a8	cb 0c 	rrc h	rrc h
+0448aa	fa 0c 2b 0d 	jp m,$0d2b0c	jp m,$000000
+0448ae	5c 	ld e,h	ld e,h
+0448af	0d 	dec c	dec c
+0448b0	8e 	adc a,(hl)	adc a,(hl)
+0448b1	0d 	dec c	dec c
+0448b2	c0 	ret nz	ret nz
+0448b3	0d 	dec c	dec c
+0448b4	f3 	di	di
+0448b5	0d 	dec c	dec c
+0448b6	27 	daa	daa
+0448b7	0e 5c 	ld c,$5c	ld c,$00
+0448b9	0e 91 	ld c,$91	ld c,$00
+0448bb	0e c8 	ld c,$c8	ld c,$00
+0448bd	0e ff 	ld c,$ff	ld c,$00
+0448bf	0e 36 	ld c,$36	ld c,$00
+0448c1	0f 	rrca	rrca
+0448c2	6f 	ld l,a	ld l,a
+0448c3	0f 	rrca	rrca
+0448c4	a9 	xor c	xor c
+0448c5	0f 	rrca	rrca
+0448c6	e3 	ex (sp),hl	ex (sp),hl
+0448c7	0f 	rrca	rrca
+0448c8	1e 10 	ld e,$10	ld e,$00
+0448ca	5a 	ld e,d	ld e,d
+0448cb	10 97 	djnz $-$67	djnz $-$00
+0448cd	10 d5 	djnz $-$29	djnz $-$00
+0448cf	10 13 	djnz $+$15	djnz $+$00
+0448d1	11 53 11 93 	ld de,$931153	ld de,$000000
+0448d5	11 d5 11 17 	ld de,$1711d5	ld de,$000000
+0448d9	12 	ld (de),a	ld (de),a
+0448da	5b 12 	ld.lil (de),a	ld.lil (de),a
+0448dc	9f 	sbc a,a	sbc a,a
+0448dd	12 	ld (de),a	ld (de),a
+0448de	e4 12 f3 21 	call po,$21f312	call po,$000000
+0448e2	35 	dec (hl)	dec (hl)
+0448e3	49 04 	inc.lis b	inc.lis b
+0448e5	1e 32 	ld e,$32	ld e,$00
+0448e7	3e 14 	ld a,$14	ld a,$00
+0448e9	49 cf 	rst.lis $08	rst.lis $00
+0448eb	eb 	ex de,hl	ex de,hl
+0448ec	21 43 49 04 	ld hl,$044943	ld hl,$000000
+0448f0	ed 1f 	ld (hl),de	ld (hl),de
+0448f2	fb 	ei	ei
+0448f3	c9 	ret	ret
+0448f4	f3 	di	di
+0448f5	21 43 49 04 	ld hl,$044943	ld hl,$000000
+0448f9	ed 17 	ld de,(hl)	ld de,(hl)
+0448fb	eb 	ex de,hl	ex de,hl
+0448fc	1e 32 	ld e,$32	ld e,$00
+0448fe	3e 14 	ld a,$14	ld a,$00
+044900	49 cf 	rst.lis $08	rst.lis $00
+044902	fb 	ei	ei
+044903	c9 	ret	ret
+044904	3e 08 	ld a,$08	ld a,$00
+044906	49 cf 	rst.lis $08	rst.lis $00
+044908	21 49 4d 04 	ld hl,$044d49	ld hl,$000000
+04490c	dd 7e 19 	ld a,(ix+$19)	ld a,(ix+$00)
+04490f	be 	cp (hl)	cp (hl)
+044910	20 0a 	jr nz,$+$0c	jr nz,$+$00
+044912	af 	xor a	xor a
+044913	32 48 4d 04 	ld ($044d48),a	ld ($000000),a
+044917	32 47 4d 04 	ld ($044d47),a	ld ($000000),a
+04491b	c9 	ret	ret
+04491c	77 	ld (hl),a	ld (hl),a
+04491d	dd 7e 18 	ld a,(ix+$18)	ld a,(ix+$00)
+044920	b7 	or a	or a
+044921	28 ef 	jr z,$-$0f	jr z,$-$00
+044923	32 47 4d 04 	ld ($044d47),a	ld ($000000),a
+044927	dd 7e 05 	ld a,(ix+$05)	ld a,(ix+$00)
+04492a	32 48 4d 04 	ld ($044d48),a	ld ($000000),a
+04492e	fe 1b 	cp $1b	cp $00
+044930	cc 4c 3f 04 	call z,$043f4c	call z,$000000
+044934	c9 	ret	ret
+044935	f3 	di	di
+044936	f5 	push af	push af
+044937	e5 	push hl	push hl
+044938	dd e5 	push ix	push ix
+04493a	cd 04 49 04 	call $044904	call $000000
+04493e	dd e1 	pop ix	pop ix
+044940	e1 	pop hl	pop hl
+044941	f1 	pop af	pop af
+044942	c3 00 00 00 	jp $000000	jp $000000
+044946	af 	xor a	xor a
+044947	cd 77 37 04 	call $043777	call $000000
+04494b	53 	ld d,e	ld d,e
+04494c	6f 	ld l,a	ld l,a
+04494d	72 	ld (hl),d	ld (hl),d
+04494e	72 	ld (hl),d	ld (hl),d
+04494f	79 	ld a,c	ld a,c
+044950	00 	nop	nop
 044951	ff 	rst $38	rst $00
 044952	ff 	rst $38	rst $00
 044953	ff 	rst $38	rst $00

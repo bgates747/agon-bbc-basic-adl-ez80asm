@@ -979,3 +979,13 @@ EXPR_W2:		CALL	EXPRI			; Get first parameter
 ; Stuff not implemented yet
 ;
 RESET:			RET
+; BEGIN INSERTED FROM BINARY
+	xor a
+	call EXTERR
+	ld d,e
+	ld l,a
+	ld (hl),d
+	ld (hl),d
+	ld a,c
+	nop
+; END INSERTED FROM BINARY

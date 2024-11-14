@@ -12010,7 +12010,16 @@ EXPR_W2:		CALL	EXPRI			; Get first parameter
 ; Stuff not implemented yet
 ;
 RESET:			RET
-; --- End patch.asm ---
+; BEGIN INSERTED FROM BINARY
+	xor a
+	call EXTERR
+	ld d,e
+	ld l,a
+	ld (hl),d
+	ld (hl),d
+	ld a,c
+	nop
+; END INSERTED FROM BINARY; --- End patch.asm ---
 
 ; --- Begin agon_graphics.asm ---
 ;
@@ -12055,10 +12064,12 @@ RESET:			RET
 			; XREF	CRLF
 			; XREF	EXPR_W2
 			; XREF	INKEY1
-			
+
 ; CLG: clears the graphics area
 ;
-CLG:			VDU	10h
+CLG:			
+
+			VDU	10h
 			JP	XEQ
 
 ; CLS: clears the text area
