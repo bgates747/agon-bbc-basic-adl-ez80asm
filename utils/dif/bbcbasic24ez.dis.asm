@@ -208,8 +208,9 @@
 040120	06 04 	ld b,$04	ld b,$00
 040122	50 	ld d,b	ld d,b
 040123	06 04 	ld b,$04	ld b,$00
-040125	46 	ld b,(hl)	ld b,(hl)
-040126	49 04 	inc.lis b	inc.lis b
+040125	b7 	or a	or a
+040126	43 	ld b,e	ld b,e
+040127	04 	inc b	inc b
 040128	25 	dec h	dec h
 040129	05 	dec b	dec b
 04012a	04 	inc b	inc b
@@ -1510,7 +1511,7 @@
 040ae7	0b 	dec bc	dec bc
 040ae8	04 	inc b	inc b
 040ae9	82 	add a,d	add a,d
-040aea	11 04 46 49 	ld de,$494604	ld de,$000000
+040aea	11 04 b7 43 	ld de,$43b704	ld de,$000000
 040aee	04 	inc b	inc b
 040aef	97 	sub a	sub a
 040af0	0f 	rrca	rrca
@@ -2563,7 +2564,7 @@
 04140c	fd 23 	inc iy	inc iy
 04140e	cd 90 17 04 	call $041790	call $000000
 041412	cd 15 03 04 	call $040315	call $000000
-041416	cd 46 49 04 	call $044946	call $000000
+041416	cd b7 43 04 	call $0443b7	call $000000
 04141a	c3 96 0b 04 	jp $040b96	jp $000000
 04141e	cd 90 17 04 	call $041790	call $000000
 041422	cd 0a 03 04 	call $04030a	call $000000
@@ -9866,14 +9867,17 @@
 044940	e1 	pop hl	pop hl
 044941	f1 	pop af	pop af
 044942	c3 00 00 00 	jp $000000	jp $000000
-044946	af 	xor a	xor a
-044947	cd 77 37 04 	call $043777	call $000000
-04494b	53 	ld d,e	ld d,e
-04494c	6f 	ld l,a	ld l,a
-04494d	72 	ld (hl),d	ld (hl),d
-04494e	72 	ld (hl),d	ld (hl),d
-04494f	79 	ld a,c	ld a,c
-044950	00 	nop	nop
+044946	ff 	rst $38	rst $00
+044947	ff 	rst $38	rst $00
+044948	ff 	rst $38	rst $00
+044949	ff 	rst $38	rst $00
+04494a	ff 	rst $38	rst $00
+04494b	ff 	rst $38	rst $00
+04494c	ff 	rst $38	rst $00
+04494d	ff 	rst $38	rst $00
+04494e	ff 	rst $38	rst $00
+04494f	ff 	rst $38	rst $00
+044950	ff 	rst $38	rst $00
 044951	ff 	rst $38	rst $00
 044952	ff 	rst $38	rst $00
 044953	ff 	rst $38	rst $00

@@ -12009,17 +12009,36 @@ EXPR_W2:		CALL	EXPRI			; Get first parameter
 
 ; Stuff not implemented yet
 ;
-RESET:			RET
-; BEGIN INSERTED FROM BINARY
-	xor a
-	call EXTERR
-	ld d,e
-	ld l,a
-	ld (hl),d
-	ld (hl),d
-	ld a,c
-	nop
-; END INSERTED FROM BINARY; --- End patch.asm ---
+RESET:			RET; --- End patch.asm ---
+
+; --- Begin sorry.asm ---
+;
+; Title:	BBC Basic Interpreter - Z80 version
+;		Catch-all for unimplemented functionality
+; Author:	Dean Belfield
+; Created:	12/05/2023
+; Last Updated:	12/05/2023
+;
+; Modinfo:
+
+			; .ASSUME	ADL = 1
+
+			; SEGMENT CODE
+			
+			; XDEF	ENVEL
+			; XDEF	ADVAL
+			; XDEF	PUTIMS
+			
+			; XREF	EXTERR
+			
+ENVEL:
+ADVAL:
+PUTIMS:
+			XOR     A
+			CALL    EXTERR
+			DEFB    "Sorry"
+			DEFB    0
+; --- End sorry.asm ---
 
 ; --- Begin agon_graphics.asm ---
 ;
@@ -12525,35 +12544,6 @@ VBLANK_HANDLER:		DI
 ; Finally jump to the MOS interrupt
 ;
 VBLANK_HANDLER_JP:	JP		0				; This is self-modified by VBLANK_INIT				; --- End interrupts.asm ---
-
-; --- Begin sorry.asm ---
-;
-; Title:	BBC Basic Interpreter - Z80 version
-;		Catch-all for unimplemented functionality
-; Author:	Dean Belfield
-; Created:	12/05/2023
-; Last Updated:	12/05/2023
-;
-; Modinfo:
-
-			; .ASSUME	ADL = 1
-
-			; SEGMENT CODE
-			
-			; XDEF	ENVEL
-			; XDEF	ADVAL
-			; XDEF	PUTIMS
-			
-			; XREF	EXTERR
-			
-ENVEL:
-ADVAL:
-PUTIMS:
-			XOR     A
-			CALL    EXTERR
-			DEFB    "Sorry"
-			DEFB    0
-; --- End sorry.asm ---
 
 ; --- Begin ram.asm ---
 ;

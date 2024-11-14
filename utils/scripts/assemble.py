@@ -176,12 +176,10 @@ if __name__ == '__main__':
         'main.asm',
         'misc.asm',
         'patch.asm',
+        'sorry.asm',
         'agon_graphics.asm',
         'agon_sound.asm',
         'interrupts.asm',
-
-        'sorry.asm',
-
         'ram.asm',
     ]
 

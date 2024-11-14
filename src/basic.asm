@@ -10,10 +10,11 @@
     include "main.asm"
     include "misc.asm"
     include "patch.asm"
+    include "sorry.asm"
+
     include "agon_graphics.asm"
     include "agon_sound.asm"
     include "interrupts.asm"
-    include "sorry.asm"
 
     include "ram.asm"
     include "user.asm"
