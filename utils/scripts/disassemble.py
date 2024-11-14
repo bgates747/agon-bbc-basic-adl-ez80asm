@@ -407,8 +407,8 @@ def export_query_to_csv(db_path, output_csv_path):
     
     # Define the query with LEFT JOIN and ORDER BY clause
     query = """
-        SELECT t1.idx, t1.idx1, t1.idx2, t1.address1, t1.address2, t1.instruction1, 
-               t1.instruction2, t1.matching1, t2.src_file, t2.srccode
+        SELECT t1.idx, t1.idx1, t1.idx2, t1.address1, t1.address2, t1.opcode1, t1.opcode2,
+        t1.instruction1, t1.instruction2, t1.matching1, t2.src_file, t2.srccode
         FROM final_table AS t1
         LEFT JOIN bbcbasic24ez_lst AS t2 ON t1.address2 = LOWER(t2.address)
         ORDER BY t1.idx

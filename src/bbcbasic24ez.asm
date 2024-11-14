@@ -3715,15 +3715,22 @@ LOMEMV_EX:			CALL    EQUALS
 ;
 HIMEMV_EX:			CALL    EQUALS			; Check for '=' and throw an error if not found
 			CALL    EXPRI			; Load the expression into registers
-			LD	A,L			;  A: The MSB of the 24-bit value
-			EXX				; HL: The LSW of the 24-bit value
-			LD	(R0),HL
-			LD	(R0+2),A
-			LD	HL,(FREE)
-			LD      DE,256
-			ADD	HL,DE 
-			EX	DE,HL			; DE: FREE + 256
-			LD	HL,(R0)			; HL: The passed expression
+; BEGIN MISSING FROM BINARY
+			; LD	A,L			;  A: The MSB of the 24-bit value
+			; EXX				; HL: The LSW of the 24-bit value
+			; LD	(R0),HL
+			; LD	(R0+2),A
+			; LD	HL,(FREE)
+			; LD      DE,256
+			; ADD	HL,DE 
+			; EX	DE,HL			; DE: FREE + 256
+			; LD	HL,(R0)			; HL: The passed expression
+; END MISSING FROM BINARY
+; BEGIN ADDED FROM BINARY
+			exx
+			ld de,(FREE)
+			inc d
+; END ADDED FROM BINARY
 			XOR     A
 			SBC     HL,DE
 			ADD     HL,DE			; Do a bounds check
@@ -3764,30 +3771,49 @@ TRACE1:			LD      (TRACEN),HL
 
 ; VDU expr,expr;....
 ;
-VDU:			LD	IX,BUFFER		; Storage for the VDU stream
-VDU1:			PUSH	IX
-			CALL    EXPRI			; Fetch the VDU character
-			POP	IX
-			EXX
-			LD	(IX+0),L		; Write out the character to the buffer
-			INC	IX 
-			LD      A,(IY)			;  A: The separator character
-			CP      ','			; Is it a comma?
-			JR      Z,VDU2			; Yes, so it's a byte value - skip to next expression
-			CP      ';'			; Is it a semicolon?
-			JR      NZ,VDU3			; No, so skip to the next expression
-			LD	(IX+0),H		; Write out the high byte to the buffer
-			INC	IX 
-VDU2:			INC     IY			; Skip to the next character
-VDU3:			CALL    TERMQ			; Skip past white space
-			JR      NZ,VDU1			; Loop unti reached end of the VDU command
-			LD	A,IXL			;  A: Number of bytes to write out 
-			OR	A
-			JR 	Z,VDU4			; No bytes to write, so skip the next bit
-			LD	HL,BUFFER		; HL: Start of stream
-			LD	BC,0
-			LD	C,A			; BC: Number of bytes to write out
-			RST.LIL	18h			; Output the buffer to MOS
+; BEGIN MISSING FROM BINARY
+; VDU:			LD	IX,BUFFER		; Storage for the VDU stream
+; VDU1:			PUSH	IX
+; 			CALL    EXPRI			; Fetch the VDU character
+; 			POP	IX
+; 			EXX
+; 			LD	(IX+0),L		; Write out the character to the buffer
+; 			INC	IX 
+; 			LD      A,(IY)			;  A: The separator character
+; 			CP      ','			; Is it a comma?
+; 			JR      Z,VDU2			; Yes, so it's a byte value - skip to next expression
+; 			CP      ';'			; Is it a semicolon?
+; 			JR      NZ,VDU3			; No, so skip to the next expression
+; 			LD	(IX+0),H		; Write out the high byte to the buffer
+; 			INC	IX 
+; VDU2:			INC     IY			; Skip to the next character
+; VDU3:			CALL    TERMQ			; Skip past white space
+; 			JR      NZ,VDU1			; Loop unti reached end of the VDU command
+; 			LD	A,IXL			;  A: Number of bytes to write out 
+; 			OR	A
+; 			JR 	Z,VDU4			; No bytes to write, so skip the next bit
+; 			LD	HL,BUFFER		; HL: Start of stream
+; 			LD	BC,0
+; 			LD	C,A			; BC: Number of bytes to write out
+; 			RST.LIL	18h			; Output the buffer to MOS
+; END MISSING FROM BINARY
+; BEGIN ADDED FROM BINARY
+VDU:
+			call EXPRI
+			exx
+			ld a,l
+			call PROMPT
+			ld a,(iy)
+			cp $2c
+			jr z,$+$0b
+			cp $3b
+			jr nz,$+$09
+			ld a,h
+			call PROMPT
+			inc iy
+			call TERMQ
+			jr nz,$-$20
+; END ADDED FROM BINARY
 VDU4:			JP      XEQ
 
 ; CLOSE channel number
@@ -4713,9 +4739,11 @@ GROUP08:		SUB	2			; The number of opcodes in GROUP8
 			RLCA
 			RLCA
 			ADD	A,C
-			LD	C,A
-			CALL	ED			; Prefix with ED
-			LD	A,C
+; BEGIN NOT IN BINARY
+			; LD	C,A
+			; CALL	ED			; Prefix with ED
+			; LD	A,C
+; END NOT IN BINARY
 			CALL	BYTE_			; Write out the operand
 			JP	VAL8			; Write out the value
 ;
@@ -5226,251 +5254,1008 @@ DOT:			CP	'.'			; Check if it is a dot character
 ; Group 0: (15 opcodes)
 ; Trivial cases requiring no computation
 ;
-OPCODS:			DB	"NO","P"+80H,00h	; # 00h
-			DB	"RLC","A"+80H,07h
-			DB	"EX",0,"AF",0,"AF","'"+80H,08h
-			DB	"RRC","A"+80H,0FH
-			DB	"RL","A"+80H,17H
-			DB	"RR","A"+80H,1FH
-			DB	"DA","A"+80H,27H
-			DB	"CP","L"+80H,2FH
-			DB	"SC","F"+80H,37H
-			DB	"CC","F"+80H,3FH
-			DB	"HAL","T"+80H,76H
-			DB	"EX","X"+80H,D9H
-			DB	"EX",0,"DE",0,"H","L"+80H,EBH
-			DB	"D","I"+80H,F3H
-			DB	"E","I"+80H,FBH
+; BEGIN REFACTOR FROM BINARY
+; OPCODS:			
+; 			DB	"NO","P"+80H,00h	; # 00h
+; 			DB	"RLC","A"+80H,07h
+; 			DB	"EX",0,"AF",0,"AF","'"+80H,08h
+; 			DB	"RRC","A"+80H,0FH
+; 			DB	"RL","A"+80H,17H
+; 			DB	"RR","A"+80H,1FH
+; 			DB	"DA","A"+80H,27H
+; 			DB	"CP","L"+80H,2FH
+; 			DB	"SC","F"+80H,37H
+; 			DB	"CC","F"+80H,3FH
+; 			DB	"HAL","T"+80H,76H
+; 			DB	"EX","X"+80H,D9H
+; 			DB	"EX",0,"DE",0,"H","L"+80H,EBH
+; 			DB	"D","I"+80H,F3H
+; 			DB	"E","I"+80H,FBH
+; ;
+; ; Group 1: (53 opcodes)
+; ; As Group 0, but with an ED prefix
+; ;
+; 			DB	"NE","G"+80H,44H	; 0Fh
+; 			DB	"IM",0,"0"+80H,46H
+; 			DB	"RET","N"+80H,45H
+; 			DB	"MLT",0,"B","C"+80H,4CH
+; 			DB	"RET","I"+80H,4DH
+; 			DB	"IM",0,"1"+80H,56H
+; 			DB	"MLT",0,"D","E"+80H,5CH						
+; 			DB	"IM",0,"2"+80H,5EH
+; 			DB	"RR","D"+80H,67H
+; 			DB	"MLT",0,"H","L"+80H,6CH
+; 			DB	"LD",0,"MB",0,"A"+80H,6DH
+; 			DB	"LD",0,"A",0,"M","B"+80H,6EH
+; 			DB	"RL","D"+80H,6FH
+; 			DB	"SL","P"+80H,76H
+; 			DB	"MLT",0,"S","P"+80H,7CH
+; 			DB	"STMI","X"+80H,7DH
+; 			DB	"RSMI","X"+80H,7EH
+; 			DB	"INI","M"+80H,82H
+; 			DB	"OTI","M"+80H,83H
+; 			DB	"INI","2"+80H,84H
+; 			DB	"IND","M"+80H,8AH
+; 			DB	"OTD","M"+80H,8BH
+; 			DB	"IND","2"+80H,8CH
+; 			DB	"INIM","R"+80H,92H
+; 			DB	"OTIM","R"+80H,93H
+; 			DB	"INI2","R"+80H,94H
+; 			DB	"INDM","R"+80H,9AH
+; 			DB	"OTDM","R"+80H,9BH
+; 			DB	"IND2","R"+80H,9CH
+; 			DB	"LD","I"+80H,A0H
+; 			DB	"CP","I"+80H,A1H
+; 			DB	"IN","I"+80H,A2H
+; 			DB	"OUTI","2"+80H,A4H	; These are swapped round so that FIND will find
+; 			DB	"OUT","I"+80H,A3H	; OUTI2 before OUTI
+; 			DB	"LD","D"+80H,A8H
+; 			DB	"CP","D"+80H,A9H
+; 			DB	"IN","D"+80H,AAH
+; 			DB	"OUTD","2"+80H,ACH	; Similarly these are swapped round so that FIND
+; 			DB	"OUT","D"+80H,ABH	; will find OUTD2 before OUTD
+; 			DB	"LDI","R"+80H,B0H
+; 			DB	"CPI","R"+80H,B1H
+; 			DB	"INI","R"+80H,B2H
+; 			DB	"OTI","R"+80H,B3H
+; 			DB	"OTI2","R"+80H,B4H
+; 			DB	"LDD","R"+80H,B8H
+; 			DB	"CPD","R"+80H,B9H
+; 			DB	"IND","R"+80H,BAH
+; 			DB	"OTD","R"+80H,BBH
+; 			DB	"OTD2","R"+80H,BCH
+; 			DB	"INIR","X"+80H,C2H
+; 			DB	"OTIR","X"+80H,C3H
+; 			DB	"INDR","X"+80H,CAH
+; 			DB	"OTDR","X"+80H,CBH
+; ;
+; ; Group 2: (3 opcodes)
+; ;
+; 			DB	"BI","T"+80H,40H	; 44h
+; 			DB	"RE","S"+80H,80H
+; 			DB	"SE","T"+80H,C0H
+; ;
+; ; Group 3: (7 opcodes)
+; ;
+; 			DB	"RL","C"+80H,00H	; 47h
+; 			DB	"RR","C"+80H,08H
+; 			DB	"R","L"+80H,10H
+; 			DB	"R","R"+80H,18H
+; 			DB	"SL","A"+80H,20H
+; 			DB	"SR","A"+80H,28H
+; 			DB	"SR","L"+80H,38H
+; ;
+; ; Group 4: (3 opcodes)
+; ;
+; 			DB	"PO","P"+80H,C1H	; 4Eh
+; 			DB	"PUS","H"+80H,C5H
+; 			DB	"EX",0,"(S","P"+80H,E3H
+; ;
+; ; Group 5: (7 opcodes)
+; ;
+; 			DB	"SU","B"+80H,90H	; 51h
+; 			DB	"AN","D"+80H,A0H
+; 			DB	"XO","R"+80H,A8H
+; 			DB	"O","R"+80H,B0H
+; 			DB	"C","P"+80H,B8H
+; 			DB	TAND,A0H		; 56h TAND: Tokenised AND
+; 			DB	TOR,B0H			; 57h TOR: Tokenised OR
+; ;
+; ; Group 6 (3 opcodes)
+; ;
+; 			DB	"AD","D"+80H,80H	; 58h
+; 			DB	"AD","C"+80H,88H
+; 			DB	"SB","C"+80H,98H
+; ;
+; ; Group 7: (2 opcodes)
+; ;
+; 			DB	"IN","C"+80H,04H	; 5Bh
+; 			DB	"DE","C"+80H,05H
+; ;
+; ; Group 8: (2 opcodes)
+; ;
+; 			DB	"IN","0"+80H,00H	; 5Dh
+; 			DB	"OUT","0"+80H,01H
+; ;
+; ; Group 9: (1 opcode)
+; ;
+; 			DB	"I","N"+80H,40H		; 5Fh
+; ;
+; ; Group 10: (1 opcode)
+; ;
+; 			DB	"OU","T"+80H,41H	; 60h
+; ;
+; ; Group 11: (2 opcodes)
+; ;
+; 			DB	"J","R"+80H,20H		; 61h
+; 			DB	"DJN","Z"+80H,10H
+; ;
+; ; Group 12: (1 opcode)
+; ;
+; 			DB	"J","P"+80H,C2H		; 63h
+; ;
+; ; Group 13: (1 opcode)
+; ;
+; 			DB	"CAL","L"+80H,C4H	; 64h
+; ;
+; ; Group 14: (1 opcode)
+; ;
+; 			DB	"RS","T"+80H,C7H	; 65h
+; ;
+; ; Group 15: (1 opcode)
+; ;
+; 			DB	"RE","T"+80H,C0H	; 66h
+; ;
+; ; Group 16: (1 opcode)
+; ;
+; 			DB	"L","D"+80H,40H		; 67h
+; ;
+; ; Group 17: (1 opcode)
+; ;
+; 			DB	"TS","T"+80H,04H	; 68h
+
+; ;
+; ; Assembler Directives
+; ;
+; 			DB	"OP","T"+80H,00H	; 69h OPT
+; 			DB	"AD","L"+80H,00H	; 6Ah ADL
+; ;
+; 			DB	DEF_ & 7FH,"B"+80H,00H	; 6Bh Tokenised DEF + B
+; 			DB	DEF_ & 7FH,"W"+80H,00H	; 6Ch Tokenised DEF + W
+; 			DB	DEF_ & 7FH,"L"+80H,00H	; 6Dh Tokenised DEF + L
+; 			DB 	DEF_ & 7FH,"M"+80H,00H	; 6Eh Tokenised DEF + M
+; ;
+; 			DB	0
+; ;			
+; ; Operands
+; ;
+; OPRNDS:			DB	"B"+80H, 00H
+; 			DB	"C"+80H, 01H
+; 			DB	"D"+80H, 02H
+; 			DB	"E"+80H, 03H
+; 			DB	"H"+80H, 04H
+; 			DB	"L"+80H, 05H
+; 			DB	"(H","L"+80H,06H
+; 			DB	"A"+80H, 07H
+; 			DB	"(I","X"+80H,86H
+; 			DB	"(I","Y"+80H,C6H
+; ;
+; 			DB	"B","C"+80H,08H
+; 			DB	"D","E"+80H,0AH
+; 			DB	"H","L"+80H,0CH
+; 			DB	"I","X"+80H,8CH
+; 			DB	"I","Y"+80H,CCH
+; 			DB	"A","F"+80H,0EH
+; 			DB	"S","P"+80H,0EH
+; ;
+; 			DB	"N","Z"+80H,10H
+; 			DB	"Z"+80H,11H
+; 			DB	"N","C"+80H,12H
+; 			DB	"P","O"+80H,14H
+; 			DB	"P","E"+80H,15H
+; 			DB	"P"+80H,16H
+; 			DB	"M"+80H,17H
+; ;
+; 			DB	"(","C"+80H,20H
+; ;
+; 			DB	0
+; ;
+; ; Load operations
+; ;
+; LDOPS:			DB	"I",0,"A"+80H,47H
+; 			DB	"R",0,"A"+80H,4FH
+; 			DB	"A",0,"I"+80H,57H
+; 			DB	"A",0,"R"+80H,5FH
+; 			DB	"(BC",0,"A"+80H,02h
+; 			DB	"(DE",0,"A"+80H,12H
+; 			DB	"A",0,"(B","C"+80H,0AH
+; 			DB	"A",0,"(D","E"+80H,1AH
+; ;
+; 			DB	0
+; ;
+; ; eZ80 addressing mode suffixes
+; ;
+; ; Fully qualified suffixes
+; ;
+; EZ80SFS_1:		DB	"LI","S"+80H,49H
+; 			DB	"SI","L"+80H,52H
+; EZ80SFS_2:		DB	"SI","S"+80H,40H
+; 			DB	"LI","L"+80H,5BH
+; ;
+; 			DB	0
+; ;
+; ; Shortcuts when ADL mode is 0
+; ;
+; EZ80SFS_ADL0:		DB	"S"+80H,40H		; Equivalent to .SIS
+; 			DB	"L"+80H,49H		; Equivalent to .LIS
+; 			DB	"I","S"+80H,40H		; Equivalent to .SIS
+; 			DB	"I","L"+80H,52H		; Equivalent to .SIL
+; ;
+; 			DB	0
+; ;
+; ; Shortcuts when ADL mode is 1
+; ;
+; EZ80SFS_ADL1:		DB	"S"+80H,52H		; Equivalent to .SIL
+; 			DB	"L"+80H,5BH		; Equivalent to .LIL
+; 			DB	"I","S"+80H,49H		; Equivalent to .LIS
+; 			DB	"I","L"+80H,5BH		; Equivalent to .LIL
+; ;
+; 			DB	0
+; END REFACTOR FROM BINARY 
+; BEGIN INSERT FROM BINARY
+;
+; Trivial cases requiring no computation
+OPCODS:			
+	db 0x4e ; 041DCC 4E      5258 DB	"NO","P"+80H,00h	; # 00h
+	db 0x4f ; 041DCD
+	db 0xd0 ; 041DCE
+	db 0x00 ; 041DCF
+	db 0x52 ; 041DD0 52      5259 DB	"RLC","A"+80H,07h
+	db 0x4c ; 041DD1
+	db 0x43 ; 041DD2
+	db 0xc1 ; 041DD3
+	db 0x07 ; 041DD4
+	db 0x45 ; 041DD5 45      5260 DB	"EX",0,"AF",0,"AF","'"+80H,08h
+	db 0x58 ; 041DD6
+	db 0x00 ; 041DD7
+	db 0x41 ; 041DD8
+	db 0x46 ; 041DD9
+	db 0x00 ; 041DDA
+	db 0x41 ; 041DDB
+	db 0x46 ; 041DDC
+	db 0xa7 ; 041DDD
+	db 0x08 ; 041DDE
+	db 0x52 ; 041DDF 52      5261 DB	"RRC","A"+80H,0FH
+	db 0x52 ; 041DE0
+	db 0x43 ; 041DE1
+	db 0xc1 ; 041DE2
+	db 0x0f ; 041DE3
+	db 0x52 ; 041DE4 52      5262 DB	"RL","A"+80H,17H
+	db 0x4c ; 041DE5
+	db 0xc1 ; 041DE6
+	db 0x17 ; 041DE7
+	db 0x52 ; 041DE8 52      5263 DB	"RR","A"+80H,1FH
+	db 0x52 ; 041DE9
+	db 0xc1 ; 041DEA
+	db 0x1f ; 041DEB
+	db 0x44 ; 041DEC 44      5264 DB	"DA","A"+80H,27H
+	db 0x41 ; 041DED
+	db 0xc1 ; 041DEE
+	db 0x27 ; 041DEF
+	db 0x43 ; 041DF0 43      5265 DB	"CP","L"+80H,2FH
+	db 0x50 ; 041DF1
+	db 0xcc ; 041DF2
+	db 0x2f ; 041DF3
+	db 0x53 ; 041DF4 53      5266 DB	"SC","F"+80H,37H
+	db 0x43 ; 041DF5
+	db 0xc6 ; 041DF6
+	db 0x37 ; 041DF7
+	db 0x43 ; 041DF8 43      5267 DB	"CC","F"+80H,3FH
+	db 0x43 ; 041DF9
+	db 0xc6 ; 041DFA
+	db 0x3f ; 041DFB
+	db 0x48 ; 041DFC 48      5268 DB	"HAL","T"+80H,76H
+	db 0x41 ; 041DFD
+	db 0x4c ; 041DFE
+	db 0xd4 ; 041DFF
+	db 0x76 ; 041E00
+	db 0x45 ; 041E01 45      5269 DB	"EX","X"+80H,D9H
+	db 0x58 ; 041E02
+	db 0xd8 ; 041E03
+	db 0xd9 ; 041E04
+	db 0x45 ; 041E05 45      5270 DB	"EX",0,"DE",0,"H","L"+80H,EBH
+	db 0x58 ; 041E06
+	db 0x00 ; 041E07
+	db 0x44 ; 041E08
+	db 0x45 ; 041E09
+	db 0x00 ; 041E0A
+	db 0x48 ; 041E0B
+	db 0xcc ; 041E0C
+	db 0xeb ; 041E0D
+	db 0x44 ; 041E0E 44      5271 DB	"D","I"+80H,F3H
+	db 0xc9 ; 041E0F
+	db 0xf3 ; 041E10
+	db 0x45 ; 041E11 45      5272 DB	"E","I"+80H,FBH
+	db 0xc9 ; 041E12
+	db 0xfb ; 041E13
 ;
 ; Group 1: (53 opcodes)
 ; As Group 0, but with an ED prefix
 ;
-			DB	"NE","G"+80H,44H	; 0Fh
-			DB	"IM",0,"0"+80H,46H
-			DB	"RET","N"+80H,45H
-			DB	"MLT",0,"B","C"+80H,4CH
-			DB	"RET","I"+80H,4DH
-			DB	"IM",0,"1"+80H,56H
-			DB	"MLT",0,"D","E"+80H,5CH						
-			DB	"IM",0,"2"+80H,5EH
-			DB	"RR","D"+80H,67H
-			DB	"MLT",0,"H","L"+80H,6CH
-			DB	"LD",0,"MB",0,"A"+80H,6DH
-			DB	"LD",0,"A",0,"M","B"+80H,6EH
-			DB	"RL","D"+80H,6FH
-			DB	"SL","P"+80H,76H
-			DB	"MLT",0,"S","P"+80H,7CH
-			DB	"STMI","X"+80H,7DH
-			DB	"RSMI","X"+80H,7EH
-			DB	"INI","M"+80H,82H
-			DB	"OTI","M"+80H,83H
-			DB	"INI","2"+80H,84H
-			DB	"IND","M"+80H,8AH
-			DB	"OTD","M"+80H,8BH
-			DB	"IND","2"+80H,8CH
-			DB	"INIM","R"+80H,92H
-			DB	"OTIM","R"+80H,93H
-			DB	"INI2","R"+80H,94H
-			DB	"INDM","R"+80H,9AH
-			DB	"OTDM","R"+80H,9BH
-			DB	"IND2","R"+80H,9CH
-			DB	"LD","I"+80H,A0H
-			DB	"CP","I"+80H,A1H
-			DB	"IN","I"+80H,A2H
-			DB	"OUTI","2"+80H,A4H	; These are swapped round so that FIND will find
-			DB	"OUT","I"+80H,A3H	; OUTI2 before OUTI
-			DB	"LD","D"+80H,A8H
-			DB	"CP","D"+80H,A9H
-			DB	"IN","D"+80H,AAH
-			DB	"OUTD","2"+80H,ACH	; Similarly these are swapped round so that FIND
-			DB	"OUT","D"+80H,ABH	; will find OUTD2 before OUTD
-			DB	"LDI","R"+80H,B0H
-			DB	"CPI","R"+80H,B1H
-			DB	"INI","R"+80H,B2H
-			DB	"OTI","R"+80H,B3H
-			DB	"OTI2","R"+80H,B4H
-			DB	"LDD","R"+80H,B8H
-			DB	"CPD","R"+80H,B9H
-			DB	"IND","R"+80H,BAH
-			DB	"OTD","R"+80H,BBH
-			DB	"OTD2","R"+80H,BCH
-			DB	"INIR","X"+80H,C2H
-			DB	"OTIR","X"+80H,C3H
-			DB	"INDR","X"+80H,CAH
-			DB	"OTDR","X"+80H,CBH
+	db 0x4e ; 041E14 4E      5277 DB	"NE","G"+80H,44H	; 0Fh
+	db 0x45 ; 041E15
+	db 0xc7 ; 041E16
+	db 0x44 ; 041E17
+	db 0x49 ; 041E18 49      5278 DB	"IM",0,"0"+80H,46H
+	db 0x4d ; 041E19
+	db 0x00 ; 041E1A
+	db 0xb0 ; 041E1B
+	db 0x46 ; 041E1C
+	db 0x52 ; 041E1D 52      5279 DB	"RET","N"+80H,45H
+	db 0x45 ; 041E1E
+	db 0x54 ; 041E1F
+	db 0xce ; 041E20
+	db 0x45 ; 041E21
+	db 0x4d ; 041E22 4D      5280 DB	"MLT",0,"B","C"+80H,4CH
+	db 0x4c ; 041E23
+	db 0x54 ; 041E24
+	db 0x00 ; 041E25
+	db 0x42 ; 041E26
+	db 0xc3 ; 041E27
+	db 0x4c ; 041E28
+	db 0x52 ; 041E29 52      5281 DB	"RET","I"+80H,4DH
+	db 0x45 ; 041E2A
+	db 0x54 ; 041E2B
+	db 0xc9 ; 041E2C
+	db 0x4d ; 041E2D
+	db 0x49 ; 041E2E 49      5282 DB	"IM",0,"1"+80H,56H
+	db 0x4d ; 041E2F
+	db 0x00 ; 041E30
+	db 0xb1 ; 041E31
+	db 0x56 ; 041E32
+	db 0x4d ; 041E33 4D      5283 DB	"MLT",0,"D","E"+80H,5CH
+	db 0x4c ; 041E34
+	db 0x54 ; 041E35
+	db 0x00 ; 041E36
+	db 0x44 ; 041E37
+	db 0xc5 ; 041E38
+	db 0x5c ; 041E39
+	db 0x49 ; 041E3A 49      5284 DB	"IM",0,"2"+80H,5EH
+	db 0x4d ; 041E3B
+	db 0x00 ; 041E3C
+	db 0xb2 ; 041E3D
+	db 0x5e ; 041E3E
+	db 0x52 ; 041E3F 52      5285 DB	"RR","D"+80H,67H
+	db 0x52 ; 041E40
+	db 0xc4 ; 041E41
+	db 0x67 ; 041E42
+	db 0x4d ; 041E43 4D      5286 DB	"MLT",0,"H","L"+80H,6CH
+	db 0x4c ; 041E44
+	db 0x54 ; 041E45
+	db 0x00 ; 041E46
+	db 0x48 ; 041E47
+	db 0xcc ; 041E48
+	db 0x6c ; 041E49
+	db 0x4c ; 041E4A 4C      5287 DB	"LD",0,"MB",0,"A"+80H,6DH
+	db 0x44 ; 041E4B
+	db 0x00 ; 041E4C
+	db 0x4d ; 041E4D
+	db 0x42 ; 041E4E
+	db 0x00 ; 041E4F
+	db 0xc1 ; 041E50
+	db 0x6d ; 041E51
+	db 0x4c ; 041E52 4C      5288 DB	"LD",0,"A",0,"M","B"+80H,6EH
+	db 0x44 ; 041E53
+	db 0x00 ; 041E54
+	db 0x41 ; 041E55
+	db 0x00 ; 041E56
+	db 0x4d ; 041E57
+	db 0xc2 ; 041E58
+	db 0x6e ; 041E59
+	db 0x52 ; 041E5A 52      5289 DB	"RL","D"+80H,6FH
+	db 0x4c ; 041E5B
+	db 0xc4 ; 041E5C
+	db 0x6f ; 041E5D
+	db 0x53 ; 041E5E 53      5290 DB	"SL","P"+80H,76H
+	db 0x4c ; 041E5F
+	db 0xd0 ; 041E60
+	db 0x76 ; 041E61
+	db 0x4d ; 041E62 4D      5291 DB	"MLT",0,"S","P"+80H,7CH
+	db 0x4c ; 041E63
+	db 0x54 ; 041E64
+	db 0x00 ; 041E65
+	db 0x53 ; 041E66
+	db 0xd0 ; 041E67
+	db 0x7c ; 041E68
+	db 0x53 ; 041E69 53      5292 DB	"STMI","X"+80H,7DH
+	db 0x54 ; 041E6A
+	db 0x4d ; 041E6B
+	db 0x49 ; 041E6C
+	db 0xd8 ; 041E6D
+	db 0x7d ; 041E6E
+	db 0x52 ; 041E6F 52      5293 DB	"RSMI","X"+80H,7EH
+	db 0x53 ; 041E70
+	db 0x4d ; 041E71
+	db 0x49 ; 041E72
+	db 0xd8 ; 041E73
+	db 0x7e ; 041E74
+	db 0x49 ; 041E75 49      5294 DB	"INI","M"+80H,82H
+	db 0x4e ; 041E76
+	db 0x49 ; 041E77
+	db 0xcd ; 041E78
+	db 0x82 ; 041E79
+	db 0x4f ; 041E7A 4F      5295 DB	"OTI","M"+80H,83H
+	db 0x54 ; 041E7B
+	db 0x49 ; 041E7C
+	db 0xcd ; 041E7D
+	db 0x83 ; 041E7E
+	db 0x49 ; 041E7F 49      5296 DB	"INI","2"+80H,84H
+	db 0x4e ; 041E80
+	db 0x49 ; 041E81
+	db 0xb2 ; 041E82
+	db 0x84 ; 041E83
+	db 0x49 ; 041E84 49      5297 DB	"IND","M"+80H,8AH
+	db 0x4e ; 041E85
+	db 0x44 ; 041E86
+	db 0xcd ; 041E87
+	db 0x8a ; 041E88
+	db 0x4f ; 041E89 4F      5298 DB	"OTD","M"+80H,8BH
+	db 0x54 ; 041E8A
+	db 0x44 ; 041E8B
+	db 0xcd ; 041E8C
+	db 0x8b ; 041E8D
+	db 0x49 ; 041E8E 49      5299 DB	"IND","2"+80H,8CH
+	db 0x4e ; 041E8F
+	db 0x44 ; 041E90
+	db 0xb2 ; 041E91
+	db 0x8c ; 041E92
+	db 0x49 ; 041E93 49      5300 DB	"INIM","R"+80H,92H
+	db 0x4e ; 041E94
+	db 0x49 ; 041E95
+	db 0x4d ; 041E96
+	db 0xd2 ; 041E97
+	db 0x92 ; 041E98
+	db 0x4f ; 041E99 4F      5301 DB	"OTIM","R"+80H,93H
+	db 0x54 ; 041E9A
+	db 0x49 ; 041E9B
+	db 0x4d ; 041E9C
+	db 0xd2 ; 041E9D
+	db 0x93 ; 041E9E
+	db 0x49 ; 041E9F 49      5302 DB	"INI2","R"+80H,94H
+	db 0x4e ; 041EA0
+	db 0x49 ; 041EA1
+	db 0x32 ; 041EA2
+	db 0xd2 ; 041EA3
+	db 0x94 ; 041EA4
+	db 0x49 ; 041EA5 49      5303 DB	"INDM","R"+80H,9AH
+	db 0x4e ; 041EA6
+	db 0x44 ; 041EA7
+	db 0x4d ; 041EA8
+	db 0xd2 ; 041EA9
+	db 0x9a ; 041EAA
+	db 0x4f ; 041EAB 4F      5304 DB	"OTDM","R"+80H,9BH
+	db 0x54 ; 041EAC
+	db 0x44 ; 041EAD
+	db 0x4d ; 041EAE
+	db 0xd2 ; 041EAF
+	db 0x9b ; 041EB0
+	db 0x49 ; 041EB1 49      5305 DB	"IND2","R"+80H,9CH
+	db 0x4e ; 041EB2
+	db 0x44 ; 041EB3
+	db 0x32 ; 041EB4
+	db 0xd2 ; 041EB5
+	db 0x9c ; 041EB6
+	db 0x4c ; 041EB7 4C      5306 DB	"LD","I"+80H,A0H
+	db 0x44 ; 041EB8
+	db 0xc9 ; 041EB9
+	db 0xa0 ; 041EBA
+	db 0x43 ; 041EBB 43      5307 DB	"CP","I"+80H,A1H
+	db 0x50 ; 041EBC
+	db 0xc9 ; 041EBD
+	db 0xa1 ; 041EBE
+	db 0x49 ; 041EBF 49      5308 DB	"IN","I"+80H,A2H
+	db 0x4e ; 041EC0
+	db 0xc9 ; 041EC1
+	db 0xa2 ; 041EC2
+	db 0x4f ; 041EC3 4F      5309 DB	"OUTI","2"+80H,A4H	; These are swapped round so that FIND will find
+	db 0x55 ; 041EC4
+	db 0x54 ; 041EC5
+	db 0x49 ; 041EC6
+	db 0xb2 ; 041EC7
+	db 0xa4 ; 041EC8
+	db 0x4f ; 041EC9 4F      5310 DB	"OUT","I"+80H,A3H	; OUTI2 before OUTI
+	db 0x55 ; 041ECA
+	db 0x54 ; 041ECB
+	db 0xc9 ; 041ECC
+	db 0xa3 ; 041ECD
+	db 0x4c ; 041ECE 4C      5311 DB	"LD","D"+80H,A8H
+	db 0x44 ; 041ECF
+	db 0xc4 ; 041ED0
+	db 0xa8 ; 041ED1
+	db 0x43 ; 041ED2 43      5312 DB	"CP","D"+80H,A9H
+	db 0x50 ; 041ED3
+	db 0xc4 ; 041ED4
+	db 0xa9 ; 041ED5
+	db 0x49 ; 041ED6 49      5313 DB	"IN","D"+80H,AAH
+	db 0x4e ; 041ED7
+	db 0xc4 ; 041ED8
+	db 0xaa ; 041ED9
+	db 0x4f ; 041EDA 4F      5314 DB	"OUTD","2"+80H,ACH	; Similarly these are swapped round so that FIND
+	db 0x55 ; 041EDB
+	db 0x54 ; 041EDC
+	db 0x44 ; 041EDD
+	db 0xb2 ; 041EDE
+	db 0xac ; 041EDF
+	db 0x4f ; 041EE0 4F      5315 DB	"OUT","D"+80H,ABH	; will find OUTD2 before OUTD
+	db 0x55 ; 041EE1
+	db 0x54 ; 041EE2
+	db 0xc4 ; 041EE3
+	db 0xab ; 041EE4
+	db 0x4c ; 041EE5 4C      5316 DB	"LDI","R"+80H,B0H
+	db 0x44 ; 041EE6
+	db 0x49 ; 041EE7
+	db 0xd2 ; 041EE8
+	db 0xb0 ; 041EE9
+	db 0x43 ; 041EEA 43      5317 DB	"CPI","R"+80H,B1H
+	db 0x50 ; 041EEB
+	db 0x49 ; 041EEC
+	db 0xd2 ; 041EED
+	db 0xb1 ; 041EEE
+	db 0x49 ; 041EEF 49      5318 DB	"INI","R"+80H,B2H
+	db 0x4e ; 041EF0
+	db 0x49 ; 041EF1
+	db 0xd2 ; 041EF2
+	db 0xb2 ; 041EF3
+	db 0x4f ; 041EF4 4F      5319 DB	"OTI","R"+80H,B3H
+	db 0x54 ; 041EF5
+	db 0x49 ; 041EF6
+	db 0xd2 ; 041EF7
+	db 0xb3 ; 041EF8
+	db 0x4f ; 041EF9 4F      5320 DB	"OTI2","R"+80H,B4H
+	db 0x54 ; 041EFA
+	db 0x49 ; 041EFB
+	db 0x32 ; 041EFC
+	db 0xd2 ; 041EFD
+	db 0xb4 ; 041EFE
+	db 0x4c ; 041EFF 4C      5321 DB	"LDD","R"+80H,B8H
+	db 0x44 ; 041F00
+	db 0x44 ; 041F01
+	db 0xd2 ; 041F02
+	db 0xb8 ; 041F03
+	db 0x43 ; 041F04 43      5322 DB	"CPD","R"+80H,B9H
+	db 0x50 ; 041F05
+	db 0x44 ; 041F06
+	db 0xd2 ; 041F07
+	db 0xb9 ; 041F08
+	db 0x49 ; 041F09 49      5323 DB	"IND","R"+80H,BAH
+	db 0x4e ; 041F0A
+	db 0x44 ; 041F0B
+	db 0xd2 ; 041F0C
+	db 0xba ; 041F0D
+	db 0x4f ; 041F0E 4F      5324 DB	"OTD","R"+80H,BBH
+	db 0x54 ; 041F0F
+	db 0x44 ; 041F10
+	db 0xd2 ; 041F11
+	db 0xbb ; 041F12
+	db 0x4f ; 041F13 4F      5325 DB	"OTD2","R"+80H,BCH
+	db 0x54 ; 041F14
+	db 0x44 ; 041F15
+	db 0x32 ; 041F16
+	db 0xd2 ; 041F17
+	db 0xbc ; 041F18
+	db 0x49 ; 041F19 49      5326 DB	"INIR","X"+80H,C2H
+	db 0x4e ; 041F1A
+	db 0x49 ; 041F1B
+	db 0x52 ; 041F1C
+	db 0xd8 ; 041F1D
+	db 0xc2 ; 041F1E
+	db 0x4f ; 041F1F 4F      5327 DB	"OTIR","X"+80H,C3H
+	db 0x54 ; 041F20
+	db 0x49 ; 041F21
+	db 0x52 ; 041F22
+	db 0xd8 ; 041F23
+	db 0xc3 ; 041F24
+	db 0x49 ; 041F25 49      5328 DB	"INDR","X"+80H,CAH
+	db 0x4e ; 041F26
+	db 0x44 ; 041F27
+	db 0x52 ; 041F28
+	db 0xd8 ; 041F29
+	db 0xca ; 041F2A
+	db 0x4f ; 041F2B 4F      5329 DB	"OTDR","X"+80H,CBH
+	db 0x54 ; 041F2C
+	db 0x44 ; 041F2D
+	db 0x52 ; 041F2E
+	db 0xd8 ; 041F2F
+	db 0xcb ; 041F30
 ;
 ; Group 2: (3 opcodes)
 ;
-			DB	"BI","T"+80H,40H	; 44h
-			DB	"RE","S"+80H,80H
-			DB	"SE","T"+80H,C0H
+	db 0x42 ; 041F31 42      5333 DB	"BI","T"+80H,40H	; 44h
+	db 0x49 ; 041F32
+	db 0xd4 ; 041F33
+	db 0x40 ; 041F34
+	db 0x52 ; 041F35 52      5333 DB	"RE","S"+80H,80H
+	db 0x45 ; 041F36
+	db 0xd3 ; 041F37
+	db 0x80 ; 041F38
+	db 0x53 ; 041F39 53      5334 DB	"SE","T"+80H,C0H
+	db 0x45 ; 041F3A
+	db 0xd4 ; 041F3B
+	db 0xc0 ; 041F3C
 ;
 ; Group 3: (7 opcodes)
 ;
-			DB	"RL","C"+80H,00H	; 47h
-			DB	"RR","C"+80H,08H
-			DB	"R","L"+80H,10H
-			DB	"R","R"+80H,18H
-			DB	"SL","A"+80H,20H
-			DB	"SR","A"+80H,28H
-			DB	"SR","L"+80H,38H
+	db 0x52 ; 041F3D 52      5338 DB	"RL","C"+80H,00H	; 47h
+	db 0x4c ; 041F3E
+	db 0xc3 ; 041F3F
+	db 0x00 ; 041F40
+	db 0x52 ; 041F41 52      5339 DB	"RR","C"+80H,08H
+	db 0x52 ; 041F42
+	db 0xc3 ; 041F43
+	db 0x08 ; 041F44
+	db 0x52 ; 041F45 52      5340 DB	"R","L"+80H,10H
+	db 0xcc ; 041F46
+	db 0x10 ; 041F47
+	db 0x52 ; 041F48 52      5341 DB	"R","R"+80H,18H
+	db 0xd2 ; 041F49
+	db 0x18 ; 041F4A
+	db 0x53 ; 041F4B 53      5342 DB	"SL","A"+80H,20H
+	db 0x4c ; 041F4C
+	db 0xc1 ; 041F4D
+	db 0x20 ; 041F4E
+	db 0x53 ; 041F4F 53      5343 DB	"SR","A"+80H,28H
+	db 0x52 ; 041F50
+	db 0xc1 ; 041F51
+	db 0x28 ; 041F52
+	db 0x53 ; 041F53 53      5344 DB	"SR","L"+80H,38H
+	db 0x52 ; 041F54
+	db 0xcc ; 041F55
+	db 0x38 ; 041F56
 ;
 ; Group 4: (3 opcodes)
 ;
-			DB	"PO","P"+80H,C1H	; 4Eh
-			DB	"PUS","H"+80H,C5H
-			DB	"EX",0,"(S","P"+80H,E3H
+	db 0x50 ; 041F57 50      5348 DB	"PO","P"+80H,C1H	; 4Eh
+	db 0x4f ; 041F58
+	db 0xd0 ; 041F59
+	db 0xc1 ; 041F5A
+	db 0x50 ; 041F5B 50      5349 DB	"PUS","H"+80H,C5H
+	db 0x55 ; 041F5C
+	db 0x53 ; 041F5D
+	db 0xc8 ; 041F5E
+	db 0xc5 ; 041F5F
+	db 0x45 ; 041F60 45      5350 DB	"EX",0,"(S","P"+80H,E3H
+	db 0x58 ; 041F61
+	db 0x00 ; 041F62
+	db 0x28 ; 041F63
+	db 0x53 ; 041F64
+	db 0xd0 ; 041F65
+	db 0xe3 ; 041F66
 ;
 ; Group 5: (7 opcodes)
 ;
-			DB	"SU","B"+80H,90H	; 51h
-			DB	"AN","D"+80H,A0H
-			DB	"XO","R"+80H,A8H
-			DB	"O","R"+80H,B0H
-			DB	"C","P"+80H,B8H
-			DB	TAND,A0H		; 56h TAND: Tokenised AND
-			DB	TOR,B0H			; 57h TOR: Tokenised OR
+	db 0x53 ; 041F67 53      5354 DB	"SU","B"+80H,90H	; 51h
+	db 0x55 ; 041F68
+	db 0xc2 ; 041F69
+	db 0x90 ; 041F6A
+	db 0x41 ; 041F6B 41      5355 DB	"AN","D"+80H,A0H
+	db 0x4e ; 041F6C
+	db 0xc4 ; 041F6D
+	db 0xa0 ; 041F6E
+	db 0x58 ; 041F6F 58      5356 DB	"XO","R"+80H,A8H
+	db 0x4f ; 041F70
+	db 0xd2 ; 041F71
+	db 0xa8 ; 041F72
+	db 0x4f ; 041F73 4F      5357 DB	"O","R"+80H,B0H
+	db 0xd2 ; 041F74
+	db 0xb0 ; 041F75
+	db 0x43 ; 041F76 43      5358 DB	"C","P"+80H,B8H
+	db 0xd0 ; 041F77
+	db 0xb8 ; 041F78
+	db 0x80 ; 041F79 80      5359 DB	TAND,A0H		; 56h TAND: Tokenised AND
+	db 0xa0 ; 041F7A
+	db 0x84 ; 041F7B 84      5360 DB	TOR,B0H			; 57h TOR: Tokenised OR
+	db 0xb0 ; 041F7C
 ;
 ; Group 6 (3 opcodes)
 ;
-			DB	"AD","D"+80H,80H	; 58h
-			DB	"AD","C"+80H,88H
-			DB	"SB","C"+80H,98H
+	db 0x41 ; 041F7D 41      5364 DB	"AD","D"+80H,80H	; 58h
+	db 0x44 ; 041F7E
+	db 0xc4 ; 041F7F
+	db 0x80 ; 041F80
+	db 0x41 ; 041F81 41      5365 DB	"AD","C"+80H,88H
+	db 0x44 ; 041F82
+	db 0xc3 ; 041F83
+	db 0x88 ; 041F84
+	db 0x53 ; 041F85 53      5366 DB	"SB","C"+80H,98H
+	db 0x42 ; 041F86
+	db 0xc3 ; 041F87
+	db 0x98 ; 041F88
 ;
 ; Group 7: (2 opcodes)
 ;
-			DB	"IN","C"+80H,04H	; 5Bh
-			DB	"DE","C"+80H,05H
+	db 0x49 ; 041F89 49      5370 DB	"IN","C"+80H,04H	; 5Bh
+	db 0x4e ; 041F8A
+	db 0xc3 ; 041F8B
+	db 0x04 ; 041F8C
+	db 0x44 ; 041F8D 44      5371 DB	"DE","C"+80H,05H
+	db 0x45 ; 041F8E
+	db 0xc3 ; 041F8F
+	db 0x05 ; 041F90
 ;
 ; Group 8: (2 opcodes)
 ;
-			DB	"IN","0"+80H,00H	; 5Dh
-			DB	"OUT","0"+80H,01H
+	db 0x49 ; 041F91 49      5375 DB	"IN","0"+80H,00H	; 5Dh
+	db 0x4e ; 041F92
+	db 0xb0 ; 041F93
+	db 0x00 ; 041F94
+	db 0x4f ; 041F95 4F      5376 DB	"OUT","0"+80H,01H
+	db 0x55 ; 041F96
+	db 0x54 ; 041F97
+	db 0xb0 ; 041F98
+	db 0x01 ; 041F99
 ;
 ; Group 9: (1 opcode)
 ;
-			DB	"I","N"+80H,40H		; 5Fh
+	db 0x49 ; 041F9A 49      5380 DB	"I","N"+80H,40H		; 5Fh
+	db 0xce ; 041F9B
+	db 0x40 ; 041F9C
 ;
 ; Group 10: (1 opcode)
 ;
-			DB	"OU","T"+80H,41H	; 60h
+	db 0x4f ; 041F9D 4F      5384 DB	"OU","T"+80H,41H	; 60h
+	db 0x55 ; 041F9E
+	db 0xd4 ; 041F9F
+	db 0x41 ; 041FA0
 ;
 ; Group 11: (2 opcodes)
 ;
-			DB	"J","R"+80H,20H		; 61h
-			DB	"DJN","Z"+80H,10H
+	db 0x4a ; 041FA1 4A      5388 DB	"J","R"+80H,20H		; 61h
+	db 0xd2 ; 041FA2
+	db 0x20 ; 041FA3
+	db 0x44 ; 041FA4 44      5389 DB	"DJN","Z"+80H,10H
+	db 0x4a ; 041FA5
+	db 0x4e ; 041FA6
+	db 0xda ; 041FA7
+	db 0x10 ; 041FA8
 ;
 ; Group 12: (1 opcode)
 ;
-			DB	"J","P"+80H,C2H		; 63h
+	db 0x4a ; 041FA9 4A      5393 DB	"J","P"+80H,C2H		; 63h
+	db 0xd0 ; 041FAA
+	db 0xc2 ; 041FAB
 ;
 ; Group 13: (1 opcode)
 ;
-			DB	"CAL","L"+80H,C4H	; 64h
+	db 0x43 ; 041FAC 43      5397 DB	"CAL","L"+80H,C4H	; 64h
+	db 0x41 ; 041FAD
+	db 0x4c ; 041FAE
+	db 0xcc ; 041FAF
+	db 0xc4 ; 041FB0
 ;
 ; Group 14: (1 opcode)
 ;
-			DB	"RS","T"+80H,C7H	; 65h
+	db 0x52 ; 041FB1 52      5401 DB	"RS","T"+80H,C7H	; 65h
+	db 0x53 ; 041FB2
+	db 0xd4 ; 041FB3
+	db 0xc7 ; 041FB4
 ;
 ; Group 15: (1 opcode)
 ;
-			DB	"RE","T"+80H,C0H	; 66h
+	db 0x52 ; 041FB5 52      5405 DB	"RE","T"+80H,C0H	; 66h
+	db 0x45 ; 041FB6
+	db 0xd4 ; 041FB7
+	db 0xc0 ; 041FB8
 ;
 ; Group 16: (1 opcode)
 ;
-			DB	"L","D"+80H,40H		; 67h
+	db 0x4c ; 041FB9 4C      5409 DB	"L","D"+80H,40H		; 67h
+	db 0xc4 ; 041FBA
+	db 0x40 ; 041FBB
 ;
 ; Group 17: (1 opcode)
 ;
-			DB	"TS","T"+80H,04H	; 68h
-
+	db 0x54 ; 041FBC 54      5413 DB	"TS","T"+80H,04H	; 68h
+	db 0x53 ; 041FBD
+	db 0xd4 ; 041FBE
+	db 0x04 ; 041FBF
 ;
 ; Assembler Directives
 ;
-			DB	"OP","T"+80H,00H	; 69h OPT
-			DB	"AD","L"+80H,00H	; 6Ah ADL
+	db 0x4f ; 041FC0 4F      5418 DB	"OP","T"+80H,00H	; 69h OPT
+	db 0x50 ; 041FC1
+	db 0xd4 ; 041FC2
+	db 0x00 ; 041FC3
+	db 0x41 ; 041FC4 41      5419 DB	"AD","L"+80H,00H	; 6Ah ADL
+	db 0x44 ; 041FC5
+	db 0xcc ; 041FC6
+	db 0x00 ; 041FC7
+	db 0x5d ; 041FC8 5D      5421 DB	DEF_ & 7FH,"B"+80H,00H	; 6Bh Tokenised DEF + B
+	db 0xc2 ; 041FC9
+	db 0x00 ; 041FCA
+	db 0x5d ; 041FCB 5D      5422 DB	DEF_ & 7FH,"W"+80H,00H	; 6Ch Tokenised DEF + W
+	db 0xd7 ; 041FCC
+	db 0x00 ; 041FCD
+	db 0x5d ; 041FCE 5D      5423 DB	DEF_ & 7FH,"L"+80H,00H	; 6Dh Tokenised DEF + L
+	db 0xcc ; 041FCF
+	db 0x00 ; 041FD0
+	db 0x5d ; 041FD1 5D      5424 DB 	DEF_ & 7FH,"M"+80H,00H	; 6Eh Tokenised DEF + M
+	db 0xcd ; 041FD2
+	db 0x00 ; 041FD3
+	db 0x00 ; 041FD4 00      5426 DB	0
 ;
-			DB	DEF_ & 7FH,"B"+80H,00H	; 6Bh Tokenised DEF + B
-			DB	DEF_ & 7FH,"W"+80H,00H	; 6Ch Tokenised DEF + W
-			DB	DEF_ & 7FH,"L"+80H,00H	; 6Dh Tokenised DEF + L
-			DB 	DEF_ & 7FH,"M"+80H,00H	; 6Eh Tokenised DEF + M
-;
-			DB	0
-;			
 ; Operands
 ;
-OPRNDS:			DB	"B"+80H, 00H
-			DB	"C"+80H, 01H
-			DB	"D"+80H, 02H
-			DB	"E"+80H, 03H
-			DB	"H"+80H, 04H
-			DB	"L"+80H, 05H
-			DB	"(H","L"+80H,06H
-			DB	"A"+80H, 07H
-			DB	"(I","X"+80H,86H
-			DB	"(I","Y"+80H,C6H
-;
-			DB	"B","C"+80H,08H
-			DB	"D","E"+80H,0AH
-			DB	"H","L"+80H,0CH
-			DB	"I","X"+80H,8CH
-			DB	"I","Y"+80H,CCH
-			DB	"A","F"+80H,0EH
-			DB	"S","P"+80H,0EH
-;
-			DB	"N","Z"+80H,10H
-			DB	"Z"+80H,11H
-			DB	"N","C"+80H,12H
-			DB	"P","O"+80H,14H
-			DB	"P","E"+80H,15H
-			DB	"P"+80H,16H
-			DB	"M"+80H,17H
-;
-			DB	"(","C"+80H,20H
-;
-			DB	0
+OPRNDS:
+	db 0xc2 ; 041FD5 42      5430 OPRNDS:			DB	"B"+80H, 00H
+	db 0x00 ; 041FD6
+	db 0xc3 ; 041FD7 43      5431 DB	"C"+80H, 01H
+	db 0x01 ; 041FD8
+	db 0xc4 ; 041FD9 44      5432 DB	"D"+80H, 02H
+	db 0x02 ; 041FDA
+	db 0xc5 ; 041FDB 45      5433 DB	"E"+80H, 03H
+	db 0x03 ; 041FDC
+	db 0xc8 ; 041FDD 48      5434 DB	"H"+80H, 04H
+	db 0x04 ; 041FDE
+	db 0xcc ; 041FDF 4C      5435 DB	"L"+80H, 05H
+	db 0x05 ; 041FE0
+	db 0x28 ; 041FE1 28      5436 DB	"(H","L"+80H,06H
+	db 0x48 ; 041FE2
+	db 0xcc ; 041FE3
+	db 0x06 ; 041FE4
+	db 0xc1 ; 041FE5 41      5437 DB	"A"+80H, 07H
+	db 0x07 ; 041FE6
+	db 0x28 ; 041FE7 28      5438 DB	"(I","X"+80H,86H
+	db 0x49 ; 041FE8
+	db 0xd8 ; 041FE9
+	db 0x86 ; 041FEA
+	db 0x28 ; 041FEB 28      5439 DB	"(I","Y"+80H,C6H
+	db 0x49 ; 041FEC
+	db 0xd9 ; 041FED
+	db 0xc6 ; 041FEE
+	db 0x42 ; 041FEF 42      5441 DB	"B","C"+80H,08H
+	db 0xc3 ; 041FF0
+	db 0x08 ; 041FF1
+	db 0x44 ; 041FF2 44      5442 DB	"D","E"+80H,0AH
+	db 0xc5 ; 041FF3
+	db 0x0a ; 041FF4
+	db 0x48 ; 041FF5 48      5443 DB	"H","L"+80H,0CH
+	db 0xcc ; 041FF6
+	db 0x0c ; 041FF7
+	db 0x49 ; 041FF8 49      5444 DB	"I","X"+80H,8CH
+	db 0xd8 ; 041FF9
+	db 0x8c ; 041FFA
+	db 0x49 ; 041FFB 49      5445 DB	"I","Y"+80H,CCH
+	db 0xd9 ; 041FFC
+	db 0xcc ; 041FFD
+	db 0x41 ; 041FFE 41      5446 DB	"A","F"+80H,0EH
+	db 0xc6 ; 041FFF
+	db 0x0e ; 042000
+	db 0x53 ; 042001 53      5447 DB	"S","P"+80H,0EH
+	db 0xd0 ; 042002
+	db 0x0e ; 042003
+	db 0x4e ; 042004 4E      5449 DB	"N","Z"+80H,10H
+	db 0xda ; 042005
+	db 0x10 ; 042006
+	db 0xda ; 042007 5A      5450 DB	"Z"+80H,11H
+	db 0x11 ; 042008
+	db 0x4e ; 042009 4E      5451 DB	"N","C"+80H,12H
+	db 0xc3 ; 04200A
+	db 0x12 ; 04200B
+	db 0x50 ; 04200C 50      5452 DB	"P","O"+80H,14H
+	db 0xcf ; 04200D
+	db 0x14 ; 04200E
+	db 0x50 ; 04200F 50      5453 DB	"P","E"+80H,15H
+	db 0xc5 ; 042010
+	db 0x15 ; 042011
+	db 0xd0 ; 042012 50      5454 DB	"P"+80H,16H
+	db 0x16 ; 042013
+	db 0xcd ; 042014 4D      5455 DB	"M"+80H,17H
+	db 0x17 ; 042015
+	db 0x28 ; 042016 28      5457 DB	"(","C"+80H,20H
+	db 0xc3 ; 042017
+	db 0x20 ; 042018
+	db 0x00 ; 042019 00      5459 DB	0
 ;
 ; Load operations
 ;
-LDOPS:			DB	"I",0,"A"+80H,47H
-			DB	"R",0,"A"+80H,4FH
-			DB	"A",0,"I"+80H,57H
-			DB	"A",0,"R"+80H,5FH
-			DB	"(BC",0,"A"+80H,02h
-			DB	"(DE",0,"A"+80H,12H
-			DB	"A",0,"(B","C"+80H,0AH
-			DB	"A",0,"(D","E"+80H,1AH
-;
-			DB	0
+LDOPS:
+	db 0x49 ; 04201A 49      5463 LDOPS:			DB	"I",0,"A"+80H,47H
+	db 0x00 ; 04201B
+	db 0xc1 ; 04201C
+	db 0x47 ; 04201D
+	db 0x52 ; 04201E 52      5464 DB	"R",0,"A"+80H,4FH
+	db 0x00 ; 04201F
+	db 0xc1 ; 042020
+	db 0x4f ; 042021
+	db 0x41 ; 042022 41      5465 DB	"A",0,"I"+80H,57H
+	db 0x00 ; 042023
+	db 0xc9 ; 042024
+	db 0x57 ; 042025
+	db 0x41 ; 042026 41      5466 DB	"A",0,"R"+80H,5FH
+	db 0x00 ; 042027
+	db 0xd2 ; 042028
+	db 0x5f ; 042029
+	db 0x28 ; 04202A 28      5467 DB	"(BC",0,"A"+80H,02h
+	db 0x42 ; 04202B
+	db 0x43 ; 04202C
+	db 0x00 ; 04202D
+	db 0xc1 ; 04202E
+	db 0x02 ; 04202F
+	db 0x28 ; 042030 28      5468 DB	"(DE",0,"A"+80H,12H
+	db 0x44 ; 042031
+	db 0x45 ; 042032
+	db 0x00 ; 042033
+	db 0xc1 ; 042034
+	db 0x12 ; 042035
+	db 0x41 ; 042036 41      5469 DB	"A",0,"(B","C"+80H,0AH
+	db 0x00 ; 042037
+	db 0x28 ; 042038
+	db 0x42 ; 042039
+	db 0xc3 ; 04203A
+	db 0x0a ; 04203B
+	db 0x41 ; 04203C 41      5470 DB	"A",0,"(D","E"+80H,1AH
+	db 0x00 ; 04203D
+	db 0x28 ; 04203E
+	db 0x44 ; 04203F
+	db 0xc5 ; 042040
+	db 0x1a ; 042041
+	db 0x00 ; 042042 00      5472 DB	0
 ;
 ; eZ80 addressing mode suffixes
 ;
 ; Fully qualified suffixes
 ;
-EZ80SFS_1:		DB	"LI","S"+80H,49H
-			DB	"SI","L"+80H,52H
-EZ80SFS_2:		DB	"SI","S"+80H,40H
-			DB	"LI","L"+80H,5BH
-;
-			DB	0
+EZ80SFS_1:
+	db 0x4c ; 042043 4C      5478 EZ80SFS_1:		DB	"LI","S"+80H,49H
+	db 0x49 ; 042044
+	db 0xd3 ; 042045
+	db 0x49 ; 042046
+	db 0x53 ; 042047 53      5479 DB	"SI","L"+80H,52H
+	db 0x49 ; 042048
+	db 0xcc ; 042049
+	db 0x52 ; 04204A
+
+EZ80SFS_2:
+	db 0x53 ; 04204B 53      5480 EZ80SFS_2:		DB	"SI","S"+80H,40H
+	db 0x49 ; 04204C
+	db 0xd3 ; 04204D
+	db 0x40 ; 04204E
+	db 0x4c ; 04204F 4C      5481 DB	"LI","L"+80H,5BH
+	db 0x49 ; 042050
+	db 0xcc ; 042051
+	db 0x5b ; 042052
+	db 0x00 ; 042053 00      5483 DB	0
 ;
 ; Shortcuts when ADL mode is 0
 ;
-EZ80SFS_ADL0:		DB	"S"+80H,40H		; Equivalent to .SIS
-			DB	"L"+80H,49H		; Equivalent to .LIS
-			DB	"I","S"+80H,40H		; Equivalent to .SIS
-			DB	"I","L"+80H,52H		; Equivalent to .SIL
-;
-			DB	0
+EZ80SFS_ADL0:
+	db 0xd3 ; 042054 53      5487 EZ80SFS_ADL0:		DB	"S"+80H,40H		; Equivalent to .SIS
+	db 0x40 ; 042055
+	db 0xcc ; 042056 4C      5488 DB	"L"+80H,49H		; Equivalent to .LIS
+	db 0x49 ; 042057
+	db 0x49 ; 042058 49      5489 DB	"I","S"+80H,40H		; Equivalent to .SIS
+	db 0xd3 ; 042059
+	db 0x40 ; 04205A
+	db 0x49 ; 04205B 49      5490 DB	"I","L"+80H,52H		; Equivalent to .SIL
+	db 0xcc ; 04205C
+	db 0x52 ; 04205D
+	db 0x00 ; 04205E 00      5492 DB	0
 ;
 ; Shortcuts when ADL mode is 1
 ;
-EZ80SFS_ADL1:		DB	"S"+80H,52H		; Equivalent to .SIL
-			DB	"L"+80H,5BH		; Equivalent to .LIL
-			DB	"I","S"+80H,49H		; Equivalent to .LIS
-			DB	"I","L"+80H,5BH		; Equivalent to .LIL
-;
-			DB	0
+EZ80SFS_ADL1:
+	db 0xd3 ; 04205F 53      5496 EZ80SFS_ADL1:		DB	"S"+80H,52H		; Equivalent to .SIL
+	db 0x52 ; 042060
+	db 0xcc ; 042061 4C      5497 DB	"L"+80H,5BH		; Equivalent to .LIL
+	db 0x5b ; 042062
+	db 0x49 ; 042063 49      5498 DB	"I","S"+80H,49H		; Equivalent to .LIS
+	db 0xd3 ; 042064
+	db 0x49 ; 042065
+	db 0x49 ; 042066 49      5499 DB	"I","L"+80H,5BH		; Equivalent to .LIL
+	db 0xcc ; 042067
+	db 0x5b ; 042068
+	db 0x00 ; 042069 00      5501 DB	0
+; END INSERT FROM BINARY
 ;
 ; .LIST
 ;
